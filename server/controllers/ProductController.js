@@ -1,5 +1,6 @@
 const ProductModel = require("../modles/ProductModel");
 const OrderModel = require("../modles/OrderModel");
+const usermodel = require("../modles/usermodel")
 const fs = require("fs").promises;
 const slugify = require("slugify");
 const CategoryModel = require("../modles/CategoryModel");
@@ -324,130 +325,101 @@ async function CatergoryWiseProductController(req, resp) {
   }
 }
 
-async function createProductReview(req, resp){
-  try{
-    if (!req.user) {
-      return resp.status(401).json({
-        success: false,
-        message: 'User not authenticated',
-      });
-    }
-    const productId = req.params.id;
-    const product = await ProductModel.findById(productId)
-    const { rating, comment } = req.body;
-    const isReviewed = product.reviews.find(
-      (rev)=> rev.user.toString() === req.user._id.toString()
-    )
-     
-    if(isReviewed){
+async function createProductReview(req, resp) {
+  try {
+    const productId = req.params.pid; 
+    const userId = req.params.uid;
+    const product = await ProductModel.findById(productId);    const user = await usermodel.findById(userId)
+    const { rating, comment } = req.body; 
+    const isReviewed = product.reviews.find((rev) => {
+      return rev.user === userId;
+    });
+    if (isReviewed) {
       return resp.status(400).send({
-        success:false,
-        message:"Product already reviewed"
-      })
-    }
-    const review = {
-      name: req.user.name,
-      rating: Number(rating),
-      comment,
-      user:req.user._id,
-    }
-    product.reviews.push(review)
-    product.numofreviews = product.reviews.length;
-    product.ratings = product.reviews.reduce((acc,item)=>item.rating+ acc, 0)/product.reviews.length
-   
-  await product.save({ validateBeforeSave: false });
-    resp.status(200).json({
-      success:true,
-      message:"Review Created"
-    })
-  }
-  catch(error){
-    console.log(error);
-    resp.status(400).send({
-      success: false,
-      error,
-    });
-  }
-}
-
-async function getProductReview(req,resp){
-  try{
-    const productId = req.params.id
-    const product = await ProductModel.findById(productId);
-  if(!product){
-    resp.status(404).json({
-      success:false,
-      message:"product not found",
-    })
-  }
-  resp.status(200).json({
-    success: true,
-    reviews: product.reviews,
-  })
-  
-  }
-  catch(error){
-    console.log(error);
-    resp.status(400).send({
-      success: false,
-      error,
-    });
-  }
-}
-
-async function deleteReview(req,resp){
-  try{
-    if (!req.query.id) {
-      return resp.status(401).json({
         success: false,
-        message: 'User not authenticated',
+        message: "Product already reviewed"
+      })
+    } 
+    const review = {
+      name: user.Name, rating: Number(rating),
+      comment, user: userId
+    }   
+    product.reviews.push(review)
+    product.numofreviews = product.reviews.length; 
+    
+    product.ratings = product.reviews.reduce((acc, item) => item.rating + acc, 0) / product.reviews.length
+
+    await product.save({ validateBeforeSave: false });
+    resp.status(200).json({
+      success: true,
+      message: "Review Created"
+    })
+  } catch (error) {
+    console.log(error); resp.status(400).send({
+      success: false, error,
+    });
+  }
+}
+
+async function deleteReview(req, resp) {
+  try {
+    const productId = req.params.pid;
+    const userId = req.params.uid;
+    const reviewId = req.params.rid;
+    const product = await ProductModel.findById(productId);
+    if (!product) {
+      return resp.status(404).json({
+        success: false,
+        message: "Product not found"
       });
     }
-    const productId = req.params.id;
-    const product = await ProductModel.findById(productId)
-    if(!product){
-      resp.status(404).json({
-        success:false,
-        message:"product not found",
-      })
+    const reviewIndex = product.reviews.findIndex((rev) => {
+      console.log('Review Object ID:', rev._id);
+      return rev._id.toString() === reviewId
+    });
+    console.log(reviewIndex)
+    if (reviewIndex === -1) {
+      return resp.status(404).json({
+        success: false,
+        message: "Review not found"
+      });
     }
-  
-    const reviews = product.reviews.filter(
-      (rev) => rev._id.toString() !== req.query.id.toString()
-    )
-
+    if (product.reviews[reviewIndex].user.toString() !== userId) {
+      return resp.status(403).json({
+        success: false, message: "You are not authorized to delete this review"
+      });
+    }
+    product.reviews.splice(reviewIndex, 1);
+    const reviews = product.reviews;
     let avg = 0;
-    reviews.forEach((rev) =>{
-      avg =avg + rev.rating;
+    reviews.forEach((rev) => {
+      avg = avg + rev.rating;
     })
-
     let ratings = 0;
-    if(reviews.length === 0){
+    if (reviews.length === 0) {
       ratings = 0
-    }else{
-      ratings = avg/reviews.length;
+    } else {
+      ratings = avg / reviews.length;
     }
     const numofreviews = reviews.length;
-    await product.findByIdAndUpdate(
-      req.query.productId,
+    await ProductModel.findByIdAndUpdate(
+      productId,
       {
         reviews,
         ratings,
         numofreviews,
       },
       {
-        new:true,
+        new: true,
         runValidators: true,
         useFindAndModify: false,
-      }
-    )
+      })
     resp.status(200).json({
-      success:true,
-      message:"deleted successfully review"
+      success: true,
+      message: "deleted successfully review"
     })
   }
-
-  catch(error){
+  catch (error) {
     console.log(error);
     resp.status(400).send({
       success: false,
@@ -455,7 +427,6 @@ async function deleteReview(req,resp){
     });
   }
 }
-
 //payment gateway api
 
 //token
@@ -531,7 +502,6 @@ module.exports = {
   SimilarProductController,
   CatergoryWiseProductController,
   GetUserProductController,
-  getProductReview,
   createProductReview,
   deleteReview,
 };

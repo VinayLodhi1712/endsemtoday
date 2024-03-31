@@ -72,13 +72,9 @@ router.get("/product-CategoryWise/:id/:pid", CatergoryWiseProductController);
 //get products created by user
 router.get("/get-product-user/:id", GetUserProductController);
 
-//creating review
-router.put("/get-product/:id/create-review",createProductReview)
-
+//create review
+router.put("/get-product/:pid/:uid/create-review", createProductReview)
 //delete review
-router.delete("/get-product/:id/delete-review", deleteReview)
-
-//get review
-router.get("/get-product/:id/getreview",getProductReview)
+router.delete("/get-product/:pid/:uid/delete-review/:rid", deleteReview)
 
 module.exports = router;
