@@ -20,13 +20,11 @@ const ProductDetails = () => {
   const [showModal, setShowModal] = useState(false);
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
+  const [showDetails, setShowDetails] = useState(true);
+
   const handleRating = (rate) => {
     setRating(rate);
   };
-  const onPointerEnter = () => console.log('Enter')
-  const onPointerLeave = () => console.log('Leave')
-  const onPointerMove = (value, index) => console.log(value, index)
-
   async function GetProduct() {
     try {
       const response = await fetch(
@@ -43,11 +41,12 @@ const ProductDetails = () => {
       }, 2000);
     }
   }
+
   function makeCall() {
     var phoneNumber = Detail[0].owner.MobileNo;
 
     var telURI = "tel:+91" + phoneNumber;
-    // Open the phone's default calling app
+    // Open the phone's default calling app 
     var link = document.createElement("a");
     link.href = telURI;
     document.body.appendChild(link);
@@ -71,7 +70,6 @@ const ProductDetails = () => {
             body: JSON.stringify({ rating, comment }),
           }
         );
-
         if (response.ok) {
           toast.success("Review created successfully");
           GetProduct();
@@ -115,132 +113,121 @@ const ProductDetails = () => {
   useEffect(() => {
     GetProduct();
   }, []);
+
   return (
     <Layout>
-      <div className="d-flex  mt-3 flex-column align-items-center">
-        <h3
-          className="text-center mb-5"
-          style={{ fontWeight: "800", fontFamily: "sans-serif" }}
-        >
-          ProductDetails
-        </h3>
+      <div className="container mt-3">
+        <h3 className="text-center mb-5" style={{ fontWeight: "800", fontFamily: "sans-serif" }}>Product Details</h3>
         {Detail.map((p) => (
-          <div
-            className="d-flex justify-content-around mb-3"
-            style={{ width: "70%" }}>
-
-
-            <div style={{ width: "40%" }} className="d-flex flex-column align-items-center">
-              <Image
-                src={`http://localhost:8000/api/v1/product/get-productPhoto/${p._id}`}
-                className="card-Image-top"
-                style={{ height: "25rem" }}
-              />
-
-              <div className="col-md-8">
-                <h6><p><strong>Overall Rating: {p.ratings}/5</strong>
-                </p></h6>
-                <h5>Reviews</h5>
-                <div style={{ padding: "10px", border: "1px solid #ccc", marginBottom: "20px" }}>
-                  {p.reviews.map((review) => (
-                    <div style={{ padding: "10px", borderBottom: "1px solid #ccc" }}>
-                      <p><strong>Name:</strong> {review.name}</p>
-                      <p><strong>Rating:</strong>
-                        {[...Array(review.rating)].map((_, index) => (
-                          <span key={index} style={{ color: "yellow", fontSize: "28px" }}>&#9733;</span> // Render a star for each rating value
-                        ))}</p>
-                      <p><strong>Comment:</strong> {review.comment}</p>
-                      <button className="btn btn-danger" onClick={() => deleteReview(review._id)}>Delete Review</button>
-                    </div>
-                  ))}
-                </div>
-                <Button className="btn btn-success mt-3" onClick={() => setShowModal(true)}>Create Review</Button>
-                <Modal show={showModal} onHide={() => setShowModal(false)}>
-                  <Modal.Header closeButton>
-                    <Modal.Title>Create Review</Modal.Title>
-                  </Modal.Header>
-                  <Modal.Body>
-                    <Form>
-                      <Form.Group controlId="formRating">
-                        <Form.Label>Rating</Form.Label>
-                        {/* Render the Rating component for the user to select the rating */}
-                        <Rating
-                          onClick={handleRating}
-                          ratingValue={rating}
-                          size={30}
-                        />
-                      </Form.Group>
-                      <Form.Group controlId="formComment">
-                        <Form.Label>Comment</Form.Label>
-                        <Form.Control type="text" placeholder="Enter your comment" value={comment} onChange={(e) => setComment(e.target.value)} />
-                      </Form.Group>
-                    </Form>
-                  </Modal.Body>
-                  <Modal.Footer>
-                    <Button variant="secondary" onClick={() => setShowModal(false)}>
-                      Close
-                    </Button>
-                    <Button variant="primary" onClick={createReview}>
-                      Submit Review
-                    </Button>
-                  </Modal.Footer>
-                </Modal>
+          <div key={p._id} className="card p-5" style={{ backgroundColor: "white" }}>
+            <div className="row">
+              <div className="col-md-6">
+                <Image
+                  src={`http://localhost:8000/api/v1/product/get-productPhoto/${p._id}`}
+                  className="card-Image-top"
+                  style={{ height: "25rem" }}
+                />
               </div>
-            </div>
-            <div
-              className="d-flex flex-column align-items-start"
-              style={{ width: "40%" }}
-            >
-              <p className="mb-0">{p.category.name}</p>
-              <p
-                className="card-title"
-                style={{ fontSize: "1.5rem", fontWeight: "700" }}
-              >
-                {p.name}
-              </p>
-              <p
-                className="card-text mb-0"
-                style={{
-                  fontSize: "1.5rem",
-                  fontWeight: "700",
-                  color: "green",
-                }}
-              >
-                ₹ {p.price}{" "}
-              </p>
-              <p className="mb-3">{p.description}</p>
+              <div className="col-md-6">
+                <div className="d-flex  mb-3">
+                  <button className="button-16" style={{ marginRight: "120px", fontWeight: 600, letterSpacing: "1.2px" }} onClick={() => setShowDetails(true)}>DETAILS</button>
+                  <button className="button-16" style={{ fontWeight: 600, letterSpacing: "1.2px" }} onClick={() => setShowDetails(false)}>REVIEWS</button>
+                </div>
+                {showDetails ? (
+                  <div className="col-md-11">
+                    <p className="Titlefont">{p.name} </p>
+                    <p style={{ fontWeight: 600 }}> {p.description}</p>
+                    <p className="tag"> {p.category.name}</p>
+                    <p className="smalltitlefont">PRICE: <strong>     ₹{p.price}</strong> </p>
 
-              <p className="mb-0">
-                <b>Owner Name:</b> {p.owner.Name}
-              </p>
+                    <div className="d-flex mt-2 w-60">
+                      <button
+                        className="button-27" style={{ marginRight: "60px" }}
+                        onClick={() => {
+                          SetCart([...Cart, p]);
+                          localStorage.setItem("Cart", JSON.stringify([...Cart, p]));
+                          toast("Item Added to cart!", {
+                            icon: "👍",
+                          });
+                        }}
+                      >
+                        ADD TO CART
+                      </button>
+                      <button
+                        className="button-24"
+                        onClick={() => {
+                          makeCall();
+                        }}
+                      >
+                        <IoCall />
+                        Contact
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="col-md-10">
+                    <p className="mediumtitlefont">Rating :     {[...Array(p.ratings)].map((_, index) => (
+                      <span key={index} style={{ color: "#FFD700", fontSize: "28px" }}>&#9733;</span>
+                    ))}</p>
 
-              <div className="d-flex justify-content-around mt-3 w-50">
-                <button
-                  className="btn btn-light  border-dark border-2"
-                  onClick={() => {
-                    SetCart([...Cart, p]);
-                    localStorage.setItem("Cart", JSON.stringify([...Cart, p]));
-                    toast("Item Added to cart!", {
-                      icon: "👍",
-                    });
-                  }}
-                >
-                  Add to cart
-                </button>
-                <button
-                  className="btn btn-primary border-dark border-2  d-flex align-items-center "
-                  onClick={() => {
-                    makeCall();
-                  }}
-                >
-                  <IoCall />
-                  Contact
-                </button>
+                    <Button className="btn btn-success mb-3 align-items-center" onClick={() => setShowModal(true)}>Create Review</Button>
+
+                    <div style={{ padding: "10px", border: "1px solid #ccc", marginBottom: "20px" }}>
+                      {p.reviews.map((review) => (
+                        <div style={{ padding: "10px", borderBottom: "1px solid #ccc" }}>
+                          <div className="d-flex" style={{marginRight: "60px"}}>
+                          {[...Array(review.rating)].map((_, index) => (
+                            <span key={index} style={{ color: "#FFD700", fontSize: "28px" }}>&#9733;</span>
+                          ))}
+                          {auth.user && auth.user._id.toString() === review.user && (
+                            <button className="button-24" onClick={() => deleteReview(review._id)}>Delete</button>
+                          )}
+                          </div>
+                          <p style={{ fontWeight: 600 }}>{review.comment}</p>
+
+                          <p className="mediumtitlefont" style={{ marginRight: "8rem" }}>- {review.name}</p>
+
+
+
+                        </div>
+                      ))}
+                    </div>
+
+                    <Modal show={showModal} onHide={() => setShowModal(false)}>
+                      <Modal.Header closeButton>
+                        <Modal.Title>Create Review</Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body>
+                        <Form>
+                          <Form.Group controlId="formRating">
+                            <Form.Label>Rating</Form.Label>
+                            <Rating
+                              onClick={handleRating}
+                              ratingValue={rating}
+                              size={30}
+                            />
+                          </Form.Group>
+                          <Form.Group controlId="formComment">
+                            <Form.Label>Comment</Form.Label>
+                            <Form.Control type="text" placeholder="Enter your comment" value={comment} onChange={(e) => setComment(e.target.value)} />
+                          </Form.Group>
+                        </Form>
+                      </Modal.Body>
+                      <Modal.Footer>
+                        <Button variant="secondary" onClick={() => setShowModal(false)}>
+                          Close
+                        </Button>
+                        <Button variant="primary" onClick={createReview}>
+                          Submit Review
+                        </Button>
+                      </Modal.Footer>
+                    </Modal>
+                  </div>
+                )}
               </div>
             </div>
           </div>
         ))}
-
       </div>
     </Layout>
   );
