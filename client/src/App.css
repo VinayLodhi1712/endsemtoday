@@ -342,3 +342,25 @@ body {
   box-shadow: none;
   transform: translateY(0);
 }
+
+.inf-content {
+  border: 1px solid #dddddd;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);
+}
+.UserInfo {
+  font-size: larger;
+  width: 100%;
+  background-color: #202124fb;
+  color: #dadce0;
+  padding: 0.3rem;
+}
+.col-md-4 img {
+  border-radius: 50%;
+  height: 80%;
+}
+.Info {
+  font-weight: 700;
+}

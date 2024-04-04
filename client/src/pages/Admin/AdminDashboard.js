@@ -103,15 +103,6 @@ const AdminDashboard = () => {
               </NavLink>
             </button>
 
-            {/* <button className="btn btn-info  btn-lg ButtonBorder" style={{fontWeight:"700"}}>
-            <NavLink
-              to="/dashboard/admin/Orders"
-              className="list-group-item list-group-item-action"
-            >
-             Edit Orders
-            </NavLink>
-          </button> */}
-
             <button className="btn btn-dark  btn-lg ButtonBorder">
               <NavLink
                 to="/dashboard/Admin/Profile"
