@@ -48,19 +48,36 @@ const AdminDashboard = () => {
       children: moment(auth.user.createdAt).fromNow(),
     },
   ];
+  const style = {
+    py: 0,
+    width: "100%",
+    maxWidth: 360,
+    borderRadius: 2,
+    border: "1px solid",
+    borderColor: "divider",
+    backgroundColor: "background.paper",
+  };
+
   return (
     <Layout>
-      <div className="d-flex flex-column align-items-center justify-content-center h-50">
-        <Descriptions
-          title="User Info"
-          items={items}
-          style={{ padding: "2rem" }}
+      <div className="d-flex justify-content-center align-items-center h-100 p-3">
+        <img
+          src={`http://localhost:8000/api/v1/auth/get-userPhoto/${auth.user._id}`}
+          className="card-Image-top productimage"
+          style={{ height: "15rem", width: "100%" }}
         />
-        <Space>
-          <Button type="primary" onClick={showDrawer}>
-            Dashboard
-          </Button>
-        </Space>
+        <div className="d-flex flex-column justify-content-center  align-items-center">
+          <Descriptions
+            title="User Info"
+            items={items}
+            style={{ padding: "2rem" }}
+          />
+          <Space>
+            <Button type="primary" onClick={showDrawer}>
+              Dashboard
+            </Button>
+          </Space>
+        </div>
         <Drawer
           title="User Dashboard"
           placement={placement}

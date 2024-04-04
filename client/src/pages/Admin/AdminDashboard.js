@@ -44,17 +44,24 @@ const AdminDashboard = () => {
   ];
   return (
     <Layout>
-      <div className="d-flex flex-column align-items-center justify-content-center h-50">
-        <Descriptions
-          title="User Info"
-          items={items}
-          style={{ padding: "2rem" }}
+      <div className="d-flex justify-content-center align-items-center h-100">
+        <img
+          src={`http://localhost:8000/api/v1/auth/get-userPhoto/${auth.user._id}`}
+          className="card-Image-top productimage"
+          style={{ height: "15rem", width: "100%" }}
         />
-        <Space>
-          <Button type="primary" onClick={showDrawer}>
-            Dashboard
-          </Button>
-        </Space>
+        <div className="d-flex flex-column justify-content-center  align-items-center">
+          <Descriptions
+            title="User Info"
+            items={items}
+            style={{ padding: "2rem" }}
+          />
+          <Space>
+            <Button type="primary" onClick={showDrawer}>
+              Dashboard
+            </Button>
+          </Space>
+        </div>
         <Drawer
           title="Admin Dashboard"
           placement={placement}
@@ -71,7 +78,7 @@ const AdminDashboard = () => {
             className="d-flex  flex-column "
             style={{ gap: "1rem", width: "100%" }}
           >
-            <button className="btn btn-info btn-lg ButtonBorder">
+            <button className="btn btn-dark btn-lg ButtonBorder">
               <NavLink
                 to="/dashboard/admin/create-Category"
                 className="list-group-item list-group-item-action"
@@ -79,7 +86,7 @@ const AdminDashboard = () => {
                 Create Category
               </NavLink>
             </button>
-            <button className="btn btn-info  btn-lg  ButtonBorder">
+            <button className="btn btn-dark  btn-lg  ButtonBorder">
               <NavLink
                 to="/dashboard/admin/create-product"
                 className="list-group-item list-group-item-action"
@@ -87,7 +94,7 @@ const AdminDashboard = () => {
                 Create New Product
               </NavLink>
             </button>
-            <button className="btn btn-info  btn-lg ButtonBorder">
+            <button className="btn btn-dark  btn-lg ButtonBorder">
               <NavLink
                 to="/dashboard/admin/Product"
                 className="list-group-item list-group-item-action"
@@ -105,7 +112,7 @@ const AdminDashboard = () => {
             </NavLink>
           </button> */}
 
-            <button className="btn btn-info  btn-lg ButtonBorder">
+            <button className="btn btn-dark  btn-lg ButtonBorder">
               <NavLink
                 to="/dashboard/Admin/Profile"
                 className="list-group-item list-group-item-action"
@@ -114,7 +121,7 @@ const AdminDashboard = () => {
               </NavLink>
             </button>
 
-            <button className="btn btn-info  btn-lg ButtonBorder">
+            <button className="btn btn-dark  btn-lg ButtonBorder">
               <NavLink
                 to="/dashboard/Admin/Users"
                 className="list-group-item list-group-item-action"
@@ -123,7 +130,7 @@ const AdminDashboard = () => {
               </NavLink>
             </button>
 
-            <button className="btn btn-info  btn-lg ButtonBorder">
+            <button className="btn btn-dark  btn-lg ButtonBorder">
               <NavLink
                 to="/dashboard/admin/questions"
                 className="list-group-item list-group-item-action d-flex justify-content-center  align-items-center"
@@ -132,7 +139,7 @@ const AdminDashboard = () => {
               </NavLink>
             </button>
 
-            <button className="btn btn-info  btn-lg ButtonBorder">
+            <button className="btn btn-dark  btn-lg ButtonBorder">
               <NavLink
                 to="/dashboard/admin/Contributions"
                 className="list-group-item list-group-item-action d-flex justify-content-center  align-items-center"

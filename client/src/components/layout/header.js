@@ -8,6 +8,8 @@ import Usecategory from "../hooks/usecategory";
 import { useCart } from "../../context/cart";
 import { Badge } from "antd";
 import { IoCartSharp } from "react-icons/io5";
+
+import Avatar from "@mui/material/Avatar";
 function Header() {
   const [auth, setAuth] = useAuth();
   const [cart, setCart] = useCart();
@@ -100,12 +102,18 @@ function Header() {
                 <>
                   <li className="nav-item dropdown">
                     <a
-                      className="nav-link dropdown-toggle"
+                      className="nav-link dropdown-toggle d-flex align-items-center"
                       href="#"
                       role="button"
                       data-bs-toggle="dropdown"
                       aria-expanded="false"
                     >
+                      {" "}
+                      <Avatar
+                        alt={auth.user.Name}
+                        src={`http://localhost:8000/api/v1/auth/get-userPhoto/${auth.user._id}`}
+                        sx={{ width: 30, height: 30 }}
+                      />
                       {auth.user.Name}
                     </a>
                     <ul className="dropdown-menu">

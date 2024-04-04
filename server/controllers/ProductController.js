@@ -25,13 +25,16 @@ async function CreateProductController(req, resp) {
         message: "Image Size Must Be Less Than 1mb",
       });
     }
+
     const Product = new ProductModel({ ...req.fields, slug: slugify(name) });
     if (photo) {
       Product.photo.data = await fs.readFile(photo.path);
       Product.photo.contentType = photo.type;
       await fs.unlink(photo.path);
     }
+    
     await Product.save();
+
     resp.status(200).send({
       success: true,
       message: "Product Created Successfully",

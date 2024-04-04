@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@mui/material": "^5.15.14",
     "bcrypt": "^5.1.1",
     "braintree": "^3.21.0",
     "cors": "^2.8.5",

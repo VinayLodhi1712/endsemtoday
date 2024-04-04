@@ -21,7 +21,7 @@ const UserSchema = new mongoose.Schema(
     },
     Address: {
       type: String,
-      required: true,
+      required: true, 
     },
     MobileNo: {
       type: Number,
@@ -32,6 +32,10 @@ const UserSchema = new mongoose.Schema(
       type: Number,
       required: true,
       default: 0,
+    },
+    photo: {
+      data: Buffer,
+      contentType: String,
     },
     Bookmarked: [
       {
