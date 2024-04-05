@@ -1,20 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "../../components/layout/layout";
 import { NavLink } from "react-router-dom";
 import { Button, Drawer, Radio, Space } from "antd";
 
 import { useAuth } from "../../context/auth";
-import { FaUserEdit } from "react-icons/fa";
-import { FaPlusSquare } from "react-icons/fa";
-import { MdPublishedWithChanges } from "react-icons/md";
-import { BsFillQuestionSquareFill } from "react-icons/bs";
-import { FaHandsHelping } from "react-icons/fa";
 
 import moment from "moment";
 const AdminDashboard = () => {
   const [open, setOpen] = useState(false);
   const [placement, setPlacement] = useState("left");
   const [auth, SetAuth] = useAuth();
+  const [QuestionAsked, SetQuestionAsked] = useState(0);
 
   const onClose = () => {
     setOpen(false);
@@ -22,6 +18,25 @@ const AdminDashboard = () => {
   const showDrawer = () => {
     setOpen(true);
   };
+  async function GetAllUserQuestion() {
+    try {
+      const AllQuestion = await fetch(
+        `http://localhost:8000/api/v1/Questions/AskedUserQuestion/${auth.user._id}`
+      );
+
+      if (AllQuestion.status == 200) {
+        const AllQue = await AllQuestion.json();
+        SetQuestionAsked(AllQue.questionCount);
+      }
+      console.log(QuestionAsked);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    GetAllUserQuestion();
+  }, []);
 
   return (
     <Layout>
@@ -168,7 +183,7 @@ const AdminDashboard = () => {
                           <span className="glyphicon glyphicon-calendar text-primary" />
                           Question Asked
                         </td>
-                        <td className="Info">12</td>
+                        <td className="Info">{QuestionAsked}</td>
                       </tr>
                       <tr>
                         <td>
