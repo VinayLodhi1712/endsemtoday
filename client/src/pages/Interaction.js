@@ -8,7 +8,9 @@ import "../App.css";
 import { NavLink } from "react-router-dom";
 import { Input } from "antd";
 import { Empty } from "antd";
-
+import Avatar from "@mui/material/Avatar";
+import { useAuth } from "../context/auth";
+import { IoMdChatboxes } from "react-icons/io";
 const Interaction = () => {
   const [Questions, SetQuestions] = useState([]);
   const [TotalQuestions, SetTotalQuestions] = useState(0);
@@ -18,7 +20,7 @@ const Interaction = () => {
   const isInitialMount = useRef(true);
   const [shownproducts, Setshownproducts] = useState(3);
   const [notsearching, Setnotsearching] = useState(false);
-
+  const [auth, setAuth] = useAuth();
 
   const { Search } = Input;
 
@@ -78,7 +80,6 @@ const Interaction = () => {
       console.log(error);
     }
   }
- 
 
   useEffect(() => {
     GetQuestions(0);
@@ -141,6 +142,30 @@ const Interaction = () => {
           Questions.map((q) => (
             <div class="card w-75 p-2">
               <div class="card-body">
+                <div
+                  className="d-flex justify-content-between"
+                  style={{ width: "30%" }}
+                >
+                  {" "}
+                  <div
+                    className="d-flex  justify-content-between"
+                    style={{ width: "28%" }}
+                  >
+                    <Avatar
+                      src={`http://localhost:8000/api/v1/auth/get-userPhoto/${q.user._id}`}
+                      sx={{ width: 30, height: 30 }}
+                    />
+                    <p className="UserNameDisplay">{q.user.Name}</p>
+                  </div>
+                  <div className="d-flex">
+                    <p className="light-dull">Asked:</p>
+
+                    <p className="DateDisplay">
+                      {" "}
+                      {moment(q.createdAt).format("MMMM Do YYYY")}
+                    </p>
+                  </div>
+                </div>
                 <blockquote class="blockquote mb-0">
                   <p style={{ marginBottom: "0rem" }}>{q.title} </p>
                   <div className="d-flex align-items-center w-100 justify-content-between">
@@ -151,26 +176,26 @@ const Interaction = () => {
                         <Tag color="blue">{tag}</Tag>
                       ))}
                     </div>
-                    <footer class="blockquote-footer">
-                      asked by{" "}
-                      <cite title="Source Title">
-                        <b>{q.user.Name}</b>
-                      </cite>{" "}
-                      {moment(q.createdAt).fromNow()}
-                    </footer>
                   </div>
                 </blockquote>
               </div>
-              <div
-                className="d-flex align-items-center"
-                style={{ gap: "1rem" }}
-              >
-                <NavLink to={`/dashboard/user/answers/${q._id}`}>
-                  <button className="btn btn-success">Contribute</button>
-                </NavLink>
-                <NavLink to={`/dashboard/user/ViewQuestion/${q._id}`}>
-                  <button className="btn btn-primary">View Question</button>
-                </NavLink>
+              <div className="d-flex justify-content-between">
+                <div className="AnswerBox">
+                  <IoMdChatboxes />
+                  <p style={{ margin: "0rem" }}>5 Answers</p>
+                </div>
+
+                <div
+                  className="d-flex align-items-center"
+                  style={{ gap: "1rem" }}
+                >
+                  <NavLink to={`/dashboard/user/answers/${q._id}`}>
+                    <button className="btn btn-dark">Answer</button>
+                  </NavLink>
+                  <NavLink to={`/dashboard/user/ViewQuestion/${q._id}`}>
+                    <button className="btn btn-primary">View</button>
+                  </NavLink>
+                </div>
               </div>
             </div>
           ))

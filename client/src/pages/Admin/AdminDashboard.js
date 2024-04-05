@@ -11,7 +11,7 @@ const AdminDashboard = () => {
   const [placement, setPlacement] = useState("left");
   const [auth, SetAuth] = useAuth();
   const [QuestionAsked, SetQuestionAsked] = useState(0);
-
+  const [AnswerAsked, SetAnswerAsked] = useState(0);
   const onClose = () => {
     setOpen(false);
   };
@@ -33,9 +33,25 @@ const AdminDashboard = () => {
       console.log(error);
     }
   }
+  async function GetAllUserAnswers() {
+    try {
+      const AllAnswer = await fetch(
+        `http://localhost:8000/api/v1/Answer/GetNumberOfQuestions/${auth.user._id}`
+      );
+
+      if (AllAnswer.status == 200) {
+        const AllAns = await AllAnswer.json();
+        SetAnswerAsked(AllAns.AnswerCount);
+      }
+      console.log(QuestionAsked);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   useEffect(() => {
     GetAllUserQuestion();
+    GetAllUserAnswers();
   }, []);
 
   return (
@@ -190,7 +206,7 @@ const AdminDashboard = () => {
                           <span className="glyphicon glyphicon-calendar text-primary" />
                           Question Answered
                         </td>
-                        <td className="Info">4</td>
+                        <td className="Info">{AnswerAsked}</td>
                       </tr>
                       <tr>
                         <td>

@@ -364,3 +364,19 @@ body {
 .Info {
   font-weight: 700;
 }
+
+.UserNameDisplay{
+color: #4285f4;
+font-weight: 600;
+}
+.DateDisplay{
+  color: #4285f4;
+}
+.AnswerBox{
+  padding: 0.5rem;
+  display:flex;
+  align-items: center;
+  justify-content:space-around;
+  background-color: #343a4058;
+  width:13%;
+}

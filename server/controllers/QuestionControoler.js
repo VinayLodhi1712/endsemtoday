@@ -226,7 +226,7 @@ async function SearchquestionController(req, resp) {
         { title: { $regex: Keyword, $options: "i" } },
         { tags: { $regex: Keyword, $options: "i" } },
       ],
-    });
+    }).populate("user");
     if (questions) {
       resp.status(200).send({
         success: true,
