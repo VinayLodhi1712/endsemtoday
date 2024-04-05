@@ -173,6 +173,26 @@ async function QuestionCountController(req, resp) {
   }
 }
 
+async function QuestionByUserCountController(req, resp) {
+  try {
+    const QuestionByUser = await Questionmodel.find({
+      user: req.params.uid,
+    }); // give the number of documents by user
+    const questionCount = QuestionByUser.length;
+    resp.status(200).send({
+      success: true,
+      questionCount,
+    });
+  } catch (error) {
+    console.log(error);
+    resp.status(500).send({
+      success: false,
+      message: "Error in Getting Questions count",
+      error,
+    });
+  }
+}
+
 async function GetSingleQuestionsController(req, resp) {
   try {
     const id = req.params.id;
@@ -206,7 +226,7 @@ async function SearchquestionController(req, resp) {
         { title: { $regex: Keyword, $options: "i" } },
         { tags: { $regex: Keyword, $options: "i" } },
       ],
-    });
+    }).populate("user");
     if (questions) {
       resp.status(200).send({
         success: true,
@@ -275,5 +295,6 @@ module.exports = {
   GetUSerQuestionsController,
   GetSingleQuestionsController,
   DeletequestionController,
+  QuestionByUserCountController,
   RemoveBookmarked,
 };

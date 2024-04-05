@@ -11,6 +11,7 @@ const {
   GetUSerQuestionsController,
   RemoveBookmarked,
   GetSingleQuestionsController,
+  QuestionByUserCountController
 } = require("../controllers/QuestionControoler");
 
 router.get("/get_question/:SkipCount", GetquestionController);
@@ -22,6 +23,8 @@ router.get("/QuestionCount", QuestionCountController);
 router.get("/Question_search/:Keyword", SearchquestionController);
 router.get("/getSingleQuestion/:id", GetSingleQuestionsController);
 router.get("/getBookmarked/:uid", GetBookMarkedQuestion);
+
+router.get("/AskedUserQuestion/:uid", QuestionByUserCountController);
 
 router.put("/removeBookmarked/:uid/:qid", RemoveBookmarked);
 module.exports = router;

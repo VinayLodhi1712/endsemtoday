@@ -275,7 +275,7 @@ const AdminQuestions = () => {
                   ))
                 ) : (
                   <div className="d-flex flex-column align-items-center">
-                    <h2>You haven't asked any question yet</h2>
+                    <h2>No bookmarks found</h2>
                   </div>
                 )}
               </div>

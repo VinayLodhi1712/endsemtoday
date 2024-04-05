@@ -13,6 +13,8 @@ const Register = () => {
   const [Answer, SetAnswer] = useState("");
   const [Address, SetAddress] = useState("");
   const [MobileNo, SetMobileNo] = useState("");
+  const [photo, SetPhoto] = useState("");
+
   const navigate = useNavigate();
   const [Loading, SetLoading] = useState(false);
 
@@ -24,7 +26,15 @@ const Register = () => {
     try {
       e.preventDefault();
       SetLoading(true);
+      const formData = new FormData();
+      formData.append("Name", Name);
+      formData.append("Email", Email);
+      formData.append("Password", Password);
+      formData.append("Answer", Answer);
+      formData.append("Address", Address);
 
+      formData.append("photo", photo);
+      formData.append("MobileNo", MobileNo);
       if (Password.length < 6) {
         toast.error("Password length must be more than 6");
         SetLoading(false);
@@ -34,17 +44,7 @@ const Register = () => {
         "http://localhost:8000/api/v1/auth/register",
         {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            Name,
-            Email,
-            Password,
-            Answer,
-            Address,
-            MobileNo,
-          }),
+          body: formData,
         }
       );
 
@@ -66,7 +66,7 @@ const Register = () => {
       }
     } catch (error) {
       SetLoading(false);
-      toast.error(error);
+      toast.error(error.message);
     }
   }
   return (
@@ -175,6 +175,21 @@ const Register = () => {
               }}
               required
             />
+          </div>
+
+          <div className="d-flex justify-content-start w-100 border-2">
+            <label className="btn border border-3 w-100 btn-outline-primary ">
+              {photo ? photo.name : "Upload Photo"}
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => {
+                  SetPhoto(e.target.files[0]);
+                }}
+                hidden
+                required
+              ></input>
+            </label>
           </div>
 
           <button type="submit" className="btn btn-dark" disabled={Loading}>

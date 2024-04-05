@@ -175,6 +175,25 @@ async function GetUserAnswerController(req, resp) {
     });
   }
 }
+async function GetUserAnswersController(req, resp) {
+  try {
+    const AnswersByUser = await Answermodel.find({
+      user: req.params.uid,
+    }); // give the number of documents by user
+    const AnswerCount = AnswersByUser.length;
+    resp.status(200).send({
+      success: true,
+      AnswerCount,
+    });
+  } catch (error) {
+    console.log(error);
+    resp.status(500).send({
+      success: false,
+      message: "Error in Getting Answers count",
+      error,
+    });
+  }
+}
 
 module.exports = {
   AnswerController,
@@ -183,4 +202,5 @@ module.exports = {
   GetAnswerController,
   GetUserAnswerController,
   UpdateAnswerVotesController,
+  GetUserAnswersController,
 };

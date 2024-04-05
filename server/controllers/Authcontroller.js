@@ -2,55 +2,50 @@ const Usermodel = require("../modles/usermodel");
 const Ordermodel = require("../modles/OrderModel");
 const { hashPassword, comparePassword } = require("../helpers/authhelper");
 const JWT = require("jsonwebtoken");
+const fs = require("fs").promises;
 
 async function registerController(req, res) {
   try {
-    const { Name, Email, Password, Answer, Address, MobileNo } = req.body;
-    if (!Name) {
-      return res.send({ error: "Name is required" });
-    }
-    if (!Email) {
-      return res.send({ error: "email is required" });
+    const { Name, Email, Password, Answer, Address, MobileNo } = req.fields;
+
+    if (!Name || !Email || !Password || !Address) {
+      return res
+        .status(400)
+        .send({ success: false, error: "All fields are required" });
     }
 
-    if (!Password) {
-      return res.send({ error: "password is required" });
-    }
-    if (!Address) {
-      return res.send({ error: "password is required" });
-    }
-
-    //check existing user
-    const existinguser = await Usermodel.findOne({
+    const existingUser = await Usermodel.findOne({
       $or: [{ Email }, { MobileNo }],
     });
-
-    //existing user
-    if (existinguser) {
-      return res.status(409).send({
-        success: false,
-        message: "Already existing user",
-      });
+    if (existingUser) {
+      return res
+        .status(409)
+        .send({ success: false, message: "User already exists" });
     }
-    //register
 
     const hashedPassword = await hashPassword(Password);
-    const user = await new Usermodel({
-      Name: Name,
-      Email: Email,
+    const user = new Usermodel({
+      Name,
+      Email,
       Password: hashedPassword,
-      Answer: Answer,
-      Address: Address,
-      MobileNo: MobileNo,
-    }).save();
-
-    res.status(201).send({
-      success: true,
-      message: "User register Succesfull",
-      user,
+      Answer,
+      Address,
+      MobileNo,
     });
+
+    if (req.files && req.files.photo) {
+      user.photo.data = await fs.readFile(req.files.photo.path);
+      user.photo.contentType = req.files.photo.type;
+      await fs.unlink(req.files.photo.path);
+    }
+
+    await user.save();
+    res
+      .status(201)
+      .send({ success: true, message: "User registered successfully", user });
   } catch (error) {
-    console.log(error);
+    console.error("Error:", error);
+    res.status(500).send({ success: false, error: "Internal server error" });
   }
 }
 
@@ -133,8 +128,8 @@ async function ForgotPassword(req, res) {
 
 async function UpdateProfileController(req, res) {
   try {
-    const { Name, Email, Password, Address, Number } = req.body;
-
+    const { Name, Password, Address, Number } = req.fields;
+    const { photo } = req.files;
     if (!Password || Password.length < 6) {
       return res.status(400).send({
         success: false,
@@ -142,18 +137,32 @@ async function UpdateProfileController(req, res) {
       });
     }
     const user = await Usermodel.findById(req.user._id);
+    console.log(user);
     const hashedPassword = await hashPassword(Password);
+
+    const existingUser = await Usermodel.findOne({ Number });
+
+    if (existingUser) {
+      return res
+        .status(409)
+        .send({ success: false, message: "User already exists" });
+    }
+
     const UpdatedUser = await Usermodel.findByIdAndUpdate(
       req.user._id,
       {
         Name: Name || user.Name,
         Password: hashedPassword || user.Password,
-        Email: Email || user.Email,
         Address: Address || user.Address,
         MobileNo: Number || user.MobileNo,
       },
       { new: true }
     );
+    if (photo) {
+      UpdatedUser.photo.data = await fs.readFile(photo.path);
+      UpdatedUser.photo.contentType = photo.type;
+    }
+    await UpdatedUser.save();
 
     res.status(200).send({
       success: true,
@@ -335,6 +344,22 @@ async function BookmarkQuestion(req, resp) {
   }
 }
 
+async function GetUserPhotoController(req, resp) {
+  try {
+    const user = await Usermodel.findById(req.params.id).select("photo");
+    if (user.photo.data) {
+      resp.set("Content-type", user.photo.contentType);
+    }
+    return resp.status(200).send(user.photo.data);
+  } catch (error) {
+    resp.status(404).send({
+      success: false,
+      message: "Error getting Product",
+      error,
+    });
+  }
+}
+
 module.exports = {
   registerController,
   loginController,
@@ -348,4 +373,5 @@ module.exports = {
   DeleteUser,
   UserCountController,
   BookmarkQuestion,
+  GetUserPhotoController,
 };

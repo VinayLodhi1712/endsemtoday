@@ -2,7 +2,6 @@ import React from "react";
 import Layout from "../components/layout/layout";
 import UserMEnu from "../components/layout/UserMEnu";
 import { useState, useEffect } from "react";
-
 import toast from "react-hot-toast";
 import { useAuth } from "../context/auth";
 const Profile = () => {
@@ -12,23 +11,27 @@ const Profile = () => {
   const [Password, SetPassword] = useState("");
   const [Address, SetAddress] = useState("");
   const [Number, SetNumber] = useState(0);
+  const [photo, SetPhoto] = useState("");
+
   async function handleSubmit(e) {
     try {
+      e.preventDefault();
+      const formData = new FormData();
+      formData.append("Name", Name);
+      formData.append("Number", Number);
+      formData.append("Password", Password);
+      formData.append("photo", photo);
+      formData.append("Address", Address);
+
       e.preventDefault();
       const response = await fetch(
         "http://localhost:8000/api/v1/auth/profile",
         {
           method: "PUT",
           headers: {
-            "Content-Type": "application/json",
             Authorization: auth.token,
           },
-          body: JSON.stringify({
-            Name,
-            Email,
-            Password,
-            Address,
-          }),
+          body: formData,
         }
       );
       const data = await response.json();
@@ -39,8 +42,14 @@ const Profile = () => {
           user: data.UpdatedUser,
         });
 
-        localStorage.setItem("auth", JSON.stringify(auth.user));
-        console.log("set auth");
+        localStorage.setItem(
+          "auth",
+          JSON.stringify({
+            ...auth,
+            user: data.UpdatedUser,
+          })
+        );
+
         toast.success(data.message);
       } else {
         toast(data.message, {
@@ -77,8 +86,8 @@ const Profile = () => {
           className="FormBackgound"
         >
           <div className="registerformupdate mt-3" style={{ width: "50%" }}>
-            <h1>Update Profile</h1>
-            <div className="mb-2 wi">
+            <h1 style={{ margin: "0rem" }}>Update Profile</h1>
+            <div className="mb-1 wi">
               <label htmlFor="exampleInputName" className="form-label">
                 <b>New Name</b>
               </label>
@@ -94,7 +103,7 @@ const Profile = () => {
               />
             </div>
 
-            <div className="mb-2 wi">
+            <div className="mb-1 wi">
               <label htmlFor="exampleInputEmail1" className="form-label">
                 <b>Your Email address (Cannot be Changed)</b>
               </label>
@@ -111,7 +120,7 @@ const Profile = () => {
               />
             </div>
 
-            <div className="mb-2 wi">
+            <div className="mb-1 wi">
               <label htmlFor="exampleInputPassword1" className="form-label">
                 <b>New Password</b>
               </label>
@@ -126,7 +135,7 @@ const Profile = () => {
               />
             </div>
 
-            <div className="mb-2 wi">
+            <div className="mb-1 wi">
               <label htmlFor="exampleInputEmail1" className="form-label">
                 <b>New Contact Number</b>
               </label>
@@ -155,6 +164,21 @@ const Profile = () => {
                 }}
                 required
               />
+            </div>
+
+            <div className="d-flex justify-content-start w-100 border-2 mb-2">
+              <label className="btn border border-3 w-100 btn-outline-primary ">
+                {photo ? photo.name : "Update Profile Photo"}
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => {
+                    SetPhoto(e.target.files[0]);
+                  }}
+                  hidden
+                  required
+                ></input>
+              </label>
             </div>
 
             <button type="submit" className="btn btn-dark ">

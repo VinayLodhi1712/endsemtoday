@@ -12,17 +12,18 @@ const {
   DeleteUser,
   UserCountController,
   BookmarkQuestion,
+  GetUserPhotoController
 } = require("../controllers/Authcontroller");
 const requireSignIn = require("../middlewares/authMiddleware");
 const IsAdmin = require("../middlewares/Isadmin");
-
+const formidable = require("express-formidable");
 //roter object
 const router = express.Router();
 
 //routing
 
 //register
-router.post("/register", registerController);
+router.post("/register", formidable(), registerController);
 
 //login
 router.post("/login", loginController);
@@ -31,6 +32,9 @@ router.post("/login", loginController);
 router.get("/userAuth", requireSignIn, (req, res) => {
   res.status(200).send({ ok: true });
 });
+
+router.get("/get-userPhoto/:id", GetUserPhotoController);
+
 //admin protected route
 router.get("/AdminAuth", requireSignIn, IsAdmin, (req, res) => {
   res.status(200).send({ ok: true });
@@ -38,7 +42,7 @@ router.get("/AdminAuth", requireSignIn, IsAdmin, (req, res) => {
 
 router.post("/forgetPassword", ForgotPassword);
 
-router.put("/Profile", requireSignIn, UpdateProfileController);
+router.put("/Profile", requireSignIn, formidable(), UpdateProfileController);
 
 router.get("/orders", requireSignIn, GetAllOrderController);
 
