@@ -77,11 +77,13 @@ const ProductDetails = () => {
           GetProduct();
         } else {
           const errorData = await response.json();
+          setShowModal(false)
           throw new Error(errorData.message || "Failed to create review");
         }
       } catch (error) {
         console.error(error);
-        toast.error("Something went wrong in creating review");
+        setShowModal(false)
+        toast.error("You have already reviewed");
       }
     } else {
       toast.error("Please provide a valid comment and rating (1-5)");
