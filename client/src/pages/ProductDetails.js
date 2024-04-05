@@ -7,7 +7,8 @@ import { Image } from "antd";
 import Layout from "../components/layout/layout";
 import { Modal, Button, Form } from "react-bootstrap";
 import { Rating } from 'react-simple-star-rating'
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar, faStarHalfAlt } from '@fortawesome/free-solid-svg-icons';
 import { useAuth } from "../context/auth";
 import { useCart } from "../context/cart";
 
@@ -72,6 +73,7 @@ const ProductDetails = () => {
         );
         if (response.ok) {
           toast.success("Review created successfully");
+          setShowModal(false)
           GetProduct();
         } else {
           const errorData = await response.json();
@@ -110,6 +112,11 @@ const ProductDetails = () => {
     }
   }
 
+  useEffect(() => {
+    if (showModal) {
+      setComment('');
+    }
+  }, [showModal]);
   useEffect(() => {
     GetProduct();
   }, []);
@@ -160,38 +167,48 @@ const ProductDetails = () => {
                         }}
                       >
                         <IoCall />
+                        <span style={{ marginRight: "5px" }}></span>
                         Contact
                       </button>
                     </div>
                   </div>
                 ) : (
                   <div className="col-md-10">
-                    <p className="mediumtitlefont">Rating :     {[...Array(p.ratings)].map((_, index) => (
-                      <span key={index} style={{ color: "#FFD700", fontSize: "28px" }}>&#9733;</span>
-                    ))}</p>
+                    {typeof p.ratings === 'number' && p.ratings > 0 ? (
+                      <p className="mediumtitlefont">
+                        Rating:
+                        {[...Array(Math.floor(p.ratings))].map((_, index) => (
+                          <FontAwesomeIcon icon={faStar} key={index} style={{ color: "#FFD700", fontSize: "28px" }} />
+                        ))}
+                        {p.ratings % 1 !== 0 && (
+                          <FontAwesomeIcon icon={faStarHalfAlt} style={{ color: "#FFD700", fontSize: "28px" }} />
+                        )}
+                      </p>
+                    ) : (
+                      <p className="mediumtitlefont center">No rating available</p>
+                    )}
+                    <Button className="btn btn-success mb-3" onClick={() => setShowModal(true)}>Create Review</Button>
+                    {p.reviews.length > 0 && (
+                      <div style={{ padding: "10px", border: "1px solid #ccc", marginBottom: "20px" }}>
+                        {p.reviews.map((review) => (
+                          <div style={{ padding: "10px", borderBottom: "1px solid #ccc" }}>
+                            <div className="d-flex justify-content-between" style={{ marginRight: "60px" }}>
+                              <div>
+                                {[...Array(review.rating)].map((_, index) => (
+                                  <span key={index} style={{ color: "#FFD700", fontSize: "28px" }}>&#9733;</span>
+                                ))}
+                              </div>
+                              {auth.user && auth.user._id.toString() === review.user && (
+                                <Button className="btn btn-danger mb-3 align-items-center" onClick={() => deleteReview(review._id)}>Delete</Button>
+                              )}
+                            </div>
 
-                    <Button className="btn btn-success mb-3 align-items-center" onClick={() => setShowModal(true)}>Create Review</Button>
-
-                    <div style={{ padding: "10px", border: "1px solid #ccc", marginBottom: "20px" }}>
-                      {p.reviews.map((review) => (
-                        <div style={{ padding: "10px", borderBottom: "1px solid #ccc" }}>
-                          <div className="d-flex" style={{marginRight: "60px"}}>
-                          {[...Array(review.rating)].map((_, index) => (
-                            <span key={index} style={{ color: "#FFD700", fontSize: "28px" }}>&#9733;</span>
-                          ))}
-                          {auth.user && auth.user._id.toString() === review.user && (
-                            <button className="button-24" onClick={() => deleteReview(review._id)}>Delete</button>
-                          )}
+                            <p style={{ fontWeight: 600 }}>{review.comment}</p>
+                            <p className="mediumtitlefont" style={{ marginRight: "8rem" }}>- {review.name}</p>
                           </div>
-                          <p style={{ fontWeight: 600 }}>{review.comment}</p>
-
-                          <p className="mediumtitlefont" style={{ marginRight: "8rem" }}>- {review.name}</p>
-
-
-
-                        </div>
-                      ))}
-                    </div>
+                        ))}
+                      </div>
+                    )}
 
                     <Modal show={showModal} onHide={() => setShowModal(false)}>
                       <Modal.Header closeButton>
