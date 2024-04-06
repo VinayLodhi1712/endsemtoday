@@ -146,11 +146,11 @@ const CartPage = () => {
               </div>
             ) : (
               <div className="d-flex flex-column">
-                <Image src={emptycart} style={{ width: "20rem" }}></Image>
+                <img src={emptycart} style={{ width: "20rem" }} />
                 <button
                   className="btn btn-dark"
                   onClick={() => {
-                    Navigate("/");
+                    Navigate("/products");
                   }}
                 >
                   Add Items to cart

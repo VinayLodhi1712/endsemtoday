@@ -211,9 +211,9 @@ body {
   box-sizing: border-box;
   color: #ffffff;
   cursor: pointer;
-  display: inline-flex; 
+  display: inline-flex;
   align-items: center;
-  font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+  font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
   font-size: 16px;
   font-weight: 800;
   line-height: 16px;
@@ -235,7 +235,6 @@ body {
   background-position: 0 0;
   color: #ff4742;
 }
-
 
 .button-24:active {
   opacity: 0.5;
@@ -346,10 +345,10 @@ body {
 }
 
 .half-star {
-  background: linear-gradient(to right, #FFD700 50%, transparent 50%);
+  background: linear-gradient(to right, #ffd700 50%, transparent 50%);
 }
 
-.center{
+.center {
   border: 1px solid #ccc;
   padding: 10px;
   text-align: center;
@@ -376,18 +375,24 @@ body {
   font-weight: 700;
 }
 
-.UserNameDisplay{
-color: #4285f4;
-font-weight: 600;
+.UserNameDisplay {
+  color: #4285f4;
+  font-weight: 600;
 }
-.DateDisplay{
+.DateDisplay {
   color: #4285f4;
 }
-.AnswerBox{
-  padding: 0.5rem;
-  display:flex;
+.AnswerParent {
+  display: flex;
+  gap: 0.5rem;
   align-items: center;
-  justify-content:space-around;
-  background-color: #343a4058;
-  width:13%;
+}
+.AnswerBox {
+  padding: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+
+  background-color: #343a402f;
+  width: 100%;
 }

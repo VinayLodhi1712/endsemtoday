@@ -84,7 +84,7 @@ async function DeletequestionController(req, resp) {
       resp.status(200).send({
         success: true,
         message: "Question deleted Succesfully",
-      });
+      });x  
     } else {
       console.log(deleted);
       resp.status(404).send({

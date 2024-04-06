@@ -1,4 +1,5 @@
 const Answermodel = require("../modles/Answermodel");
+const Questionmodel = require("../modles/QuestionModel");
 
 async function AnswerController(req, resp) {
   try {
@@ -9,6 +10,10 @@ async function AnswerController(req, resp) {
       answer: Answer,
       votes: votes,
     }).save();
+
+    await Questionmodel.findByIdAndUpdate(req.params.qid, {
+      $inc: { AnswerCount: 1 },
+    }); //increment answer count
 
     if (response) {
       resp.status(201).send({
@@ -72,6 +77,10 @@ async function DeleteAnswerController(req, resp) {
         success: true,
         message: "Deleted Succesfully",
       });
+
+      await Questionmodel.findByIdAndUpdate(req.params.qid, {
+        $inc: { AnswerCount: -1 },
+      }); //increment answer count
     } else {
       resp.status(400).send({
         success: false,
@@ -195,6 +204,23 @@ async function GetUserAnswersController(req, resp) {
   }
 }
 
+// async function GetAnswerCountByQuestionId(req, resp) {
+//   try {
+//     const Count = await Answermodel.find({
+//       questionid: req.params.qid,
+//     }).estimatedDocumentCount();
+//     return resp.status(200).send({
+//       success: true,
+//       Count,
+//     });
+//   } catch (error) {
+//     return resp.status(404).send({
+//       success: false,
+//       message: "Errror in api",
+//     });
+//   }
+// }
+
 module.exports = {
   AnswerController,
   UpdateAnswerController,
@@ -203,4 +229,5 @@ module.exports = {
   GetUserAnswerController,
   UpdateAnswerVotesController,
   GetUserAnswersController,
+  // GetAnswerCountByQuestionId,
 };

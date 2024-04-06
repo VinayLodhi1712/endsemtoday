@@ -30,7 +30,7 @@ router.post(
   CreateProductController
 );
 
-//get All products
+//get All products 
 router.get("/get-product/:id", GetProductController);
 
 // get single Product

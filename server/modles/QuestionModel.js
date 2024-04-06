@@ -12,6 +12,10 @@ const QuestionSchema = new Schema(
       type: String,
       required: true,
     },
+    AnswerCount: {
+      type: Number,
+      default: 0,
+    },
 
     tags: {
       type: [String], //add multiple tags

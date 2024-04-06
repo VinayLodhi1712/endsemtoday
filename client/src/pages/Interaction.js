@@ -11,6 +11,7 @@ import { Empty } from "antd";
 import Avatar from "@mui/material/Avatar";
 import { useAuth } from "../context/auth";
 import { IoMdChatboxes } from "react-icons/io";
+import { FaRegEye } from "react-icons/fa";
 const Interaction = () => {
   const [Questions, SetQuestions] = useState([]);
   const [TotalQuestions, SetTotalQuestions] = useState(0);
@@ -180,9 +181,11 @@ const Interaction = () => {
                 </blockquote>
               </div>
               <div className="d-flex justify-content-between">
-                <div className="AnswerBox">
-                  <IoMdChatboxes />
-                  <p style={{ margin: "0rem" }}>5 Answers</p>
+                <div className="AnswerParent">
+                  <div className="AnswerBox">
+                    <IoMdChatboxes />
+                    <p style={{ margin: "0rem" }}>{q.AnswerCount} Answers</p>
+                  </div>
                 </div>
 
                 <div
