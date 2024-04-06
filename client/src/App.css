@@ -392,7 +392,8 @@ body {
   display: flex;
   gap: 0.5rem;
   align-items: center;
-
   background-color: #343a402f;
   width: 100%;
+ 
 }
+

@@ -3,11 +3,15 @@ import Layout from "../../components/layout/layout";
 import { Card } from "antd";
 import { useAuth } from "../../context/auth";
 import toast from "react-hot-toast";
-import AdminMenu from "../../components/layout/AdminMenu";
 import { NavLink } from "react-router-dom";
 import { Modal } from "antd";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Button from "@mui/material/Button";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { blue } from "@mui/material/colors";
+import AdminMenu from "./../../components/layout/AdminMenu";
 
-const AdminContributions = () => {
+const UserContributions = () => {
   const [auth, setAuth] = useAuth();
   const [answer, setAnswer] = useState("");
   const [response, setResponse] = useState([]);
@@ -86,6 +90,17 @@ const AdminContributions = () => {
     }
   }
 
+  const theme = createTheme({
+    palette: {
+      ochre: {
+        danger: "#f90707",
+        dangerHover: "rgb(195, 23, 23)",
+        Update: blue[900],
+        UpdateHover: "#05a8a8",
+      },
+    },
+  });
+
   useEffect(() => {
     getUserAnswer();
   }, []);
@@ -117,21 +132,37 @@ const AdminContributions = () => {
                   >
                     <p>{R.answer}</p>
                   </Card>
-                  <div className="d-flex flex-column">
-                    <div className="d-flex justify-content-around w-50 ">
-                      <button
-                        className="btn btn-danger mt-1"
-                        onClick={() => deleteContribution(R._id)}
-                      >
-                        <b>Delete Contribution</b>
-                      </button>
-                      <button
-                        className="btn btn-info mt-1 ml-3"
+
+                  <div
+                    className="d-flex justify-content-around mt-1"
+                    style={{ width: "30%" }}
+                  >
+                    <ThemeProvider theme={theme}>
+                      <Button
+                        variant="contained"
+                        sx={{
+                          bgcolor: "ochre.Update",
+                        }}
                         onClick={() => handleUpdateClick(R._id, R.answer)}
                       >
-                        <b>Update Contribution</b>
-                      </button>
-                    </div>
+                        Update
+                      </Button>
+                    </ThemeProvider>
+                    <ThemeProvider theme={theme}>
+                      <Button
+                        variant="contained"
+                        sx={{
+                          bgcolor: "ochre.danger",
+                          "&:hover": {
+                            bgcolor: "ochre.dangerHover",
+                          },
+                        }}
+                        startIcon={<DeleteIcon />}
+                        onClick={() => deleteContribution(R._id)}
+                      >
+                        Delete
+                      </Button>
+                    </ThemeProvider>
                   </div>
                 </div>
               ))
@@ -141,7 +172,9 @@ const AdminContributions = () => {
                   You haven't made any Contributions
                 </h2>
                 <NavLink to="/dashboard/user/interactions">
-                  <button className="btn btn-success">Contribute Now</button>
+                  <Button variant="contained" color="success">
+                    Answer
+                  </Button>
                 </NavLink>
               </div>
             )}
@@ -167,4 +200,4 @@ const AdminContributions = () => {
   );
 };
 
-export default AdminContributions;
+export default UserContributions;

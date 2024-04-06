@@ -9,9 +9,12 @@ import { NavLink } from "react-router-dom";
 import { Input } from "antd";
 import { Empty } from "antd";
 import Avatar from "@mui/material/Avatar";
-import { useAuth } from "../context/auth";
+
 import { IoMdChatboxes } from "react-icons/io";
-import { FaRegEye } from "react-icons/fa";
+import Button from "@mui/material/Button";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { blue } from "@mui/material/colors";
+
 const Interaction = () => {
   const [Questions, SetQuestions] = useState([]);
   const [TotalQuestions, SetTotalQuestions] = useState(0);
@@ -21,7 +24,6 @@ const Interaction = () => {
   const isInitialMount = useRef(true);
   const [shownproducts, Setshownproducts] = useState(3);
   const [notsearching, Setnotsearching] = useState(false);
-  const [auth, setAuth] = useAuth();
 
   const { Search } = Input;
 
@@ -81,7 +83,13 @@ const Interaction = () => {
       console.log(error);
     }
   }
-
+  const theme = createTheme({
+    palette: {
+      ochre: {
+        darker: blue[900],
+      },
+    },
+  });
   useEffect(() => {
     GetQuestions(0);
     GetNumberofQuestion();
@@ -117,11 +125,14 @@ const Interaction = () => {
         className="d-flex justify-content-center flex-column align-items-center "
         style={{ gap: "1rem" }}
       >
-        <NavLink to="/dashboard/user/Ask">
-          <button className="btn btn-info AskQuestion">
-            <b>Ask Question</b>{" "}
-          </button>
-        </NavLink>
+        {" "}
+        <ThemeProvider theme={theme}>
+          <NavLink to="/dashboard/user/Ask" className="AskQuestion">
+            <Button variant="contained" sx={{ bgcolor: "ochre.darker" }}>
+              Ask Question
+            </Button>
+          </NavLink>
+        </ThemeProvider>
         <h1>
           Code
           <MdOutlineConnectingAirports />
@@ -192,11 +203,13 @@ const Interaction = () => {
                   className="d-flex align-items-center"
                   style={{ gap: "1rem" }}
                 >
-                  <NavLink to={`/dashboard/user/answers/${q._id}`}>
-                    <button className="btn btn-dark">Answer</button>
-                  </NavLink>
                   <NavLink to={`/dashboard/user/ViewQuestion/${q._id}`}>
                     <button className="btn btn-primary">View</button>
+                  </NavLink>
+                  <NavLink to={`/dashboard/user/answers/${q._id}`}>
+                    <Button variant="contained" color="success">
+                      Answer
+                    </Button>
                   </NavLink>
                 </div>
               </div>

@@ -7,10 +7,15 @@ import moment from "moment";
 import "../../App.css";
 import { NavLink } from "react-router-dom";
 import { Input } from "antd";
-
 import { Empty } from "antd";
+import Avatar from "@mui/material/Avatar";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { IoMdChatboxes } from "react-icons/io";
+import Button from "@mui/material/Button";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { blue } from "@mui/material/colors";
 
-const AdminInteraction = () => {
+const Interaction = () => {
   const [Questions, SetQuestions] = useState([]);
   const [TotalQuestions, SetTotalQuestions] = useState(0);
   const [loading, setloading] = useState(false);
@@ -40,29 +45,6 @@ const AdminInteraction = () => {
       toast.error("Something went wrong");
     }
   }
-
-  async function GetQuestions(SkipCount) {
-    try {
-      setloading(true);
-
-      const response = await fetch(
-        `http://localhost:8000/api/v1/Questions/get_question/${SkipCount}`
-      );
-      const data = await response.json();
-      if (response.status === 200) {
-        SetQuestions([...data.questions]);
-
-        setloading(false);
-      } else {
-        toast.error(data.message);
-        setloading(false);
-      }
-    } catch (error) {
-      setloading(false);
-      console.log(error);
-      toast.error("Something went wrong");
-    }
-  }
   async function DeleteQuestion(question) {
     try {
       let confirmed = window.confirm(
@@ -89,6 +71,29 @@ const AdminInteraction = () => {
       toast.error("Question Not Deleted");
     }
   }
+  async function GetQuestions(SkipCount) {
+    try {
+      setloading(true);
+
+      const response = await fetch(
+        `http://localhost:8000/api/v1/Questions/get_question/${SkipCount}`
+      );
+      const data = await response.json();
+      if (response.status === 200) {
+        SetQuestions([...data.questions]);
+
+        setloading(false);
+      } else {
+        toast.error(data.message);
+        setloading(false);
+      }
+    } catch (error) {
+      setloading(false);
+      console.log(error);
+      toast.error("Something went wrong");
+    }
+  }
+
   async function GetNumberofQuestion() {
     try {
       const data = await fetch(
@@ -103,7 +108,14 @@ const AdminInteraction = () => {
       console.log(error);
     }
   }
-
+  const theme = createTheme({
+    palette: {
+      ochre: {
+        danger: "#f90707",
+        dangerHover: "rgb(195, 23, 23)",
+      },
+    },
+  });
   useEffect(() => {
     GetQuestions(0);
     GetNumberofQuestion();
@@ -139,11 +151,14 @@ const AdminInteraction = () => {
         className="d-flex justify-content-center flex-column align-items-center "
         style={{ gap: "1rem" }}
       >
-        <NavLink to="/dashboard/user/Ask">
-          <button className="btn btn-info AskQuestion">
-            <b>Ask Question</b>{" "}
-          </button>
-        </NavLink>
+        {" "}
+        <ThemeProvider theme={theme}>
+          <NavLink to="/dashboard/user/Ask" className="AskQuestion">
+            <Button variant="contained" sx={{ bgcolor: "ochre.darker" }}>
+              Ask Question
+            </Button>
+          </NavLink>
+        </ThemeProvider>
         <h1>
           Code
           <MdOutlineConnectingAirports />
@@ -165,10 +180,32 @@ const AdminInteraction = () => {
           Questions.map((q) => (
             <div class="card w-75 p-2">
               <div class="card-body">
+                <div
+                  className="d-flex justify-content-between"
+                  style={{ width: "30%" }}
+                >
+                  {" "}
+                  <div
+                    className="d-flex  justify-content-between"
+                    style={{ width: "28%" }}
+                  >
+                    <Avatar
+                      src={`http://localhost:8000/api/v1/auth/get-userPhoto/${q.user._id}`}
+                      sx={{ width: 30, height: 30 }}
+                    />
+                    <p className="UserNameDisplay">{q.user.Name}</p>
+                  </div>
+                  <div className="d-flex">
+                    <p className="light-dull">Asked:</p>
+
+                    <p className="DateDisplay">
+                      {" "}
+                      {moment(q.createdAt).format("MMMM Do YYYY")}
+                    </p>
+                  </div>
+                </div>
                 <blockquote class="blockquote mb-0">
-                  <p style={{ marginBottom: "0rem" }}>
-                    {q.title} 
-                  </p>
+                  <p style={{ marginBottom: "0rem" }}>{q.title} </p>
                   <div className="d-flex align-items-center w-100 justify-content-between">
                     {" "}
                     <div>
@@ -177,34 +214,48 @@ const AdminInteraction = () => {
                         <Tag color="blue">{tag}</Tag>
                       ))}
                     </div>
-                    <footer class="blockquote-footer">
-                      asked by{" "}
-                      <cite title="Source Title">
-                        <b>{q.user.Name}</b>
-                      </cite>{" "}
-                      {moment(q.createdAt).fromNow()}
-                    </footer>
                   </div>
                 </blockquote>
               </div>
-              <div
-                className="d-flex align-items-center"
-                style={{ gap: "1rem" }}
-              >
-                <NavLink to={`/dashboard/admin/answers/${q._id}`}>
-                  <button className="btn btn-success">Contribute</button>
-                </NavLink>
-                <NavLink to={`/dashboard/admin/ViewQuestion/${q._id}`}>
-                  <button className="btn btn-primary">View Question</button>
-                </NavLink>
-                <button
-                  className="btn btn-danger"
-                  onClick={() => {
-                    DeleteQuestion(q._id);
-                  }}
+              <div className="d-flex justify-content-between">
+                <div className="AnswerParent">
+                  <div className="AnswerBox">
+                    <IoMdChatboxes />
+                    <p style={{ margin: "0rem" }}>{q.AnswerCount} Answers</p>
+                  </div>
+                </div>
+
+                <div
+                  className="d-flex align-items-center"
+                  style={{ gap: "1rem" }}
                 >
-                  Delete
-                </button>
+                  <NavLink to={`/dashboard/user/ViewQuestion/${q._id}`}>
+                    <button className="btn btn-primary">View</button>
+                  </NavLink>
+                  <NavLink to={`/dashboard/user/answers/${q._id}`}>
+                    <Button variant="contained" color="success">
+                      Answer
+                    </Button>
+                  </NavLink>
+
+                  <ThemeProvider theme={theme}>
+                    <Button
+                      variant="contained"
+                      sx={{
+                        bgcolor: "ochre.danger",
+                        "&:hover": {
+                          bgcolor: "ochre.dangerHover",
+                        },
+                      }}
+                      startIcon={<DeleteIcon />}
+                      onClick={() => {
+                        DeleteQuestion(q._id);
+                      }}
+                    >
+                      Delete
+                    </Button>
+                  </ThemeProvider>
+                </div>
               </div>
             </div>
           ))
@@ -238,8 +289,6 @@ const AdminInteraction = () => {
                 {loading ? "Loading..." : "LoadMore"}{" "}
               </button>
             </div>
-          ) : shownproducts == TotalQuestions ? (
-            <>No more data</>
           ) : (
             <button
               className="mb-2 btn btn-secondary"
@@ -257,4 +306,4 @@ const AdminInteraction = () => {
   );
 };
 
-export default AdminInteraction;
+export default Interaction;

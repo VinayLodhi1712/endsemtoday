@@ -3,6 +3,7 @@ import Layout from "../components/layout/layout";
 import { useParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useAuth } from "../context/auth";
+import Button from "@mui/material/Button";
 const AnswerQuestion = () => {
   const params = useParams();
   const [Answer, SetAnswer] = useState("");
@@ -87,9 +88,10 @@ const AnswerQuestion = () => {
               style={{ height: "13rem" }}
             ></textarea>
           </div>
-          <button className="btn btn-success" type="submit">
-            Post Answer
-          </button>
+
+          <Button variant="contained" color="success" type="submit">
+            Post
+          </Button>
         </form>
       </div>
     </Layout>

@@ -3,11 +3,15 @@ import Layout from "../../components/layout/layout";
 import { NavLink } from "react-router-dom";
 import toast from "react-hot-toast";
 import { Tag } from "antd";
-import AdminMenu from "../../components/layout/AdminMenu";
 import moment from "moment";
-// import ".../App.css";
+import DeleteIcon from "@mui/icons-material/Delete";
+import "../../App.css";
+import Button from "@mui/material/Button";
 import { useAuth } from "../../context/auth";
 import { Tabs } from "antd";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import AdminMenu from "./../../components/layout/AdminMenu";
+
 const { TabPane } = Tabs;
 const AdminQuestions = () => {
   const [Questions, SetQuestions] = useState([]);
@@ -99,13 +103,44 @@ const AdminQuestions = () => {
       toast.error("Something went wrong");
     }
   }
-
+  async function RemoveBookmark(qid) {
+    try {
+      const response = await fetch(
+        `http://localhost:8000/api/v1/Questions/removeBookmarked/${auth.user._id}/${qid}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (response.status === 200) {
+        toast.success("Bookmarked removed");
+        GetBookmarkedQuestion();
+      } else {
+        if (response.status === 500) {
+          toast.error("Something Went Wrong");
+        }
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Something Went Wrong");
+    }
+  }
   useEffect(() => {
     GetQuestions();
     GetNumberofQuestion();
     GetBookmarkedQuestion();
   }, []);
 
+  const theme = createTheme({
+    palette: {
+      ochre: {
+        danger: "#f90707",
+        dangerHover: "rgb(195, 23, 23)",
+      },
+    },
+  });
   const handleLoadMore = () => {
     GetQuestions();
     GetNumberofQuestion();
@@ -151,24 +186,31 @@ const AdminQuestions = () => {
                       </div>
                       <div className="d-flex" style={{ gap: "1rem" }}>
                         <NavLink to={`/dashboard/user/answers/${q._id}`}>
-                          <button className="btn btn-success">
-                            Contribute
-                          </button>
+                          <Button variant="contained" color="success">
+                            Answer
+                          </Button>
                         </NavLink>
                         <NavLink to={`/dashboard/user/ViewQuestion/${q._id}`}>
-                          <button className="btn btn-primary">
-                            View Question
-                          </button>
+                          <button className="btn btn-primary">View</button>
                         </NavLink>
-                        <button
-                          className="btn btn-danger"
-                          style={{ width: "10%" }}
-                          onClick={() => {
-                            DeleteQuestion(q._id);
-                          }}
-                        >
-                          Delete
-                        </button>
+                        <ThemeProvider theme={theme}>
+                          <Button
+                            variant="contained"
+                            sx={{
+                              bgcolor: "ochre.danger",
+                              "&:hover": {
+                                bgcolor: "ochre.dangerHover",
+                              },
+                            }}
+                            startIcon={<DeleteIcon />}
+                            onClick={() => {
+                              DeleteQuestion(q._id);
+                            }}
+                            className="DangerButton"
+                          >
+                            Delete
+                          </Button>
+                        </ThemeProvider>
                       </div>
                     </div>
                   ))
@@ -230,21 +272,29 @@ const AdminQuestions = () => {
                       </div>
                       <div className="d-flex" style={{ gap: "1rem" }}>
                         <NavLink to={`/dashboard/user/answers/${q._id}`}>
-                          <button className="btn btn-success">
-                            Contribute
-                          </button>
+                        <Button variant="contained" color="success">
+                            Answer
+                          </Button>
                         </NavLink>
                         <NavLink to={`/dashboard/user/ViewQuestion/${q._id}`}>
                           <button className="btn btn-primary">
-                            View Question
+                            View 
                           </button>
                         </NavLink>
+                        <button
+                          className="btn btn-warning"
+                          onClick={() => {
+                            RemoveBookmark(q._id);
+                          }}
+                        >
+                          Remove
+                        </button>
                       </div>
                     </div>
                   ))
                 ) : (
                   <div className="d-flex flex-column align-items-center">
-                    <h2>You haven't asked any question yet</h2>
+                    <h2>No bookmarks found</h2>
                   </div>
                 )}
               </div>

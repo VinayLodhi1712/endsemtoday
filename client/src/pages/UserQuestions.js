@@ -5,9 +5,13 @@ import toast from "react-hot-toast";
 import { Tag } from "antd";
 import UserMEnu from "../components/layout/UserMEnu";
 import moment from "moment";
+import DeleteIcon from "@mui/icons-material/Delete";
 import "../App.css";
+import Button from "@mui/material/Button";
 import { useAuth } from "../context/auth";
 import { Tabs } from "antd";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
 const { TabPane } = Tabs;
 const AdminQuestions = () => {
   const [Questions, SetQuestions] = useState([]);
@@ -129,6 +133,14 @@ const AdminQuestions = () => {
     GetBookmarkedQuestion();
   }, []);
 
+  const theme = createTheme({
+    palette: {
+      ochre: {
+        danger: "#f90707",
+        dangerHover: "rgb(195, 23, 23)",
+      },
+    },
+  });
   const handleLoadMore = () => {
     GetQuestions();
     GetNumberofQuestion();
@@ -174,24 +186,31 @@ const AdminQuestions = () => {
                       </div>
                       <div className="d-flex" style={{ gap: "1rem" }}>
                         <NavLink to={`/dashboard/user/answers/${q._id}`}>
-                          <button className="btn btn-success">
-                            Contribute
-                          </button>
+                          <Button variant="contained" color="success">
+                            Answer
+                          </Button>
                         </NavLink>
                         <NavLink to={`/dashboard/user/ViewQuestion/${q._id}`}>
-                          <button className="btn btn-primary">
-                            View Question
-                          </button>
+                          <button className="btn btn-primary">View</button>
                         </NavLink>
-                        <button
-                          className="btn btn-danger"
-                          style={{ width: "10%" }}
-                          onClick={() => {
-                            DeleteQuestion(q._id);
-                          }}
-                        >
-                          Delete
-                        </button>
+                        <ThemeProvider theme={theme}>
+                          <Button
+                            variant="contained"
+                            sx={{
+                              bgcolor: "ochre.danger",
+                              "&:hover": {
+                                bgcolor: "ochre.dangerHover",
+                              },
+                            }}
+                            startIcon={<DeleteIcon />}
+                            onClick={() => {
+                              DeleteQuestion(q._id);
+                            }}
+                            className="DangerButton"
+                          >
+                            Delete
+                          </Button>
+                        </ThemeProvider>
                       </div>
                     </div>
                   ))
@@ -253,13 +272,13 @@ const AdminQuestions = () => {
                       </div>
                       <div className="d-flex" style={{ gap: "1rem" }}>
                         <NavLink to={`/dashboard/user/answers/${q._id}`}>
-                          <button className="btn btn-success">
-                            Contribute
-                          </button>
+                        <Button variant="contained" color="success">
+                            Answer
+                          </Button>
                         </NavLink>
                         <NavLink to={`/dashboard/user/ViewQuestion/${q._id}`}>
                           <button className="btn btn-primary">
-                            View Question
+                            View 
                           </button>
                         </NavLink>
                         <button

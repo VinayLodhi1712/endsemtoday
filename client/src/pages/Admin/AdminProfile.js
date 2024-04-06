@@ -1,9 +1,10 @@
 import React from "react";
 import Layout from "../../components/layout/layout";
-import UserMEnu from "../../components/layout/UserMEnu";
+
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import { useAuth } from "../../context/auth";
+import AdminMenu from "./../../components/layout/AdminMenu";
 const Profile = () => {
   const [auth, Setauth] = useAuth();
   const [Name, SetName] = useState("");
@@ -76,7 +77,7 @@ const Profile = () => {
         style={{ width: "100%", height: "100%" }}
       >
         <div className="d-flex mt-3">
-          <UserMEnu />
+          <AdminMenu />
         </div>
         <form
           style={{ display: "flex", justifyContent: "center", width: "70%" }}

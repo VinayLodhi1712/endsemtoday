@@ -10,7 +10,11 @@ import { NavLink } from "react-router-dom";
 import { FaRegArrowAltCircleUp } from "react-icons/fa";
 import { useAuth } from "../context/auth";
 import { LuBookmarkPlus } from "react-icons/lu";
+import Button from "@mui/material/Button";
 
+import Avatar from "@mui/material/Avatar";
+
+import { IoMdChatboxes } from "react-icons/io";
 const View = () => {
   const [Questions, SetQuestions] = useState([]);
   const [Answers, SetAnswers] = useState([]);
@@ -119,33 +123,45 @@ const View = () => {
 
         {Questions.length > 0 ? (
           Questions.map((q) => (
-            <div class="card p-2 w-100">
+            <div class="card w-100 p-2">
               <div class="card-body">
-                <blockquote class="blockquote mb-0">
-                  <div className="d-flex justify-content-between">
-                    <p style={{ marginBottom: "0rem" }}>
-                      {" "}
-                      <b>Question:</b> {q.title}{" "}
-                    </p>
-                    <footer
-                      class="blockquote-footer d-flex align-items-center "
-                      style={{ gap: "2rem" }}
+                <div className="d-flex justify-content-between">
+                  <div
+                    className="d-flex justify-content-between"
+                    style={{ width: "25%" }}
+                  >
+                    {" "}
+                    <div
+                      className="d-flex  justify-content-between"
+                      style={{ width: "26%" }}
                     >
-                      <cite title="Source Title">
-                        asked by <b>{q.user.Name}</b>{" "}
-                        {moment(q.createdAt).fromNow()}
-                      </cite>{" "}
-                      <LuBookmarkPlus
-                        className="Bookmark"
-                        onClick={() => {
-                          Bookmark(q._id);
-                        }}
+                      <Avatar
+                        src={`http://localhost:8000/api/v1/auth/get-userPhoto/${q.user._id}`}
+                        sx={{ width: 30, height: 30 }}
                       />
-                    </footer>
+                      <p className="UserNameDisplay">{q.user.Name}</p>
+                    </div>
+                    <div className="d-flex">
+                      <p className="light-dull">Asked:</p>
+
+                      <p className="DateDisplay">
+                        {" "}
+                        {moment(q.createdAt).format("MMMM Do YYYY")}
+                      </p>
+                    </div>
                   </div>
-                  <small>
-                    <b>Description:</b> {q.question}
-                  </small>
+
+                  <LuBookmarkPlus
+                    title="Bookmark this Question"
+                    className="Bookmark"
+                    onClick={() => {
+                      Bookmark(q._id);
+                    }}
+                  />
+                </div>
+                <blockquote class="blockquote mb-0">
+                  <p style={{ marginBottom: "0rem" }}>{q.title} </p>
+                  <small>{q.question}</small>
                   <div className="d-flex align-items-center w-100 justify-content-between">
                     {" "}
                     <div>
@@ -209,7 +225,9 @@ const View = () => {
             >
               <Empty />
               <NavLink to={`/dashboard/user/answers/${params.qid}`}>
-                <button className="btn btn-success">Contribute</button>
+                <Button variant="contained" color="success">
+                  Answer
+                </Button>
               </NavLink>
             </div>
           )}
