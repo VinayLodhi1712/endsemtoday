@@ -100,7 +100,9 @@ async function GetAnswerController(req, resp) {
   try {
     const response = await Answermodel.find({
       questionid: req.params.qid,
-    }).populate("user", "Name");
+    })
+      .populate("user", "Name")
+      .sort({ votes: -1});
     if (response) {
       resp.status(200).send({
         success: true,
@@ -133,9 +135,13 @@ async function UpdateAnswerVotesController(req, resp) {
         message: "You have already voted",
       });
     } else {
+      if (answer.UserWhoDownVoted.includes(uid)) {
+        answer.UserWhoDownVoted.pull(uid);
+      }
       answer.votes = Votes;
       answer.UserWhoVoted.push(uid); // push the id of the user who already voted
       await answer.save();
+
       if (answer) {
         resp.status(201).send({
           success: true,
@@ -157,7 +163,46 @@ async function UpdateAnswerVotesController(req, resp) {
     });
   }
 }
+async function UpdateAnswerDownVotesController(req, resp) {
+  try {
+    const { aid, uid } = req.params;
+    const { Votes } = req.body;
+    const answer = await Answermodel.findById(aid);
 
+    if (answer.UserWhoDownVoted.includes(uid)) {
+      return resp.status(400).json({
+        success: false,
+        message: "You have already voted",
+      });
+    } else {
+      if (answer.UserWhoVoted.includes(uid)) {
+        answer.UserWhoVoted.pull(uid);
+      }
+      answer.votes = Votes;
+      answer.UserWhoDownVoted.push(uid); // push the id of the user who already voted
+      await answer.save();
+
+      if (answer) {
+        resp.status(201).send({
+          success: true,
+          message: "Your feedback was added succesfully",
+          answer,
+        });
+      } else {
+        resp.status(404).send({
+          success: false,
+          message: "Error adding feedback ",
+        });
+      }
+    }
+  } catch (error) {
+    console.log(error);
+    resp.status(404).send({
+      success: false,
+      message: "Error in api",
+    });
+  }
+}
 async function GetUserAnswerController(req, resp) {
   try {
     const answers = await Answermodel.find({ user: req.params.uid }).populate(
@@ -228,6 +273,7 @@ module.exports = {
   GetAnswerController,
   GetUserAnswerController,
   UpdateAnswerVotesController,
+  UpdateAnswerDownVotesController,
   GetUserAnswersController,
   // GetAnswerCountByQuestionId,
 };

@@ -2,7 +2,7 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 /* navbar css */
@@ -146,18 +146,25 @@ body {
 .UpVote:hover {
   background-color: lightgreen;
 }
+
 .DownVote {
   border-radius: 50%;
   height: 2rem;
   width: 2rem;
 }
 .DownVote:hover {
-  background-color: rgba(255, 0, 0, 0.477);
+  background-color: rgba(255, 0, 0, 0.34);
 }
 
+.Bookmark{
+  height: 1.3rem;
+  width: 1.3rem;
+  color: #3c4043a3;
+}
 .Bookmark:hover {
   cursor: pointer;
   color: black;
+  
 }
 
 .button-27 {
@@ -394,6 +401,8 @@ body {
   align-items: center;
   background-color: #343a402f;
   width: 100%;
- 
 }
 
+.QuestionTitle {
+  font-weight: 600;
+}

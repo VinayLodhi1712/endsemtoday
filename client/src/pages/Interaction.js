@@ -179,7 +179,7 @@ const Interaction = () => {
                   </div>
                 </div>
                 <blockquote class="blockquote mb-0">
-                  <p style={{ marginBottom: "0rem" }}>{q.title} </p>
+                  <p style={{ marginBottom: "0rem" }} className="QuestionTitle">{q.title} </p>
                   <div className="d-flex align-items-center w-100 justify-content-between">
                     {" "}
                     <div>
