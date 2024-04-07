@@ -55,33 +55,33 @@ function Technewscard() {
 const About = () => {
   return (
     <Layout>
-      <p className="Titlefont center" style={{marginTop:"2rem"}}> Welcome to <mark>TALKOFCODE</mark>, your go-to destination for all
-            things code-related!</p>
+      <p className="Titlefont center" style={{ marginTop: "2rem" }}> Welcome to <mark>TALKOFCODE</mark>, your go-to destination for all
+        things code-related!</p>
       <div className="cards">
         <div><Productcard /></div>
         <div className="cardmargin"><Codeconnectcard /></div>
         <div className="cardmargin"><Technewscard /></div>
       </div>
 
-      <p className="Titlefont center" style={{marginTop:"2rem"}}> About us</p>
+      <p className="Titlefont center" style={{ marginTop: "2rem" }}> About us</p>
       <div
         className="d-flex justify-content-center align-items-center"
         style={{ height: "100%", gap: "2rem" }}
       >
-       
+
         <div style={{ width: "40%", height: "75%" }}>
           <img className="boxlayout"
             src={data}
             style={{ width: "100%", height: "100%" }}
           ></img>
         </div>
-        <div style={{ width: "50%", height:"75%" }} className="flex-column d-flex ">
-         
-        <div className="boxlayout smalltitlefont">
-    <p>At TalkOfCode, we're more than just a platform – we're a vibrant community of learners, creators, and enthusiasts united by our passion for technology. Our mission is simple: to provide a dynamic space where individuals from all backgrounds can come together to learn, share, and grow.</p>
-    <p className="smalltitlefont">"Whether you're a seasoned developer, a student, or an entrepreneur, TalkOfCode is here to support you every step of the way."</p>
-    <p className="smalltitlefont">TalkOfCode also offers a unique marketplace where members can buy and sell old tech products, fostering a culture of sustainability and resourcefulness within our community. Let's code, connect, and create together!</p>
-</div>
+        <div style={{ width: "50%", height: "75%" }} className="flex-column d-flex ">
+
+          <div className="boxlayout smalltitlefont">
+            <p>At TalkOfCode, we're more than just a platform – we're a vibrant community of learners, creators, and enthusiasts united by our passion for technology. Our mission is simple: to provide a dynamic space where individuals from all backgrounds can come together to learn, share, and grow.</p>
+            <p className="smalltitlefont">"Whether you're a seasoned developer, a student, or an entrepreneur, TalkOfCode is here to support you every step of the way."</p>
+            <p className="smalltitlefont">TalkOfCode also offers a unique marketplace where members can buy and sell old tech products, fostering a culture of sustainability and resourcefulness within our community. Let's code, connect, and create together!</p>
+          </div>
 
         </div>
       </div>
