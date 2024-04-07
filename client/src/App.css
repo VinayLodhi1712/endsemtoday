@@ -156,7 +156,7 @@ body {
   background-color: rgba(255, 0, 0, 0.34);
 }
 
-.Bookmark{
+.Bookmark {
   height: 1.3rem;
   width: 1.3rem;
   color: #3c4043a3;
@@ -164,7 +164,6 @@ body {
 .Bookmark:hover {
   cursor: pointer;
   color: black;
-  
 }
 
 .button-27 {
@@ -375,8 +374,9 @@ body {
   padding: 0.3rem;
 }
 .col-md-4 img {
-  border-radius: 50%;
+  width: 60%;
   height: 80%;
+  overflow: hidden;
 }
 .Info {
   font-weight: 700;

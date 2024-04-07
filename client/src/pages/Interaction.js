@@ -179,7 +179,9 @@ const Interaction = () => {
                   </div>
                 </div>
                 <blockquote class="blockquote mb-0">
-                  <p style={{ marginBottom: "0rem" }} className="QuestionTitle">{q.title} </p>
+                  <p style={{ marginBottom: "0rem" }} className="QuestionTitle">
+                    {q.title}{" "}
+                  </p>
                   <div className="d-flex align-items-center w-100 justify-content-between">
                     {" "}
                     <div>
@@ -232,7 +234,7 @@ const Interaction = () => {
                     handleLoadMore(-1);
                   }}
                 >
-                  {loading ? "Loading..." : "Back"}{" "}
+                  {loading ? "Loading..." : "Back"}
                 </button>
               ) : null}
               <button
@@ -242,10 +244,10 @@ const Interaction = () => {
                   handleLoadMore(+1);
                 }}
               >
-                {loading ? "Loading..." : "LoadMore"}{" "}
+                {loading ? "Loading..." : "Load More"}
               </button>
             </div>
-          ) : (
+          ) : shownproducts > 3 ? (
             <button
               className="mb-2 btn btn-secondary"
               onClick={() => {
@@ -253,9 +255,9 @@ const Interaction = () => {
                 handleLoadMore(-1);
               }}
             >
-              {loading ? "Loading..." : "Back"}{" "}
+              {loading ? "Loading..." : "Back"}
             </button>
-          )
+          ) : null
         ) : null}
       </div>
     </Layout>

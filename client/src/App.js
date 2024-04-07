@@ -55,7 +55,10 @@ function App() {
         <Route path="/register" element={<Register />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/ForgotPassword" element={<Forgotpassword />}></Route>
-
+        <Route
+          path="/Dashboard/user/interaction"
+          element={<Interaction />}
+        ></Route>
         {/* users */}
 
         <Route path="/Dashboard" element={<PrivateRoute />}>
@@ -63,7 +66,6 @@ function App() {
           <Route path="user/orders" element={<Orders />}></Route>
           <Route path="user/Profile" element={<Profile />}></Route>
           {/* question */}
-          <Route path="user/Interaction" element={<Interaction />}></Route>
 
           <Route path="user/Ask" element={<AskQuestion />}></Route>
           <Route path="user/questions" element={<UserQuestions />}></Route>
@@ -114,7 +116,6 @@ function App() {
           <Route path="Admin/Profile" element={<AdminProfile />}></Route>
           <Route path="Admin/Users" element={<Users />}></Route>
 
-          {/* modify later */}
           <Route
             path="Admin/Interaction"
             element={<AdminInteraction />}

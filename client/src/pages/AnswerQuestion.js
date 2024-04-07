@@ -10,6 +10,7 @@ const AnswerQuestion = () => {
   const [Title, SetTitle] = useState("");
   const [Description, SetDescription] = useState("");
   const [auth, SetAuth] = useAuth();
+  const [Email, SetEmail] = useState("");
   async function GetSingleQuestion() {
     try {
       const que = await fetch(
@@ -19,6 +20,7 @@ const AnswerQuestion = () => {
       if (data) {
         SetTitle(data.question[0].title);
         SetDescription(data.question[0].question);
+        SetEmail(data.question[0].user.Email);
       } else {
         toast.error("Error! getting title");
       }
@@ -45,6 +47,7 @@ const AnswerQuestion = () => {
       if (answer) {
         toast.success("Answer Posted Succesfully");
         SetAnswer("");
+        await SendEmail();
       } else {
         toast.error("Answer was not posted");
       }
@@ -52,7 +55,24 @@ const AnswerQuestion = () => {
       toast.error("Something Went Wrong");
     }
   }
-
+  async function SendEmail() {
+    try {
+      const response = await fetch(
+        `http://localhost:8000/api/v1/Answer/EmailUser/${Email}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (response.status == 200) {
+        console.log("Email sent ");
+      }
+    } catch (error) {
+      toast.error("EmailSent");
+    }
+  }
   useEffect(() => {
     GetSingleQuestion();
   }, []);

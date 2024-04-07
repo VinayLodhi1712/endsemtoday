@@ -1,5 +1,6 @@
 const Answermodel = require("../modles/Answermodel");
 const Questionmodel = require("../modles/QuestionModel");
+const nodemailer = require("nodemailer");
 
 async function AnswerController(req, resp) {
   try {
@@ -102,7 +103,7 @@ async function GetAnswerController(req, resp) {
       questionid: req.params.qid,
     })
       .populate("user", "Name")
-      .sort({ votes: -1});
+      .sort({ votes: -1 });
     if (response) {
       resp.status(200).send({
         success: true,
@@ -249,22 +250,36 @@ async function GetUserAnswersController(req, resp) {
   }
 }
 
-// async function GetAnswerCountByQuestionId(req, resp) {
-//   try {
-//     const Count = await Answermodel.find({
-//       questionid: req.params.qid,
-//     }).estimatedDocumentCount();
-//     return resp.status(200).send({
-//       success: true,
-//       Count,
-//     });
-//   } catch (error) {
-//     return resp.status(404).send({
-//       success: false,
-//       message: "Errror in api",
-//     });
-//   }
-// }
+async function EmailUser(req, resp) {
+  // Handle form data here
+  const Email = req.params.Email;
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "taskmaster991@gmail.com",
+      pass: "kmepakzcabvztekd",
+    },
+  });
+
+  const mailOptions = {
+    from: "taskmaster991@gmail.com",
+    to: Email,
+    subject: "Someone Answered Your Question",
+    text: `
+      Message:"Someone Answered Your Question you asked on our platform"
+      `,
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.log("Error sending email: " + error);
+      resp.status(500).send("Error sending email");
+    } else {
+      console.log("Email sent: " + info.response);
+      resp.status(200).send("Form data sent successfully");
+    }
+  });
+}
 
 module.exports = {
   AnswerController,
@@ -275,5 +290,6 @@ module.exports = {
   UpdateAnswerVotesController,
   UpdateAnswerDownVotesController,
   GetUserAnswersController,
+  EmailUser,
   // GetAnswerCountByQuestionId,
 };

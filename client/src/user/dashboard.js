@@ -161,13 +161,12 @@ const AdminDashboard = () => {
             </button>
           </div>
         </Drawer>
-        <div className="container bootstrap snippets bootdey">
+        <div className="container bootstrap snippets bootdey" style={{width:"80%"}}>
           <div className="panel-body inf-content">
             <div className="row">
-              <div className="col-md-4">
+              <div className="col-md-4 d-flex justify-content-center align-items-center">
                 <img
                   alt
-                  style={{ width: 600 }}
                   title
                   className="img-circle img-thumbnail isTooltip"
                   src={`http://localhost:8000/api/v1/auth/get-userPhoto/${auth.user._id}`}
