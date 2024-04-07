@@ -22,6 +22,7 @@ export default function PrivateRoute() {
             setOk(true);
           } else {
             setOk(false);
+            console.log("no ok from server");
           }
         } else {
           setOk(false);

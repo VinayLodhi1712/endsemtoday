@@ -84,7 +84,7 @@ async function DeletequestionController(req, resp) {
       resp.status(200).send({
         success: true,
         message: "Question deleted Succesfully",
-      });x  
+      });
     } else {
       console.log(deleted);
       resp.status(404).send({
@@ -196,7 +196,10 @@ async function QuestionByUserCountController(req, resp) {
 async function GetSingleQuestionsController(req, resp) {
   try {
     const id = req.params.id;
-    const question = await Questionmodel.findById(id).populate("user", "Name");
+    const question = await Questionmodel.findById(id).populate(
+      "user",
+      "Name Email"
+    );
 
     if (question) {
       resp.status(200).send({
@@ -249,8 +252,9 @@ async function SearchquestionController(req, resp) {
 async function GetBookMarkedQuestion(req, resp) {
   try {
     const questions = await Usermodel.findById(req.params.uid)
-      .select("Bookmarked")
+      .select({ Bookmarked: 1, Name: 1 })
       .populate("Bookmarked");
+
     if (questions) {
       return resp.status(200).send({
         success: true,

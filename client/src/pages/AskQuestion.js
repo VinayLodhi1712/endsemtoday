@@ -58,10 +58,10 @@ const AskQuestion = () => {
     <Layout>
       {" "}
       <div
-        className="d-flex justify-content-center flex-column align-items-center w-100 mt-3"
-        style={{ gap: "1rem" }}
+        className="d-flex justify-content-center flex-column align-items-center w-100"
+        style={{ gap: "1rem",height:"77vh" }}
       >
-        <h2>Ask Your Question</h2>
+        <h2 className="mt-2">Ask Your Question</h2>
         <form
           onSubmit={(e) => {
             PostQuestion(e);

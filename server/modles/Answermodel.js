@@ -13,17 +13,23 @@ const AnswerSchema = new Schema(
       type: String,
       required: true,
     },
-    // Id Of User who has posted answer for  question 
+    // Id Of User who has posted answer for  question
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Users",
       required: true,
     },
     votes: {
-      type: Number, 
+      type: Number,
       default: 0,
     },
     UserWhoVoted: [
+      {
+        type: mongoose.ObjectId,
+        ref: "Users",
+      },
+    ],
+    UserWhoDownVoted: [
       {
         type: mongoose.ObjectId,
         ref: "Users",

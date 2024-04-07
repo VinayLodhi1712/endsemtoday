@@ -2,7 +2,8 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+
 }
 
 /* navbar css */
@@ -173,6 +174,7 @@ body {
   background-color: lightgreen;
 }
 
+
 .DownVote {
   border-radius: 50%;
   height: 2rem;
@@ -180,9 +182,14 @@ body {
 }
 
 .DownVote:hover {
-  background-color: rgba(255, 0, 0, 0.477);
+  background-color: rgba(255, 0, 0, 0.34);
 }
 
+.Bookmark {
+  height: 1.3rem;
+  width: 1.3rem;
+  color: #3c4043a3;
+}
 .Bookmark:hover {
   cursor: pointer;
   color: black;
@@ -399,8 +406,9 @@ body {
 }
 
 .col-md-4 img {
-  border-radius: 50%;
+  width: 60%;
   height: 80%;
+  overflow: hidden;
 }
 
 .Info {
@@ -429,9 +437,11 @@ body {
   align-items: center;
   background-color: #343a402f;
   width: 100%;
-
 }
 
+.QuestionTitle {
+  font-weight: 600;
+}
 .formlayout {
   height: 100%;
   width: 80%;

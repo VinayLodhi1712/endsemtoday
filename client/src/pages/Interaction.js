@@ -9,12 +9,12 @@ import { NavLink } from "react-router-dom";
 import { Input } from "antd";
 import { Empty } from "antd";
 import Avatar from "@mui/material/Avatar";
-
+import DeleteIcon from "@mui/icons-material/Delete";
 import { IoMdChatboxes } from "react-icons/io";
 import Button from "@mui/material/Button";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { blue } from "@mui/material/colors";
-
+import { useAuth } from "../context/auth";
 const Interaction = () => {
   const [Questions, SetQuestions] = useState([]);
   const [TotalQuestions, SetTotalQuestions] = useState(0);
@@ -24,6 +24,7 @@ const Interaction = () => {
   const isInitialMount = useRef(true);
   const [shownproducts, Setshownproducts] = useState(3);
   const [notsearching, Setnotsearching] = useState(false);
+  const [auth, SetAuth] = useAuth();
 
   const { Search } = Input;
 
@@ -45,7 +46,32 @@ const Interaction = () => {
       toast.error("Something went wrong");
     }
   }
-
+  async function DeleteQuestion(question) {
+    try {
+      let confirmed = window.confirm(
+        "Are you sure you want to delete this Question?"
+      );
+      if (confirmed) {
+        const del = await fetch(
+          `http://localhost:8000/api/v1/Questions/delete_question/${question}`,
+          {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" },
+          }
+        );
+        if (del) {
+          toast.success("Deleted Successfully");
+          window.location.reload();
+        } else {
+          toast.error("Error! Please Try Again");
+        }
+      } else {
+        return;
+      }
+    } catch (error) {
+      toast.error("Question Not Deleted");
+    }
+  }
   async function GetQuestions(SkipCount) {
     try {
       setloading(true);
@@ -83,10 +109,13 @@ const Interaction = () => {
       console.log(error);
     }
   }
+
   const theme = createTheme({
     palette: {
       ochre: {
         darker: blue[900],
+        danger: "#f90707",
+        dangerHover: "rgb(195, 23, 23)",
       },
     },
   });
@@ -122,8 +151,9 @@ const Interaction = () => {
   return (
     <Layout>
       <div
-        className="d-flex justify-content-center flex-column align-items-center "
+        className="d-flex justify-content-center flex-column align-items-center"
         style={{ gap: "1rem" }}
+        
       >
         {" "}
         <ThemeProvider theme={theme}>
@@ -179,7 +209,12 @@ const Interaction = () => {
                   </div>
                 </div>
                 <blockquote class="blockquote mb-0">
-                  <p style={{ marginBottom: "0rem" }}>{q.title} </p>
+                  <p style={{ marginBottom: "0rem" }} className="QuestionTitle">
+                    {q.title.length > 100
+                      ? q.title.substring(0, 100) + "..."
+                      : q.title}
+                  </p>
+
                   <div className="d-flex align-items-center w-100 justify-content-between">
                     {" "}
                     <div>
@@ -211,6 +246,25 @@ const Interaction = () => {
                       Answer
                     </Button>
                   </NavLink>
+                  {auth.user.Role == 1 ? (
+                    <ThemeProvider theme={theme}>
+                      <Button
+                        variant="contained"
+                        sx={{
+                          bgcolor: "ochre.danger",
+                          "&:hover": {
+                            bgcolor: "ochre.dangerHover",
+                          },
+                        }}
+                        startIcon={<DeleteIcon />}
+                        onClick={() => {
+                          DeleteQuestion(q._id);
+                        }}
+                      >
+                        Delete
+                      </Button>
+                    </ThemeProvider>
+                  ) : null}
                 </div>
               </div>
             </div>
@@ -232,7 +286,7 @@ const Interaction = () => {
                     handleLoadMore(-1);
                   }}
                 >
-                  {loading ? "Loading..." : "Back"}{" "}
+                  {loading ? "Loading..." : "Back"}
                 </button>
               ) : null}
               <button
@@ -242,10 +296,10 @@ const Interaction = () => {
                   handleLoadMore(+1);
                 }}
               >
-                {loading ? "Loading..." : "LoadMore"}{" "}
+                {loading ? "Loading..." : "Load More"}
               </button>
             </div>
-          ) : (
+          ) : shownproducts > 3 ? (
             <button
               className="mb-2 btn btn-secondary"
               onClick={() => {
@@ -253,9 +307,9 @@ const Interaction = () => {
                 handleLoadMore(-1);
               }}
             >
-              {loading ? "Loading..." : "Back"}{" "}
+              {loading ? "Loading..." : "Back"}
             </button>
-          )
+          ) : null
         ) : null}
       </div>
     </Layout>

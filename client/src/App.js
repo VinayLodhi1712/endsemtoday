@@ -33,7 +33,6 @@ import AnswerQuestion from "./pages/AnswerQuestion";
 import UserContributions from "./pages/UserContributions";
 import View from "./pages/View";
 import AdminQuestions from "./pages/Admin/AdminQuestion";
-import AdminInteraction from "./pages/Admin/Admininteraction";
 import AdminContributions from "./pages/Admin/AdminContributions";
 import Productpage from "./pages/Productpage";
 function App() {
@@ -55,7 +54,10 @@ function App() {
         <Route path="/register" element={<Register />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/ForgotPassword" element={<Forgotpassword />}></Route>
-
+        <Route
+          path="/Dashboard/user/interaction"
+          element={<Interaction />}
+        ></Route>
         {/* users */}
 
         <Route path="/Dashboard" element={<PrivateRoute />}>
@@ -63,7 +65,6 @@ function App() {
           <Route path="user/orders" element={<Orders />}></Route>
           <Route path="user/Profile" element={<Profile />}></Route>
           {/* question */}
-          <Route path="user/Interaction" element={<Interaction />}></Route>
 
           <Route path="user/Ask" element={<AskQuestion />}></Route>
           <Route path="user/questions" element={<UserQuestions />}></Route>
@@ -114,11 +115,7 @@ function App() {
           <Route path="Admin/Profile" element={<AdminProfile />}></Route>
           <Route path="Admin/Users" element={<Users />}></Route>
 
-          {/* modify later */}
-          <Route
-            path="Admin/Interaction"
-            element={<AdminInteraction />}
-          ></Route>
+          <Route path="Admin/Interaction" element={<Interaction />}></Route>
 
           <Route path="admin/Ask" element={<AskQuestion />}></Route>
           <Route path="admin/questions" element={<AdminQuestions />}></Route>

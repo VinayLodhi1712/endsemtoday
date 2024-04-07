@@ -84,6 +84,17 @@ function Header() {
                   ))}
                 </ul>
               </li>
+              <li className="nav-item">
+                <NavLink
+                  to={`/dashboard/${
+                    
+                    auth?.user?.Role === 1 ? `Admin` : `user`
+                  }/interaction`}
+                  className="nav-link"
+                >
+                  CodeConnect
+                </NavLink>
+              </li>
 
               {!auth.user ? (
                 <>
@@ -142,16 +153,7 @@ function Header() {
                   </li>
                 </>
               )}
-              <li className="nav-item">
-                <NavLink
-                  to={`/dashboard/${
-                    auth?.user?.Role === 1 ? `Admin` : `user`
-                  }/interaction`}
-                  className="nav-link"
-                >
-                  CodeConnect
-                </NavLink>
-              </li>
+
               <li className="nav-item">
                 <NavLink to="/UserCart" className="nav-link">
                   <IoCartSharp />

@@ -11,7 +11,7 @@ import { FaRegArrowAltCircleUp } from "react-icons/fa";
 import { useAuth } from "../context/auth";
 import { LuBookmarkPlus } from "react-icons/lu";
 import Button from "@mui/material/Button";
-
+import { FaRegArrowAltCircleDown } from "react-icons/fa";
 import Avatar from "@mui/material/Avatar";
 
 import { IoMdChatboxes } from "react-icons/io";
@@ -81,6 +81,33 @@ const View = () => {
       toast.error("Something Went wrong");
     }
   }
+  async function UpdateDownVotes(aid, Votes) {
+    try {
+      const votevalue = await fetch(
+        `http://localhost:8000/api/v1/Answer/Update_Answer_Down_votes/${aid}/${auth.user._id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            Votes,
+          }),
+        }
+      );
+
+      if (votevalue.status === 201) {
+        toast.success("DownVote Counted");
+      } else {
+        if (votevalue.status === 400) {
+          const data = await votevalue.json();
+          toast.error(data.message);
+        }
+      }
+    } catch (error) {
+      toast.error("Something Went wrong");
+    }
+  }
   async function Bookmark(qid) {
     try {
       const response = await fetch(
@@ -108,6 +135,10 @@ const View = () => {
     await UpdateVotes(id, updatedvotes);
     GetSingleAnswers();
   }
+  async function HandleDownvotes(id, updatedvotes) {
+    await UpdateDownVotes(id, updatedvotes);
+    GetSingleAnswers();
+  }
 
   useEffect(() => {
     GetSingleQuestion();
@@ -115,11 +146,12 @@ const View = () => {
   }, []);
   return (
     <Layout>
+      <div >
       <div
-        className="d-flex flex-column align-items-center mt-3 "
-        style={{ width: "90%", margin: "auto" }}
+        className="d-flex flex-column align-items-center "
+        style={{ width: "90%", margin: "auto"}}
       >
-        <h1>View Question </h1>
+        <h1 className="mt-3">View Question </h1>
 
         {Questions.length > 0 ? (
           Questions.map((q) => (
@@ -152,7 +184,7 @@ const View = () => {
                   </div>
 
                   <LuBookmarkPlus
-                    title="Bookmark this Question"
+                    title="Add to Bookmark"
                     className="Bookmark"
                     onClick={() => {
                       Bookmark(q._id);
@@ -160,7 +192,7 @@ const View = () => {
                   />
                 </div>
                 <blockquote class="blockquote mb-0">
-                  <p style={{ marginBottom: "0rem" }}>{q.title} </p>
+                  <p style={{ marginBottom: "0rem" }} className="QuestionTitle ">{q.title} </p>
                   <small>{q.question}</small>
                   <div className="d-flex align-items-center w-100 justify-content-between">
                     {" "}
@@ -188,7 +220,7 @@ const View = () => {
         >
           {Answers.length > 0 ? (
             Answers.map((a, index) => (
-              <div key={index} className="card d-flex flex-row w-100 ">
+              <div key={index} className="card d-flex flex-row w-100 p-2">
                 <div
                   className="d-flex flex-column align-items-center  mt-1 justify-content-center"
                   style={{ gap: "0.2rem", marginLeft: "0.5rem" }}
@@ -202,7 +234,16 @@ const View = () => {
                     }}
                     title="Upvote"
                   />
-                  <p>{a.votes}</p>
+                  <p style={{ margin: "0rem" }}> {a.votes}</p>
+                  <FaRegArrowAltCircleDown
+                    className="DownVote"
+                    title="DownVote"
+                    onClick={() => {
+                      const updatedVotes = a.votes - 1;
+                      SetVotes(updatedVotes);
+                      HandleDownvotes(a._id, updatedVotes);
+                    }}
+                  />
                 </div>
                 <div className="card-body mt-3 ">
                   <b>Answer: </b>
@@ -214,7 +255,7 @@ const View = () => {
                   <cite title="Source Title">
                     <b>{a.user.Name}</b>
                   </cite>{" "}
-                  {moment(a.createdAt).fromNow()}
+                  {moment(a.createdAt).format("MMMM Do YYYY")}
                 </div>
               </div>
             ))
@@ -232,6 +273,7 @@ const View = () => {
             </div>
           )}
         </div>
+      </div>
       </div>
     </Layout>
   );

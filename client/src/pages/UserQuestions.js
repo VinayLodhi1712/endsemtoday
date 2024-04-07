@@ -20,7 +20,7 @@ const AdminQuestions = () => {
   const [loading, setloading] = useState(false);
   const [auth, setAuth] = useAuth();
   const [BookMarked, setBookMarked] = useState([]);
-
+  const [UserName, SetUserName] = useState("");
   async function GetQuestions() {
     try {
       setloading(true);
@@ -93,6 +93,7 @@ const AdminQuestions = () => {
       const data = await response.json();
       if (response.status === 200) {
         setBookMarked(data.questions.Bookmarked);
+        SetUserName(data.questions.Name);
       } else {
         if (response.status === 400) {
           toast.error("Please try Again");
@@ -165,7 +166,7 @@ const AdminQuestions = () => {
                     <div class="card w-100 p-2">
                       <div class="card-body">
                         <blockquote class="blockquote mb-0">
-                          <p style={{ marginBottom: "0rem" }}>{q.title} </p>
+                          <p style={{ marginBottom: "0rem" }}>{q.title.substring(0,40)}..... </p>
                           <div className="d-flex align-items-center w-100 justify-content-between">
                             {" "}
                             <div>
@@ -179,7 +180,7 @@ const AdminQuestions = () => {
                               <cite title="Source Title">
                                 <b>{q.user.Name}</b>
                               </cite>{" "}
-                              {moment(q.createdAt).fromNow()}
+                              {moment(q.createdAt).format("MMMM Do YYYY")}
                             </footer>
                           </div>
                         </blockquote>
@@ -263,23 +264,21 @@ const AdminQuestions = () => {
                             <footer class="blockquote-footer">
                               asked by{" "}
                               <cite title="Source Title">
-                                <b>{q.user.Name}</b>
+                                <b>{UserName}</b>
                               </cite>{" "}
-                              {moment(q.createdAt).fromNow()}
+                              {moment(q.createdAt).format("MMMM Do YYYY")}
                             </footer>
                           </div>
                         </blockquote>
                       </div>
                       <div className="d-flex" style={{ gap: "1rem" }}>
                         <NavLink to={`/dashboard/user/answers/${q._id}`}>
-                        <Button variant="contained" color="success">
+                          <Button variant="contained" color="success">
                             Answer
                           </Button>
                         </NavLink>
                         <NavLink to={`/dashboard/user/ViewQuestion/${q._id}`}>
-                          <button className="btn btn-primary">
-                            View 
-                          </button>
+                          <button className="btn btn-primary">View</button>
                         </NavLink>
                         <button
                           className="btn btn-warning"
