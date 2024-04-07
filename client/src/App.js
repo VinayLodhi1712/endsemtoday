@@ -33,7 +33,6 @@ import AnswerQuestion from "./pages/AnswerQuestion";
 import UserContributions from "./pages/UserContributions";
 import View from "./pages/View";
 import AdminQuestions from "./pages/Admin/AdminQuestion";
-import AdminInteraction from "./pages/Admin/Admininteraction";
 import AdminContributions from "./pages/Admin/AdminContributions";
 import Productpage from "./pages/Productpage";
 function App() {
@@ -116,10 +115,7 @@ function App() {
           <Route path="Admin/Profile" element={<AdminProfile />}></Route>
           <Route path="Admin/Users" element={<Users />}></Route>
 
-          <Route
-            path="Admin/Interaction"
-            element={<AdminInteraction />}
-          ></Route>
+          <Route path="Admin/Interaction" element={<Interaction />}></Route>
 
           <Route path="admin/Ask" element={<AskQuestion />}></Route>
           <Route path="admin/questions" element={<AdminQuestions />}></Route>

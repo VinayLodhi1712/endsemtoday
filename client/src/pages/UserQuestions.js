@@ -166,7 +166,7 @@ const AdminQuestions = () => {
                     <div class="card w-100 p-2">
                       <div class="card-body">
                         <blockquote class="blockquote mb-0">
-                          <p style={{ marginBottom: "0rem" }}>{q.title} </p>
+                          <p style={{ marginBottom: "0rem" }}>{q.title.substring(0,40)}..... </p>
                           <div className="d-flex align-items-center w-100 justify-content-between">
                             {" "}
                             <div>

@@ -146,11 +146,12 @@ const View = () => {
   }, []);
   return (
     <Layout>
+      <div >
       <div
-        className="d-flex flex-column align-items-center mt-3 "
-        style={{ width: "90%", margin: "auto" }}
+        className="d-flex flex-column align-items-center "
+        style={{ width: "90%", margin: "auto"}}
       >
-        <h1>View Question </h1>
+        <h1 className="mt-3">View Question </h1>
 
         {Questions.length > 0 ? (
           Questions.map((q) => (
@@ -272,6 +273,7 @@ const View = () => {
             </div>
           )}
         </div>
+      </div>
       </div>
     </Layout>
   );

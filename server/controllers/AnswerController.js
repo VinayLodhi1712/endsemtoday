@@ -72,6 +72,7 @@ async function UpdateAnswerController(req, resp) {
 
 async function DeleteAnswerController(req, resp) {
   try {
+    const { qid } = req.params;
     const del = await Answermodel.findByIdAndDelete(req.params.aid);
     if (del) {
       resp.status(200).send({
@@ -79,9 +80,9 @@ async function DeleteAnswerController(req, resp) {
         message: "Deleted Succesfully",
       });
 
-      await Questionmodel.findByIdAndUpdate(req.params.qid, {
+      await Questionmodel.findByIdAndUpdate(qid, {
         $inc: { AnswerCount: -1 },
-      }); //increment answer count
+      });
     } else {
       resp.status(400).send({
         success: false,
@@ -265,9 +266,10 @@ async function EmailUser(req, resp) {
     from: "taskmaster991@gmail.com",
     to: Email,
     subject: "Someone Answered Your Question",
-    text: `
-      Message:"Someone Answered Your Question you asked on our platform"
-      `,
+    html: `
+      <p>Someone answered your question that you asked on our platform.</p>
+      <p><a href="http://localhost:3000/dashboard/user/questions">Click here</a> to view the answer.</p>
+    `,
   };
 
   transporter.sendMail(mailOptions, (error, info) => {

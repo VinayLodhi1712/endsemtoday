@@ -19,7 +19,7 @@ router.post("/post_Answer/:uid/:qid", AnswerController);
 
 router.put("/Update_Answer/:aid", UpdateAnswerController);
 
-router.delete("/delete_Answer/:aid", DeleteAnswerController);
+router.delete("/delete_Answer/:aid/:qid", DeleteAnswerController);
 
 router.get("/Get_User_Answers/:uid", GetUserAnswerController);
 
