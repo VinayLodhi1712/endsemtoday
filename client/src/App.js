@@ -55,14 +55,15 @@ function App() {
         <Route path="/register" element={<Register />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/ForgotPassword" element={<Forgotpassword />}></Route>
-        <Route
-          path="/Dashboard/user/interaction"
-          element={<Interaction />}
-        ></Route>
+        
         <Route path="/technews" element={<Technews/>}></Route>
         {/* users */}
 
         <Route path="/Dashboard" element={<PrivateRoute />}>
+        <Route
+          path="user/interaction"
+          element={<Interaction />}
+        ></Route>
           <Route path="user" element={<Dashboard />}></Route>
           <Route path="user/orders" element={<Orders />}></Route>
           <Route path="user/Profile" element={<Profile />}></Route>

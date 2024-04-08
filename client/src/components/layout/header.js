@@ -86,11 +86,13 @@ function Header() {
               </li>
               <li className="nav-item">
                 <NavLink
+                
                   to={`/dashboard/${
-                    auth?.user?.Role === 1 ? `Admin` : `user`
+                    auth ? (auth?.user?.Role === 1 ? `Admin` : `user`) : `user`
                   }/interaction`}
                   className="nav-link"
                 >
+                  
                   CodeConnect
                 </NavLink>
               </li>
