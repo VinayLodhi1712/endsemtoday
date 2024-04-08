@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Layout from "../../components/layout/layout";
 import { NavLink } from "react-router-dom";
-import { Button, Drawer, Radio, Space } from "antd";
-
+import { Button, Drawer, Space } from "antd";
 import { useAuth } from "../../context/auth";
 
 import moment from "moment";
@@ -142,12 +141,8 @@ const AdminDashboard = () => {
             <div className="row">
               <div className="col-md-4">
                 <img
-                  alt
-                  style={{ width: 600 }}
-                  title
-                  className="img-circle img-thumbnail isTooltip"
+                  style={{ width: "100%" }}
                   src={`http://localhost:8000/api/v1/auth/get-userPhoto/${auth.user._id}`}
-                  data-original-title="Usuario"
                 />
               </div>
               <div className="col-md-6">

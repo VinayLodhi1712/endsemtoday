@@ -35,6 +35,7 @@ import View from "./pages/View";
 import AdminQuestions from "./pages/Admin/AdminQuestion";
 import AdminContributions from "./pages/Admin/AdminContributions";
 import Productpage from "./pages/Productpage";
+import Technews from "./pages/Technews";
 function App() {
   return (
     <>
@@ -58,6 +59,7 @@ function App() {
           path="/Dashboard/user/interaction"
           element={<Interaction />}
         ></Route>
+        <Route path="/technews" element={<Technews/>}></Route>
         {/* users */}
 
         <Route path="/Dashboard" element={<PrivateRoute />}>

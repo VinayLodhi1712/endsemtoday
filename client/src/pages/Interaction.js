@@ -151,7 +151,7 @@ const Interaction = () => {
   return (
     <Layout>
       <div
-        className="d-flex justify-content-center flex-column align-items-center"
+        className="d-flex justify-content-center flex-column align-items-center BgColor"
         style={{ gap: "1rem" }}
         
       >

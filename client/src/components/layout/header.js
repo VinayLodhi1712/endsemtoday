@@ -87,12 +87,16 @@ function Header() {
               <li className="nav-item">
                 <NavLink
                   to={`/dashboard/${
-                    
                     auth?.user?.Role === 1 ? `Admin` : `user`
                   }/interaction`}
                   className="nav-link"
                 >
                   CodeConnect
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink to="/technews" className="nav-link">
+                  Tech_News
                 </NavLink>
               </li>
 

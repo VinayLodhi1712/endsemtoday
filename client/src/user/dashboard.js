@@ -166,7 +166,7 @@ const AdminDashboard = () => {
             <div className="row">
               <div className="col-md-4 d-flex justify-content-center align-items-center">
                 <img
-                  alt
+                
                   title
                   className="img-circle img-thumbnail isTooltip"
                   src={`http://localhost:8000/api/v1/auth/get-userPhoto/${auth.user._id}`}
