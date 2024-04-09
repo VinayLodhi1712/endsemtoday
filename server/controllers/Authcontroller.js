@@ -3,7 +3,7 @@ const Ordermodel = require("../modles/OrderModel");
 const { hashPassword, comparePassword } = require("../helpers/authhelper");
 const JWT = require("jsonwebtoken");
 const fs = require("fs").promises;
-
+const nodemailer = require("nodemailer");
 async function registerController(req, res) {
   try {
     const { Name, Email, Password, Answer, Address, MobileNo } = req.fields;
@@ -360,6 +360,36 @@ async function GetUserPhotoController(req, resp) {
   }
 }
 
+async function SubmitUserQuery(req, resp) {
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "taskmaster991@gmail.com",
+      pass: "kmepakzcabvztekd",
+    },
+  });
+
+  const mailOptions = {
+    from: req.body.Email,
+    to: "taskmaster991@gmail.com",
+    subject: "TALKOFCODE USER QUERY",
+    text: `
+      Name: ${req.body.Name}
+      Email: ${req.body.Email}
+      Message: ${req.body.Message}`,
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.log("Error sending email: " + error);
+      resp.status(500).send("Error sending email");
+    } else {
+      console.log("Email sent: " + info.response);
+      resp.status(200).send("Form data sent successfully");
+    }
+  });
+}
+
 module.exports = {
   registerController,
   loginController,
@@ -374,4 +404,5 @@ module.exports = {
   UserCountController,
   BookmarkQuestion,
   GetUserPhotoController,
+  SubmitUserQuery,
 };

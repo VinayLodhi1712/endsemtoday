@@ -12,7 +12,8 @@ const {
   DeleteUser,
   UserCountController,
   BookmarkQuestion,
-  GetUserPhotoController
+  GetUserPhotoController,
+  SubmitUserQuery
 } = require("../controllers/Authcontroller");
 const requireSignIn = require("../middlewares/authMiddleware");
 const IsAdmin = require("../middlewares/Isadmin");
@@ -59,4 +60,6 @@ router.get("/UserCount", UserCountController);
 
 router.put("/Bookmark/:qid/:uid", BookmarkQuestion);
 
+
+router.post("/SubmitUserQueryForm",SubmitUserQuery)
 module.exports = router;
