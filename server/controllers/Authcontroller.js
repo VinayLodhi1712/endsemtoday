@@ -360,6 +360,24 @@ async function GetUserPhotoController(req, resp) {
   }
 }
 
+async function getTotalUsersController(req, resp) {
+  try {
+    const totalUsers = await Usermodel.countDocuments({ Role: { $ne: 1 } });
+    console.log(totalUsers)
+    resp.status(200).send({
+      success: true,
+      totalUsers,
+    });
+  } catch (error) {
+    console.log(error);
+    resp.status(500).send({
+      success: false,
+      message: "Error getting total users",
+      error,
+    });
+  }
+}
+
 module.exports = {
   registerController,
   loginController,
@@ -374,4 +392,5 @@ module.exports = {
   UserCountController,
   BookmarkQuestion,
   GetUserPhotoController,
+  getTotalUsersController,
 };

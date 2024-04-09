@@ -12,7 +12,8 @@ const {
   DeleteUser,
   UserCountController,
   BookmarkQuestion,
-  GetUserPhotoController
+  GetUserPhotoController,
+  getTotalUsersController,
 } = require("../controllers/Authcontroller");
 const requireSignIn = require("../middlewares/authMiddleware");
 const IsAdmin = require("../middlewares/Isadmin");
@@ -58,5 +59,5 @@ router.delete("/OrderDelete/:id", requireSignIn, CancelOrder);
 router.get("/UserCount", UserCountController);
 
 router.put("/Bookmark/:qid/:uid", BookmarkQuestion);
-
+router.get("/count", getTotalUsersController);
 module.exports = router;

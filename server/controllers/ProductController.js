@@ -430,6 +430,8 @@ async function deleteReview(req, resp) {
     });
   }
 }
+
+
 //payment gateway api
 
 //token
@@ -507,4 +509,5 @@ module.exports = {
   GetUserProductController,
   createProductReview,
   deleteReview,
+  ProductCountController,
 };
