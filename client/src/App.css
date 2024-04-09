@@ -3,7 +3,6 @@ body {
   padding: 0;
   box-sizing: border-box;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-
 }
 
 /* navbar css */
@@ -173,7 +172,6 @@ body {
 .UpVote:hover {
   background-color: lightgreen;
 }
-
 
 .DownVote {
   border-radius: 50%;
@@ -445,7 +443,7 @@ body {
 .formlayout {
   height: 100%;
   width: 80%;
-  margin: 2rem auto;
+  margin: auto;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   border: 1px solid #ccc;
   border-radius: 10px;
@@ -478,9 +476,8 @@ body {
   margin-bottom: 1rem;
 }
 
-
 .aqua {
-  color: #10A5F5;
+  color: #10a5f5;
 }
 
 .center {
@@ -511,24 +508,31 @@ body {
 .icons {
   margin: 0.3rem;
   border-radius: 50%;
-  background-color: #10A5F5;
+  background-color: #10a5f5;
   padding: 0.5rem;
 }
 
-.cards{
-  display: flex; 
+.cards {
+  display: flex;
   justify-content: space-evenly;
   margin: 4rem auto;
-  width:80%;
+  width: 80%;
 }
 
-.cardmargin{
+.cardmargin {
   margin-left: 10px;
 }
 
-.BgColor{
-  background-color:lightcyan;
+.BgColor {
+  background-color: lightcyan;
 }
+
+.TeamNames {
+  color: orange;
+  font-weight: 600;
+  margin: 0%;
+}
+
 
 .news-container {
   width: 100%;
