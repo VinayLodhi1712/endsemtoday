@@ -432,47 +432,7 @@ async function deleteReview(req, resp) {
 }
 
 
-//payment gateway api
 
-//token
-// async function BraintreeTokenController(req, resp) {
-//   try {
-//     gateway.clientToken.generate({}, function (error, response) {
-//       //generate token
-//       if (error) {
-//         resp.status(500).send({ error });
-//       } else {
-//         resp.send(response);
-//       }
-//     });
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
-
-// //payment
-// async function BraintreePaymentController(req, resp) {
-//   try {
-//     const Cart = req.body;
-//     let total = 0;
-//     Cart.map((i) => {
-//       total += i;
-//     });
-//     const Orders = new OrderModel({
-//       products: Cart,
-//       buyer: req.user._id, //getting from middleware
-//     }).save();
-//     if (Orders) {
-//       resp.json({ ok: true, Orders });
-//     } else {
-//       resp.status(500).send({
-//         error,
-//       });
-//     }
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
 
 async function GetUserProductController(req, resp) {
   try {

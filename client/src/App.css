@@ -515,8 +515,8 @@ body {
 .cards {
   display: flex;
   justify-content: space-evenly;
-  margin: 4rem auto;
-  width: 80%;
+
+  width: 100%;
 }
 
 .cardmargin {
@@ -533,7 +533,6 @@ body {
   margin: 0%;
 }
 
-
 .news-container {
   width: 100%;
   overflow-x: auto;
@@ -544,7 +543,6 @@ body {
 .card-wrapper {
   display: flex;
   flex-wrap: nowrap;
- 
 }
 
 .box-layout {
@@ -554,17 +552,17 @@ body {
   margin-right: 4rem;
 }
 
-.flexrow{
+.flexrow {
   display: flex;
   flex-direction: row;
 }
 
-.flexcolumn{
+.flexcolumn {
   display: flex;
   flex-direction: column;
 }
 
-.divcenter{
+.divcenter {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -588,5 +586,16 @@ body {
   font-size: 1.2rem;
   font-weight: bold;
   margin-bottom: 5px;
-  color: #0047AB; /* Dark blue color */
+  color: #0047ab; /* Dark blue color */
+}
+
+.gradient1 {
+  background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+}
+.gradient2 {
+  background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.gradient3 {
+  background-image: linear-gradient(-20deg, #00cdac 0%, #8ddad5 100%);
 }

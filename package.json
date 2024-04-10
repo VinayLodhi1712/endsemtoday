@@ -11,6 +11,7 @@
     "moment": "^2.30.1",
     "mongoose": "^8.0.3",
     "nodemailer": "^6.9.13",
+    "react-countup": "^6.5.3",
     "react-icons": "^5.0.1",
     "slugify": "^1.6.6"
   }
