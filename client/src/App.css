@@ -535,7 +535,7 @@ body {
 
 .news-container {
   width: 100%;
-  overflow-x: auto;
+ 
   padding: 0 20px;
   min-width: 450px; /* Add some padding to prevent the cards from sticking to the edges */
 }

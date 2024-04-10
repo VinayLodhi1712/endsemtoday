@@ -154,7 +154,7 @@ const About = () => {
                   <div style={{ height: 50 }}>
                     {isVisible ? (
                       <h2>
-                        <CountUp end={900} />{" "}
+                        <CountUp end={900}  duration={3}/>{" "}
                       </h2>
                     ) : null}
                   </div>
@@ -171,14 +171,14 @@ const About = () => {
           <div>
             <div className="gradient2  p-2">
               <div>
-                <FaShoppingCart />
+                <FaComment />
               </div>
               <VisibilitySensor partialVisibility offset={{ bottom: 200 }}>
                 {({ isVisible }) => (
                   <div style={{ height: 50 }}>
                     {isVisible ? (
                       <h2>
-                        <CountUp end={234} />{" "}
+                        <CountUp end={234}  duration={3}/>{" "}
                       </h2>
                     ) : null}
                   </div>
@@ -197,14 +197,14 @@ const About = () => {
           <div>
             <div className="gradient3  p-2">
               <div>
-                <FaComment />
+                <FaShoppingCart />
               </div>
               <VisibilitySensor partialVisibility offset={{ bottom: 200 }}>
                 {({ isVisible }) => (
                   <div style={{ height: 50 }}>
                     {isVisible ? (
                       <h2>
-                        <CountUp end={342} />{" "}
+                        <CountUp end={342} duration={3} />{" "}
                       </h2>
                     ) : null}
                   </div>
