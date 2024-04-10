@@ -80,10 +80,10 @@ const AnswerQuestion = () => {
   return (
     <Layout>
       <div className="d-flex flex-column align-items-center mt-2">
-        <h1>Contribute</h1>
-        <div className="d-flex flex-column w-50">
-          <h3>Question: {Title} ?</h3>
-          <p>Description: {Description}</p>
+        <h1 className="Titlefont" style={{marginBottom:"-1rem"}}>Contribute</h1>
+        <div className="d-flex flex-column w-50 contactlayout">
+          <h3 className="mediumtitlefont">Question: {Title} ?</h3>
+          <p className="smalltitlefont">Description: {Description}</p>
         </div>
         <form
           className="w-100 d-flex flex-column justify-content-center align-items-center"
@@ -93,11 +93,11 @@ const AnswerQuestion = () => {
         >
           <div className="w-50">
             <b>
-              <label for="Question">Body</label>
+              <label for="Question" className="mediumtitlefont" style={{marginBottom:"1rem"}}>Answer : </label>
             </b>
             <textarea
               id="Question"
-              className="w-100"
+              className="form-control w-100"
               type="text"
               placeholder="Describe your Answer"
               value={Answer}
@@ -105,12 +105,12 @@ const AnswerQuestion = () => {
               onChange={(e) => {
                 SetAnswer(e.target.value);
               }}
-              style={{ height: "13rem" }}
+              style={{ height: "13rem" , marginBottom:"1rem"}}
             ></textarea>
           </div>
 
-          <Button variant="contained" color="success" type="submit">
-            Post
+          <Button variant="contained" color="success" type="submit" style={{ padding: "0.5rem 1rem", margin: "0.5rem" }}>
+            Post Answer
           </Button>
         </form>
       </div>
