@@ -20,9 +20,7 @@ const CartPage = () => {
       MyCart.splice(index, 1);
       setCart(MyCart);
       localStorage.setItem("Cart", JSON.stringify(MyCart));
-      toast("Item removed from cart!", {
-        icon: "🫡",
-      });
+      toast("Item removed from cart!");
     } catch (error) {
       console.log(error);
       toast.error("Error Removing item");
@@ -58,44 +56,34 @@ const CartPage = () => {
             {Cart.length > 0 ? (
               <div
                 className="d-flex justify-content-start"
-                style={{ width: "90%" }}
+                style={{ width: "100%" }}
               >
                 <div
-                  className="d-flex flex-column"
+                  className="d-flex justify-content-center align-items-center flex-wrap"
                   style={{ gap: "1rem", width: "50%" }}
                 >
                   {Cart?.map((p) => (
-                    <div className="d-flex justify-content-between border border-2 p-2">
-                      <div style={{ width: "50%" }}>
-                        <Image
-                          src={`http://localhost:8000/api/v1/product/get-productPhoto/${p._id}`}
-                          className="card-Image-top"
-                          style={{ height: "100%", width: "10rem" }}
-                        />
-                      </div>
+                    <div
+                      className="card border border-3"
+                      style={{ width: "40%" }}
+                    >
+                      <Image
+                        src={`http://localhost:8000/api/v1/product/get-productPhoto/${p._id}`}
+                        className="card-Image-top productimage"
+                        style={{ height: "15rem", width: "100%" }}
+                      />
 
-                      <div
-                        className="d-flex flex-column align-items-start justify-content-start ProductDetailsCard p-2"
-                        style={{ width: "100%" }}
-                      >
+                      <div className="card-body text-start ProductDetailsCard">
                         <h5 className="card-title">
-                          {" "}
-                          {p.name.substring(0, 40)}...
+                          {p.name.substring(0, 15)}...
                         </h5>
-                        <p
-                          className="card-text"
-                          style={{ marginBottom: "0rem" }}
-                        >
+                        <p className="card-text">
                           {p.description.substring(0, 20)}...
                         </p>
-                        <p className="card-text" style={{ color: "green" }}>
-                          <b>Price: ₹ {p.price} </b>
+                        <p className="card-text">
+                          Price: <span className="priceSpan">₹ {p.price}</span>{" "}
                         </p>
-
-                        <div
-                          className="d-flex flex-column"
-                          style={{ width: "55%" }}
-                        >
+                        <div className="d-flex justify-content-around">
                           <button
                             className="btn btn-primary ButtonBorder"
                             onClick={() => {
@@ -105,7 +93,7 @@ const CartPage = () => {
                             More details
                           </button>
                           <button
-                            className="btn btn-danger mt-2 ButtonBorder"
+                            className="btn btn-danger ButtonBorder"
                             onClick={() => {
                               RemoveCartItems(p._id);
                             }}
@@ -130,17 +118,6 @@ const CartPage = () => {
                     <h5>
                       <b>Total Payable Amount:</b>₹ {TotalPrice()}.00
                     </h5>
-                    {/* <h5>
-                      <b>Shipping Address:</b> {auth.user.Address}{" "}
-                      <button
-                        className="btn btn-dark"
-                        onClick={() => {
-                          Navigate("/dashboard/user/profile");
-                        }}
-                      >
-                        Change Address
-                      </button>
-                    </h5> */}
                   </div>
                 </div>
               </div>
