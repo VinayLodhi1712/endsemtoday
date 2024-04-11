@@ -148,7 +148,7 @@ body {
 .AskQuestion {
   position: fixed;
   top: 65%;
-  right: 3%;
+  right: 1%;
   z-index: 2;
 }
 
@@ -526,7 +526,7 @@ body {
 }
 
 .BgColor {
-  background-color: lightcyan;
+  background-color: #89f7fe;
 }
 
 .TeamNames {
@@ -537,6 +537,7 @@ body {
 
 .news-container {
   width: 100%;
+  height: 80vh;
   padding: 0 20px;
   min-width: 450px; /* Add some padding to prevent the cards from sticking to the edges */
 }
@@ -601,8 +602,6 @@ body {
   background-image: linear-gradient(-20deg, #00cdac 0%, #8ddad5 100%);
 }
 
-
-
 .form-container {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3);
   border-radius: 10px;
@@ -635,4 +634,11 @@ body {
 
 .GreenGradient {
   background-image: linear-gradient(120deg, #89f7fe 0%, #66a6ff 100%);
+}
+.HomeFirstDiv {
+  height: 77vh;
+}
+.Div {
+  height: 100px;
+  background-color: #1a1a1a;
 }

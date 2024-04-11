@@ -151,8 +151,8 @@ const Interaction = () => {
   return (
     <Layout>
       <div
-        className="d-flex justify-content-center flex-column align-items-center BgColor"
-        style={{ gap: "1rem" }}
+        className="d-flex flex-column align-items-center BgColor"
+        style={{ gap: "1rem", height: "100vh" }}
       >
         {" "}
         <ThemeProvider theme={theme}>
@@ -197,7 +197,7 @@ const Interaction = () => {
                   >
                     <Avatar
                       src={`http://localhost:8000/api/v1/auth/get-userPhoto/${q.user._id}`}
-                      sx={{ width: 30, height: 30}} // Add margin for spacing
+                      sx={{ width: 30, height: 30 }} // Add margin for spacing
                     />
                     <p className="UserNameDisplay">{q.user.Name}</p>
                   </div>

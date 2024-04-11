@@ -1,14 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "./header";
 import Footer from "./footer";
-
 
 function Layout({ children }) {
   return (
     <div>
-    
       <Header></Header>
-      <main style={{ height: "77.5vh" }} className="overflow-auto">{children}</main>
+      <main
+        style={{ height: "100%", scrollbarWidth: "none" }}
+        className="overflow-auto"
+      >
+        {children}
+      </main>
 
       <Footer></Footer>
     </div>
