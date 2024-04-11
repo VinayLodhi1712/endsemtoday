@@ -416,6 +416,8 @@ body {
 .UserNameDisplay {
   color: #4285f4;
   font-weight: 600;
+  margin: 0;
+  margin-left: 0.5rem;
 }
 
 .DateDisplay {
@@ -535,7 +537,6 @@ body {
 
 .news-container {
   width: 100%;
-
   padding: 0 20px;
   min-width: 450px; /* Add some padding to prevent the cards from sticking to the edges */
 }
@@ -599,11 +600,21 @@ body {
 .gradient3 {
   background-image: linear-gradient(-20deg, #00cdac 0%, #8ddad5 100%);
 }
+
+
+
+.form-container {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  padding: 1rem;
+  width: 70%;
+  margin: 0 auto;
+}
 .AboutUsText {
   background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
 }
 .WelcomeText {
- font-weight: 600;
+  font-weight: 600;
 }
 
 /* 

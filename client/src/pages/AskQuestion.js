@@ -58,100 +58,104 @@ const AskQuestion = () => {
     <Layout>
       {" "}
       <div
-  className="d-flex justify-content-center flex-column align-items-center w-100"
-  style={{ gap: "1rem", height: "77vh" }}
->
-  <h2 className="mt-2 Titlefont">Ask Your Question</h2>
-  <div className="form-container">
-    <form
-      onSubmit={(e) => {
-        PostQuestion(e);
-      }}
-      className="w-100 d-flex flex-column justify-content-center align-items-center "
-      style={{ gap: "1rem" }}
-    >
-      <div className="w-50">
-        <b>
-          <label className="form-label smalltitlefont" for="Title">Title</label>
-        </b>
-        <input
-          id="Title"
-          className="form-control w-100"
-          type="text"
-          placeholder="Give title to your question in one line"
-          value={title}
-          required
-          onChange={(e) => {
-            SetTitle(e.target.value);
-          }}
-        ></input>
-      </div>
-
-      <div className="w-50">
-        <b>
-          <label className="form-label smalltitlefont" for="Question">Body</label>
-        </b>
-        <textarea
-          id="Question"
-          className="form-control w-100"
-          type="text"
-          placeholder="Describe your question"
-          value={question}
-          required
-          onChange={(e) => {
-            Setquestion(e.target.value);
-          }}
-          style={{ height: "10rem" }}
-        ></textarea>
-      </div>
-
-      <div className="w-50 d-flex flex-column">
-        <b>
-          <label className="form-label smalltitlefont" for="Question">Tags</label>
-        </b>
-        <div className="d-flex" style={{ gap: "2rem" }}>
-          <input
-            type="text"
-            className="form-control"
-            onChange={(e) => {
-              setTag(e.target.value);
+        className="d-flex justify-content-center flex-column align-items-center w-100"
+        style={{ gap: "1rem", height: "77vh" }}
+      >
+        <h2 className="mt-2 Titlefont">Ask Your Question</h2>
+        <div className="form-container">
+          <form
+            onSubmit={(e) => {
+              PostQuestion(e);
             }}
-            value={tag}
-            placeholder="Enter relevent tag"
-          ></input>{" "}
-          <button
-            className="btn btn-primary"
-            onClick={(e) => {
-              handleTagInputChange(e);
-            }}
+            className="w-100 d-flex flex-column justify-content-center align-items-center "
+            style={{ gap: "1rem" }}
           >
-            Add
-          </button>
-        </div>
-        <div>
-          {tags.length > 0
-            ? tags.map((t) => (
-                <Tag color="blue">
-                  {t}
-                  <RxCross2
-                    onClick={(e) => {
-                      handleTagRemove(e, t);
-                    }}
-                  />
-                </Tag>
-              ))
-            : null}
-        </div>
-      </div>
-    </form>
-  </div>
-  <div>
-    <button className="btn btn-primary" type="submit">
-      Post Question
-    </button>
-  </div>
-</div>
+            <div className="w-50">
+              <b>
+                <label className="form-label smalltitlefont" for="Title">
+                  Title
+                </label>
+              </b>
+              <input
+                id="Title"
+                className="form-control w-100"
+                type="text"
+                placeholder="Give title to your question in one line"
+                value={title}
+                required
+                onChange={(e) => {
+                  SetTitle(e.target.value);
+                }}
+              ></input>
+            </div>
 
+            <div className="w-50">
+              <b>
+                <label className="form-label smalltitlefont" for="Question">
+                  Body
+                </label>
+              </b>
+              <textarea
+                id="Question"
+                className="form-control w-100"
+                type="text"
+                placeholder="Describe your question"
+                value={question}
+                required
+                onChange={(e) => {
+                  Setquestion(e.target.value);
+                }}
+                style={{ height: "10rem" }}
+              ></textarea>
+            </div>
+
+            <div className="w-50 d-flex flex-column">
+              <b>
+                <label className="form-label smalltitlefont" for="Question">
+                  Tags
+                </label>
+              </b>
+              <div className="d-flex" style={{ gap: "2rem" }}>
+                <input
+                  type="text"
+                  className="form-control"
+                  onChange={(e) => {
+                    setTag(e.target.value);
+                  }}
+                  value={tag}
+                  placeholder="Enter relevent tag"
+                ></input>{" "}
+                <button
+                  className="btn btn-primary"
+                  onClick={(e) => {
+                    handleTagInputChange(e);
+                  }}
+                >
+                  Add
+                </button>
+              </div>
+              <div>
+                {tags.length > 0
+                  ? tags.map((t) => (
+                      <Tag color="blue">
+                        {t}
+                        <RxCross2
+                          onClick={(e) => {
+                            handleTagRemove(e, t);
+                          }}
+                        />
+                      </Tag>
+                    ))
+                  : null}
+              </div>
+            </div>
+            <button className="btn btn-primary" type="submit">
+              Post Question
+            </button>
+          </form>
+        </div>
+        <div></div>
+      </div>
     </Layout>
   );
 };

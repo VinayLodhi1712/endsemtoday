@@ -153,60 +153,64 @@ const Interaction = () => {
       <div
         className="d-flex justify-content-center flex-column align-items-center BgColor"
         style={{ gap: "1rem" }}
-
       >
         {" "}
-        {/* <ThemeProvider theme={theme}>
+        <ThemeProvider theme={theme}>
           <NavLink to="/dashboard/user/Ask" className="AskQuestion">
             <Button variant="contained" sx={{ bgcolor: "ochre.darker" }}>
               Ask Question
             </Button>
           </NavLink>
-        </ThemeProvider> */}
+        </ThemeProvider>
         <h1>
           Code
           <MdOutlineConnectingAirports />
           Connect
         </h1>
-        <div className="interaction-container">
-          <ThemeProvider theme={theme}>
-            <NavLink to="/dashboard/user/Ask" className="ask-question-link">
-              <Button variant="contained" sx={{ bgcolor: "ochre.darker" }}>
-                Ask Question
-              </Button>
-            </NavLink>
-          </ThemeProvider>
-          <Search
-            placeholder="Search Question"
-            value={Keyword}
-            onChange={(e) => {
-              SetKeyword(e.target.value);
-            }}
-            onSearch={(Keyword) => {
-              onSearch(Keyword);
-            }}
-            enterButton
-            className="w-50"
-          />
-        </div>
+        <Search
+          placeholder="Search Question"
+          value={Keyword}
+          onChange={(e) => {
+            SetKeyword(e.target.value);
+          }}
+          onSearch={(Keyword) => {
+            onSearch(Keyword);
+          }}
+          enterButton
+          className="w-50"
+        />
         {Questions.length > 0 ? (
           Questions.map((q) => (
-            <div class="card w-75 p-2" style={{ boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.3)" }}>
+            <div
+              class="card w-75 p-2"
+              style={{ boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.3)" }}
+            >
               <div class="card-body">
-                <div className="d-flex justify-content-between" style={{ width: "100%" }}>
+                <div
+                  className="d-flex justify-content-between"
+                  style={{ width: "100%" }}
+                >
                   {/* User image and name */}
-                  <div className="d-flex align-items-center" style={{ width: "50%" }}>
+                  <div
+                    className="d-flex align-items-center "
+                    style={{ width: "50%" }}
+                  >
                     <Avatar
                       src={`http://localhost:8000/api/v1/auth/get-userPhoto/${q.user._id}`}
-                      sx={{ width: 30, height: 30, marginRight: "0.5rem" }} // Add margin for spacing
+                      sx={{ width: 30, height: 30}} // Add margin for spacing
                     />
                     <p className="UserNameDisplay">{q.user.Name}</p>
                   </div>
 
                   {/* Asked label and date */}
-                  <div className="d-flex align-items-center" style={{ width: "50%" }}>
+                  <div
+                    className="d-flex align-items-center"
+                    style={{ width: "50%" }}
+                  >
                     <p className="light-dull">Asked:</p>
-                    <p className="DateDisplay" style={{ marginLeft: "0.5rem" }}> {/* Add margin for spacing */}
+                    <p className="DateDisplay" style={{ marginLeft: "0.5rem" }}>
+                      {" "}
+                      {/* Add margin for spacing */}
                       {moment(q.createdAt).format("MMMM Do YYYY")}
                     </p>
                   </div>
