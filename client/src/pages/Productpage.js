@@ -141,12 +141,13 @@ function Productpage() {
       <div className="d-flex justify-content-end mt-3 ">
         <div style={{ width: "20%", marginLeft: "1rem" }} className="Fixed">
           <div>
-            <h2>Filter by Category</h2>
+            <h2 className="mediumtitlefont">Select Category</h2>
             <Toaster />
             <div className="d-flex flex-column p-1">
               {Categories?.map((c) => (
                 <Checkbox
                   key={c._id}
+                  className="smalltitlefont"
                   onChange={(e) => {
                     HandleFilter(e.target.checked, c._id);
                   }}
@@ -158,7 +159,7 @@ function Productpage() {
           </div>
           {/* filter by price */}
           <div className="mt-3">
-            <h2>Filter by Price</h2>
+            <h2 className="mediumtitlefont">Select Price Range</h2>
             <div className="d-flex flex-column p-1">
               <Radio.Group
                 onChange={(e) => {
@@ -166,8 +167,8 @@ function Productpage() {
                 }}
               >
                 {Prices?.map((p) => (
-                  <div key={p._id}>
-                    <Radio value={p.array}>{p.name}</Radio>
+                  <div key={p._id} >
+                    <Radio className="smalltitlefont" value={p.array}>{p.name}</Radio>
                   </div>
                 ))}
               </Radio.Group>
@@ -186,7 +187,7 @@ function Productpage() {
         </div>
 
         <div className=" text-center " style={{ height: "100%", width: "80%" }}>
-          <h1>All Products</h1>
+          <h1 className="Titlefont">All Products</h1>
           {FilterProductLength ? (
             <div
               className="d-flex justify-content-around flex-wrap "
