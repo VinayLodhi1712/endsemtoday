@@ -98,7 +98,7 @@ function Header() {
               </li>
               <li className="nav-item">
                 <NavLink to="/technews" className="nav-link">
-                  Tech_News
+                  TECH_NEWSY
                 </NavLink>
               </li>
 

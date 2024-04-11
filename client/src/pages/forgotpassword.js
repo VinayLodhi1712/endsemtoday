@@ -62,7 +62,7 @@ const Forgotpassword = () => {
         }}
         className="FormBackgound"
       >
-        <Toaster />
+        
 
         <div className="registerform ">
           <h1 style={{ fontWeight: "300" }}>Forgot Password</h1>

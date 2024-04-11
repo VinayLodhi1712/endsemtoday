@@ -115,7 +115,7 @@ const About = () => {
 
   return (
     <Layout>
-      <p className="Titlefont center" style={{ marginTop: "2rem" }}>
+      <p className="Titlefont center WelcomeTExt" style={{ marginTop: "2rem" }}>
         {" "}
         Welcome to <mark>TALKOFCODE</mark>, your go-to destination for all
         things code-related!
@@ -132,7 +132,7 @@ const About = () => {
         </div>
       </div>
 
-      <p className="Titlefont center" style={{ marginTop: "2rem" }}>
+      <p className="Titlefont center AboutUsText" style={{ marginTop: "2rem" }}>
         {" "}
         About us
       </p>
