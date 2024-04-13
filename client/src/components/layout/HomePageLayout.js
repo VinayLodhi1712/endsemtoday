@@ -2,12 +2,12 @@ import React, { useEffect } from "react";
 import Header from "./header";
 import Footer from "./footer";
 
-function Layout({ children }) {
+function HomeLayout({ children }) {
   return (
     <div>
       <Header></Header>
       <main
-        style={{ height: "77.5vh", scrollbarWidth: "none" }}
+        style={{ height: "100%", scrollbarWidth: "none" }}
         className="overflow-auto"
       >
         {children}
@@ -18,4 +18,4 @@ function Layout({ children }) {
   );
 }
 
-export default Layout;
+export default HomeLayout;

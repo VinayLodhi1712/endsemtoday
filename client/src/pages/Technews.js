@@ -8,7 +8,7 @@ import { CardActionArea } from "@mui/material";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import CircularProgress from "@mui/material/CircularProgress";
 import Skeleton from "@mui/material/Skeleton";
-
+import { Empty } from "antd";
 const Technews = () => {
   const [newsData, setNewsData] = useState(null);
   const [loading, setlodaing] = useState(false);
@@ -59,7 +59,7 @@ const Technews = () => {
         console.error(error);
       }
     }
-    // fetchNews();
+    fetchNews();
   }, []);
 
   return (
@@ -96,7 +96,10 @@ const Technews = () => {
                 </Card>
               ))
             ) : (
-              <p className="text-center">No news available</p>
+              <div className="d-flex w-100 align-items-center justify-content-center flex-column ">
+                <p className="text-center">No news available</p>
+                <Empty />
+              </div>
             )
           ) : (
             <div

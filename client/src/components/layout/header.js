@@ -8,8 +8,10 @@ import Usecategory from "../hooks/usecategory";
 import { useCart } from "../../context/cart";
 import { Badge } from "antd";
 import { IoCartSharp } from "react-icons/io5";
+import logobg from "../../assests/logobg.png";
 
 import Avatar from "@mui/material/Avatar";
+//import { logo } from ',,';
 function Header() {
   const [auth, setAuth] = useAuth();
   const [cart, setCart] = useCart();
@@ -46,7 +48,8 @@ function Header() {
           <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
             <NavLink to="/" className="navbar-brand" href="#">
               {" "}
-              TALKOFCODE
+              <img src={logobg} width="160" alt="logo"></img>
+            
             </NavLink>
 
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">

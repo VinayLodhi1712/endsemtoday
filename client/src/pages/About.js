@@ -132,7 +132,7 @@ const About = () => {
         </div>
       </div>
 
-      <p className="Titlefont center AboutUsText" style={{ marginTop: "2rem" }}>
+      <p className="Titlefont center " style={{ marginTop: "2rem" }}>
         {" "}
         About us
       </p>
@@ -154,7 +154,7 @@ const About = () => {
                   <div style={{ height: 50 }}>
                     {isVisible ? (
                       <h2>
-                        <CountUp end={900}  duration={3}/>{" "}
+                        <CountUp end={900} duration={3} />{" "}
                       </h2>
                     ) : null}
                   </div>
@@ -178,7 +178,7 @@ const About = () => {
                   <div style={{ height: 50 }}>
                     {isVisible ? (
                       <h2>
-                        <CountUp end={234}  duration={3}/>{" "}
+                        <CountUp end={234} duration={3} />{" "}
                       </h2>
                     ) : null}
                   </div>

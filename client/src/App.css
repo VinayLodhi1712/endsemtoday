@@ -2,7 +2,7 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: Georgia, serif;
 }
 
 /* navbar css */
@@ -21,6 +21,7 @@ body {
 .footer a {
   text-decoration: none;
   color: white;
+
   padding: 1rem;
 }
 
@@ -526,7 +527,7 @@ body {
 }
 
 .BgColor {
-  background-color: #89f7fe;
+  background-color: rgba(255, 228, 196, 0.636);
 }
 
 .TeamNames {
@@ -642,3 +643,17 @@ body {
   height: 100px;
   background-color: #1a1a1a;
 }
+.AccordianParent {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 7rem;
+  align-items: center;
+  padding-bottom: 2rem;
+}
+.Accordian1 {
+  width: 80%;
+ 
+}
+  
