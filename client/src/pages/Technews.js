@@ -9,57 +9,48 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import CircularProgress from "@mui/material/CircularProgress";
 import Skeleton from "@mui/material/Skeleton";
 import { Empty } from "antd";
+import "../App.css";
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/effect-coverflow";
+import "swiper/css/pagination";
+import { EffectCoverflow, Pagination } from "swiper/modules";
+
 const Technews = () => {
   const [newsData, setNewsData] = useState(null);
   const [loading, setlodaing] = useState(false);
+
   useEffect(() => {
     async function fetchNews() {
       setlodaing(true);
-      // const topic = "coding";
-      // const language = "en";
-      // const url = `https://news67.p.rapidapi.com/v2/topic-search?languages=${encodeURIComponent(
-      //   language
-      // )}&search=${encodeURIComponent(topic)}`;
+      const topic = "coding";
+      const language = "en";
+      const url = `https://news67.p.rapidapi.com/v2/topic-search?languages=${encodeURIComponent(
+        language
+      )}&search=${encodeURIComponent(topic)}`;
 
-      // const options = {
-      //   method: "GET",
-      //   headers: {
-      //     "X-RapidAPI-Key":
-      //       "df461d9036mshb4f44340f3538d7p13a8bajsn86cdae799e77",
-      //     "X-RapidAPI-Host": "news67.p.rapidapi.com",
-      //   },
-      // };
-
-      // try {
-      //   const response = await fetch(url, options);
-      //   const result = await response.json();
-      //   setNewsData(result.news); // Update newsData state with fetched data
-      //   setlodaing(false);
-      // } catch (error) {
-      //   setlodaing(false);
-      //   console.error(error);
-      // }
-
-      const url = "https://google-news13.p.rapidapi.com/latest?lr=en-US";
       const options = {
         method: "GET",
         headers: {
           "X-RapidAPI-Key":
-            "c31e37b590msh53493f64684660cp15092ajsn8c95da3fe0c6",
-          "X-RapidAPI-Host": "google-news13.p.rapidapi.com",
+            "920ef80cd5msh4c5faac297a869bp14e7a6jsnaca2d223ae90",
+          "X-RapidAPI-Host": "news67.p.rapidapi.com",
         },
       };
 
       try {
         const response = await fetch(url, options);
         const result = await response.json();
-        console.log(result.items);
-        setNewsData(result.items.slice(0, 8));
+        setNewsData(result.news); // Update newsData state with fetched data
+        setlodaing(false);
       } catch (error) {
+        setlodaing(false);
         console.error(error);
       }
     }
-    fetchNews();
+    // fetchNews();
   }, []);
 
   return (
@@ -67,7 +58,7 @@ const Technews = () => {
       <div className="news-container">
         <h2
           className="text-center mb-4 Titlefont"
-          style={{ marginTop: "2rem", marginBottom: "2rem" }}
+          style={{ marginTop: "2rem" }}
         >
           Technews
         </h2>
@@ -75,33 +66,6 @@ const Technews = () => {
         <div className="card-wrapper">
           {" "}
           {loading ? (
-            newsData && newsData.length > 0 ? (
-              newsData.map((newsItem, index) => (
-                <Card key={index} className="box-layout boxlayout">
-                  <CardActionArea>
-                    <CardMedia
-                      component="img"
-                      height="140"
-                      image={newsItem.Image}
-                      alt="News Image"
-                    />
-                    <CardContent>
-                      <Typography gutterBottom variant="h5" component="div">
-                        {newsItem.Title}
-                      </Typography>
-
-                      <a href={newsItem.Url}>{newsItem.Url}</a>
-                    </CardContent>
-                  </CardActionArea>
-                </Card>
-              ))
-            ) : (
-              <div className="d-flex w-100 align-items-center justify-content-center flex-column ">
-                <p className="text-center">No news available</p>
-                <Empty />
-              </div>
-            )
-          ) : (
             <div
               className="w-100 text-center d-flex flex-column align-items-center justify-content-center"
               style={{ gap: "2rem" }}
@@ -133,6 +97,60 @@ const Technews = () => {
               <div>
                 <CircularProgress disableShrink /> <h5>Loading...</h5>
               </div>
+            </div>
+          ) : newsData && newsData.length > 0 ? (
+            <Swiper
+              effect={"coverflow"}
+              grabCursor={true}
+              centeredSlides={true}
+              slidesPerView={"auto"}
+              loop={true}
+              pagination={{
+                clickable: true,
+              }}
+              navigation={true}
+              coverflowEffect={{
+                rotate: 50,
+                stretch: 0,
+                depth: 100,
+                modifier: 0,
+                slideShadows: true,
+              }}
+              modules={[EffectCoverflow, Pagination]}
+              className="mySwiper"
+              initialSlide={0}
+            >
+              {newsData.map((newsItem, index) => (
+                <SwiperSlide key={index}>
+                  <Card className="box-layout boxlayout">
+                    <CardActionArea>
+                      {newsItem.Image && ( // Check if Image URL is valid
+                        <CardMedia
+                          className="news-image"
+                          component="img"
+                          height="140"
+                          image={newsItem.Image}
+                          alt="News Image"
+                        />
+                      )}
+
+                      <CardContent>
+                        <Typography gutterBottom variant="h5" component="div">
+                          {newsItem.Title.substring(0, 50)}....
+                        </Typography>
+                        <a href={newsItem.Url} style={{ marginBottom: "1rem" }}>
+                          {newsItem.Url.substring(0, 30)}
+                        </a>
+                      </CardContent>
+                    </CardActionArea>
+                  </Card>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          ) : (
+            <div className="d-flex w-100 align-items-center justify-content-center flex-column ">
+              <p className="text-center">No news available</p>
+              <Empty />
             </div>
           )}
         </div>

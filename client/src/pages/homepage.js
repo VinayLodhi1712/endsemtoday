@@ -22,11 +22,13 @@ import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
 
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
+import "swiper/css/navigation";
 
 // import required modules
 import { EffectCoverflow, Pagination } from "swiper/modules";
@@ -131,6 +133,7 @@ function Home() {
           <div style={{ width: "100%", marginTop: "0%" }}>
             <Swiper
               effect={"coverflow"}
+              navigation={true}
               grabCursor={true}
               centeredSlides={true}
               slidesPerView={"auto"}
@@ -142,7 +145,7 @@ function Home() {
                 slideShadows: true,
               }}
               pagination={true}
-              modules={[EffectCoverflow, Pagination]}
+              modules={[EffectCoverflow, Pagination, Navigation]}
               className="mySwiper"
               initialSlide={1}
             >

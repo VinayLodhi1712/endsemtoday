@@ -549,10 +549,10 @@ body {
 }
 
 .box-layout {
-  flex: 0 0 auto; /* Ensure cards don't grow or shrink */
-  margin-right: 10px; /* Add some spacing between cards */
+  flex: 0 0 auto;
   max-width: 350px;
   margin-right: 4rem;
+  height: 90%;
 }
 
 .flexrow {
@@ -668,7 +668,7 @@ body {
   background-size: cover;
 }
 .swiper-pagination {
-  position: relative !important;
+  bottom: -1% !important;
 }
 
 .swiper-slide Card {
@@ -677,6 +677,28 @@ body {
 .unselectable {
   user-select: none;
 }
-.mySwiper{
+.mySwiper {
   margin-top: 1rem;
+}
+.news-image {
+  background-position: center;
+  background-size: cover;
+}
+.swiper-button-prev,
+.swiper-button-next {
+  position: absolute;
+  top: 50%;
+  width: 40px;
+  height: 40px;
+  transform: translateY(-50%);
+  z-index: 10;
+  cursor: pointer;
+}
+.swiper-button-prev {
+  top: 100% !important;
+  left: 30% !important;
+}
+.swiper-button-next {
+  top: 100% !important;
+  right: 30% !important;
 }
