@@ -615,6 +615,7 @@ body {
 }
 .WelcomeText {
   font-weight: 600;
+  margin: 0;
 }
 
 /* 
@@ -654,6 +655,28 @@ body {
 }
 .Accordian1 {
   width: 80%;
- 
 }
-  
+.swiper {
+  width: 100% !important;
+}
+.swiper-wrapper {
+  width: 30% !important;
+}
+
+.swiper-slide {
+  background-position: center;
+  background-size: cover;
+}
+.swiper-pagination {
+  position: relative !important;
+}
+
+.swiper-slide Card {
+  height: 80% !important  ;
+}
+.unselectable {
+  user-select: none;
+}
+.mySwiper{
+  margin-top: 1rem;
+}

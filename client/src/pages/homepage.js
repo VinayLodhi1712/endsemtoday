@@ -1,7 +1,7 @@
 import HomeLayout from "../components/layout/HomePageLayout";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+// import Slider from "react-slick";
+// import "slick-carousel/slick/slick.css";
+// import "slick-carousel/slick/slick-theme.css";
 import React, { useEffect } from "react";
 import Card from "react-bootstrap/Card";
 import products from "../assests/products.jpg";
@@ -20,8 +20,16 @@ import MuiAccordion from "@mui/material/Accordion";
 import MuiAccordionSummary from "@mui/material/AccordionSummary";
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
+
 import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
 import "swiper/css";
+import "swiper/css/effect-coverflow";
+import "swiper/css/pagination";
+
+// import required modules
+import { EffectCoverflow, Pagination } from "swiper/modules";
 
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -62,7 +70,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 
 function Home() {
   useEffect(() => {
-    AOS.init({ duration: 2000 });
+    AOS.init({ duration: "1000" });
   }, []);
   const [expanded, setExpanded] = React.useState("panel1");
 
@@ -70,15 +78,15 @@ function Home() {
     setExpanded(newExpanded ? panel : false);
   };
 
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 5000,
-  };
+  // const settings = {
+  //   dots: true,
+  //   infinite: true,
+  //   speed: 500,
+  //   slidesToShow: 1,
+  //   slidesToScroll: 1,
+  //   autoplay: true,
+  //   autoplaySpeed: 5000,
+  // };
 
   const theme = createTheme({
     palette: {
@@ -120,73 +128,115 @@ function Home() {
             {" "}
             Our Services
           </h1>
-          <div style={{ width: "65%", height: "100%" }} data-aos="fade-right">
-            <Slider {...settings}>
-              <Card className="boxlayout" style={{ width: "25rem" }}>
-                <Card.Img
-                  variant="top"
-                  src={technews}
-                  style={{ height: "20rem" }}
-                />
-                <Card.Body>
-                  <Card.Title className="mediumtitlefont">
-                    Tech News Provider
-                  </Card.Title>
-                  <Card.Text>
-                    Help Students by providing them a platform where they can
-                    get all current tech news
-                  </Card.Text>
-                  <Link to="/technews">
-                    <button className="btn btn-primary w-100">
-                      See Latest TechNews
-                    </button>
-                  </Link>
-                </Card.Body>
-              </Card>
+          <div style={{ width: "100%", marginTop: "0%" }}>
+            <Swiper
+              effect={"coverflow"}
+              grabCursor={true}
+              centeredSlides={true}
+              slidesPerView={"auto"}
+              coverflowEffect={{
+                rotate: 50,
+                stretch: 0,
+                depth: 100,
+                modifier: 1,
+                slideShadows: true,
+              }}
+              pagination={true}
+              modules={[EffectCoverflow, Pagination]}
+              className="mySwiper"
+              initialSlide={1}
+            >
+              {/* slide 1 */}
+              <SwiperSlide>
+                <Card
+                  className="boxlayout"
+                  style={{ width: "25rem", height: "30rem" }}
+                  data-aos="fade-right"
+                >
+                  <Card.Img
+                    variant="top"
+                    src={products}
+                    style={{ height: "70%" }}
+                    className="unselectable"
+                  />
+                  <Card.Body>
+                    <Card.Title className="mediumtitlefont unselectable">
+                      Helping Students
+                    </Card.Title>
+                    <Card.Text className="unselectable">
+                      Help Students by providing them a platform to buy and sell
+                      their study-related materials
+                    </Card.Text>
+                    <Link to="/products">
+                      <button className="btn btn-primary w-100">
+                        See Products
+                      </button>
+                    </Link>
+                  </Card.Body>
+                </Card>
+              </SwiperSlide>
+              {/* slide 2 */}
 
-              <Card className="boxlayout" style={{ width: "25rem" }}>
-                <Card.Img
-                  variant="top"
-                  src={stack}
-                  style={{ height: "20rem" }}
-                />
-                <Card.Body>
-                  <Card.Title className="mediumtitlefont w-100">
-                    Student Doubts Solver
-                  </Card.Title>
-                  <Card.Text>
-                    Help Students by providing them a platform to ask and
-                    provide solutions to their doubts
-                  </Card.Text>
-                  <Link to="/dashboard/user/interaction">
-                    <button className="btn btn-primary w-100">
-                      Visit Code-Connect
-                    </button>
-                  </Link>
-                </Card.Body>
-              </Card>
-              <Card className="boxlayout" style={{ width: "25rem" }}>
-                <Card.Img
-                  variant="top"
-                  src={products}
-                  style={{ height: "20rem" }}
-                />
-                <Card.Body>
-                  <Card.Title className="mediumtitlefont">
-                    Helping Students
-                  </Card.Title>
-                  <Card.Text>
-                    Help Students by providing them a platform to buy and sell
-                    their study-related materials
-                  </Card.Text>
-                  <Link to="/products">
-                    <button className="btn btn-primary w-100">
-                      See Products
-                    </button>
-                  </Link>
-                </Card.Body>
-              </Card>
-            </Slider>
+              <SwiperSlide>
+                <Card
+                  data-aos="fade-up"
+                  // data-aos-duration="1000"
+                  className="boxlayout"
+                  style={{ width: "25rem", height: "30rem" }}
+                >
+                  <Card.Img
+                    variant="top"
+                    src={stack}
+                    style={{ height: "70%" }}
+                    className="unselectable"
+                  />
+                  <Card.Body>
+                    <Card.Title className="mediumtitlefont  unselectable w-100">
+                      Student Doubts Solver
+                    </Card.Title>
+                    <Card.Text className="unselectable">
+                      Help Students by providing them a platform to ask and
+                      provide solutions to their doubts
+                    </Card.Text>
+                    <Link to="/dashboard/user/interaction">
+                      <button className="btn btn-primary w-100">
+                        Visit Code-Connect
+                      </button>
+                    </Link>
+                  </Card.Body>
+                </Card>
+              </SwiperSlide>
+
+              {/* slide 3 */}
+              <SwiperSlide>
+                <Card
+                  data-aos="fade-left"
+                  className="boxlayout "
+                  style={{ width: "25rem", height: "30rem" }}
+                >
+                  <Card.Img
+                    variant="top"
+                    src={technews}
+                    style={{ height: "60%" }}
+                    className="unselectable"
+                  />
+                  <Card.Body>
+                    <Card.Title className="mediumtitlefont unselectable">
+                      Tech News Provider
+                    </Card.Title>
+                    <Card.Text className="unselectable">
+                      Help Students by providing them a platform where they can
+                      get all current tech news
+                    </Card.Text>
+                    <Link to="/technews">
+                      <button className="btn btn-primary w-100">
+                        See Latest TechNews
+                      </button>
+                    </Link>
+                  </Card.Body>
+                </Card>
+              </SwiperSlide>
+            </Swiper>
           </div>
         </div>
         <div className="AccordianParent">
@@ -277,18 +327,6 @@ function Home() {
               </AccordionDetails>
             </Accordion>
           </div>{" "}
-          {/* <Swiper
-            spaceBetween={50}
-            slidesPerView={3}
-            onSlideChange={() => console.log("slide change")}
-            onSwiper={(swiper) => console.log(swiper)}
-          >
-            <SwiperSlide></SwiperSlide>
-            <SwiperSlide>Slide 2</SwiperSlide>
-            <SwiperSlide>Slide 3</SwiperSlide>
-            <SwiperSlide>Slide 4</SwiperSlide>
-            
-          </Swiper> */}
         </div>
       </div>
     </HomeLayout>
