@@ -680,6 +680,9 @@ body {
 .mySwiper {
   margin-top: 1rem;
 }
+.icon {
+  margin: 0;
+}
 .news-image {
   background-position: center;
   background-size: cover;
