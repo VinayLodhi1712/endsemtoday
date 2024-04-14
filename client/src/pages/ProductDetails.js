@@ -126,18 +126,18 @@ const ProductDetails = () => {
   return (
     <Layout>
       <div className="container mt-3">
-        <h3 className="text-center mb-5" style={{ fontWeight: "800", fontFamily: "sans-serif" }}>Product Details</h3>
+        <h3 className="text-center mb-5 Titlefont" >Product Details</h3>
         {Detail.map((p) => (
-          <div key={p._id} className="card p-5" style={{ backgroundColor: "white" }}>
-            <div className="row">
-              <div className="col-md-6">
+          <div key={p._id} className="card p-5 detailslayout" style={{ backgroundColor: "white" }}>
+            <div className="row"> 
+              <div className="col-md-6" style={{width:"40%"}}>
                 <Image
                   src={`http://localhost:8000/api/v1/product/get-productPhoto/${p._id}`}
                   className="card-Image-top"
                   style={{ height: "25rem" }}
                 />
               </div>
-              <div className="col-md-6">
+              <div className="col-md-6" style={{width:"60%"}}>
                 <div className="d-flex  mb-3">
                   <button className="button-16" style={{ marginRight: "120px", fontWeight: 600, letterSpacing: "1.2px" }} onClick={() => setShowDetails(true)}>DETAILS</button>
                   <button className="button-16" style={{ fontWeight: 600, letterSpacing: "1.2px" }} onClick={() => setShowDetails(false)}>REVIEWS</button>
@@ -175,7 +175,7 @@ const ProductDetails = () => {
                     </div>
                   </div>
                 ) : (
-                  <div className="col-md-10">
+                  <div className="col-md-10" style={{width:"100%"}}>
                     {typeof p.ratings === 'number' && p.ratings > 0 ? (
                       <p className="mediumtitlefont">
                         Rating:
@@ -191,10 +191,10 @@ const ProductDetails = () => {
                     )}
                     <Button className="btn btn-success mb-3" onClick={() => setShowModal(true)}>Create Review</Button>
                     {p.reviews.length > 0 && (
-                      <div style={{ padding: "10px", border: "1px solid #ccc", marginBottom: "20px" }}>
+                      <div className="reviewlayout">
                         {p.reviews.map((review) => (
                           <div style={{ padding: "10px", borderBottom: "1px solid #ccc" }}>
-                            <div className="d-flex justify-content-between" style={{ marginRight: "60px" }}>
+                            <div className="d-flex justify-content-between" style={{ marginRight: "10px" }}>
                               <div>
                                 {[...Array(review.rating)].map((_, index) => (
                                   <span key={index} style={{ color: "#FFD700", fontSize: "28px" }}>&#9733;</span>

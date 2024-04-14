@@ -467,6 +467,18 @@ body {
   margin-bottom: 1rem;
 }
 
+.reviewlayout {
+  height: 100%;
+  width: 130%;
+  margin-left: -1rem;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
 .contactlayout {
   height: 100%;
   width: 80%;
@@ -479,6 +491,17 @@ body {
   margin-bottom: 1rem;
 }
 
+.detailslayout{
+  height: 100%;
+  width: 80%;
+  margin: 2rem auto;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 0.2rem;
+}
 .aqua {
   color: #10a5f5;
 }
