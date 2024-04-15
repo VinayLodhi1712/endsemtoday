@@ -11,7 +11,7 @@ import Skeleton from "@mui/material/Skeleton";
 import { Empty } from "antd";
 import "../App.css";
 import { Swiper, SwiperSlide } from "swiper/react";
-
+import { Navigation } from "swiper/modules";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/effect-coverflow";
@@ -105,9 +105,9 @@ const Technews = () => {
               centeredSlides={true}
               slidesPerView={"auto"}
               loop={true}
-              pagination={{
-                clickable: true,
-              }}
+              // pagination={{
+              //   clickable: true,
+              // }}
               navigation={true}
               coverflowEffect={{
                 rotate: 50,
@@ -116,7 +116,7 @@ const Technews = () => {
                 modifier: 0,
                 slideShadows: true,
               }}
-              modules={[EffectCoverflow, Pagination]}
+              modules={[EffectCoverflow, Pagination, Navigation]}
               className="mySwiper"
               initialSlide={0}
             >

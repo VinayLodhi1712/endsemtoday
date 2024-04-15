@@ -191,11 +191,11 @@ function Productpage() {
           {FilterProductLength ? (
             <div
               className="d-flex justify-content-around flex-wrap "
-              style={{ height: "100%", gap: "0.5rem" }}
+              style={{ height: "100%", gap: "2rem" }}
             >
               {Products.map((p) => (
                 <div
-                  className="card d-flex border border-3"
+                  className="card d-flex border border-3 boxlayoutproducts"
                   style={{ width: "25%", height: "100%" }}
                 >
                   <Image

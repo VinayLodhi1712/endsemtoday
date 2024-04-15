@@ -10,7 +10,7 @@ import VisibilitySensor from "react-visibility-sensor";
 import { FaAddressBook, FaShoppingCart, FaComment } from "react-icons/fa";
 function Productcard() {
   return (
-    <Card className="boxlayout" style={{ width: "25rem" }}>
+    <Card className="boxlayout" style={{ width: "22rem" }}>
       <Card.Img variant="top" src={products} />
       <Card.Body>
         <Card.Title className="mediumtitlefont">Helping Students</Card.Title>
@@ -28,7 +28,7 @@ function Productcard() {
 
 function Codeconnectcard() {
   return (
-    <Card className="boxlayout" style={{ width: "25rem" }}>
+    <Card className="boxlayout" style={{ width: "22rem" }}>
       <Card.Img variant="top" src={stack} />
       <Card.Body>
         <Card.Title className="mediumtitlefont w-100">
@@ -48,7 +48,7 @@ function Codeconnectcard() {
 
 function Technewscard() {
   return (
-    <Card className="boxlayout" style={{ width: "25rem" }}>
+    <Card className="boxlayout" style={{ width: "22rem" }}>
       <Card.Img variant="top" src={technews} />
       <Card.Body>
         <Card.Title className="mediumtitlefont">Tech News Provider</Card.Title>
@@ -121,15 +121,11 @@ const About = () => {
         things code-related!
       </p>
       <div className="cards">
-        <div>
-          <Productcard />
-        </div>
-        <div className="cardmargin">
-          <Codeconnectcard />
-        </div>
-        <div className="cardmargin">
-          <Technewscard />
-        </div>
+        <Productcard />
+
+        <Codeconnectcard />
+
+        <Technewscard />
       </div>
 
       <p className="Titlefont center " style={{ marginTop: "2rem" }}>
@@ -141,7 +137,7 @@ const About = () => {
         style={{ height: "100%", gap: "2rem" }}
       >
         <div
-          className="d-flex justify-content-around"
+          className="d-flex justify-content-around align-items-center"
           style={{ width: "45%", height: "80%", gap: "1rem" }}
         >
           <div>

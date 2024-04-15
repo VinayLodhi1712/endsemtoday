@@ -231,13 +231,13 @@ const AdminDashboard = () => {
                         </td>
                         <td className="Info">{AnswerAsked}</td>
                       </tr>
-                      <tr>
+                      {/* <tr>
                         <td>
                           <span className="glyphicon glyphicon-calendar text-primary" />
                           Reputation
                         </td>
                         <td className="Info">4</td>
-                      </tr>
+                      </tr> */}
                       <tr>
                         <td>
                           <span className="glyphicon glyphicon-calendar text-primary" />

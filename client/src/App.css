@@ -466,11 +466,19 @@ body {
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
+.boxlayoutproducts {
+  height: 100%;
+  width: 80%;
+
+  box-shadow: 4px 8px 10px rgba(0, 0, 0, 0.4), 4px 8px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding: 0.2rem;
+}
 
 .reviewlayout {
   height: 100%;
-  width: 130%;
-  margin-left: -1rem;
+  width: 110%;
+  margin-left: 0.1rem;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   border: 1px solid #ccc;
   border-radius: 10px;
@@ -491,7 +499,7 @@ body {
   margin-bottom: 1rem;
 }
 
-.detailslayout{
+.detailslayout {
   height: 100%;
   width: 80%;
   margin: 2rem auto;

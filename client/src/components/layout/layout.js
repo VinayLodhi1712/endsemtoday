@@ -7,7 +7,7 @@ function Layout({ children }) {
     <div>
       <Header></Header>
       <main
-        style={{ height: "77.5vh", scrollbarWidth: "none" }}
+        style={{ height: "80vh", scrollbarWidth: "none" }}
         className="overflow-auto"
       >
         {children}

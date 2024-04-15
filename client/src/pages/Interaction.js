@@ -153,7 +153,7 @@ const Interaction = () => {
     <Layout>
       <div
         className="d-flex flex-column align-items-center BgColor"
-        style={{ gap: "1rem", height: "100vh" }}
+        style={{ gap: "1rem" }}
       >
         {" "}
         <ThemeProvider theme={theme}>

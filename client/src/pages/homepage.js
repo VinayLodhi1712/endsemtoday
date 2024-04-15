@@ -148,6 +148,7 @@ function Home() {
               modules={[EffectCoverflow, Pagination, Navigation]}
               className="mySwiper"
               initialSlide={1}
+
             >
               {/* slide 1 */}
               <SwiperSlide>
@@ -243,7 +244,7 @@ function Home() {
           </div>
         </div>
         <div className="AccordianParent">
-          <h1 className=" w-100 text-center WelcomeText" data-aos="fade-right">
+          <h1 className=" w-100 text-center WelcomeText mb-3" data-aos="fade-right">
             {" "}
             Frequently Asked Questions
           </h1>
