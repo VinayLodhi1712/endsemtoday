@@ -12,6 +12,14 @@ import { faStar, faStarHalfAlt } from "@fortawesome/free-solid-svg-icons";
 import { useAuth } from "../context/auth";
 import { useCart } from "../context/cart";
 
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/effect-coverflow";
+import "swiper/css/pagination";
+import { EffectCoverflow, Pagination } from "swiper/modules";
+
 const ProductDetails = () => {
   const Navigate = useNavigate();
   const params = useParams();
@@ -124,6 +132,11 @@ const ProductDetails = () => {
 
   return (
     <Layout>
+      <style>{`
+       .swiper-wrapper {
+        width: 100% !important;
+      }
+      `}</style>
       <div className="container mt-3">
         <h3 className="text-center mb-5 Titlefont">Product Details</h3>
         {Detail.map((p) => (
@@ -165,7 +178,7 @@ const ProductDetails = () => {
                     PRICE: <strong> ₹{p.price}</strong>{" "}
                   </p>
 
-                  <div className="d-flex mt-2 w-60">
+                  <div className="d-flex mt-2 mb-3 w-60">
                     <button
                       className="button-27"
                       style={{ marginRight: "60px" }}
@@ -198,7 +211,9 @@ const ProductDetails = () => {
                 <div className="col-md-10" style={{ width: "100%" }}>
                   {typeof p.ratings === "number" && p.ratings > 0 ? (
                     <>
-                      <p className="mediumtitlefont">Number of Reviews : {p.numofreviews}</p>
+                      <p className="mediumtitlefont">
+                        Number of Reviews : {p.numofreviews}
+                      </p>
                       <p className="mediumtitlefont">
                         Rating:
                         {[...Array(Math.floor(p.ratings))].map((_, index) => (
@@ -225,52 +240,81 @@ const ProductDetails = () => {
                   >
                     Create Review
                   </Button>
-                  {p.reviews.length > 0 && (
-                    <div>
-                      {p.reviews.map((review) => (
-                        <div
-                          className="boxlayout"
-                          style={{
-                            padding: "10px",
-                            width: "100%",
-                          }}
-                        >
-                          <div
-                            className="d-flex justify-content-between"
-                            style={{ marginRight: "10px" }}
-                          >
-                            <div>
-                              {[...Array(review.rating)].map((_, index) => (
-                                <span
-                                  key={index}
-                                  style={{ color: "#FFD700", fontSize: "28px" }}
-                                >
-                                  &#9733;
-                                </span>
-                              ))}
-                            </div>
-                            {auth.user &&
-                              auth.user._id.toString() === review.user && (
-                                <Button
-                                  className="btn btn-danger mb-3 align-items-center"
-                                  onClick={() => deleteReview(review._id)}
-                                >
-                                  Delete
-                                </Button>
-                              )}
-                          </div>
 
-                          <p style={{ fontWeight: 600 }}>{review.comment}</p>
-                          <p
-                            className="mediumtitlefont"
-                            style={{ marginRight: "8rem" }}
-                          >
-                            - {review.name}
-                          </p>
-                        </div>
-                      ))}
-                    </div>
-                  )}
+                  <Swiper
+                    effect={"coverflow"}
+                    grabCursor={true}
+                    centeredSlides={true}
+                    slidesPerView={"auto"}
+                    loop={true}
+                    // pagination={{
+                    //   clickable: true,
+                    // }}
+                    navigation={true}
+                    coverflowEffect={{
+                      rotate: 50,
+                      stretch: 0,
+
+                      modifier: 0,
+                      slideShadows: true,
+                    }}
+                    modules={[EffectCoverflow, Pagination, Navigation]}
+                    className="mySwiper mb-3"
+                    initialSlide={0}
+                  >
+                    {p.reviews.length > 0 && (
+                      <div>
+                        {p.reviews.map((review) => (
+                          <SwiperSlide>
+                            <div
+                              className="boxlayout p-3"
+                              style={{
+                                width: "100%",
+                              }}
+                            >
+                              <div
+                                className="d-flex justify-content-between"
+                                style={{ marginRight: "10px" }}
+                              >
+                                <div>
+                                  {[...Array(review.rating)].map((_, index) => (
+                                    <span
+                                      key={index}
+                                      style={{
+                                        color: "#FFD700",
+                                        fontSize: "28px",
+                                      }}
+                                    >
+                                      &#9733;
+                                    </span>
+                                  ))}
+                                </div>
+                                {auth.user &&
+                                  auth.user._id.toString() === review.user && (
+                                    <Button
+                                      className="btn btn-danger mb-3 align-items-center"
+                                      onClick={() => deleteReview(review._id)}
+                                    >
+                                      Delete
+                                    </Button>
+                                  )}
+                              </div>
+
+                              <p style={{ fontWeight: 600 }}>
+                                {review.comment}
+                              </p>
+                              <p
+                                className="mediumtitlefont"
+                                style={{ marginRight: "8rem" }}
+                              >
+                                - {review.name}
+                              </p>
+                            </div>
+                          </SwiperSlide>
+                        ))}
+                      </div>
+                    )}
+                  </Swiper>
 
                   <Modal show={showModal} onHide={() => setShowModal(false)}>
                     <Modal.Header closeButton>

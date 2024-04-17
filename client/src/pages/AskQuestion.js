@@ -70,7 +70,7 @@ const AskQuestion = () => {
             className="w-100 d-flex flex-column justify-content-center align-items-center "
             style={{ gap: "1rem" }}
           >
-            <div className="w-50">
+            <div className="w-75">
               <b>
                 <label className="form-label smalltitlefont" for="Title">
                   Title
@@ -89,7 +89,7 @@ const AskQuestion = () => {
               ></input>
             </div>
 
-            <div className="w-50">
+            <div className="w-75">
               <b>
                 <label className="form-label smalltitlefont" for="Question">
                   Body
