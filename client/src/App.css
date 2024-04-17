@@ -2,7 +2,7 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Georgia, serif;
+  font-family:Georgia, 'Times New Roman', Times, serif;
 }
 
 /* navbar css */
@@ -203,8 +203,6 @@ body {
   color: #ffffff;
   cursor: pointer;
   display: inline-block;
-  font-family: Roobert, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica,
-    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 16px;
   font-weight: 600;
   line-height: normal;
@@ -247,7 +245,7 @@ body {
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+
   font-size: 16px;
   font-weight: 800;
   line-height: 16px;
@@ -280,7 +278,6 @@ body {
   border-radius: 4px;
   color: #3c4043;
   cursor: pointer;
-  font-family: arial, sans-serif;
   font-size: 14px;
   height: 36px;
   line-height: 27px;
@@ -305,14 +302,12 @@ body {
 }
 
 .Titlefont {
-  font-family: Georgia, serif;
   font-size: 2.2rem;
   color: black;
   font-weight: 600;
 }
 
 .mediumtitlefont {
-  font-family: Georgia, serif;
   font-size: 1.4rem;
   color: black;
   font-weight: 600;
@@ -320,7 +315,7 @@ body {
 }
 
 .smalltitlefont {
-  font-family: Georgia, serif;
+  font-family: "Courier New", Courier, monospace;
   font-size: 1.2rem;
   color: black;
   font-weight: 470;
@@ -687,9 +682,6 @@ body {
 .Accordian1 {
   width: 80%;
 }
-.swiper {
-  width: 100% !important;
-}
 .swiper-wrapper {
   width: 30% !important;
 }
@@ -702,9 +694,6 @@ body {
   bottom: -1% !important;
 }
 
-.swiper-slide Card {
-  height: 80% !important  ;
-}
 .unselectable {
   user-select: none;
 }
@@ -753,5 +742,4 @@ body {
   background-color: black;
   padding: 5px;
   border-radius: 10%;
-  
 }

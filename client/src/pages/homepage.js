@@ -107,10 +107,13 @@ function Home() {
           <div
             className="w-50 d-flex flex-column justify-content-center align-items-center"
             data-aos="fade-right"
+            style={{ gap: "1rem" }}
           >
             <h1 className=" mt-3  text-center WelcomeText">
               {" "}
-              Welcome to <mark>TalkOfCode</mark> – Your Dynamic Tech Community
+              Welcome to <mark>TalkOfCode</mark>
+              <br></br>
+              Your Dynamic Tech Community
             </h1>
             <p className="text-center">
               Empowering Tech Enthusiasts to Learn, Connect, and Innovate.
@@ -123,10 +126,10 @@ function Home() {
               </NavLink>
             </ThemeProvider>
           </div>
-          <img src={HomeImg} className="w-25 h-50 " data-aos="fade-left"></img>
+          <img src={HomeImg} className="h-75 " data-aos="fade-left"></img>
         </div>{" "}
         <div className="d-flex align-items-center flex-column justify-content-center w-100 HomeSecondDiv">
-          <h1 className=" w-100 text-center WelcomeText" data-aos="fade-left">
+          <h1 className=" w-50 text-center WelcomeText" data-aos="fade-left">
             {" "}
             Our Services
           </h1>
@@ -148,7 +151,6 @@ function Home() {
               modules={[EffectCoverflow, Pagination, Navigation]}
               className="mySwiper"
               initialSlide={1}
-
             >
               {/* slide 1 */}
               <SwiperSlide>
@@ -244,7 +246,10 @@ function Home() {
           </div>
         </div>
         <div className="AccordianParent">
-          <h1 className=" w-100 text-center WelcomeText mb-3" data-aos="fade-right">
+          <h1
+            className=" w-100 text-center WelcomeText mb-3"
+            data-aos="fade-right"
+          >
             {" "}
             Frequently Asked Questions
           </h1>

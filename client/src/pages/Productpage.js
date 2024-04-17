@@ -152,7 +152,7 @@ function Productpage() {
                     HandleFilter(e.target.checked, c._id);
                   }}
                 >
-                  {c.name}
+                  <strong>{c.name}</strong>
                 </Checkbox> // show categories as check box
               ))}
             </div>
@@ -167,8 +167,10 @@ function Productpage() {
                 }}
               >
                 {Prices?.map((p) => (
-                  <div key={p._id} >
-                    <Radio className="smalltitlefont" value={p.array}>{p.name}</Radio>
+                  <div key={p._id}>
+                    <Radio className="smalltitlefont" value={p.array}>
+                      <strong>{p.name}</strong>
+                    </Radio>
                   </div>
                 ))}
               </Radio.Group>
