@@ -72,7 +72,7 @@ const AskQuestion = () => {
           >
             <div className="w-75">
               <b>
-                <label className="form-label smalltitlefont" for="Title">
+                <label className="form-label " for="Title">
                   Title
                 </label>
               </b>
@@ -91,7 +91,7 @@ const AskQuestion = () => {
 
             <div className="w-75">
               <b>
-                <label className="form-label smalltitlefont" for="Question">
+                <label className="form-label " for="Question">
                   Body
                 </label>
               </b>
@@ -111,7 +111,7 @@ const AskQuestion = () => {
 
             <div className="w-50 d-flex flex-column">
               <b>
-                <label className="form-label smalltitlefont" for="Question">
+                <label className="form-label " for="Question">
                   Tags
                 </label>
               </b>

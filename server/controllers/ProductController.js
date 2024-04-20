@@ -1,6 +1,6 @@
 const ProductModel = require("../modles/ProductModel");
 const OrderModel = require("../modles/OrderModel");
-const usermodel = require("../modles/usermodel")
+const usermodel = require("../modles/usermodel");
 const fs = require("fs").promises;
 const slugify = require("slugify");
 const CategoryModel = require("../modles/CategoryModel");
@@ -32,7 +32,7 @@ async function CreateProductController(req, resp) {
       Product.photo.contentType = photo.type;
       await fs.unlink(photo.path);
     }
-    
+
     await Product.save();
 
     resp.status(200).send({
@@ -78,9 +78,12 @@ async function GetProductController(req, resp) {
 async function GetSingleProductController(req, resp) {
   try {
     const product = await ProductModel.findOne({ slug: req.params.slug })
-      .select("-photo")
+
       .populate("category")
-      .populate("owner");
+      .populate({
+        path: "owner",
+        select: "MobileNo reviews",
+      });
     resp.status(200).send({
       success: true,
       product: [product],
@@ -330,36 +333,43 @@ async function CatergoryWiseProductController(req, resp) {
 
 async function createProductReview(req, resp) {
   try {
-    const productId = req.params.pid; 
+    const productId = req.params.pid;
     const userId = req.params.uid;
-    const product = await ProductModel.findById(productId);    const user = await usermodel.findById(userId)
-    const { rating, comment } = req.body; 
+    const product = await ProductModel.findById(productId);
+    const user = await usermodel.findById(userId);
+    const { rating, comment } = req.body;
     const isReviewed = product.reviews.find((rev) => {
       return rev.user === userId;
     });
     if (isReviewed) {
       return resp.status(400).send({
         success: false,
-        message: "Product already reviewed"
-      })
-    } 
+        message: "Product already reviewed",
+      });
+    }
     const review = {
-      name: user.Name, rating: Number(rating),
-      comment, user: userId
-    }   
-    product.reviews.push(review)
-    product.numofreviews = product.reviews.length; 
-    
-    product.ratings = product.reviews.reduce((acc, item) => item.rating + acc, 0) / product.reviews.length
+      name: user.Name,
+      rating: Number(rating),
+      comment,
+      user: userId,
+    };
+    product.reviews.push(review);
+    product.numofreviews = product.reviews.length;
+
+    product.ratings =
+      product.reviews.reduce((acc, item) => item.rating + acc, 0) /
+      product.reviews.length;
 
     await product.save({ validateBeforeSave: false });
     resp.status(200).json({
       success: true,
-      message: "Review Created"
-    })
+      message: "Review Created",
+    });
   } catch (error) {
-    console.log(error); resp.status(400).send({
-      success: false, error,
+    console.log(error);
+    resp.status(400).send({
+      success: false,
+      error,
     });
   }
 }
@@ -373,23 +383,24 @@ async function deleteReview(req, resp) {
     if (!product) {
       return resp.status(404).json({
         success: false,
-        message: "Product not found"
+        message: "Product not found",
       });
     }
     const reviewIndex = product.reviews.findIndex((rev) => {
-      console.log('Review Object ID:', rev._id);
-      return rev._id.toString() === reviewId
+      console.log("Review Object ID:", rev._id);
+      return rev._id.toString() === reviewId;
     });
-    console.log(reviewIndex)
+    console.log(reviewIndex);
     if (reviewIndex === -1) {
       return resp.status(404).json({
         success: false,
-        message: "Review not found"
+        message: "Review not found",
       });
     }
     if (product.reviews[reviewIndex].user.toString() !== userId) {
       return resp.status(403).json({
-        success: false, message: "You are not authorized to delete this review"
+        success: false,
+        message: "You are not authorized to delete this review",
       });
     }
     product.reviews.splice(reviewIndex, 1);
@@ -397,10 +408,10 @@ async function deleteReview(req, resp) {
     let avg = 0;
     reviews.forEach((rev) => {
       avg = avg + rev.rating;
-    })
+    });
     let ratings = 0;
     if (reviews.length === 0) {
-      ratings = 0
+      ratings = 0;
     } else {
       ratings = avg / reviews.length;
     }
@@ -416,13 +427,13 @@ async function deleteReview(req, resp) {
         new: true,
         runValidators: true,
         useFindAndModify: false,
-      })
+      }
+    );
     resp.status(200).json({
       success: true,
-      message: "deleted successfully review"
-    })
-  }
-  catch (error) {
+      message: "deleted successfully review",
+    });
+  } catch (error) {
     console.log(error);
     resp.status(400).send({
       success: false,
@@ -430,9 +441,6 @@ async function deleteReview(req, resp) {
     });
   }
 }
-
-
-
 
 async function GetUserProductController(req, resp) {
   try {

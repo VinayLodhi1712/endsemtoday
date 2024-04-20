@@ -152,7 +152,7 @@ const Interaction = () => {
   return (
     <Layout>
       <div
-        className="d-flex flex-column align-items-center BgColor"
+        className="d-flex flex-column align-items-center"
         style={{ gap: "1rem" }}
       >
         {" "}

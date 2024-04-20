@@ -13,7 +13,6 @@ const UpateProduct = () => {
   const [description, Setdescription] = useState("");
   const [price, Setprice] = useState("");
   const [quantity, Setquantity] = useState("");
-  const [shipping, Setshipping] = useState(false);
   const [category, Setcategory] = useState("");
   const [auth, setAuth] = useAuth();
   const navigate = useNavigate();
@@ -55,6 +54,7 @@ const UpateProduct = () => {
         Setdescription(data.product[0].description);
         Setprice(data.product[0].price);
         Setcategory(data.product[0].category._id);
+        SetPhoto(data.product[0]?.photo?.data?.data || "");
       } else {
         toast.error("Cannot get products");
       }
@@ -74,7 +74,7 @@ const UpateProduct = () => {
     const formData = new FormData();
     formData.append(
       "data",
-      JSON.stringify({ name, description, price, quantity, shipping, category })
+      JSON.stringify({ name, description, price, quantity, category })
     );
     formData.append("photo", photo);
     try {
@@ -90,7 +90,7 @@ const UpateProduct = () => {
       );
       const data = await response.json();
       if (data?.success) {
-        toast.success("Product Updated Succesfully");
+        toast.success("Updated Succesfully");
         setTimeout(() => {
           navigate("/dashboard/admin/Product");
         }, 2000);

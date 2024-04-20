@@ -102,7 +102,7 @@ function Home() {
 
   return (
     <HomeLayout>
-      <div className="d-flex flex-column GreenGradient">
+      <div className="d-flex flex-column">
         <div className="d-flex justify-content-around align-items-center HomeFirstDiv">
           <div
             className="w-50 d-flex flex-column justify-content-center align-items-center"
