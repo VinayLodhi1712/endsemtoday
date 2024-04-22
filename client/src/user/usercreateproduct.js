@@ -12,7 +12,7 @@ const CreateProductUSer = () => {
   const [name, Setname] = useState("");
   const [description, Setdescription] = useState("");
   const [price, Setprice] = useState("");
-  
+
   const [category, Setcategory] = useState("");
   const [auth, setAuth] = useAuth();
   const navigate = useNavigate();
@@ -163,8 +163,6 @@ const CreateProductUSer = () => {
                   required
                 ></input>
               </div>
-
-            
 
               <button type="submit" className="mt-2 btn btn-primary">
                 Create Product

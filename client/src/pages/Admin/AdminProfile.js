@@ -1,10 +1,11 @@
 import React from "react";
 import Layout from "../../components/layout/layout";
-
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import { useAuth } from "../../context/auth";
 import AdminMenu from "./../../components/layout/AdminMenu";
+import { Tabs } from "antd";
+const { TabPane } = Tabs;
 const Profile = () => {
   const [auth, Setauth] = useAuth();
   const [Name, SetName] = useState("");

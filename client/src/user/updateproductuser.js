@@ -12,8 +12,8 @@ const UpateProductUSer = () => {
   const [name, Setname] = useState("");
   const [description, Setdescription] = useState("");
   const [price, Setprice] = useState("");
-  const [quantity, Setquantity] = useState("");
-  const [shipping, Setshipping] = useState(false);
+  const [Pid, SetPid] = useState("");
+
   const [category, Setcategory] = useState("");
   const [auth, setAuth] = useAuth();
   const navigate = useNavigate();
@@ -54,8 +54,8 @@ const UpateProductUSer = () => {
         Setname(data.product[0].name);
         Setdescription(data.product[0].description);
         Setprice(data.product[0].price);
-        Setquantity(data.product[0].quantity);
         Setcategory(data.product[0].category._id);
+        SetPid(data.product[0]._id);
       } else {
         toast.error("Cannot get products");
       }
@@ -75,9 +75,11 @@ const UpateProductUSer = () => {
     const formData = new FormData();
     formData.append(
       "data",
-      JSON.stringify({ name, description, price, quantity, shipping, category })
+      JSON.stringify({ name, description, price, category })
     );
-    formData.append("photo", photo);
+    if (photo) {
+      formData.append("photo", photo);
+    }
     try {
       const response = await fetch(
         `http://localhost:8000/api/v1/product/update-product/${Singleproduct}`,
@@ -168,7 +170,7 @@ const UpateProductUSer = () => {
                 ))}
               </Select>
 
-              <div className="mt-4">
+              <div className="mt-4 d-flex flex-column align-items-center">
                 <label className="btn border border-3 w-100 btn-outline-primary ">
                   {photo ? photo.name : "Upload Photo"}
                   <input
@@ -180,6 +182,10 @@ const UpateProductUSer = () => {
                     hidden
                   ></input>
                 </label>
+                <img
+                  style={{ width: "5rem" }}
+                  src={`http://localhost:8000/api/v1/product/get-productPhoto/${Pid}`}
+                ></img>
               </div>
 
               <div>
@@ -230,7 +236,6 @@ const UpateProductUSer = () => {
               onClick={() => {
                 HandleDelete();
               }}
-              style={{ marginLeft: "1rem" }}
             >
               Delete Product
             </button>

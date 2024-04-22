@@ -150,7 +150,7 @@ const AdminQuestions = () => {
   return (
     <Layout>
       <div className="d-flex justify-content-around">
-        <div className="w-25 ">
+        <div className="w-25 mt-3">
           <UserMEnu />
         </div>
 

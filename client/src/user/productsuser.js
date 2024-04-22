@@ -8,6 +8,7 @@ import { useAuth } from "../context/auth";
 import { Image } from "antd";
 import "../App";
 import Layout from "../components/layout/layout";
+
 const UpdateProducts = () => {
   const [Products, SetProducts] = useState([]);
   const [auth, setAuth] = useAuth();
@@ -40,7 +41,7 @@ const UpdateProducts = () => {
           <UserMEnu></UserMEnu>
         </div>
 
-        <div className="w-75 " style={{ height: "100%" }}>
+        <div className="w-50 " style={{ height: "100%" }}>
           <h1 className="text-center">Edit products listed by you</h1>
           <div
             className="d-flex justify-content-around flex-wrap align-items-center "
@@ -49,31 +50,30 @@ const UpdateProducts = () => {
             {Products.length > 0 ? (
               Products.map((p) => (
                 <div
-                  className="card d-flex border border-3 "
-                  style={{ width: "25%", height: "100%" }}
+                  className="card border border-3 d-flex flex-column justify-content-center"
+                  style={{ width: "50%", height: "100%" }}
                 >
                   <Image
                     src={`http://localhost:8000/api/v1/product/get-productPhoto/${p._id}`}
                     className="card-Image-top productimage"
                     style={{ height: "15rem", width: "100%" }}
                   />
-                  <Link
-                    to={`/dashboard/user/Update-Product/${p.slug}`}
-                    className="ProductLink"
-                  >
-                    <div className="card-body">
-                      <h5 className="card-title">
-                        {" "}
-                        {p.name.substring(0, 50)}...
-                      </h5>
-                      <p className="card-text">
-                        {p.description.substring(0, 20)}...
-                      </p>
-                      <p className="card-text">
-                        <span className="priceSpan"> ₹ {p.price}</span>
-                      </p>
-                    </div>
-                  </Link>
+
+                  <div className="card-body">
+                    <h5 className="card-title">
+                      {" "}
+                      {p.name.substring(0, 50)}...
+                    </h5>
+                    <p className="card-text">
+                      {p.description.substring(0, 20)}...
+                    </p>
+                    <p className="card-text">
+                      <span className="priceSpan"> ₹ {p.price}</span>
+                    </p>
+                    <Link to={`/dashboard/user/Update-Product/${p.slug}`}>
+                      <button className="btn btn-primary w-100">Update</button>
+                    </Link>
+                  </div>
                 </div>
               ))
             ) : (
