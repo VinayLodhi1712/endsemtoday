@@ -21,7 +21,7 @@ const UserSchema = new mongoose.Schema(
     },
     Address: {
       type: String,
-      required: true, 
+      required: true,
     },
     MobileNo: {
       type: Number,
@@ -37,6 +37,16 @@ const UserSchema = new mongoose.Schema(
       data: Buffer,
       contentType: String,
     },
+    Github: {
+      type: String,
+    },
+    LinkedIn: {
+      type: String,
+    },
+    Website: {
+      type: String,
+    },
+
     Bookmarked: [
       {
         type: mongoose.ObjectId,

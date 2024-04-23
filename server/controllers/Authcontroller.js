@@ -128,31 +128,25 @@ async function ForgotPassword(req, res) {
 
 async function UpdateProfileController(req, res) {
   try {
-    const { Name, Password, Address, Number } = req.fields;
+    const { Name, Address, Number } = req.fields;
     const { photo } = req.files;
-    if (!Password || Password.length < 6) {
-      return res.status(400).send({
-        success: false,
-        message: "Check Password length",
-      });
-    }
+
     const user = await Usermodel.findById(req.user._id);
-    console.log(user);
-    const hashedPassword = await hashPassword(Password);
 
     const existingUser = await Usermodel.findOne({ Number });
 
     if (existingUser) {
-      return res
-        .status(409)
-        .send({ success: false, message: "User already exists" });
+      return res.status(409).send({
+        success: false,
+        message: "User already exists with this number",
+      });
     }
 
     const UpdatedUser = await Usermodel.findByIdAndUpdate(
       req.user._id,
       {
         Name: Name || user.Name,
-        Password: hashedPassword || user.Password,
+
         Address: Address || user.Address,
         MobileNo: Number || user.MobileNo,
       },
@@ -167,6 +161,84 @@ async function UpdateProfileController(req, res) {
     res.status(200).send({
       success: true,
       message: "Profile Updated Succesfully",
+      UpdatedUser,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(400).send({
+      success: false,
+      message: "Error in Profile Updatedation",
+      user,
+    });
+  }
+}
+async function UpdateSocialLinksController(req, res) {
+  try {
+    const { Github, LinkedIn, Website } = req.fields;
+
+    const user = await Usermodel.findById(req.user._id);
+
+    const UpdatedUser = await Usermodel.findByIdAndUpdate(
+      req.user._id,
+      {
+        Github: Github || user.Github,
+        LinkedIn: LinkedIn || user.LinkedIn,
+        Website: Website || user.Website,
+      },
+      { new: true }
+    );
+    await UpdatedUser.save();
+
+    res.status(200).send({
+      success: true,
+      message: "Profile Updated Succesfully",
+      UpdatedUser,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(400).send({
+      success: false,
+      message: "Error in Profile Updatedation",
+      user,
+    });
+  }
+}
+
+async function UpdatePasswordController(req, res) {
+  try {
+    const { OldPassword, NewPassword } = req.fields;
+
+    if (!NewPassword || NewPassword.length < 6) {
+      return res.status(400).send({
+        success: false,
+        message: "Check Password length",
+      });
+    }
+    const user = await Usermodel.findById(req.user._id);
+
+    const match = await comparePassword(OldPassword, user.Password);
+
+    if (!match) {
+      return res.status(210).send({
+        success: false,
+        message: "Invalid  OldPassword",
+      });
+    }
+    const hashedPassword = await hashPassword(NewPassword);
+
+    const UpdatedUser = await Usermodel.findByIdAndUpdate(
+      req.user._id,
+      {
+        Password: hashedPassword,
+      },
+      { new: true }
+    );
+
+    await UpdatedUser.save();
+
+    res.status(200).send({
+      success: true,
+      message: "Password Updated ",
       UpdatedUser,
     });
   } catch (error) {
@@ -393,7 +465,7 @@ async function SubmitUserQuery(req, resp) {
 async function getTotalUsersController(req, resp) {
   try {
     const totalUsers = await Usermodel.countDocuments({ Role: { $ne: 1 } });
-    console.log(totalUsers)
+    console.log(totalUsers);
     resp.status(200).send({
       success: true,
       totalUsers,
@@ -424,4 +496,6 @@ module.exports = {
   GetUserPhotoController,
   SubmitUserQuery,
   getTotalUsersController,
+  UpdateSocialLinksController,
+  UpdatePasswordController,
 };

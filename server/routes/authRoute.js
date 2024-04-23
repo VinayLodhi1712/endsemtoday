@@ -15,6 +15,8 @@ const {
   GetUserPhotoController,
   SubmitUserQuery,
   getTotalUsersController,
+  UpdatePasswordController,
+  UpdateSocialLinksController,
 } = require("../controllers/Authcontroller");
 const requireSignIn = require("../middlewares/authMiddleware");
 const IsAdmin = require("../middlewares/Isadmin");
@@ -45,6 +47,18 @@ router.get("/AdminAuth", requireSignIn, IsAdmin, (req, res) => {
 router.post("/forgetPassword", ForgotPassword);
 
 router.put("/Profile", requireSignIn, formidable(), UpdateProfileController);
+router.put(
+  "/ProfilePassword",
+  requireSignIn,
+  formidable(),
+  UpdatePasswordController
+);
+router.put(
+  "/ProfileLinks",
+  requireSignIn,
+  formidable(),
+  UpdateSocialLinksController
+);
 
 router.get("/orders", requireSignIn, GetAllOrderController);
 
@@ -62,5 +76,5 @@ router.get("/UserCount", UserCountController);
 router.put("/Bookmark/:qid/:uid", BookmarkQuestion);
 router.get("/count", getTotalUsersController);
 
-router.post("/SubmitUserQueryForm",SubmitUserQuery)
+router.post("/SubmitUserQueryForm", SubmitUserQuery);
 module.exports = router;

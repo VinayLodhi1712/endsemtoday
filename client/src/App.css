@@ -64,15 +64,24 @@ body {
 }
 
 .registerformupdate {
-  height: 93%;
-  width: 40%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: lightblue;
   padding: 1rem;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 10px 20px 0 rgba(0, 0, 0, 0.19);
+  margin-bottom: 1rem;
+  gap: 0.5rem;
+}
+.registerformupdatePassword {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 10px 20px 0 rgba(0, 0, 0, 0.19);
+
+  gap: 0.5rem;
 }
 
 .FormBackgound {
@@ -743,8 +752,12 @@ body {
   padding: 5px;
   border-radius: 10%;
 }
-.AnswerQuestionBackGround {
-  background-image: url("./assests/backgroungimage.jpg");
-  background-position: center center;
-  background-size: cover;
+.TabPanePersonalInfo {
+  display: flex;
+  justify-content: space-around;
+}
+.EditProfileUSerPhoto {
+  border-radius: 50%;
+  height: 70%;
+  margin-bottom: 1rem;
 }
