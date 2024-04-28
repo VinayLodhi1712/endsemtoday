@@ -7,6 +7,7 @@ import { Tabs, Tag } from "antd";
 import { RxCross2 } from "react-icons/rx";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import AdminMenu from "./../../components/layout/AdminMenu";
+import { Modal } from "antd";
 
 const Profile = () => {
   const [auth, Setauth] = useAuth();
@@ -25,6 +26,8 @@ const Profile = () => {
   const [tag, setTag] = useState("");
   const [tags, setTags] = useState([]);
   const [userskills, setuserskills] = useState([]);
+  const [Skilltoremove, SetSkilltoremove] = useState("");
+  const [visible, Setvisible] = useState(false);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -184,6 +187,48 @@ const Profile = () => {
     } catch (error) {
       console.log(error);
       toast.error("Error Updating Profile");
+    }
+  }
+
+  async function SkillsRemove(e, skilltoremove) {
+    try {
+      e.preventDefault();
+
+      const response = await fetch(
+        `http://localhost:8000/api/v1/auth/userskillsupdate/${skilltoremove}`,
+        {
+          method: "PUT",
+          headers: {
+            Authorization: auth.token,
+          },
+        }
+      );
+
+      const data = await response.json();
+
+      if (response.status == 200) {
+        Setauth({
+          ...auth, //spread auth to keep previous values as it is
+          user: data.user,
+        });
+
+        localStorage.setItem(
+          "auth",
+          JSON.stringify({
+            ...auth,
+            user: data.user,
+          })
+        );
+        console.log(data.user);
+        toast.success("Skills Updated");
+      } else {
+        toast("Error", {
+          icon: "❌",
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Try Again");
     }
   }
 
@@ -449,12 +494,44 @@ const Profile = () => {
                   <label htmlFor="exampleInputPassword1" className="form-label">
                     <b>Skills:</b>
                   </label>
-                  <div className="w-75 ">
-                    {userskills.map((skill, index) => (
-                      <Tag color="blue">{skill}</Tag>
-                    ))}
+                  <div className="d-flex w-75 justify-content-between">
+                    <div className="w-75 border d-flex align-items-center flex-wrap gap-1">
+                      {userskills.map((skill, index) => (
+                        <Tag color="blue">{skill}</Tag>
+                      ))}
+                    </div>
+                    <button
+                      className="btn btn-primary"
+                      onClick={() => {
+                        Setvisible(true);
+                      }}
+                      type="button" // Add type="button" to prevent form submission
+                    >
+                      Edit
+                    </button>
                   </div>
+                  <Modal
+                    visible={visible}
+                    onCancel={() => {
+                      Setvisible(false);
+                    }}
+                    footer={null}
+                  >
+                    <div className="mb-3">
+                      {userskills.map((skill, index) => (
+                        <Tag color="blue">
+                          {skill}{" "}
+                          <RxCross2
+                            onClick={(e) => {
+                              SkillsRemove(e, skill);
+                            }}
+                          />
+                        </Tag>
+                      ))}
+                    </div>
+                  </Modal>
                 </div>
+
                 <div className="d-flex align-items-center w-100 mb-3 justify-content-between">
                   <label htmlFor="exampleInputPassword1" className="form-label">
                     <b>Add Skills:</b>

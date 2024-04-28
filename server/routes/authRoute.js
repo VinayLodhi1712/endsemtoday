@@ -14,6 +14,7 @@ const {
   UpdatePasswordController,
   UpdateSocialLinksController,
   GetUserReputation,
+  UpdateSkillTagsController,
 } = require("../controllers/Authcontroller");
 const requireSignIn = require("../middlewares/authMiddleware");
 const IsAdmin = require("../middlewares/Isadmin");
@@ -70,4 +71,9 @@ router.post("/SubmitUserQueryForm", SubmitUserQuery);
 
 router.get("/GetReputation/:uid", GetUserReputation);
 
+router.put(
+  "/userskillsupdate/:skilltoremove",
+  requireSignIn,
+  UpdateSkillTagsController
+);
 module.exports = router;

@@ -204,6 +204,28 @@ async function UpdateSocialLinksController(req, res) {
     });
   }
 }
+async function UpdateSkillTagsController(req, res) {
+  try {
+    const { skilltoremove } = req.params;
+
+    const user = await Usermodel.findById(req.user._id);
+
+    user.tags.pull(skilltoremove);
+    await user.save();
+
+    res.status(200).send({
+      success: true,
+      message: "Profile Updated Succesfully",
+      user,
+    });
+  } catch (error) { 
+    console.log(error);
+    res.status(400).send({
+      success: false,
+      message: "Error in Updatedation",
+    });
+  }
+}
 
 async function UpdatePasswordController(req, res) {
   try {
@@ -438,4 +460,5 @@ module.exports = {
   UpdateSocialLinksController,
   UpdatePasswordController,
   GetUserReputation,
+  UpdateSkillTagsController,
 };
