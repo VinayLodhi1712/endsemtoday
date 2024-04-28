@@ -46,6 +46,10 @@ const UserSchema = new mongoose.Schema(
     Website: {
       type: String,
     },
+    Reputation: {
+      type: Number,
+      default: 0,
+    },
 
     Bookmarked: [
       {

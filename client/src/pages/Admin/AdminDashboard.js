@@ -5,12 +5,14 @@ import { Button, Drawer, Space } from "antd";
 import { useAuth } from "../../context/auth";
 
 import moment from "moment";
+
 const AdminDashboard = () => {
   const [open, setOpen] = useState(false);
   const [placement, setPlacement] = useState("left");
   const [auth, SetAuth] = useAuth();
   const [QuestionAsked, SetQuestionAsked] = useState(0);
   const [AnswerAsked, SetAnswerAsked] = useState(0);
+  const [Reputation, SetReputation] = useState(0);
   const onClose = () => {
     setOpen(false);
   };
@@ -48,9 +50,19 @@ const AdminDashboard = () => {
     }
   }
 
+  async function GetUserReputation() {
+    const resp = await fetch(
+      `http://localhost:8000/api/v1/auth/GetReputation/${auth.user._id}`
+    );
+    if (resp.status === 200) {
+      const reputation = await resp.json();
+      SetReputation(reputation.Rep.Reputation);
+    }
+  }
   useEffect(() => {
     GetAllUserQuestion();
     GetAllUserAnswers();
+    GetUserReputation();
   }, []);
 
   return (
@@ -208,7 +220,7 @@ const AdminDashboard = () => {
                           <span className="glyphicon glyphicon-calendar text-primary" />
                           Reputation
                         </td>
-                        <td className="Info">4</td>
+                        <td className="Info">{Reputation}</td>
                       </tr>
                       <tr>
                         <td>

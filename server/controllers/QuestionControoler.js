@@ -106,8 +106,8 @@ async function GetquestionController(req, resp) {
     let SkipCount = req.params.SkipCount;
     const questions = await Questionmodel.find()
       .populate("user", "Name")
-      .skip(SkipCount * 3)
-      .limit(3)
+      .skip(SkipCount * 6)
+      .limit(6)
       .sort({ createdAt: -1 });
     if (questions) {
       resp.status(200).send({

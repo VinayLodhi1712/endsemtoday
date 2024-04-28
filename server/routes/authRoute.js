@@ -17,6 +17,7 @@ const {
   getTotalUsersController,
   UpdatePasswordController,
   UpdateSocialLinksController,
+  GetUserReputation,
 } = require("../controllers/Authcontroller");
 const requireSignIn = require("../middlewares/authMiddleware");
 const IsAdmin = require("../middlewares/Isadmin");
@@ -77,4 +78,7 @@ router.put("/Bookmark/:qid/:uid", BookmarkQuestion);
 router.get("/count", getTotalUsersController);
 
 router.post("/SubmitUserQueryForm", SubmitUserQuery);
+
+router.get("/GetReputation/:uid", GetUserReputation);
+
 module.exports = router;

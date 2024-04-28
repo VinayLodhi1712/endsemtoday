@@ -17,6 +17,7 @@ const AdminDashboard = () => {
   const [auth, SetAuth] = useAuth();
   const [QuestionAsked, SetQuestionAsked] = useState(0);
   const [AnswerAsked, SetAnswerAsked] = useState(0);
+  const [Reputation, SetReputation] = useState(0);
   const onClose = () => {
     setOpen(false);
   };
@@ -55,10 +56,20 @@ const AdminDashboard = () => {
       console.log(error);
     }
   }
+  async function GetUserReputation() {
+    const resp = await fetch(
+      `http://localhost:8000/api/v1/auth/GetReputation/${auth.user._id}`
+    );
+    if (resp.status === 200) {
+      const reputation = await resp.json();
+      SetReputation(reputation.Rep.Reputation);
+    }
+  }
 
   useEffect(() => {
     GetAllUserQuestion();
     GetAllUserAnswers();
+    GetUserReputation();
   }, []);
 
   return (
@@ -161,12 +172,14 @@ const AdminDashboard = () => {
             </button>
           </div>
         </Drawer>
-        <div className="container bootstrap snippets bootdey" style={{width:"80%"}}>
+        <div
+          className="container bootstrap snippets bootdey"
+          style={{ width: "80%" }}
+        >
           <div className="panel-body inf-content">
             <div className="row">
               <div className="col-md-4 d-flex justify-content-center align-items-center">
                 <img
-                
                   title
                   className="img-circle img-thumbnail isTooltip"
                   src={`http://localhost:8000/api/v1/auth/get-userPhoto/${auth.user._id}`}
@@ -231,13 +244,13 @@ const AdminDashboard = () => {
                         </td>
                         <td className="Info">{AnswerAsked}</td>
                       </tr>
-                      {/* <tr>
+                      <tr>
                         <td>
                           <span className="glyphicon glyphicon-calendar text-primary" />
                           Reputation
                         </td>
-                        <td className="Info">4</td>
-                      </tr> */}
+                        <td className="Info">{Reputation}</td>
+                      </tr>
                       <tr>
                         <td>
                           <span className="glyphicon glyphicon-calendar text-primary" />

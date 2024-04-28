@@ -1,6 +1,7 @@
 const Answermodel = require("../modles/Answermodel");
 const Questionmodel = require("../modles/QuestionModel");
 const nodemailer = require("nodemailer");
+const Usermodel = require("../modles/usermodel");
 
 async function AnswerController(req, resp) {
   try {
@@ -15,7 +16,9 @@ async function AnswerController(req, resp) {
     await Questionmodel.findByIdAndUpdate(req.params.qid, {
       $inc: { AnswerCount: 1 },
     }); //increment answer count
-
+    await Usermodel.findByIdAndUpdate(req.params.uid, {
+      $inc: { Reputation: 2 },
+    });
     if (response) {
       resp.status(201).send({
         success: true,
@@ -127,7 +130,7 @@ async function GetAnswerController(req, resp) {
 
 async function UpdateAnswerVotesController(req, resp) {
   try {
-    const { aid, uid } = req.params;
+    const { aid, uid, ansuid } = req.params;
     const { Votes } = req.body;
     const answer = await Answermodel.findById(aid);
 
@@ -150,6 +153,11 @@ async function UpdateAnswerVotesController(req, resp) {
           message: "Your feedback was added succesfully",
           answer,
         });
+
+        // add reputation
+        await Usermodel.findByIdAndUpdate(ansuid, {
+          $inc: { Reputation: 2 },
+        });
       } else {
         resp.status(404).send({
           success: false,
@@ -167,7 +175,7 @@ async function UpdateAnswerVotesController(req, resp) {
 }
 async function UpdateAnswerDownVotesController(req, resp) {
   try {
-    const { aid, uid } = req.params;
+    const { aid, uid, ansuid } = req.params;
     const { Votes } = req.body;
     const answer = await Answermodel.findById(aid);
 
@@ -189,6 +197,10 @@ async function UpdateAnswerDownVotesController(req, resp) {
           success: true,
           message: "Your feedback was added succesfully",
           answer,
+        });
+        // decrease reputation
+        await Usermodel.findByIdAndUpdate(ansuid, {
+          $inc: { Reputation: -2 },
         });
       } else {
         resp.status(404).send({
@@ -249,7 +261,7 @@ async function GetUserAnswersController(req, resp) {
       error,
     });
   }
-} 
+}
 
 async function EmailUser(req, resp) {
   // Handle form data here

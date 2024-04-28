@@ -14,7 +14,6 @@ import Button from "@mui/material/Button";
 import { FaRegArrowAltCircleDown } from "react-icons/fa";
 import Avatar from "@mui/material/Avatar";
 
-import { IoMdChatboxes } from "react-icons/io";
 const View = () => {
   const [Questions, SetQuestions] = useState([]);
   const [Answers, SetAnswers] = useState([]);
@@ -54,10 +53,10 @@ const View = () => {
       toast.error("Something went wrong");
     }
   }
-  async function UpdateVotes(aid, Votes) {
+  async function UpdateVotes(aid, Votes, ansuid) {
     try {
       const votevalue = await fetch(
-        `http://localhost:8000/api/v1/Answer//Update_Answer_votes/${aid}/${auth.user._id}`,
+        `http://localhost:8000/api/v1/Answer/Update_Answer_votes/${aid}/${auth.user._id}/${ansuid}`,
         {
           method: "PUT",
           headers: {
@@ -81,10 +80,10 @@ const View = () => {
       toast.error("Something Went wrong");
     }
   }
-  async function UpdateDownVotes(aid, Votes) {
+  async function UpdateDownVotes(aid, Votes, ansuid) {
     try {
       const votevalue = await fetch(
-        `http://localhost:8000/api/v1/Answer/Update_Answer_Down_votes/${aid}/${auth.user._id}`,
+        `http://localhost:8000/api/v1/Answer/Update_Answer_Down_votes/${aid}/${auth.user._id}/${ansuid}`,
         {
           method: "PUT",
           headers: {
@@ -131,12 +130,13 @@ const View = () => {
       toast.error("Something Went Wrong");
     }
   }
-  async function Handlevotes(id, updatedvotes) {
-    await UpdateVotes(id, updatedvotes);
+
+  async function Handlevotes(id, updatedvotes, ansuid) {
+    await UpdateVotes(id, updatedvotes, ansuid);
     GetSingleAnswers();
   }
-  async function HandleDownvotes(id, updatedvotes) {
-    await UpdateDownVotes(id, updatedvotes);
+  async function HandleDownvotes(id, updatedvotes, ansuid) {
+    await UpdateDownVotes(id, updatedvotes, ansuid);
     GetSingleAnswers();
   }
 
@@ -146,134 +146,139 @@ const View = () => {
   }, []);
   return (
     <Layout>
-      <div >
-      <div
-        className="d-flex flex-column align-items-center "
-        style={{ width: "90%", margin: "auto"}}
-      >
-        <h1 className="mt-3">View Question </h1>
-
-        {Questions.length > 0 ? (
-          Questions.map((q) => (
-            <div class="card w-100 p-2">
-              <div class="card-body">
-                <div className="d-flex justify-content-between">
-                  <div
-                    className="d-flex justify-content-between"
-                    style={{ width: "25%" }}
-                  >
-                    {" "}
-                    <div
-                      className="d-flex  justify-content-between"
-                      style={{ width: "26%" }}
-                    >
-                      <Avatar
-                        src={`http://localhost:8000/api/v1/auth/get-userPhoto/${q.user._id}`}
-                        sx={{ width: 30, height: 30 }}
-                      />
-                      <p className="UserNameDisplay">{q.user.Name}</p>
-                    </div>
-                    <div className="d-flex">
-                      <p className="light-dull">Asked:</p>
-
-                      <p className="DateDisplay">
-                        {" "}
-                        {moment(q.createdAt).format("MMMM Do YYYY")}
-                      </p>
-                    </div>
-                  </div>
-
-                  <LuBookmarkPlus
-                    title="Add to Bookmark"
-                    className="Bookmark"
-                    onClick={() => {
-                      Bookmark(q._id);
-                    }}
-                  />
-                </div>
-                <blockquote class="blockquote mb-0">
-                  <p style={{ marginBottom: "0rem" }} className="QuestionTitle ">{q.title} </p>
-                  <small>{q.question}</small>
-                  <div className="d-flex align-items-center w-100 justify-content-between">
-                    {" "}
-                    <div>
-                      {" "}
-                      {q.tags.map((tag, index) => (
-                        <Tag color="blue">{tag}</Tag>
-                      ))}
-                    </div>
-                  </div>
-                </blockquote>
-              </div>
-            </div>
-          ))
-        ) : (
-          <>
-            {" "}
-            <Empty />
-          </>
-        )}
-        <h3 className="d-flex justify-content-start  mt-2 w-100">Answers:</h3>
+      <div>
         <div
-          className="w-100 d-flex flex-column align-items-center mb-3"
-          style={{ gap: "1rem" }}
+          className="d-flex flex-column align-items-center "
+          style={{ width: "90%", margin: "auto" }}
         >
-          {Answers.length > 0 ? (
-            Answers.map((a, index) => (
-              <div key={index} className="card d-flex flex-row w-100 p-2">
-                <div
-                  className="d-flex flex-column align-items-center  mt-1 justify-content-center"
-                  style={{ gap: "0.2rem", marginLeft: "0.5rem" }}
-                >
-                  <FaRegArrowAltCircleUp
-                    className="UpVote"
-                    onClick={() => {
-                      const updatedVotes = a.votes + 1;
-                      SetVotes(updatedVotes);
-                      Handlevotes(a._id, updatedVotes);
-                    }}
-                    title="Upvote"
-                  />
-                  <p style={{ margin: "0rem" }}> {a.votes}</p>
-                  <FaRegArrowAltCircleDown
-                    className="DownVote"
-                    title="DownVote"
-                    onClick={() => {
-                      const updatedVotes = a.votes - 1;
-                      SetVotes(updatedVotes);
-                      HandleDownvotes(a._id, updatedVotes);
-                    }}
-                  />
-                </div>
-                <div className="card-body mt-3 ">
-                  <b>Answer: </b>
-                  {a.answer}
-                </div>
+          <h1 className="mt-3">View Question </h1>
 
-                <div className="blockquote-footer username mt-1">
-                  answered by{" "}
-                  <cite title="Source Title">
-                    <b>{a.user.Name}</b>
-                  </cite>{" "}
-                  {moment(a.createdAt).format("MMMM Do YYYY")}
+          {Questions.length > 0 ? (
+            Questions.map((q) => (
+              <div class="card w-100 p-2">
+                <div class="card-body">
+                  <div className="d-flex justify-content-between">
+                    <div
+                      className="d-flex justify-content-between"
+                      style={{ width: "25%" }}
+                    >
+                      {" "}
+                      <div
+                        className="d-flex  justify-content-between"
+                        style={{ width: "26%" }}
+                      >
+                        <Avatar
+                          src={`http://localhost:8000/api/v1/auth/get-userPhoto/${q.user._id}`}
+                          sx={{ width: 30, height: 30 }}
+                        />
+                        <p className="UserNameDisplay">{q.user.Name}</p>
+                      </div>
+                      <div className="d-flex">
+                        <p className="light-dull">Asked:</p>
+
+                        <p className="DateDisplay">
+                          {" "}
+                          {moment(q.createdAt).format("MMMM Do YYYY")}
+                        </p>
+                      </div>
+                    </div>
+
+                    <LuBookmarkPlus
+                      title="Add to Bookmark"
+                      className="Bookmark"
+                      onClick={() => {
+                        Bookmark(q._id);
+                      }}
+                    />
+                  </div>
+                  <blockquote class="blockquote mb-0">
+                    <p
+                      style={{ marginBottom: "0rem" }}
+                      className="QuestionTitle "
+                    >
+                      {q.title}{" "}
+                    </p>
+                    <small>{q.question}</small>
+                    <div className="d-flex align-items-center w-100 justify-content-between">
+                      {" "}
+                      <div>
+                        {" "}
+                        {q.tags.map((tag, index) => (
+                          <Tag color="blue">{tag}</Tag>
+                        ))}
+                      </div>
+                    </div>
+                  </blockquote>
                 </div>
               </div>
             ))
           ) : (
-            <div
-              className="d-flex flex-column align-items-center"
-              style={{ gap: "1rem" }}
-            >
+            <>
+              {" "}
               <Empty />
-              <NavLink to={`/dashboard/user/answers/${params.qid}`}>
-                <Button variant="contained" color="success">
-                  Answer
-                </Button>
-              </NavLink>
-            </div>
+            </>
           )}
+          <h3 className="d-flex justify-content-start  mt-2 w-100">Answers:</h3>
+          <div
+            className="w-100 d-flex flex-column align-items-center mb-3"
+            style={{ gap: "1rem" }}
+          >
+            {Answers.length > 0 ? (
+              Answers.map((a, index) => (
+                <div key={index} className="card d-flex flex-row w-100 p-2">
+                  <div
+                    className="d-flex flex-column align-items-center  mt-1 justify-content-center"
+                    style={{ gap: "0.2rem", marginLeft: "0.5rem" }}
+                  >
+                    <FaRegArrowAltCircleUp
+                      className="UpVote"
+                      onClick={() => {
+                        const updatedVotes = a.votes + 1;
+                        SetVotes(updatedVotes);
+                        Handlevotes(a._id, updatedVotes, a.user._id);
+                      }}
+                      title="Upvote"
+                    />
+                    <p style={{ margin: "0rem" }}> {a.votes}</p>
+                    <FaRegArrowAltCircleDown
+                      className="DownVote"
+                      title="DownVote"
+                      onClick={() => {
+                        const updatedVotes = a.votes - 1;
+                        SetVotes(updatedVotes);
+                        HandleDownvotes(a._id, updatedVotes, a.user._id);
+                      }}
+                    />
+                  </div>
+                  <div className="card-body mt-3 ">
+                    <b>Answer: </b>
+                    {a.answer}
+                  </div>
+
+                  <div className="blockquote-footer username mt-1">
+                    answered by{" "}
+                    <cite title="Source Title">
+                      <b>{a.user.Name}</b>
+                    </cite>{" "}
+                    {moment(a.createdAt).format("MMMM Do YYYY")}
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div
+                className="d-flex flex-column align-items-center"
+                style={{ gap: "1rem" }}
+              >
+                <Empty />
+                <NavLink to={`/dashboard/user/answers/${params.qid}`}>
+                  <Button variant="contained" color="success">
+                    Answer
+                  </Button>
+                </NavLink>
+              </div>
+            )}
+          </div>
         </div>
-      </div>
       </div>
     </Layout>
   );

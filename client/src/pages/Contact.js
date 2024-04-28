@@ -238,10 +238,10 @@ const Contact = () => {
             <img src={vinayprofile} className="imgstyle" alt="Person 1" />
           </div>
           <div style={{ marginLeft: "1rem" }}>
-            <p className="smalltitlefont TeamNames">Vinay Anand Lodhi</p>
+            <p className=" TeamNames">Vinay Anand Lodhi</p>
             <p className="smalltitlefont" style={{ margin: "0" }}>
               Developer and Project Manager
-            </p>
+            </p>  
             <div style={{ display: "flex" }}>
               <div className="icons" style={{ backgroundColor: "black" }}>
                 <a

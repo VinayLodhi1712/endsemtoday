@@ -465,7 +465,7 @@ async function SubmitUserQuery(req, resp) {
 async function getTotalUsersController(req, resp) {
   try {
     const totalUsers = await Usermodel.countDocuments({ Role: { $ne: 1 } });
-    console.log(totalUsers);
+
     resp.status(200).send({
       success: true,
       totalUsers,
@@ -475,6 +475,23 @@ async function getTotalUsersController(req, resp) {
     resp.status(500).send({
       success: false,
       message: "Error getting total users",
+      error,
+    });
+  }
+}
+async function GetUserReputation(req, resp) {
+  try {
+    const uid = req.params.uid;
+    const Rep = await Usermodel.findById(uid).select("Reputation");
+    resp.status(200).send({
+      success: true,
+      Rep,
+    });
+  } catch (error) {
+    console.log(error);
+    resp.status(500).send({
+      success: false,
+      message: "Repuataion error",
       error,
     });
   }
@@ -498,4 +515,5 @@ module.exports = {
   getTotalUsersController,
   UpdateSocialLinksController,
   UpdatePasswordController,
+  GetUserReputation,
 };

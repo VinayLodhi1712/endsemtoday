@@ -35,14 +35,14 @@ const UserContributions = () => {
     }
   }
 
-  async function deleteContribution(aid) {
+  async function deleteContribution(aid, qid) {
     try {
       let confirmed = window.confirm(
         "Are you sure you want to delete this contribution?"
       );
       if (confirmed) {
         const del = await fetch(
-          `http://localhost:8000/api/v1/Answer/delete_Answer/${aid}`,
+          `http://localhost:8000/api/v1/Answer/delete_Answer/${aid}/${qid}`,
           {
             method: "DELETE",
             headers: {
@@ -158,7 +158,9 @@ const UserContributions = () => {
                           },
                         }}
                         startIcon={<DeleteIcon />}
-                        onClick={() => deleteContribution(R._id)}
+                        onClick={() =>
+                          deleteContribution(R._id, R.questionid._id)
+                        }
                       >
                         Delete
                       </Button>

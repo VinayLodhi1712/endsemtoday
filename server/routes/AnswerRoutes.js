@@ -23,10 +23,13 @@ router.delete("/delete_Answer/:aid/:qid", DeleteAnswerController);
 
 router.get("/Get_User_Answers/:uid", GetUserAnswerController);
 
-router.put("/Update_Answer_votes/:aid/:uid", UpdateAnswerVotesController);
+router.put(
+  "/Update_Answer_votes/:aid/:uid/:ansuid",
+  UpdateAnswerVotesController
+);
 
 router.put(
-  "/Update_Answer_Down_votes/:aid/:uid",
+  "/Update_Answer_Down_votes/:aid/:uid/:ansuid",
   UpdateAnswerDownVotesController
 );
 

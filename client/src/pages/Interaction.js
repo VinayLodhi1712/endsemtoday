@@ -23,7 +23,7 @@ const Interaction = () => {
   const [Keyword, SetKeyword] = useState("");
   const [SkipCount, SetSkipCount] = useState(0); // Use state for SkipCount
   const isInitialMount = useRef(true);
-  const [shownproducts, Setshownproducts] = useState(3);
+  const [shownproducts, Setshownproducts] = useState(6);
   const [notsearching, Setnotsearching] = useState(false);
   const [auth, SetAuth] = useAuth();
 
@@ -301,14 +301,14 @@ const Interaction = () => {
               <button
                 className="mb-2 btn btn-primary"
                 onClick={() => {
-                  Setshownproducts(shownproducts + 3);
+                  Setshownproducts(shownproducts + 6);
                   handleLoadMore(+1);
                 }}
               >
                 {loading ? "Loading..." : "Load More"}
               </button>
             </div>
-          ) : shownproducts > 3 ? (
+          ) : shownproducts > 6 ? (
             <button
               className="mb-2 btn btn-secondary"
               onClick={() => {
