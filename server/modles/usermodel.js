@@ -50,6 +50,10 @@ const UserSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
+    tags: {
+      type: [String], //add multiple tags
+      required: true,
+    },
 
     Bookmarked: [
       {

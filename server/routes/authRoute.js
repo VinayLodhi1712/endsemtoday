@@ -4,10 +4,6 @@ const {
   registerController,
   ForgotPassword,
   UpdateProfileController,
-  GetAllOrderController,
-  GetAllAdminOrderController,
-  UpdateOrderStatus,
-  CancelOrder,
   GetUsersList,
   DeleteUser,
   UserCountController,
@@ -61,17 +57,10 @@ router.put(
   UpdateSocialLinksController
 );
 
-router.get("/orders", requireSignIn, GetAllOrderController);
-
-router.get("/Adminorders", requireSignIn, IsAdmin, GetAllAdminOrderController);
-
-router.put("/OrderStatusUpdate/:id", requireSignIn, IsAdmin, UpdateOrderStatus);
-
 router.get("/UsersList/:page", requireSignIn, IsAdmin, GetUsersList);
 
 router.delete("/UserDelete/:id", requireSignIn, IsAdmin, DeleteUser);
 
-router.delete("/OrderDelete/:id", requireSignIn, CancelOrder);
 router.get("/UserCount", UserCountController);
 
 router.put("/Bookmark/:qid/:uid", BookmarkQuestion);

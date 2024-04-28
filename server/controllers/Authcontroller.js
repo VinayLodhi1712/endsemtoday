@@ -174,9 +174,10 @@ async function UpdateProfileController(req, res) {
 }
 async function UpdateSocialLinksController(req, res) {
   try {
-    const { Github, LinkedIn, Website } = req.fields;
+    const { Github, LinkedIn, Website, tags } = req.fields;
 
     const user = await Usermodel.findById(req.user._id);
+    const tagsArray = Array.isArray(tags) ? tags : tags ? [tags] : [];
 
     const UpdatedUser = await Usermodel.findByIdAndUpdate(
       req.user._id,
@@ -184,6 +185,7 @@ async function UpdateSocialLinksController(req, res) {
         Github: Github || user.Github,
         LinkedIn: LinkedIn || user.LinkedIn,
         Website: Website || user.Website,
+        $addToSet: { tags: { $each: tagsArray } },
       },
       { new: true }
     );
@@ -198,8 +200,7 @@ async function UpdateSocialLinksController(req, res) {
     console.log(error);
     res.status(400).send({
       success: false,
-      message: "Error in Profile Updatedation",
-      user,
+      message: "Error in Updatedation",
     });
   }
 }
@@ -251,81 +252,6 @@ async function UpdatePasswordController(req, res) {
   }
 }
 
-async function GetAllOrderController(req, resp) {
-  try {
-    const orders = await Ordermodel.find({ buyer: req.user._id })
-      .populate("products", "-photo")
-      .populate("buyer", "Name"); //populate the buyer only with name
-    resp.status(200).send({
-      success: true,
-      orders,
-    });
-  } catch (error) {
-    resp.status(500).send({
-      success: false,
-      message: "Error getting Orders",
-      error,
-    });
-  }
-}
-async function GetAllAdminOrderController(req, resp) {
-  try {
-    const orders = await Ordermodel.find({})
-      .populate("products", "-photo")
-      .populate("buyer", "Name")
-      .sort({ createdAt: -1 });
-    resp.status(200).send({
-      success: true,
-      orders,
-    });
-  } catch (error) {
-    console.log(error);
-    resp.status(500).send({
-      success: false,
-      message: "Error getting Orders",
-      error,
-    });
-  }
-}
-
-async function UpdateOrderStatus(req, resp) {
-  try {
-    const id = req.params.id; //orderid
-    const NewOrderStatus = req.body.status; // new status
-    const Response = await Ordermodel.findByIdAndUpdate(
-      id,
-      {
-        status: NewOrderStatus,
-      },
-      { new: true }
-    );
-    resp.status(200).send({
-      success: true,
-      message: "Status Updated Successfully",
-    });
-  } catch (error) {
-    console.log(error);
-    resp.status(500).send({
-      success: false,
-      message: "Error Updating Status",
-      error,
-    });
-  }
-}
-async function CancelOrder(req, resp) {
-  try {
-    await Ordermodel.findByIdAndDelete(req.params.id);
-    resp.status(200).send({
-      success: true,
-      message: "Deleted Succesfully",
-    });
-  } catch (error) {
-    resp.status(500).send({
-      success: false,
-      message: "Error in Deletion",
-    });
-  }
-}
 async function GetUsersList(req, resp) {
   try {
     const page = req.params.page ? req.params.page : 1;
@@ -502,10 +428,6 @@ module.exports = {
   loginController,
   ForgotPassword,
   UpdateProfileController,
-  GetAllOrderController,
-  GetAllAdminOrderController,
-  UpdateOrderStatus,
-  CancelOrder,
   GetUsersList,
   DeleteUser,
   UserCountController,

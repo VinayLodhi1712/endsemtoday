@@ -198,10 +198,17 @@ async function UpdateAnswerDownVotesController(req, resp) {
           message: "Your feedback was added succesfully",
           answer,
         });
+
         // decrease reputation
-        await Usermodel.findByIdAndUpdate(ansuid, {
-          $inc: { Reputation: -2 },
-        });
+        const user = await Usermodel.findById(ansuid);
+        if (user.Reputation > 1) {
+          user.Reputation = user.Reputation - 2;
+        } else {
+          if (user.Reputation == 1) {
+            user.Reputation = user.Reputation - 1;
+          }
+        }
+        
       } else {
         resp.status(404).send({
           success: false,
