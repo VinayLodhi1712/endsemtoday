@@ -26,7 +26,6 @@ const Profile = () => {
   const [tag, setTag] = useState("");
   const [tags, setTags] = useState([]);
   const [userskills, setuserskills] = useState([]);
-  const [Skilltoremove, SetSkilltoremove] = useState("");
   const [visible, Setvisible] = useState(false);
 
   const togglePasswordVisibility = () => {
@@ -143,11 +142,6 @@ const Profile = () => {
   async function handleLinksSubmit(e) {
     try {
       e.preventDefault();
-      const formData = new FormData();
-      formData.append("Github", Github);
-      formData.append("LinkedIn", LinkedIn);
-      formData.append("Website", Website);
-      formData.append("tags", tags);
 
       const response = await fetch(
         "http://localhost:8000/api/v1/auth/ProfileLinks",
@@ -155,8 +149,14 @@ const Profile = () => {
           method: "PUT",
           headers: {
             Authorization: auth.token,
+            "Content-Type": "application/json",
           },
-          body: formData,
+          body: JSON.stringify({
+            Github,
+            LinkedIn,
+            Website,
+            tags,
+          }),
         }
       );
       const data = await response.json();

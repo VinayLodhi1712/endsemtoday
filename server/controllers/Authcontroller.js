@@ -174,10 +174,9 @@ async function UpdateProfileController(req, res) {
 }
 async function UpdateSocialLinksController(req, res) {
   try {
-    const { Github, LinkedIn, Website, tags } = req.fields;
+    const { Github, LinkedIn, Website, tags } = req.body;
 
     const user = await Usermodel.findById(req.user._id);
-    const tagsArray = Array.isArray(tags) ? tags : tags ? [tags] : [];
 
     const UpdatedUser = await Usermodel.findByIdAndUpdate(
       req.user._id,
@@ -185,7 +184,9 @@ async function UpdateSocialLinksController(req, res) {
         Github: Github || user.Github,
         LinkedIn: LinkedIn || user.LinkedIn,
         Website: Website || user.Website,
-        $addToSet: { tags: { $each: tagsArray } },
+        $addToSet: {
+          tags: { $each: tags }, // Assuming 'tags' is an array of new tag values
+        },
       },
       { new: true }
     );
@@ -218,7 +219,7 @@ async function UpdateSkillTagsController(req, res) {
       message: "Profile Updated Succesfully",
       user,
     });
-  } catch (error) { 
+  } catch (error) {
     console.log(error);
     res.status(400).send({
       success: false,

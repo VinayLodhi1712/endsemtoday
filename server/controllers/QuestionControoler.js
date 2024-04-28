@@ -1,6 +1,7 @@
 const Questionmodel = require("../modles/QuestionModel");
 const Answermodel = require("../modles/Answermodel");
 const Usermodel = require("../modles/usermodel");
+
 async function AskquestionController(req, resp) {
   try {
     const { question, tags, title } = req.body;

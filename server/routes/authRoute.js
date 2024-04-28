@@ -54,7 +54,7 @@ router.put(
 router.put(
   "/ProfileLinks",
   requireSignIn,
-  formidable(),
+
   UpdateSocialLinksController
 );
 
