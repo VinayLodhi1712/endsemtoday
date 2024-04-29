@@ -36,6 +36,7 @@ import AdminQuestions from "./pages/Admin/AdminQuestion";
 import AdminContributions from "./pages/Admin/AdminContributions";
 import Productpage from "./pages/Productpage";
 import Technews from "./pages/Technews";
+import UsersProfiles from "./pages/Users";
 function App() {
   return (
     <>
@@ -55,15 +56,12 @@ function App() {
         <Route path="/register" element={<Register />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/ForgotPassword" element={<Forgotpassword />}></Route>
-        
-        <Route path="/technews" element={<Technews/>}></Route>
+        <Route path="/Users" element={<UsersProfiles />}></Route>
+        <Route path="/technews" element={<Technews />}></Route>
         {/* users */}
 
         <Route path="/Dashboard" element={<PrivateRoute />}>
-        <Route
-          path="user/interaction"
-          element={<Interaction />}
-        ></Route>
+          <Route path="user/interaction" element={<Interaction />}></Route>
           <Route path="user" element={<Dashboard />}></Route>
           <Route path="user/orders" element={<Orders />}></Route>
           <Route path="user/Profile" element={<Profile />}></Route>

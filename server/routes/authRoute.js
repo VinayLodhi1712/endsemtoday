@@ -59,7 +59,7 @@ router.put(
 );
 
 router.get("/UsersList/:page", requireSignIn, IsAdmin, GetUsersList);
-
+router.get("/UsersListNoLogin/:page", GetUsersList);
 router.delete("/UserDelete/:id", requireSignIn, IsAdmin, DeleteUser);
 
 router.get("/UserCount", UserCountController);

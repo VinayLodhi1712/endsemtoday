@@ -1,14 +1,14 @@
 const Usermodel = require("../modles/usermodel");
-const Ordermodel = require("../modles/OrderModel");
 const { hashPassword, comparePassword } = require("../helpers/authhelper");
 const JWT = require("jsonwebtoken");
 const fs = require("fs").promises;
 const nodemailer = require("nodemailer");
+
 async function registerController(req, res) {
   try {
-    const { Name, Email, Password, Answer, Address, MobileNo } = req.fields;
+    const { Name, Email, Password, Answer, Location, MobileNo } = req.fields;
 
-    if (!Name || !Email || !Password || !Address) {
+    if (!Name || !Email || !Password || !Location) {
       return res
         .status(400)
         .send({ success: false, error: "All fields are required" });
@@ -29,7 +29,7 @@ async function registerController(req, res) {
       Email,
       Password: hashedPassword,
       Answer,
-      Address,
+      Location,
       MobileNo,
     });
 
@@ -181,9 +181,9 @@ async function UpdateSocialLinksController(req, res) {
     const UpdatedUser = await Usermodel.findByIdAndUpdate(
       req.user._id,
       {
-        Github: Github || user.Github,
-        LinkedIn: LinkedIn || user.LinkedIn,
-        Website: Website || user.Website,
+        Github: Github,
+        LinkedIn: LinkedIn,
+        Website: Website,
         $addToSet: {
           tags: { $each: tags }, // Assuming 'tags' is an array of new tag values
         },

@@ -10,8 +10,11 @@ import { MdPublishedWithChanges } from "react-icons/md";
 import { BsFillQuestionSquareFill } from "react-icons/bs";
 import { FaHandsHelping } from "react-icons/fa";
 import moment from "moment";
+import { FaGithub } from "react-icons/fa";
+import { FaLinkedin } from "react-icons/fa";
+import { FaGlobe } from "react-icons/fa";
 
-const AdminDashboard = () => {
+const UserDashboard = () => {
   const [open, setOpen] = useState(false);
   const [placement, setPlacement] = useState("left");
   const [auth, SetAuth] = useAuth();
@@ -172,19 +175,43 @@ const AdminDashboard = () => {
             </button>
           </div>
         </Drawer>
-        <div
-          className="container bootstrap snippets bootdey"
-          style={{ width: "80%" }}
-        >
+        <div className="container bootstrap snippets bootdey">
           <div className="panel-body inf-content">
             <div className="row">
-              <div className="col-md-4 d-flex justify-content-center align-items-center">
-                <img
-                  title
-                  className="img-circle img-thumbnail isTooltip"
-                  src={`http://localhost:8000/api/v1/auth/get-userPhoto/${auth.user._id}`}
-                  data-original-title="Usuario"
-                />
+              <div className="col-md-4">
+                <div className="d-flex flex-column align-items-center">
+                  <img
+                    style={{ width: "90%" }}
+                    src={`http://localhost:8000/api/v1/auth/get-userPhoto/${auth.user._id}`}
+                  />
+                  <div className="d-flex gap-3">
+                    {auth.user.Github ? (
+                      <NavLink to={auth.user.Github} className="NavlinksDesign">
+                        {" "}
+                        <FaGithub />
+                      </NavLink>
+                    ) : null}
+                    {auth.user.LinkedIn ? (
+                      <NavLink
+                        to={auth.user.LinkedIn}
+                        className="NavlinksDesign"
+                      >
+                        {" "}
+                        <FaLinkedin />
+                      </NavLink>
+                    ) : null}
+                    {auth.user.Website ? (
+                      <NavLink
+                        to={auth.user.Website}
+                        className="NavlinksDesign"
+                      >
+                        {" "}
+                        <FaGlobe />{" "}
+                        <span className="Smalltxt"> {auth.user.Website}</span>
+                      </NavLink>
+                    ) : null}
+                  </div>
+                </div>
               </div>
               <div className="col-md-6">
                 <strong className="UserInfo">User Information</strong>
@@ -226,9 +253,9 @@ const AdminDashboard = () => {
                       <tr>
                         <td>
                           <span className="glyphicon glyphicon-calendar text-primary" />
-                          Address
+                          Location
                         </td>
-                        <td className="Info">{auth.user.Address}</td>
+                        <td className="Info">{auth.user.Location}</td>
                       </tr>
                       <tr>
                         <td>
@@ -277,4 +304,4 @@ const AdminDashboard = () => {
   );
 };
 
-export default AdminDashboard;
+export default UserDashboard;

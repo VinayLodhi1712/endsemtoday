@@ -4,6 +4,11 @@ import Layout from "../components/layout/layout";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import {
+  CountryDropdown,
+  RegionDropdown,
+  CountryRegionData,
+} from "react-country-region-selector";
 
 const Register = () => {
   const [Name, SetName] = useState("");
@@ -11,28 +16,33 @@ const Register = () => {
   const [Password, SetPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [Answer, SetAnswer] = useState("");
-  const [Address, SetAddress] = useState("");
+
   const [MobileNo, SetMobileNo] = useState("");
   const [photo, SetPhoto] = useState("");
-
+  const [country, setCountry] = useState(""); // Added country state
+  const [region, setRegion] = useState(""); // Added region state
+  const [Location, setLocation] = useState("");
   const navigate = useNavigate();
   const [Loading, SetLoading] = useState(false);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
-
+  const Setlocation = () => {
+    setLocation(country + " " + region);
+    console.log(Location)
+  };
   async function handleSubmit(e) {
     try {
       e.preventDefault();
+      // Setlocation();
       SetLoading(true);
       const formData = new FormData();
       formData.append("Name", Name);
       formData.append("Email", Email);
       formData.append("Password", Password);
       formData.append("Answer", Answer);
-      formData.append("Address", Address);
-
+      formData.append("Location", Location);
       formData.append("photo", photo);
       formData.append("MobileNo", MobileNo);
       if (Password.length < 6) {
@@ -138,16 +148,18 @@ const Register = () => {
             </div>
           </div>
 
-          <div className="mb-3 wi">
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Address"
-              value={Address}
-              onChange={(e) => {
-                SetAddress(e.target.value);
+          <div className="mb-3 wi d-flex flex-column  ">
+            <CountryDropdown
+              value={country}
+              onChange={(val) => setCountry(val)}
+            />
+            <RegionDropdown
+              country={country}
+              value={region}
+              onChange={(val) => {
+                setRegion(val);
+                Setlocation();
               }}
-              required
             />
           </div>
           <div className="mb-3 wi">

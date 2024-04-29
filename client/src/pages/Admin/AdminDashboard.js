@@ -3,8 +3,10 @@ import Layout from "../../components/layout/layout";
 import { NavLink } from "react-router-dom";
 import { Button, Drawer, Space } from "antd";
 import { useAuth } from "../../context/auth";
-
+import { FaGithub } from "react-icons/fa";
 import moment from "moment";
+import { FaLinkedin } from "react-icons/fa";
+import { FaGlobe } from "react-icons/fa";
 
 const AdminDashboard = () => {
   const [open, setOpen] = useState(false);
@@ -13,6 +15,7 @@ const AdminDashboard = () => {
   const [QuestionAsked, SetQuestionAsked] = useState(0);
   const [AnswerAsked, SetAnswerAsked] = useState(0);
   const [Reputation, SetReputation] = useState(0);
+
   const onClose = () => {
     setOpen(false);
   };
@@ -152,10 +155,27 @@ const AdminDashboard = () => {
           <div className="panel-body inf-content">
             <div className="row">
               <div className="col-md-4">
-                <img
-                  style={{ width: "100%" }}
-                  src={`http://localhost:8000/api/v1/auth/get-userPhoto/${auth.user._id}`}
-                />
+                <div className="d-flex flex-column align-items-center">
+                  <img
+                    style={{ width: "90%" }}
+                    src={`http://localhost:8000/api/v1/auth/get-userPhoto/${auth.user._id}`}
+                  />
+                  <div className="d-flex gap-3">
+                    <NavLink to={auth.user.Github} className="NavlinksDesign">
+                      {" "}
+                      <FaGithub />
+                    </NavLink>
+                    <NavLink to={auth.user.LinkedIn} className="NavlinksDesign">
+                      {" "}
+                      <FaLinkedin />
+                    </NavLink>
+                    <NavLink to={auth.user.Website} className="NavlinksDesign">
+                      {" "}
+                      <FaGlobe />{" "}
+                      <span className="Smalltxt"> {auth.user.Website}</span>
+                    </NavLink>
+                  </div>
+                </div>
               </div>
               <div className="col-md-6">
                 <strong className="UserInfo">Admin Information</strong>
@@ -197,9 +217,9 @@ const AdminDashboard = () => {
                       <tr>
                         <td>
                           <span className="glyphicon glyphicon-calendar text-primary" />
-                          Address
+                          Location
                         </td>
-                        <td className="Info">{auth.user.Address}</td>
+                        <td className="Info">{auth.user.Location}</td>
                       </tr>
                       <tr>
                         <td>

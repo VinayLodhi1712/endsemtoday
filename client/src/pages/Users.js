@@ -1,25 +1,24 @@
-import React, { useEffect, useState } from "react";
-import Layout from "../../components/layout/layout";
-import AdminMenu from "./../../components/layout/AdminMenu";
-import { useAuth } from "../../context/auth";
+import React, { useState, useEffect } from "react";
+import Layout from "./../components/layout/layout";
+import { useAuth } from "../context/auth";
 import toast from "react-hot-toast";
 
-const User = () => {
+const Users = () => {
   const [Page, Setpage] = useState(1);
   const [auth, Setauth] = useAuth();
   const [Total, SetTotalvalue] = useState(0);
   const [totaluser, settotaluser] = useState(5);
   const [Users, SetUsers] = useState([]);
   const [Loading, setLoading] = useState(false);
+
   async function GetAllUsers() {
     try {
       setLoading(true);
       const response = await fetch(
-        `http://localhost:8000/api/v1/auth/UsersList/${Page}`,
+        `http://localhost:8000/api/v1/auth/UsersListNoLogin/${Page}`,
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: auth?.token,
           },
         }
       );
@@ -34,28 +33,6 @@ const User = () => {
     } catch (error) {
       setLoading(false);
       toast.error("Something Went Wrong Try Again");
-    }
-  }
-  async function HandleUserDelete(id) {
-    try {
-      const response = await fetch(
-        `http://localhost:8000/api/v1/auth/UserDelete/${id}`,
-        {
-          method: "Delete",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: auth?.token,
-          },
-        }
-      );
-      if (response.status === 200) {
-        const data = await response.json();
-        toast.success(data.message);
-        GetAllUsers();
-      }
-    } catch (error) {
-      console.log(error);
-      toast.error("Something Went Wrong");
     }
   }
   async function GetCount() {
@@ -77,10 +54,9 @@ const User = () => {
 
   return (
     <Layout>
-      <div className="d-flex justify-content-around" style={{ width: "100%" }}>
-        <div className="w-25">
-          <AdminMenu />
-        </div>
+      <div>
+        <h3>Users</h3>
+
         <div
           style={{ width: "60%" }}
           className="mt-3 d-flex flex-column align-items-center"
@@ -93,7 +69,6 @@ const User = () => {
                 <th scope="col">Email</th>
                 <th scope="col">Address</th>
                 <th scope="col">Role</th>
-                <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
@@ -104,16 +79,6 @@ const User = () => {
                   <td>{u.Email}</td>
                   <td>{u.Address}</td>
                   <td>{u.Role}</td>
-                  <td>
-                    <button
-                      className="btn btn-danger"
-                      onClick={() => {
-                        HandleUserDelete(u._id);
-                      }}
-                    >
-                      Delete
-                    </button>
-                  </td>
                 </tr>
               ))}
             </tbody>
@@ -151,4 +116,4 @@ const User = () => {
   );
 };
 
-export default User;
+export default Users;

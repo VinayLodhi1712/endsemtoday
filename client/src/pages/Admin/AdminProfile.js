@@ -15,7 +15,7 @@ const Profile = () => {
   const [Email, SetEmail] = useState("");
   const [OldPassword, SetOldPassword] = useState("");
   const [NewPassword, SetNewPassword] = useState("");
-  const [Address, SetAddress] = useState("");
+  const [Location, SetLocation] = useState("");
   const [Number, SetNumber] = useState(0);
   const [photo, SetPhoto] = useState("");
   const [Github, SetGithub] = useState("");
@@ -52,7 +52,7 @@ const Profile = () => {
       formData.append("Name", Name);
       formData.append("Number", Number);
       formData.append("photo", photo);
-      formData.append("Address", Address);
+      formData.append("Location", Location);
 
       e.preventDefault();
       const response = await fetch(
@@ -237,7 +237,7 @@ const Profile = () => {
       auth.user;
     SetName(Name);
     SetEmail(Email);
-    SetAddress(Address);
+    SetLocation(Location);
     SetNumber(MobileNo);
     SetGithub(Github);
     SetWebsite(Website);
@@ -353,14 +353,14 @@ const Profile = () => {
 
                 <div className="mb-2 w-100  d-flex align-items-center  justify-content-between">
                   <label className="form-label">
-                    <b>Address:</b>
+                    <b>Location:</b>
                   </label>
                   <input
                     type="text"
                     className="form-control w-75"
-                    value={Address}
+                    value={Location}
                     onChange={(e) => {
-                      SetAddress(e.target.value);
+                      SetLocation(e.target.value);
                     }}
                     required
                   />

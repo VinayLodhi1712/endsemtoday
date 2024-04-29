@@ -10,12 +10,12 @@ async function requireSignIn(req, resp, next) {
     );
     req.user = decode;
     next();
-  } catch (error) {
+  } catch (error) {   
+    console.log(error);
     resp.status(404).send({
       success: false,
       message: "error in middleware require login ",
     });
-    console.log("error");
   }
 }
 

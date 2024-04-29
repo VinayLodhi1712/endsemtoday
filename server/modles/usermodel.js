@@ -19,7 +19,7 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    Address: {
+    Location: {
       type: String,
       required: true,
     },

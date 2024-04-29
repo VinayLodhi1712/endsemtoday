@@ -761,9 +761,18 @@ body {
   height: 70%;
   margin-bottom: 1rem;
 }
-.Skillspara{
- 
-  
+.Skillspara {
   font-weight: 600;
- 
+}
+.NavlinksDesign {
+  text-decoration: none;
+  color: #000;
+}
+.NavlinksDesign:hover {
+  text-decoration: none;
+  color: #000;
+}
+
+.Smalltxt {
+  font-size: 12px;
 }

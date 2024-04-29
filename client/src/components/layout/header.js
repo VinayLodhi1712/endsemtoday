@@ -49,7 +49,6 @@ function Header() {
             <NavLink to="/" className="navbar-brand" href="#">
               {" "}
               <img src={logobg} width="160" alt="logo"></img>
-            
             </NavLink>
 
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -89,13 +88,11 @@ function Header() {
               </li>
               <li className="nav-item">
                 <NavLink
-                
                   to={`/dashboard/${
                     auth ? (auth?.user?.Role === 1 ? `Admin` : `user`) : `user`
                   }/interaction`}
                   className="nav-link"
                 >
-                  
                   CodeConnect
                 </NavLink>
               </li>
@@ -149,6 +146,11 @@ function Header() {
                         </NavLink>
                       </li>
 
+                      <li>
+                        <NavLink className="dropdown-item nav-item" to="/Users">
+                          Users
+                        </NavLink>
+                      </li>
                       <li>
                         <NavLink
                           className="dropdown-item nav-item"
