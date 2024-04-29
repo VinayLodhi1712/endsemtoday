@@ -1,11 +1,9 @@
 import HomeLayout from "../components/layout/HomePageLayout";
-// import Slider from "react-slick";
-// import "slick-carousel/slick/slick.css";
-// import "slick-carousel/slick/slick-theme.css";
+
 import React, { useEffect } from "react";
 import Card from "react-bootstrap/Card";
-import products from "../assests/products.jpg";
-import stack from "../assests/stack.jpg";
+import products from "../assests/products.jpeg";
+import stack from "../assests/stack.jpeg";
 import technews from "../assests/techphoto.jpeg";
 import HomeImg from "../assests/homepageimage.png";
 import AOS from "aos";
@@ -74,7 +72,7 @@ function Home() {
   useEffect(() => {
     AOS.init({ duration: "1000" });
   }, []);
-  const [expanded, setExpanded] = React.useState("panel1");
+  const [expanded, setExpanded] = React.useState("false");
 
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
@@ -156,7 +154,7 @@ function Home() {
               <SwiperSlide>
                 <Card
                   className="boxlayout"
-                  style={{ width: "25rem", height: "30rem" }}
+                  style={{ width: "25rem", height: "25rem" }}
                   data-aos="fade-right"
                 >
                   <Card.Img
@@ -167,12 +165,9 @@ function Home() {
                   />
                   <Card.Body>
                     <Card.Title className="mediumtitlefont unselectable">
-                      Helping Students
+                      Buy and Sell Products
                     </Card.Title>
-                    <Card.Text className="unselectable">
-                      Help Students by providing them a platform to buy and sell
-                      their study-related materials
-                    </Card.Text>
+
                     <Link to="/products">
                       <button className="btn btn-primary w-100">
                         See Products
@@ -188,7 +183,7 @@ function Home() {
                   data-aos="fade-up"
                   // data-aos-duration="1000"
                   className="boxlayout"
-                  style={{ width: "25rem", height: "30rem" }}
+                  style={{ width: "25rem", height: "25rem" }}
                 >
                   <Card.Img
                     variant="top"
@@ -200,10 +195,7 @@ function Home() {
                     <Card.Title className="mediumtitlefont  unselectable w-100">
                       Student Doubts Solver
                     </Card.Title>
-                    <Card.Text className="unselectable">
-                      Help Students by providing them a platform to ask and
-                      provide solutions to their doubts
-                    </Card.Text>
+
                     <Link to="/dashboard/user/interaction">
                       <button className="btn btn-primary w-100">
                         Visit Code-Connect
@@ -218,7 +210,7 @@ function Home() {
                 <Card
                   data-aos="fade-left"
                   className="boxlayout "
-                  style={{ width: "25rem", height: "30rem" }}
+                  style={{ width: "25rem", height: "25rem" }}
                 >
                   <Card.Img
                     variant="top"
@@ -228,12 +220,9 @@ function Home() {
                   />
                   <Card.Body>
                     <Card.Title className="mediumtitlefont unselectable">
-                      Tech News Provider
+                      Browse Tech News
                     </Card.Title>
-                    <Card.Text className="unselectable">
-                      Help Students by providing them a platform where they can
-                      get all current tech news
-                    </Card.Text>
+
                     <Link to="/technews">
                       <button className="btn btn-primary w-100">
                         See Latest TechNews

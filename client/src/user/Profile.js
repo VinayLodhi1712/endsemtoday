@@ -1,11 +1,13 @@
 import React from "react";
 import Layout from "../components/layout/layout";
-import UserMEnu from "../components/layout/UserMEnu";
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import { useAuth } from "../context/auth";
-import { Tabs } from "antd";
+import { Tabs, Tag } from "antd";
+import { RxCross2 } from "react-icons/rx";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { Modal } from "antd";
+import UserMEnu from "./../components/layout/UserMEnu";
 
 const Profile = () => {
   const [auth, Setauth] = useAuth();
@@ -21,10 +23,28 @@ const Profile = () => {
   const [Website, SetWebsite] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const { TabPane } = Tabs;
+  const [tag, setTag] = useState("");
+  const [tags, setTags] = useState([]);
+  const [userskills, setuserskills] = useState([]);
+  const [visible, Setvisible] = useState(false);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
+
+  const handleTagInputChange = (e) => {
+    e.preventDefault();
+    if (tag.trim() !== "") {
+      setTags([...tags, tag.trim()]);
+      setTag("");
+    }
+  };
+  const handleTagRemove = (e, tagtoremove) => {
+    e.preventDefault();
+    const updatedItems = tags.filter((item) => item !== tagtoremove);
+    setTags(updatedItems);
+  };
+
   async function handlePersonalSubmit(e) {
     try {
       e.preventDefault();
@@ -122,10 +142,6 @@ const Profile = () => {
   async function handleLinksSubmit(e) {
     try {
       e.preventDefault();
-      const formData = new FormData();
-      formData.append("Github", Github);
-      formData.append("LinkedIn", LinkedIn);
-      formData.append("Website", Website);
 
       const response = await fetch(
         "http://localhost:8000/api/v1/auth/ProfileLinks",
@@ -133,8 +149,14 @@ const Profile = () => {
           method: "PUT",
           headers: {
             Authorization: auth.token,
+            "Content-Type": "application/json",
           },
-          body: formData,
+          body: JSON.stringify({
+            Github,
+            LinkedIn,
+            Website,
+            tags,
+          }),
         }
       );
       const data = await response.json();
@@ -155,6 +177,7 @@ const Profile = () => {
         SetGithub("");
         SetWebsite("");
         SetLinkedIn("");
+        setTags("");
         toast.success(data.message);
       } else {
         toast(data.message, {
@@ -167,8 +190,50 @@ const Profile = () => {
     }
   }
 
+  async function SkillsRemove(e, skilltoremove) {
+    try {
+      e.preventDefault();
+
+      const response = await fetch(
+        `http://localhost:8000/api/v1/auth/userskillsupdate/${skilltoremove}`,
+        {
+          method: "PUT",
+          headers: {
+            Authorization: auth.token,
+          },
+        }
+      );
+
+      const data = await response.json();
+
+      if (response.status == 200) {
+        Setauth({
+          ...auth, //spread auth to keep previous values as it is
+          user: data.user,
+        });
+
+        localStorage.setItem(
+          "auth",
+          JSON.stringify({
+            ...auth,
+            user: data.user,
+          })
+        );
+        console.log(data.user);
+        toast.success("Skills Updated");
+      } else {
+        toast("Error", {
+          icon: "❌",
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Try Again");
+    }
+  }
+
   useEffect(() => {
-    const { Email, Name, Address, MobileNo, Github, LinkedIn, Website } =
+    const { Email, Name, Address, MobileNo, Github, LinkedIn, Website, tags } =
       auth.user;
     SetName(Name);
     SetEmail(Email);
@@ -177,6 +242,7 @@ const Profile = () => {
     SetGithub(Github);
     SetWebsite(Website);
     SetLinkedIn(LinkedIn);
+    setuserskills(tags);
   }, [auth?.user]);
 
   return (
@@ -423,6 +489,87 @@ const Profile = () => {
                       SetWebsite(e.target.value);
                     }}
                   />
+                </div>
+                <div className="d-flex align-items-center w-100 mb-3 justify-content-between">
+                  <label htmlFor="exampleInputPassword1" className="form-label">
+                    <b>Skills:</b>
+                  </label>
+                  <div className="d-flex w-75 justify-content-between">
+                    <div className="w-75 border d-flex align-items-center flex-wrap gap-1">
+                      {userskills.map((skill, index) => (
+                        <Tag color="blue">{skill}</Tag>
+                      ))}
+                    </div>
+                    <button
+                      className="btn btn-primary"
+                      onClick={() => {
+                        Setvisible(true);
+                      }}
+                      type="button" // Add type="button" to prevent form submission
+                    >
+                      Edit
+                    </button>
+                  </div>
+                  <Modal
+                    visible={visible}
+                    onCancel={() => {
+                      Setvisible(false);
+                    }}
+                    footer={null}
+                  >
+                    <div className="mb-3">
+                      {userskills.map((skill, index) => (
+                        <Tag color="blue">
+                          {skill}{" "}
+                          <RxCross2
+                            onClick={(e) => {
+                              SkillsRemove(e, skill);
+                            }}
+                          />
+                        </Tag>
+                      ))}
+                    </div>
+                  </Modal>
+                </div>
+
+                <div className="d-flex align-items-center w-100 mb-3 justify-content-between">
+                  <label htmlFor="exampleInputPassword1" className="form-label">
+                    <b>Add Skills:</b>
+                  </label>
+                  <div className="d-flex w-75 justify-content-between">
+                    {" "}
+                    <input
+                      type="text"
+                      className="form-control w-75"
+                      onChange={(e) => {
+                        setTag(e.target.value);
+                      }}
+                      value={tag}
+                      placeholder="Enter relevent tag that match your skills"
+                    ></input>{" "}
+                    <button
+                      className="btn btn-primary"
+                      onClick={(e) => {
+                        handleTagInputChange(e);
+                      }}
+                    >
+                      Add
+                    </button>
+                  </div>
+                </div>
+                <div>
+                  {tags.length > 0
+                    ? tags.map((t) => (
+                        <Tag color="blue">
+                          {t}
+                          <RxCross2
+                            onClick={(e) => {
+                              handleTagRemove(e, t);
+                            }}
+                          />
+                        </Tag>
+                      ))
+                    : null}
                 </div>
 
                 <button type="submit" className="btn btn-dark ">
