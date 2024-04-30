@@ -128,7 +128,7 @@ async function ForgotPassword(req, res) {
 
 async function UpdateProfileController(req, res) {
   try {
-    const { Name, Address, Number } = req.fields;
+    const { Name, Location, Number } = req.fields;
     const { photo } = req.files;
 
     const user = await Usermodel.findById(req.user._id);
@@ -147,7 +147,7 @@ async function UpdateProfileController(req, res) {
       {
         Name: Name || user.Name,
 
-        Address: Address || user.Address,
+        Location: Location || user.Location,
         MobileNo: Number || user.MobileNo,
       },
       { new: true }
@@ -168,7 +168,6 @@ async function UpdateProfileController(req, res) {
     res.status(400).send({
       success: false,
       message: "Error in Profile Updatedation",
-      user,
     });
   }
 }
@@ -278,11 +277,12 @@ async function UpdatePasswordController(req, res) {
 async function GetUsersList(req, resp) {
   try {
     const page = req.params.page ? req.params.page : 1;
-    const PerPage = 5;
-    const AllUsers = await Usermodel.find({ Role: { $ne: 1 } }) // do not include admins in the response
+    const PerPage = 12;
+    const AllUsers = await Usermodel.find({ Role: { $ne: 1 } })
+      .select("-photo") // do not include admins in the response
       .skip((page - 1) * PerPage) //skip users according to page
       .limit(PerPage)
-      .sort({ createdAt: -1 });
+      .sort({ Reputation: 1 });
     if (AllUsers) {
       resp.status(200).send({
         success: true,

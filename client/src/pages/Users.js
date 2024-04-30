@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from "react";
 import Layout from "./../components/layout/layout";
-import { useAuth } from "../context/auth";
+import { Tag } from "antd";
 import toast from "react-hot-toast";
-
+import { Pagination } from "antd";
 const Users = () => {
   const [Page, Setpage] = useState(1);
-  const [auth, Setauth] = useAuth();
+
   const [Total, SetTotalvalue] = useState(0);
-  const [totaluser, settotaluser] = useState(5);
+
   const [Users, SetUsers] = useState([]);
-  const [Loading, setLoading] = useState(false);
+
+  const [pageSize, setPageSize] = useState(12);
 
   async function GetAllUsers() {
     try {
-      setLoading(true);
       const response = await fetch(
         `http://localhost:8000/api/v1/auth/UsersListNoLogin/${Page}`,
         {
@@ -25,13 +25,10 @@ const Users = () => {
       if (response) {
         const data = await response.json();
         SetUsers(data.AllUsers);
-        setLoading(false);
       } else {
-        setLoading(false);
         toast.error("Unable to get user data");
       }
     } catch (error) {
-      setLoading(false);
       toast.error("Something Went Wrong Try Again");
     }
   }
@@ -49,68 +46,52 @@ const Users = () => {
 
   useEffect(() => {
     GetAllUsers();
-    GetCount();
   }, [Page]);
+
+  useEffect(() => {
+    GetCount();
+  });
 
   return (
     <Layout>
-      <div>
-        <h3>Users</h3>
+      <div
+        className="d-flex flex-column align-items-center "
+        style={{ width: "90%", marginLeft: "auto" }}
+      >
+        <h3 className="mt-2 ">Users</h3>
 
-        <div
-          style={{ width: "60%" }}
-          className="mt-3 d-flex flex-column align-items-center"
-        >
-          <table className="table table-striped table-bordered">
-            <thead>
-              <tr>
-                <th scope="col">Sr_no</th>
-                <th scope="col">Name</th>
-                <th scope="col">Email</th>
-                <th scope="col">Address</th>
-                <th scope="col">Role</th>
-              </tr>
-            </thead>
-            <tbody>
-              {Users.map((u, i) => (
-                <tr>
-                  <th scope="row">{i + 1}</th>
-                  <td>{u.Name}</td>
-                  <td>{u.Email}</td>
-                  <td>{u.Address}</td>
-                  <td>{u.Role}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-
-          <div className="d-flex" style={{ gap: "1rem" }}>
-            {Page > 1 ? (
-              <button
-                className="btn btn-secondary ButtonBorder"
-                onClick={() => {
-                  Setpage(Page - 1);
-                  settotaluser(totaluser - 5);
-                }}
-                disabled={Loading}
-              >
-                Back
-              </button>
-            ) : null}
-            {totaluser < Total ? (
-              <button
-                className="btn btn-primary ButtonBorder"
-                onClick={() => {
-                  Setpage(Page + 1);
-                  settotaluser(totaluser + 5);
-                }}
-                disabled={Loading}
-              >
-                Load More
-              </button>
-            ) : null}
-          </div>
+        <div className=" d-flex align-items-center flex-wrap justify-content-around w-100 gap-1">
+          {Users.map((u) => (
+            <div className="d-flex gap-3 mb-5" style={{ width: "20%" }}>
+              <img
+                src={`http://localhost:8000/api/v1/auth/get-userPhoto/${u._id}`}
+                className=""
+                style={{ width: "4rem", height: "5rem" }}
+              ></img>
+              <div>
+                <p className="Nomarginpara text-primary ">{u.Name}</p>
+                <p className="Nomarginpara">{u.Location}</p>
+                <p className="Nomarginpara">
+                  <strong>{u.Reputation}</strong>
+                </p>
+                <div className="d-flex flex-wrap">
+                  {u.tags.map((t) => (
+                    <Tag color="blue">{t}</Tag>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
+        <Pagination
+          total={Total}
+          showSizeChanger
+          showQuickJumper
+          pageSize={pageSize}
+          onChange={(value) => {
+            Setpage(value);
+          }}
+        />
       </div>
     </Layout>
   );

@@ -776,3 +776,6 @@ body {
 .Smalltxt {
   font-size: 12px;
 }
+.Nomarginpara{
+  margin:0rem;
+}
