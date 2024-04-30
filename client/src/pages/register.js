@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import React from "react";
 import Layout from "../components/layout/layout";
 import { useNavigate } from "react-router-dom";
@@ -30,13 +30,16 @@ const Register = () => {
   };
   const Setlocation = () => {
     setLocation(country + " " + region);
-    console.log(Location)
   };
+
+  useEffect(() => {
+    Setlocation();
+  }, [region]);
+
   async function handleSubmit(e) {
     try {
       e.preventDefault();
-      // Setlocation();
-      SetLoading(true);
+
       const formData = new FormData();
       formData.append("Name", Name);
       formData.append("Email", Email);
@@ -151,14 +154,15 @@ const Register = () => {
           <div className="mb-3 wi d-flex flex-column  ">
             <CountryDropdown
               value={country}
-              onChange={(val) => setCountry(val)}
+              onChange={(val) => {
+                setCountry(val);
+              }}
             />
             <RegionDropdown
               country={country}
               value={region}
               onChange={(val) => {
                 setRegion(val);
-                Setlocation();
               }}
             />
           </div>

@@ -37,6 +37,7 @@ import AdminContributions from "./pages/Admin/AdminContributions";
 import Productpage from "./pages/Productpage";
 import Technews from "./pages/Technews";
 import UsersProfiles from "./pages/Users";
+import UserInformation from "./pages/UserInformation";
 function App() {
   return (
     <>
@@ -57,6 +58,10 @@ function App() {
         <Route path="/login" element={<Login />}></Route>
         <Route path="/ForgotPassword" element={<Forgotpassword />}></Route>
         <Route path="/Users" element={<UsersProfiles />}></Route>
+        <Route
+          path="/userinformation/:Userid"
+          element={<UserInformation />}
+        ></Route>
         <Route path="/technews" element={<Technews />}></Route>
         {/* users */}
 

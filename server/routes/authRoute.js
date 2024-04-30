@@ -15,6 +15,7 @@ const {
   UpdateSocialLinksController,
   GetUserReputation,
   UpdateSkillTagsController,
+  GetSingleUserInfo,
 } = require("../controllers/Authcontroller");
 const requireSignIn = require("../middlewares/authMiddleware");
 const IsAdmin = require("../middlewares/Isadmin");
@@ -76,4 +77,6 @@ router.put(
   requireSignIn,
   UpdateSkillTagsController
 );
+router.get("/Getuserinfo/:uid", GetSingleUserInfo);
+
 module.exports = router;

@@ -282,7 +282,7 @@ async function GetUsersList(req, resp) {
       .select("-photo") // do not include admins in the response
       .skip((page - 1) * PerPage) //skip users according to page
       .limit(PerPage)
-      .sort({ Reputation: 1 });
+      .sort({ Reputation: -1 });
     if (AllUsers) {
       resp.status(200).send({
         success: true,
@@ -445,6 +445,30 @@ async function GetUserReputation(req, resp) {
     });
   }
 }
+async function GetSingleUserInfo(req, resp) {
+  try {
+    const uid = req.params.uid;
+    const user = await Usermodel.findById(uid).select("-photo");
+    if (user) {
+      resp.status(200).send({
+        success: true,
+        user,
+      });
+    } else {
+      resp.status(400).send({
+        success: false,
+        message: "Cannot get user try again",
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    resp.status(500).send({
+      success: false,
+      message: " user error",
+      error,
+    });
+  }
+}
 
 module.exports = {
   registerController,
@@ -462,4 +486,5 @@ module.exports = {
   UpdatePasswordController,
   GetUserReputation,
   UpdateSkillTagsController,
+  GetSingleUserInfo,
 };

@@ -3,6 +3,8 @@ import Layout from "./../components/layout/layout";
 import { Tag } from "antd";
 import toast from "react-hot-toast";
 import { Pagination } from "antd";
+
+import { NavLink } from "react-router-dom";
 const Users = () => {
   const [Page, Setpage] = useState(1);
 
@@ -55,35 +57,54 @@ const Users = () => {
   return (
     <Layout>
       <div
-        className="d-flex flex-column align-items-center "
-        style={{ width: "90%", marginLeft: "auto" }}
+        className="d-flex flex-column align-items-center"
+        style={{ width: "100%" }}
       >
         <h3 className="mt-2 ">Users</h3>
 
-        <div className=" d-flex align-items-center flex-wrap justify-content-around w-100 gap-1">
-          {Users.map((u) => (
-            <div className="d-flex gap-3 mb-5" style={{ width: "20%" }}>
-              <img
-                src={`http://localhost:8000/api/v1/auth/get-userPhoto/${u._id}`}
-                className=""
-                style={{ width: "4rem", height: "5rem" }}
-              ></img>
-              <div>
-                <p className="Nomarginpara text-primary ">{u.Name}</p>
+        <div
+          className=" d-flex align-items-center flex-wrap justify-content-around w-75"
+          style={{ gap: "3rem" }}
+        >
+          {Users.map((u, _id) => (
+            <div
+              className="candidate-list candidate-grid d-flex flex-column align-items-start border p-2"
+              style={{ width: "20%" }}
+            >
+              <div className="UserImage d-flex justify-content-center w-100">
+                <img
+                  className="img-fluid "
+                  style={{ width: "10rem", height: "10rem" }}
+                  src={`http://localhost:8000/api/v1/auth/get-userPhoto/${u._id}`}
+                />
+              </div>
+              <div className="d-flex flex-column align-items-start justify-content-start ">
+                <NavLink
+                  to={`/userinformation/${u._id}`}
+                  className="Nomarginpara UsernameLink"
+                >
+                  {u.Name}
+                </NavLink>
                 <p className="Nomarginpara">{u.Location}</p>
                 <p className="Nomarginpara">
-                  <strong>{u.Reputation}</strong>
+                  Reputation:<strong>{u.Reputation}</strong>
                 </p>
-                <div className="d-flex flex-wrap">
-                  {u.tags.map((t) => (
-                    <Tag color="blue">{t}</Tag>
-                  ))}
+                <div>
+                  {u.tags.length > 0 ? (
+                    <>
+                      <span> Skills: </span>
+                      {u.tags.map((t) => (
+                        <Tag color="blue">{t}</Tag>
+                      ))}
+                    </>
+                  ) : null}
                 </div>
               </div>
             </div>
           ))}
         </div>
         <Pagination
+          className="mt-3 mb-3"
           total={Total}
           showSizeChanger
           showQuickJumper
@@ -98,3 +119,4 @@ const Users = () => {
 };
 
 export default Users;
+// image={`http://localhost:8000/api/v1/auth/get-userPhoto/${u._id}`}

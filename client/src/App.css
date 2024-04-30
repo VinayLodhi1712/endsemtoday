@@ -776,6 +776,14 @@ body {
 .Smalltxt {
   font-size: 12px;
 }
-.Nomarginpara{
-  margin:0rem;
+.Nomarginpara {
+  margin: 0rem;
+}
+.UsernameLink {
+  text-decoration: none;
+  text-underline-offset: none;
+  font-weight: 600;
+}
+.UserImage img{
+  border-radius:5%;
 }
