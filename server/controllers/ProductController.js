@@ -57,8 +57,8 @@ async function GetProductController(req, resp) {
     const products = await ProductModel.find()
       .populate("category")
       .select("-photo")
-      .limit(12)
-      .sort({ createdAt: -1 }); //do not show photo ,show only 10 products and sort by created at property(the product created later willl be shown first)
+      .limit(6)
+      .sort({ createdAt: -1 });
     resp.status(200).send({
       success: true,
       products,
@@ -205,7 +205,9 @@ async function ProductFilterController(req, resp) {
 //count the produts
 async function ProductCountController(req, resp) {
   try {
-    const Total = await ProductModel.find({}).estimatedDocumentCount(); // give the number of documents
+    const Total = await ProductModel.find({
+      owner: { $ne: req.params.id },
+    }).estimatedDocumentCount(); // give the number of documents
     resp.status(200).send({
       success: true,
       Total,

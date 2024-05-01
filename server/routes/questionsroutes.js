@@ -14,7 +14,7 @@ const {
   QuestionByUserCountController
 } = require("../controllers/QuestionControoler");
 
-router.get("/get_question/:SkipCount", GetquestionController);
+router.get("/get_question/:Page", GetquestionController);
 router.post("/ask_question/:id", AskquestionController);
 // router.put("/Update_question/:id", UpdatequestionController);
 router.delete("/delete_question/:id", DeletequestionController);

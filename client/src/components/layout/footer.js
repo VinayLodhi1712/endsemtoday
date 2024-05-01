@@ -5,9 +5,9 @@ import { FaEnvelope, FaTwitter, FaGithub, FaLinkedin } from "react-icons/fa";
 
 function Footer() {
   return (
-    <div className="bg-dark text-light p-1 footer">
-      <div className="container-fluid" style={{ marginBottom: "0.5rem" }}>
-        <div className="row" style={{ marginTop: "0.5rem" }}>
+    <div className="bg-dark text-light footer">
+      <div className="container-fluid">
+        <div className="row">
           <div className="col-md-6 text-center">
             <h3 className="text-center mt-2 pt-1">TALKOFCODE</h3>
             <p>© 2024 All rights reserved.</p>

@@ -15,17 +15,24 @@ import Button from "@mui/material/Button";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { blue } from "@mui/material/colors";
 import { useAuth } from "../context/auth";
+import { Pagination } from "antd";
 
 const Interaction = () => {
   const [Questions, SetQuestions] = useState([]);
+
   const [TotalQuestions, SetTotalQuestions] = useState(0);
-  const [loading, setloading] = useState(false);
+
   const [Keyword, SetKeyword] = useState("");
-  const [SkipCount, SetSkipCount] = useState(0); // Use state for SkipCount
+
   const isInitialMount = useRef(true);
-  const [shownproducts, Setshownproducts] = useState(6);
+
   const [notsearching, Setnotsearching] = useState(false);
+
   const [auth, SetAuth] = useAuth();
+
+  const [pageSize, setPageSize] = useState(6);
+
+  const [Page, Setpage] = useState(1);
 
   const { Search } = Input;
 
@@ -73,24 +80,18 @@ const Interaction = () => {
       toast.error("Question Not Deleted");
     }
   }
-  async function GetQuestions(SkipCount) {
+  async function GetQuestions() {
     try {
-      setloading(true);
-
       const response = await fetch(
-        `http://localhost:8000/api/v1/Questions/get_question/${SkipCount}`
+        `http://localhost:8000/api/v1/Questions/get_question/${Page}`
       );
       const data = await response.json();
       if (response.status === 200) {
         SetQuestions([...data.questions]);
-
-        setloading(false);
       } else {
         toast.error(data.message);
-        setloading(false);
       }
     } catch (error) {
-      setloading(false);
       console.log(error);
       toast.error("Something went wrong");
     }
@@ -120,34 +121,26 @@ const Interaction = () => {
       },
     },
   });
+
+  // useEffect(() => {
+  //   if (!isInitialMount.current) {
+  //     // Check if it's not the initial render
+  //     if (Keyword.length > 0) {
+  //       Setnotsearching(true);
+  //       onSearch(Keyword);
+  //     } else {
+  //       Setnotsearching(false);
+  //       GetQuestions(0);
+  //     }
+  //   } else {
+  //     isInitialMount.current = false; // Set to false after the initial render
+  //   }
+  // }, [Keyword]);
+
   useEffect(() => {
-    GetQuestions(0);
+    GetQuestions();
     GetNumberofQuestion();
-  }, []);
-
-  useEffect(() => {
-    if (!isInitialMount.current) {
-      // Check if it's not the initial render
-      if (Keyword.length > 0) {
-        Setnotsearching(true);
-        onSearch(Keyword);
-      } else {
-        Setnotsearching(false);
-        GetQuestions(0);
-      }
-    } else {
-      isInitialMount.current = false; // Set to false after the initial render
-    }
-  }, [Keyword]);
-
-  function handleLoadMore(change) {
-    const newSkipCount = SkipCount + change;
-    if (newSkipCount >= 0) {
-      SetSkipCount(newSkipCount);
-      GetQuestions(newSkipCount);
-      GetNumberofQuestion();
-    }
-  }
+  }, [Page]);
 
   return (
     <Layout>
@@ -284,42 +277,15 @@ const Interaction = () => {
             <Empty />
           </>
         )}
-        {!notsearching ? (
-          shownproducts < TotalQuestions ? (
-            <div className="d-flex" style={{ gap: "1rem" }}>
-              {SkipCount > 0 ? (
-                <button
-                  className="mb-2 btn btn-secondary"
-                  onClick={() => {
-                    Setshownproducts(shownproducts - 3);
-                    handleLoadMore(-1);
-                  }}
-                >
-                  {loading ? "Loading..." : "Back"}
-                </button>
-              ) : null}
-              <button
-                className="mb-2 btn btn-primary"
-                onClick={() => {
-                  Setshownproducts(shownproducts + 6);
-                  handleLoadMore(+1);
-                }}
-              >
-                {loading ? "Loading..." : "Load More"}
-              </button>
-            </div>
-          ) : shownproducts > 6 ? (
-            <button
-              className="mb-2 btn btn-secondary"
-              onClick={() => {
-                Setshownproducts(shownproducts - 3);
-                handleLoadMore(-1);
-              }}
-            >
-              {loading ? "Loading..." : "Back"}
-            </button>
-          ) : null
-        ) : null}
+        <Pagination
+          total={TotalQuestions}
+          className="mt-3 mb-3"
+          showQuickJumper
+          pageSize={pageSize}
+          onChange={(value) => {
+            Setpage(value);
+          }}
+        />
       </div>
     </Layout>
   );

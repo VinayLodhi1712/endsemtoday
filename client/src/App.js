@@ -38,6 +38,7 @@ import Productpage from "./pages/Productpage";
 import Technews from "./pages/Technews";
 import UsersProfiles from "./pages/Users";
 import UserInformation from "./pages/UserInformation";
+
 function App() {
   return (
     <>
@@ -62,6 +63,8 @@ function App() {
           path="/userinformation/:Userid"
           element={<UserInformation />}
         ></Route>
+        {/* chat */}
+
         <Route path="/technews" element={<Technews />}></Route>
         {/* users */}
 

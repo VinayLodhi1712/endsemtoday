@@ -8,6 +8,8 @@ import { FaLinkedin } from "react-icons/fa";
 import { FaGlobe } from "react-icons/fa";
 import { useParams } from "react-router-dom";
 import toast from "react-hot-toast";
+import { IoCall } from "react-icons/io5";
+
 import { Tag } from "antd";
 const UserInformation = () => {
   const [auth, SetAuth] = useAuth();
@@ -84,38 +86,15 @@ const UserInformation = () => {
   }, []);
   return (
     <Layout>
-      <div className="d-flex align-items-center h-100 flex-column justify-content-center gap-2">
-        <div className="container bootstrap snippets bootdey">
-          <div className="panel-body inf-content">
+      <div className="d-flex align-items-center h-100 flex-column justify-content-center gap-2 ">
+        <div className=" d-flex justify-content-around w-100">
+          <div className="panel-body inf-content " style={{ width: "65%" }}>
             <div className="row">
-              <div className="col-md-4">
-                <div className="d-flex flex-column align-items-center">
-                  <img
-                    style={{ width: "90%" }}
-                    src={`http://localhost:8000/api/v1/auth/get-userPhoto/${Userid}`}
-                  />
-                  <div className="d-flex gap-3">
-                    {User.Github ? (
-                      <NavLink to={User.Github} className="NavlinksDesign">
-                        {" "}
-                        <FaGithub />
-                      </NavLink>
-                    ) : null}
-                    {User.LinkedIn ? (
-                      <NavLink to={User.LinkedIn} className="NavlinksDesign">
-                        {" "}
-                        <FaLinkedin />
-                      </NavLink>
-                    ) : null}
-                    {User.Website ? (
-                      <NavLink to={User.Website} className="NavlinksDesign">
-                        {" "}
-                        <FaGlobe />{" "}
-                        <span className="Smalltxt"> {User.Website}</span>
-                      </NavLink>
-                    ) : null}
-                  </div>
-                </div>
+              <div className="col-md-4 ">
+                <img
+                  style={{ width: "100%" }}
+                  src={`http://localhost:8000/api/v1/auth/get-userPhoto/${Userid}`}
+                />
               </div>
               <div className="col-md-6">
                 <strong className="UserInfo">User Information</strong>
@@ -218,7 +197,57 @@ const UserInformation = () => {
               </div>
             </div>
           </div>
+          {User.Github || User.LinkedIn || User.Website || User.MobileNo ? (
+            <div
+              className="d-flex flex-column align-items-center "
+              style={{ width: "25%" }}
+            >
+              <h4> Contact Info</h4>
+              <div className="d-flex flex-column gap-3 contactinfo p-2 w-100">
+                {User.Github ? (
+                  <NavLink
+                    to={User.Github}
+                    className="NavlinksDesign d-flex gap-2"
+                  >
+                    {" "}
+                    <FaGithub />
+                    <span className="Smalltxt"> {User.Github}</span>
+                  </NavLink>
+                ) : null}
+                {User.LinkedIn ? (
+                  <NavLink
+                    to={User.LinkedIn}
+                    className="NavlinksDesign d-flex gap-2"
+                  >
+                    {" "}
+                    <FaLinkedin />
+                    <span className="Smalltxt"> {User.LinkedIn}</span>
+                  </NavLink>
+                ) : null}
+                {User.Website ? (
+                  <NavLink
+                    to={User.Website}
+                    className="NavlinksDesign d-flex gap-2"
+                  >
+                    {" "}
+                    <FaGlobe />{" "}
+                    <span className="Smalltxt"> {User.Website}</span>
+                  </NavLink>
+                ) : null}
+                {User.MobileNo ? (
+                  <div className="NavlinksDesign d-flex gap-2">
+                    {" "}
+                    <IoCall />
+                    <span className="numberStyle"> {User.MobileNo}</span>
+                  </div>
+                ) : null}
+              </div>
+            </div>
+          ) : (
+            "No contact info"
+          )}
         </div>
+
         <NavLink to="/Users">
           <button className="btn btn-dark">Back</button>
         </NavLink>

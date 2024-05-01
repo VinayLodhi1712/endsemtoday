@@ -90,7 +90,7 @@ async function DeletequestionController(req, resp) {
       console.log(deleted);
       resp.status(404).send({
         success: false,
-        message: "Question not found to delete",
+        message: "Question not found to delete", 
       });
     }
   } catch (error) {
@@ -104,10 +104,10 @@ async function DeletequestionController(req, resp) {
 }
 async function GetquestionController(req, resp) {
   try {
-    let SkipCount = req.params.SkipCount;
+    let Page = req.params.Page - 1;
     const questions = await Questionmodel.find()
       .populate("user", "Name")
-      .skip(SkipCount * 6)
+      .skip(Page * 6)
       .limit(6)
       .sort({ createdAt: -1 });
     if (questions) {

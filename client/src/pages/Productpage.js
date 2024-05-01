@@ -8,6 +8,8 @@ import { useNavigate } from "react-router-dom";
 import { useCart } from "../context/cart";
 import { useAuth } from "../context/auth";
 import { Image } from "antd";
+import { Pagination } from "antd";
+
 function Productpage() {
   const [Cart, SetCart] = useCart();
   const [Products, SetProducts] = useState([]);
@@ -15,12 +17,12 @@ function Productpage() {
   const [checked, SetChecked] = useState([]);
   const [auth, SetAuth] = useAuth();
   const [Radioval, SetRadioval] = useState([]);
-  const [Totalvalue, SetTotalvalue] = useState(0);
-  const [totalproductshown, settotalproductsshown] = useState(6);
-  const [Page, SetPage] = useState(1);
-  const [loading, setLoading] = useState(false);
+  const [Page, Setpage] = useState(1);
   const [load, setLoad] = useState(false);
   const [FilterProductLength, SetFilterProductLength] = useState(true);
+  const [pageSize, setPageSize] = useState(6);
+
+  const [Total, SetTotalvalue] = useState(0);
   const Navigate = useNavigate();
   //get all catogaries
   async function GetCategories() {
@@ -45,7 +47,6 @@ function Productpage() {
   // get all products
   async function GetAllProducts() {
     try {
-      setLoading(true);
       let url;
       if (auth.user) {
         url = `http://localhost:8000/api/v1/product/product-list/${Page}/${auth.user._id}`;
@@ -54,7 +55,7 @@ function Productpage() {
       }
 
       const response = await fetch(url);
-      setLoading(false);
+
       const data = await response.json();
       if (data?.success) {
         SetProducts(data.Product);
@@ -63,7 +64,7 @@ function Productpage() {
       }
     } catch (error) {
       console.log(error);
-      setLoading(false);
+
       toast.error("Something went Wrong");
     }
   }
@@ -111,13 +112,13 @@ function Productpage() {
   async function GetTotal() {
     try {
       const response = await fetch(
-        `http://localhost:8000/api/v1/product/product-count`
+        `http://localhost:8000/api/v1/product/product-count/${auth.user._id}`
       );
       const data = await response.json();
       SetTotalvalue(data?.Total);
     } catch (error) {
       console.log(error);
-      toast.error("Something went Wrong");
+    
     }
   }
 
@@ -127,13 +128,13 @@ function Productpage() {
       setLoad(false);
     } else {
       GetAllProducts();
+      GetTotal();
       setLoad(true);
     }
   }, [Radioval, checked, Page, auth]);
 
   useEffect(() => {
     GetCategories();
-    GetTotal();
   }, []);
 
   return (
@@ -256,42 +257,15 @@ function Productpage() {
           ) : (
             <h1>No products found</h1>
           )}
-          <div className="d-flex justify-content-center">
-            {load ? (
-              <>
-                <div className="mt-3 p-3">
-                  {Page > 1 ? (
-                    <button
-                      className="btn btn-secondary ButtonBorder"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        SetPage(Page - 1);
-                        settotalproductsshown(totalproductshown - 6);
-                      }}
-                      disabled={loading}
-                    >
-                      Back
-                    </button>
-                  ) : null}
-                </div>
-                <div className="mt-3 p-3">
-                  {totalproductshown < Totalvalue && (
-                    <button
-                      className="btn btn-primary ButtonBorder "
-                      onClick={(e) => {
-                        e.preventDefault();
-                        SetPage(Page + 1);
-                        settotalproductsshown(totalproductshown + 6);
-                      }}
-                      disabled={loading}
-                    >
-                      {loading ? "Loading..." : "Load More"}
-                    </button>
-                  )}
-                </div>
-              </>
-            ) : null}
-          </div>
+          <Pagination
+            className="mt-3 mb-3"
+            total={Total}
+            showQuickJumper
+            pageSize={pageSize}
+            onChange={(value) => {
+              Setpage(value);
+            }}
+          />
         </div>
       </div>
     </Layout>

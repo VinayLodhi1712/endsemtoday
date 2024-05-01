@@ -55,7 +55,7 @@ router.put(
 
 router.post("/productfilter", ProductFilterController);
 
-router.get("/product-count", ProductCountController);
+router.get("/product-count/:id", ProductCountController);
 
 router.get("/product-list/:page/:id", ProductPerController);
 
