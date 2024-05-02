@@ -16,7 +16,7 @@ const Register = () => {
   const [Password, SetPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [Answer, SetAnswer] = useState("");
-
+  const [SecurityQuestion, SetSecurityQuestion] = useState("");
   const [MobileNo, SetMobileNo] = useState("");
   const [photo, SetPhoto] = useState("");
   const [country, setCountry] = useState(""); // Added country state
@@ -45,6 +45,7 @@ const Register = () => {
       formData.append("Email", Email);
       formData.append("Password", Password);
       formData.append("Answer", Answer);
+      formData.append("SecurityQuestion", SecurityQuestion);
       formData.append("Location", Location);
       formData.append("photo", photo);
       formData.append("MobileNo", MobileNo);
@@ -73,9 +74,6 @@ const Register = () => {
         SetLoading(false);
         const data = await response.json();
         toast.error(data.message);
-        setTimeout(() => {
-          navigate("/login");
-        }, 2000);
       }
     } catch (error) {
       SetLoading(false);
@@ -98,7 +96,7 @@ const Register = () => {
         <div className="registerform  ">
           <h1 style={{ margin: "0%" }}>Register</h1>
 
-          <div className="mb-3 wi">
+          <div className="mb-2 wi">
             <input
               type="text"
               className="form-control"
@@ -113,7 +111,7 @@ const Register = () => {
             />
           </div>
 
-          <div className="mb-3 wi">
+          <div className="mb-2 wi">
             <input
               type="email"
               className="form-control"
@@ -128,7 +126,7 @@ const Register = () => {
             />
           </div>
 
-          <div className="mb-3 wi">
+          <div className="mb-2 wi">
             <div style={{ display: "flex" }}>
               <input
                 type={showPassword ? "text" : "password"}
@@ -151,7 +149,7 @@ const Register = () => {
             </div>
           </div>
 
-          <div className="mb-3 wi d-flex flex-column  ">
+          <div className="mb-2 wi d-flex flex-column  ">
             <CountryDropdown
               value={country}
               onChange={(val) => {
@@ -166,7 +164,7 @@ const Register = () => {
               }}
             />
           </div>
-          <div className="mb-3 wi">
+          <div className="mb-2 wi">
             <input
               type="text"
               className="form-control"
@@ -179,12 +177,40 @@ const Register = () => {
               required
             />
           </div>
-          <div className="mb-3 wi">
+          <div className="mb-2 wi ">
+            <select
+              id="Questions"
+              className="w-100 mb-1"
+              onChange={(e) => {
+                SetSecurityQuestion(e.target.value);
+              }}
+              required
+            >
+              {console.log(SecurityQuestion)}
+              <option value="What is your mother's maiden name ?">
+                What is your mother's maiden name?
+              </option>
+
+              <option value="In which city were you born ?">
+                In which city were you born?
+              </option>
+
+              <option value="What is the name of your first pet ?">
+                What is the name of your first pet?
+              </option>
+
+              <option value="What is your favorite book?">
+                What is your favorite book?
+              </option>
+              <option value="What was the model of your first car?">
+                What was the model of your first car?
+              </option>
+            </select>
             <input
               type="text"
               className="form-control"
               id="exampleInputPassword1"
-              placeholder="What is the name of your pet animal ?"
+              placeholder="Answer"
               value={Answer}
               onChange={(e) => {
                 SetAnswer(e.target.value);

@@ -45,8 +45,6 @@ async function UpdateAnswerController(req, resp) {
     const response = await Answermodel.findByIdAndUpdate(
       req.params.aid,
       {
-        // questionid: req.params.qid,
-        // user: req.params.uid,
         answer: answer,
       },
       { new: true }
@@ -75,16 +73,30 @@ async function UpdateAnswerController(req, resp) {
 
 async function DeleteAnswerController(req, resp) {
   try {
-    const { qid } = req.params;
+    const { qid, ansuid } = req.params;
+    const votesCount = await Answermodel.countDocuments({
+      _id: req.params.aid,
+      UserWhoVoted: { $exists: true },
+    });
+    console.log(votesCount);
     const del = await Answermodel.findByIdAndDelete(req.params.aid);
     if (del) {
+      await Questionmodel.findByIdAndUpdate(qid, {
+        $inc: { AnswerCount: -1 },
+      });
+
+      const user = await Usermodel.findById(ansuid);
+      if (user.Reputation > 1) {
+        user.Reputation = user.Reputation - (votesCount + 1) * 2;
+      } else {
+        if (user.Reputation == 1) {
+          user.Reputation = user.Reputation - 1;
+        }
+      }
+      await user.save();
       resp.status(200).send({
         success: true,
         message: "Deleted Succesfully",
-      });
-
-      await Questionmodel.findByIdAndUpdate(qid, {
-        $inc: { AnswerCount: -1 },
       });
     } else {
       resp.status(400).send({
@@ -94,7 +106,7 @@ async function DeleteAnswerController(req, resp) {
     }
   } catch (error) {
     console.log(error);
-    resp.status(404).send({
+    return resp.status(404).send({
       success: false,
       message: "error in api",
     });
@@ -208,7 +220,6 @@ async function UpdateAnswerDownVotesController(req, resp) {
             user.Reputation = user.Reputation - 1;
           }
         }
-        
       } else {
         resp.status(404).send({
           success: false,

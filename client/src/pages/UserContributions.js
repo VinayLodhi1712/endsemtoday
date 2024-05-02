@@ -42,7 +42,7 @@ const UserContributions = () => {
       );
       if (confirmed) {
         const del = await fetch(
-          `http://localhost:8000/api/v1/Answer/delete_Answer/${aid}/${qid}`,
+          `http://localhost:8000/api/v1/Answer/delete_Answer/${aid}/${qid}/${auth.user._id}`,
           {
             method: "DELETE",
             headers: {

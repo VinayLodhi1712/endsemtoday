@@ -26,18 +26,17 @@ const Interaction = () => {
 
   const isInitialMount = useRef(true);
 
-  const [notsearching, Setnotsearching] = useState(false);
-
   const [auth, SetAuth] = useAuth();
 
   const [pageSize, setPageSize] = useState(6);
-
+  const [Searching, SetSearching] = useState(false);
   const [Page, Setpage] = useState(1);
 
   const { Search } = Input;
 
   async function onSearch(keywordToSearch) {
     try {
+      SetSearching(true);
       if (keywordToSearch.length === 0) {
         return;
       }
@@ -48,6 +47,7 @@ const Interaction = () => {
       if (response.status === 200) {
         SetQuestions(data.questions);
       } else {
+        SetSearching(false);
         toast("No questions found");
       }
     } catch (error) {
@@ -122,20 +122,20 @@ const Interaction = () => {
     },
   });
 
-  // useEffect(() => {
-  //   if (!isInitialMount.current) {
-  //     // Check if it's not the initial render
-  //     if (Keyword.length > 0) {
-  //       Setnotsearching(true);
-  //       onSearch(Keyword);
-  //     } else {
-  //       Setnotsearching(false);
-  //       GetQuestions(0);
-  //     }
-  //   } else {
-  //     isInitialMount.current = false; // Set to false after the initial render
-  //   }
-  // }, [Keyword]);
+  useEffect(() => {
+    if (!isInitialMount.current) {
+      // Check if it's not the initial render
+      if (Keyword.length > 0) {
+        SetSearching(true);
+        onSearch(Keyword);
+      } else {
+        SetSearching(false);
+        GetQuestions(0);
+      }
+    } else {
+      isInitialMount.current = false; // Set to false after the initial render
+    }
+  }, [Keyword]);
 
   useEffect(() => {
     GetQuestions();
@@ -173,119 +173,129 @@ const Interaction = () => {
           enterButton
           className="w-50"
         />
-        {Questions.length > 0 ? (
-          Questions.map((q) => (
-            <div
-              class="card w-75 p-2"
-              style={{ boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.3)" }}
-            >
-              <div class="card-body">
-                <div
-                  className="d-flex justify-content-between"
-                  style={{ width: "100%" }}
-                >
-                  {/* User image and name */}
+        <div className="w-100 d-flex flex-column align-items-center gap-3">
+          {Questions.length > 0 ? (
+            Questions.map((q) => (
+              <div
+                class="card w-75 p-2"
+                style={{ boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.3)" }}
+              >
+                <div class="card-body">
                   <div
-                    className="d-flex align-items-center "
-                    style={{ width: "50%" }}
+                    className="d-flex justify-content-between"
+                    style={{ width: "100%" }}
                   >
-                    <Avatar
-                      src={`http://localhost:8000/api/v1/auth/get-userPhoto/${q.user._id}`}
-                      sx={{ width: 30, height: 30 }} // Add margin for spacing
-                    />
-                    <p className="UserNameDisplay">{q.user.Name}</p>
-                  </div>
+                    {/* User image and name */}
+                    <div
+                      className="d-flex align-items-center "
+                      style={{ width: "50%" }}
+                    >
+                      <Avatar
+                        src={`http://localhost:8000/api/v1/auth/get-userPhoto/${q.user._id}`}
+                        sx={{ width: 30, height: 30 }} // Add margin for spacing
+                      />
+                      <p className="UserNameDisplay">{q.user.Name}</p>
+                    </div>
 
-                  {/* Asked label and date */}
-                  <div
-                    className="d-flex align-items-center"
-                    style={{ width: "50%" }}
-                  >
-                    <p className="light-dull">Asked:</p>
-                    <p className="DateDisplay" style={{ marginLeft: "0.5rem" }}>
-                      {" "}
-                      {/* Add margin for spacing */}
-                      {moment(q.createdAt).format("MMMM Do YYYY")}
-                    </p>
-                  </div>
-                </div>
-
-                <blockquote class="blockquote mb-0">
-                  <p style={{ marginBottom: "0rem" }} className="QuestionTitle">
-                    {q.title.length > 100
-                      ? q.title.substring(0, 100) + "..."
-                      : q.title}
-                  </p>
-
-                  <div className="d-flex align-items-center w-100 justify-content-between">
-                    {" "}
-                    <div>
-                      {" "}
-                      {q.tags.map((tag, index) => (
-                        <Tag color="blue">{tag}</Tag>
-                      ))}
+                    {/* Asked label and date */}
+                    <div
+                      className="d-flex align-items-center"
+                      style={{ width: "50%" }}
+                    >
+                      <p className="light-dull">Asked:</p>
+                      <p
+                        className="DateDisplay"
+                        style={{ marginLeft: "0.5rem" }}
+                      >
+                        {" "}
+                        {/* Add margin for spacing */}
+                        {moment(q.createdAt).format("MMMM Do YYYY")}
+                      </p>
                     </div>
                   </div>
-                </blockquote>
-              </div>
-              <div className="d-flex justify-content-between">
-                <div className="AnswerParent">
-                  <div className="AnswerBox">
-                    <IoMdChatboxes />
-                    <p style={{ margin: "0rem" }}>{q.AnswerCount} Answers</p>
+
+                  <blockquote class="blockquote mb-0">
+                    <p
+                      style={{ marginBottom: "0rem" }}
+                      className="QuestionTitle"
+                    >
+                      {q.title.length > 100
+                        ? q.title.substring(0, 100) + "..."
+                        : q.title}
+                    </p>
+
+                    <div className="d-flex align-items-center w-100 justify-content-between">
+                      {" "}
+                      <div>
+                        {" "}
+                        {q.tags.map((tag, index) => (
+                          <Tag color="blue">{tag}</Tag>
+                        ))}
+                      </div>
+                    </div>
+                  </blockquote>
+                </div>
+                <div className="d-flex justify-content-between">
+                  <div className="AnswerParent">
+                    <div className="AnswerBox">
+                      <IoMdChatboxes />
+                      <p style={{ margin: "0rem" }}>{q.AnswerCount} Answers</p>
+                    </div>
+                  </div>
+
+                  <div
+                    className="d-flex align-items-center"
+                    style={{ gap: "1rem" }}
+                  >
+                    <NavLink to={`/dashboard/user/ViewQuestion/${q._id}`}>
+                      <button className="btn btn-primary">View</button>
+                    </NavLink>
+                    <NavLink to={`/dashboard/user/answers/${q._id}`}>
+                      <Button variant="contained" color="success">
+                        Answer
+                      </Button>
+                    </NavLink>
+                    {auth.user.Role == 1 ? (
+                      <ThemeProvider theme={theme}>
+                        <Button
+                          variant="contained"
+                          sx={{
+                            bgcolor: "ochre.danger",
+                            "&:hover": {
+                              bgcolor: "ochre.dangerHover",
+                            },
+                          }}
+                          startIcon={<DeleteIcon />}
+                          onClick={() => {
+                            DeleteQuestion(q._id);
+                          }}
+                        >
+                          Delete
+                        </Button>
+                      </ThemeProvider>
+                    ) : null}
                   </div>
                 </div>
-
-                <div
-                  className="d-flex align-items-center"
-                  style={{ gap: "1rem" }}
-                >
-                  <NavLink to={`/dashboard/user/ViewQuestion/${q._id}`}>
-                    <button className="btn btn-primary">View</button>
-                  </NavLink>
-                  <NavLink to={`/dashboard/user/answers/${q._id}`}>
-                    <Button variant="contained" color="success">
-                      Answer
-                    </Button>
-                  </NavLink>
-                  {auth.user.Role == 1 ? (
-                    <ThemeProvider theme={theme}>
-                      <Button
-                        variant="contained"
-                        sx={{
-                          bgcolor: "ochre.danger",
-                          "&:hover": {
-                            bgcolor: "ochre.dangerHover",
-                          },
-                        }}
-                        startIcon={<DeleteIcon />}
-                        onClick={() => {
-                          DeleteQuestion(q._id);
-                        }}
-                      >
-                        Delete
-                      </Button>
-                    </ThemeProvider>
-                  ) : null}
-                </div>
               </div>
-            </div>
-          ))
-        ) : (
-          <>
-            {" "}
-            <Empty />
-          </>
-        )}
-        <Pagination
-          total={TotalQuestions}
-          className="mt-3 mb-3"
-          showQuickJumper
-          pageSize={pageSize}
-          onChange={(value) => {
-            Setpage(value);
-          }}
-        />
+            ))
+          ) : (
+            <>
+              {" "}
+              <Empty />
+            </>
+          )}
+          {!Searching ? (
+            <Pagination
+              total={TotalQuestions}
+              className="mt-3 mb-3"
+              showQuickJumper
+              pageSize={pageSize}
+              onChange={(value) => {
+                Setpage(value);
+              }}
+            />
+          ) : null}
+        </div>
       </div>
     </Layout>
   );

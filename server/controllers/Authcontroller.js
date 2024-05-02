@@ -6,21 +6,39 @@ const nodemailer = require("nodemailer");
 
 async function registerController(req, res) {
   try {
-    const { Name, Email, Password, Answer, Location, MobileNo } = req.fields;
+    const {
+      Name,
+      Email,
+      Password,
+      Answer,
+      Location,
+      MobileNo, 
+      SecurityQuestion,
+    } = req.fields;
 
     if (!Name || !Email || !Password || !Location) {
       return res
         .status(400)
         .send({ success: false, error: "All fields are required" });
     }
+    const existingUsername = await Usermodel.findOne({ Name });
 
-    const existingUser = await Usermodel.findOne({
-      $or: [{ Email }, { MobileNo }],
-    });
-    if (existingUser) {
+    const existingEmail = await Usermodel.findOne({ Email });
+
+    const existingNumber = await Usermodel.findOne({ MobileNo });
+
+    if (existingEmail) {
       return res
         .status(409)
-        .send({ success: false, message: "User already exists" });
+        .send({ success: false, message: "Email already exists" });
+    } else if (existingUsername) {
+      return res
+        .status(409)
+        .send({ success: false, message: "Username is already taken" });
+    } else if (existingNumber) {
+      return res
+        .status(409)
+        .send({ success: false, message: "MobileNo already exists" });
     }
 
     const hashedPassword = await hashPassword(Password);
@@ -28,6 +46,7 @@ async function registerController(req, res) {
       Name,
       Email,
       Password: hashedPassword,
+      SecurityQuestion,
       Answer,
       Location,
       MobileNo,

@@ -62,8 +62,6 @@ const Forgotpassword = () => {
         }}
         className="FormBackgound"
       >
-        
-
         <div className="registerform ">
           <h1 style={{ fontWeight: "300" }}>Forgot Password</h1>
 
@@ -93,7 +91,7 @@ const Forgotpassword = () => {
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
               value={Answer}
-              placeholder="What is the name of your pet animal  ?"
+              placeholder="Answer Of security question?"
               onChange={(e) => {
                 SetAnswer(e.target.value);
               }}
@@ -102,22 +100,21 @@ const Forgotpassword = () => {
           </div>
 
           <div className="mb-3 wi">
-          <label htmlFor="exampleInputPassword1" className="form-label">
+            <label htmlFor="exampleInputPassword1" className="form-label">
               New Password
             </label>
-            <div style={{display:"flex"}}>
-           
-            <input
-              type={showPassword ? "text" : "password"}
-              className="form-control"
-              id="exampleInputPassword1"
-              value={NewPassword}
-              onChange={(e) => {
-                SetNewPassword(e.target.value);
-              }}
-              required
-            />
-            <button
+            <div style={{ display: "flex" }}>
+              <input
+                type={showPassword ? "text" : "password"}
+                className="form-control"
+                id="exampleInputPassword1"
+                value={NewPassword}
+                onChange={(e) => {
+                  SetNewPassword(e.target.value);
+                }}
+                required
+              />
+              <button
                 className="btn"
                 type="button"
                 onClick={togglePasswordVisibility}
