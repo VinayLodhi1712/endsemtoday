@@ -84,6 +84,7 @@ const UserInformation = () => {
     GetAllUserAnswers();
     GetUserReputation();
   }, []);
+  
   return (
     <Layout>
       <div className="d-flex align-items-center h-100 flex-column justify-content-center gap-2 ">

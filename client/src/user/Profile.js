@@ -248,9 +248,6 @@ const Profile = () => {
   return (
     <Layout>
       <div className="d-flex justify-content-around">
-        <div className="w-25 mt-3">
-          <UserMEnu />
-        </div>
         <Tabs centered style={{ width: "60%" }}>
           <TabPane
             tab="Personal Information"

@@ -16,6 +16,8 @@ const {
   GetUserReputation,
   UpdateSkillTagsController,
   GetSingleUserInfo,
+  ResetPasswordEmail,
+  ResetPasswordDirectly
 } = require("../controllers/Authcontroller");
 const requireSignIn = require("../middlewares/authMiddleware");
 const IsAdmin = require("../middlewares/Isadmin");
@@ -79,4 +81,6 @@ router.put(
 );
 router.get("/Getuserinfo/:uid", GetSingleUserInfo);
 
+router.post("/SendResetEmail", ResetPasswordEmail);
+router.post("/DirectReset/:Email", ResetPasswordDirectly);
 module.exports = router;
