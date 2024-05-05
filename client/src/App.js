@@ -38,6 +38,7 @@ import Productpage from "./pages/Productpage";
 import Technews from "./pages/Technews";
 import UsersProfiles from "./pages/Users";
 import UserInformation from "./pages/UserInformation";
+import Resetpasswordemail from "./pages/Resetpasswordemail";
 
 function App() {
   return (
@@ -63,10 +64,9 @@ function App() {
           path="/userinformation/:Userid"
           element={<UserInformation />}
         ></Route>
-        {/* chat */}
+        <Route path="/Resetbyemail/:email" element={<Resetpasswordemail />}></Route>
 
         <Route path="/technews" element={<Technews />}></Route>
-        {/* users */}
 
         <Route path="/Dashboard" element={<PrivateRoute />}>
           <Route path="user/interaction" element={<Interaction />}></Route>

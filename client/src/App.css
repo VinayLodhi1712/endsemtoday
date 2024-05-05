@@ -81,7 +81,6 @@ body {
   align-items: center;
   padding: 1rem;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 10px 20px 0 rgba(0, 0, 0, 0.19);
-
   gap: 0.5rem;
 }
 
@@ -402,14 +401,7 @@ body {
   box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);
 }
 
-.UserInfo {
-  font-size: larger;
-  width: 100%;
-  background-color: #202124fb;
-  color: #dadce0;
-  padding: 0.3rem;
-}
-
+UserInfo
 .col-md-4 img {
   width: 60%;
   height: 80%;
@@ -800,6 +792,7 @@ body {
 .NavlinksDesign {
   text-decoration: none;
   color: #000;
+  
 }
 
 .NavlinksDesign:hover {

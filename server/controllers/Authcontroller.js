@@ -12,7 +12,7 @@ async function registerController(req, res) {
       Password,
       Answer,
       Location,
-      MobileNo, 
+      MobileNo,
       SecurityQuestion,
     } = req.fields;
 
@@ -489,6 +489,64 @@ async function GetSingleUserInfo(req, resp) {
   }
 }
 
+async function ResetPasswordEmail(req, resp) {
+  const { UserEmail } = req.body;
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "taskmaster991@gmail.com",
+      pass: "kmepakzcabvztekd",
+    },
+  });
+
+  const mailOptions = {
+    from: "taskmaster991@gmail.com",
+    to: UserEmail,
+    subject: "Reset password",
+    html: `
+    <p>Reset your password from the link .</p>
+    <p><a href="deployedlink/api/v1/auth/DirectReset/${UserEmail}"><button>Click here</button></a> to reset password.</p>`,
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.log("Error sending email: " + error);
+      resp.status(500).send("Error sending email");
+    } else {
+      console.log("Email sent: " + info.response);
+      resp.status(200).send("Form data sent successfully");
+    }
+  });
+}
+
+async function ResetPasswordDirectly(req, resp) {
+  try {
+    const Email = req.params.Email;
+
+    const { NewPassword } = req.body;
+    const user = await Usermodel.findOneAndUpdate(
+      { Email: Email },
+      { Password: NewPassword },
+      { new: true }
+    ).select("-photo");
+    if (user) {
+      resp.status(200).send({
+        message: "Password reset succesfull",
+        user,
+      });
+    } else {
+      resp.status(404).send({
+        message: "User not found",
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    resp.status(500).send({
+      message: "Error in api",
+    });
+  }
+}
+
 module.exports = {
   registerController,
   loginController,
@@ -505,5 +563,7 @@ module.exports = {
   UpdatePasswordController,
   GetUserReputation,
   UpdateSkillTagsController,
+  ResetPasswordEmail,
   GetSingleUserInfo,
+  ResetPasswordDirectly,
 };
