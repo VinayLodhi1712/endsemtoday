@@ -111,14 +111,18 @@ function Productpage() {
   //get total produts
   async function GetTotal() {
     try {
-      const response = await fetch(
-        `http://localhost:8000/api/v1/product/product-count/${auth.user._id}`
-      );
+      let url;
+      if (auth.user) {
+        url = `http://localhost:8000/api/v1/product/product-count/${auth.user._id}`;
+      } else {
+        url = `http://localhost:8000/api/v1/product/product-count/65f2f1dc6ecc89ef55716aaf`;
+      }
+
+      const response = await fetch(url);
       const data = await response.json();
       SetTotalvalue(data?.Total);
     } catch (error) {
       console.log(error);
-    
     }
   }
 
@@ -140,10 +144,13 @@ function Productpage() {
   return (
     <Layout>
       <div className="d-flex justify-content-end mt-3 ">
-        <div style={{ width: "20%", marginLeft: "1rem" }} className="Fixed">
+        <div
+          style={{ width: "20%", marginLeft: "1rem" }}
+          className="Fixed mt-3"
+        >
           <div>
             <h2 className="mediumtitlefont">Select Category</h2>
-            <Toaster />
+
             <div className="d-flex flex-column p-1">
               {Categories?.map((c) => (
                 <Checkbox

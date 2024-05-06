@@ -8,20 +8,27 @@ body {
 /* navbar css */
 
 .navbar {
-  font-size: 17px;
-  line-height: 26px;
+  padding:1.2rem 0rem 1.2rem 0rem;
   text-transform: uppercase;
   box-shadow: 0 1px 5px;
+  background-color: #0d7df4 !important;
 }
 
 .nav-link {
-  font-weight: 300;
+  font-weight: 500;
+  color: white !important;
+}
+.navbar-brand{
+  color: white;
+  font-weight: 600;
+}
+.nav-link.active {
+  background-color: rgba(255, 255, 255, 0.116);
 }
 
 .footer a {
   text-decoration: none;
   color: white;
-
   padding: 1rem;
 }
 
@@ -401,8 +408,7 @@ body {
   box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);
 }
 
-UserInfo
-.col-md-4 img {
+UserInfo .col-md-4 img {
   width: 60%;
   height: 80%;
   overflow: hidden;
@@ -792,7 +798,6 @@ UserInfo
 .NavlinksDesign {
   text-decoration: none;
   color: #000;
-  
 }
 
 .NavlinksDesign:hover {
@@ -884,7 +889,7 @@ UserInfo
 
 .initailmessage {
   font-weight: 500;
-  color: rgb(163, 188, 190)
+  color: rgb(163, 188, 190);
 }
 
 .name {

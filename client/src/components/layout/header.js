@@ -45,10 +45,10 @@ function Header() {
           >
             <span className="navbar-toggler-icon" />
           </button>
+
           <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
             <NavLink to="/" className="navbar-brand" href="#">
-              {" "}
-              <img src={logobg} width="160" alt="logo"></img>
+              TALKOFCODE
             </NavLink>
 
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -63,7 +63,7 @@ function Header() {
                 </NavLink>
               </li>
 
-              <li class="nav-item dropdown">
+              {/* <li class="nav-item dropdown">
                 <NavLink
                   className="nav-link dropdown-toggle"
                   role="button"
@@ -85,7 +85,7 @@ function Header() {
                     </li>
                   ))}
                 </ul>
-              </li>
+              </li> */}
               <li className="nav-item">
                 <NavLink
                   to={`/dashboard/${
