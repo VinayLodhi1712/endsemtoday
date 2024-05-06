@@ -31,7 +31,6 @@ const UserSchema = new mongoose.Schema(
     },
     SecurityQuestion: {
       type: String,
-      required: true,
     },
     Role: {
       type: Number,

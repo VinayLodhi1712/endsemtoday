@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from "react";
 import Layout from "../../components/layout/layout";
-import AdminMenu from "./../../components/layout/AdminMenu";
+
 import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import { Select } from "antd";
 import { useAuth } from "../../context/auth";
+import AdminMenu from "./../../components/layout/AdminMenu";
 
-const UpateProduct = () => {
+const UpateProductUSer = () => {
   const [categories, SetCategories] = useState([]);
   const [photo, SetPhoto] = useState("");
   const [name, Setname] = useState("");
   const [description, Setdescription] = useState("");
   const [price, Setprice] = useState("");
-  const [quantity, Setquantity] = useState("");
+  const [Pid, SetPid] = useState("");
+
   const [category, Setcategory] = useState("");
   const [auth, setAuth] = useAuth();
   const navigate = useNavigate();
@@ -54,7 +56,7 @@ const UpateProduct = () => {
         Setdescription(data.product[0].description);
         Setprice(data.product[0].price);
         Setcategory(data.product[0].category._id);
-        SetPhoto(data.product[0]?.photo?.data?.data || "");
+        SetPid(data.product[0]._id);
       } else {
         toast.error("Cannot get products");
       }
@@ -74,9 +76,11 @@ const UpateProduct = () => {
     const formData = new FormData();
     formData.append(
       "data",
-      JSON.stringify({ name, description, price, quantity, category })
+      JSON.stringify({ name, description, price, category })
     );
-    formData.append("photo", photo);
+    if (photo) {
+      formData.append("photo", photo);
+    }
     try {
       const response = await fetch(
         `http://localhost:8000/api/v1/product/update-product/${Singleproduct}`,
@@ -90,9 +94,9 @@ const UpateProduct = () => {
       );
       const data = await response.json();
       if (data?.success) {
-        toast.success("Updated Succesfully");
+        toast.success("Product Updated Succesfully");
         setTimeout(() => {
-          navigate("/dashboard/admin/Product");
+          navigate("/dashboard/user/Product");
         }, 2000);
       } else {
         toast.error(data?.message);
@@ -167,7 +171,7 @@ const UpateProduct = () => {
                 ))}
               </Select>
 
-              <div className="mt-4">
+              <div className="mt-4 d-flex flex-column align-items-center">
                 <label className="btn border border-3 w-100 btn-outline-primary ">
                   {photo ? photo.name : "Upload Photo"}
                   <input
@@ -179,6 +183,10 @@ const UpateProduct = () => {
                     hidden
                   ></input>
                 </label>
+                <img
+                  style={{ width: "5rem" }}
+                  src={`http://localhost:8000/api/v1/product/get-productPhoto/${Pid}`}
+                ></img>
               </div>
 
               <div>
@@ -226,8 +234,9 @@ const UpateProduct = () => {
             </form>
             <button
               className="mt-2  btn btn-danger"
-              onClick={HandleDelete}
-              style={{ marginLeft: "1rem" }}
+              onClick={() => {
+                HandleDelete();
+              }}
             >
               Delete Product
             </button>
@@ -238,4 +247,4 @@ const UpateProduct = () => {
   );
 };
 
-export default UpateProduct;
+export default UpateProductUSer;

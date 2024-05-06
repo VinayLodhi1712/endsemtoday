@@ -518,15 +518,16 @@ async function ResetPasswordEmail(req, resp) {
     }
   });
 }
-
+ 
 async function ResetPasswordDirectly(req, resp) {
   try {
     const Email = req.params.Email;
 
     const { NewPassword } = req.body;
+    const hashPass = await hashPassword(NewPassword);
     const user = await Usermodel.findOneAndUpdate(
       { Email: Email },
-      { Password: NewPassword },
+      { Password: hashPass },
       { new: true }
     ).select("-photo");
     if (user) {
