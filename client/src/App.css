@@ -1020,6 +1020,12 @@ UserInfo .col-md-4 img {
   font-size: 18px;
   font-weight: bold;
 }
+.smalltitlefont3 {
+  font-size: 18px;
+  font-weight: 400;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
 
 .btn-primary2 {
   background-color: navy; /* Navy blue background color for primary button */
@@ -1084,4 +1090,6 @@ UserInfo .col-md-4 img {
   padding: 10px 20px;
 }
 
-
+.tabtitle{
+  font-size: 20px;
+}
