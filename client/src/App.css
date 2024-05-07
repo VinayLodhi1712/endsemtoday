@@ -564,9 +564,6 @@ UserInfo .col-md-4 img {
   margin-left: 10px;
 }
 
-.BgColor {
-  background-color: rgba(255, 228, 196, 0.636);
-}
 
 .TeamNames {
   color: orange;
@@ -992,10 +989,6 @@ UserInfo .col-md-4 img {
   color: white;
 }
 
-.bg{
-  background-color: rgba(131, 199, 218, 0.205);
-}
-
 .bg-white{
   background-color: rgba(255, 255, 255, 0.253);
 }
@@ -1015,21 +1008,6 @@ UserInfo .col-md-4 img {
   font-size: 16px;
 }
 
-.custom-button {
-  background-color: #f0f0f0; /* Light gray background color */
-  color: #333333; /* Dark text color */
-  border: 1px solid #cccccc; /* Light border color */
-}
-
-.custom-button:hover {
-  background-color: #e0e0e0; /* Darker gray background color on hover */
-}
-
-.active-button {
-  background-color: rgb(61, 107, 145); /* Navy blue background color for active button */
-  color: white; /* White text color */
-}
-
 .active-button:hover {
   background-color: #4590db; /* Darker navy blue background color on hover */
 }
@@ -1038,12 +1016,12 @@ UserInfo .col-md-4 img {
   font-size: 16px;
 }
 
-.smalltitlefont {
+.smalltitlefont2 {
   font-size: 18px;
   font-weight: bold;
 }
 
-.btn-primary {
+.btn-primary2 {
   background-color: navy; /* Navy blue background color for primary button */
   border-color: navy; /* Navy blue border color */
 }
@@ -1075,3 +1053,35 @@ UserInfo .col-md-4 img {
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
+
+.registerform {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.registerform h1 {
+  font-weight: 600;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.registerform .form-label {
+  font-size: 16px;
+}
+
+.registerform .form-control {
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.registerform .btn {
+  font-size: 16px;
+  padding: 10px 20px;
+}
+
+

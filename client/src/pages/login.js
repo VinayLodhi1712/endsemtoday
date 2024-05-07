@@ -1,7 +1,7 @@
 import { useState } from "react";
 import React from "react";
 import Layout from "../components/layout/layout";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, NavLink, useLocation } from "react-router-dom";
 import { useAuth } from "../context/auth";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { toast, ToastContainer } from "react-toastify";
@@ -12,6 +12,7 @@ const Login = () => {
   const navigate = useNavigate();
   const [auth, setAuth] = useAuth();
   const [Loading, SetLoading] = useState(false);
+  const location = useLocation();
 
   async function handleSubmit(e) {
     try {
@@ -73,84 +74,127 @@ const Login = () => {
   return (
     <Layout>
       <ToastContainer />
-      <form
-        style={{ display: "flex", justifyContent: "center" }}
-        onSubmit={(e) => {
-          handleSubmit(e);
-        }}
-        className="FormBackgound"
-      >
-        {/* <Toaster /> */}
-        <div className="registerform mt-3">
-          <h1 style={{ fontWeight: "600" }}>LOGIN</h1>
-
-          <div className="mb-3 w-75">
-            <label htmlFor="exampleInputEmail1" className="form-label">
-              Email address
-            </label>
-            <input
-              type="email"
-              className="form-control"
-              id="exampleInputEmail1"
-              aria-describedby="emailHelp"
-              value={Email}
-              onChange={(e) => {
-                SetEmail(e.target.value);
-              }}
-              required
-            />
-          </div>
-
-          <div className="mb-3" style={{ width: "75%" }}>
-            <label htmlFor="exampleInputPassword1" className="form-label">
-              Password
-            </label>
-            <div style={{ display: "flex" }}>
-              <input
-                type={showPassword ? "text" : "password"}
-                className="form-control"
-                id="exampleInputPassword1"
-                value={Password}
-                onChange={(e) => {
-                  SetPassword(e.target.value);
-                }}
-                required
-              />
-              <button
-                className="btn "
-                type="button"
-                onClick={togglePasswordVisibility}
+      <div className="bg">
+        <div className="Registerlayout bg-light" style={{ width: "70%", padding: "20px", borderRadius: "10px" }}>
+          <div className="d-flex mb-3">
+            <button
+              className={`align-items-center button-16 ${location.pathname === '/register' ? 'bg-primary' : ''}`}
+              style={{ width: "50%", height: "50px", borderRadius: "5px", padding: "10px 20px", backgroundColor:"grey"}}
+            >
+              <NavLink
+                to="/register"
+                className={`nav-link ${location.pathname === '/register' ? 'active-button' : ''}`}
+                style={{ height: "100%", fontSize: "28px", textDecoration: "none" }}
               >
-                {showPassword ? <FaEyeSlash /> : <FaEye />}
-              </button>
-            </div>
-          </div>
-
-          <div
-            className="mt-3"
-            style={{
-              display: "flex",
-              justifyContent: "space-around",
-              alignItems: "center",
-              width: "100%",
-            }}
-          >
-            <button type="submit" className="btn btn-dark" disabled={Loading}>
-              {Loading ? "Loading..." : "Login"}
+                Register
+              </NavLink>
             </button>
             <button
-              type="submit"
-              className="btn btn-dark"
-              onClick={() => {
-                navigate("/ForgotPassword");
-              }}
+              className={`align-items-center button-16 ${location.pathname === '/login' ? 'bg-primary' : ''}`}
+              style={{ width: "50%", height: "50px", fontSize: "20px", borderRadius: "5px" }}
             >
-              Forgot Password
+              <NavLink
+                to="/login"
+                className={`nav-link ${location.pathname === '/login' ? 'active-button' : ''}`}
+                style={{ height: "100%", fontSize: "28px", textDecoration: "none", padding: "10px 20px" }}
+              >
+                Login
+              </NavLink>
             </button>
           </div>
+          
+
+
+          <form
+            style={{ display: "flex", justifyContent: "center" }}
+            onSubmit={(e) => {
+              handleSubmit(e);
+            }}
+          >
+            <div className="mt-2" style={{ width: "100%" }}>
+              <div style={{ textAlign: "center" }}>
+                <h1 style={{ fontWeight: "600" }}>Login</h1>
+                <p style={{ fontSize: "20px" }}>Doesn't have an account yet? <a href="/register">Sign-Up</a> here</p>
+              </div>
+
+
+              <div className="mb-2 w-75" style={{ marginLeft: "5rem" }}>
+                <label htmlFor="exampleInputEmail1" className="form-label smalltitlefont2">
+                  Email address
+                </label>
+                <input
+                  type="email"
+                  className="form-control"
+                  id="exampleInputEmail1"
+                  placeholder="Enter your email"
+                  aria-describedby="emailHelp"
+                  value={Email}
+                  onChange={(e) => {
+                    SetEmail(e.target.value);
+                  }}
+                  required
+                  style={{ fontSize: "16px" }}
+                />
+              </div>
+
+              <div className="mb-3" style={{ width: "75%", marginLeft: "5rem" }}>
+                <label htmlFor="exampleInputPassword1" className="form-label smalltitlefont2">
+                  Password
+                </label>
+                <div style={{ display: "flex" }}>
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    className="form-control"
+                    id="exampleInputPassword1"
+                    placeholder="Enter your Password"
+                    value={Password}
+                    onChange={(e) => {
+                      SetPassword(e.target.value);
+                    }}
+                    required
+                  
+                  />
+                  <button
+                    className="btn btn-outline-primary"
+                    type="button"
+                    onClick={togglePasswordVisibility}
+                    style={{ marginLeft: "5px" }}
+                  >
+                    {showPassword ? <FaEyeSlash /> : <FaEye />}
+                  </button>
+                </div>
+              </div>
+
+              <div
+                className="mt-3"
+                style={{
+                  display: "flex",
+                  justifyContent: "space-around",
+                  alignItems: "center",
+                  width: "60%",
+                  marginLeft: "8rem"
+                }}
+              >
+                <button type="submit" className="btn btn-primary" disabled={Loading} style={{ width: "10rem" }}>
+                  {Loading ? "Loading..." : "Login"}
+                </button>
+                <button
+                  type="submit"
+                  className="btn btn-primary"
+                  onClick={() => {
+                    navigate("/ForgotPassword");
+                  }}
+                >
+                  Forgot Password
+                </button>
+              </div>
+            </div>
+          </form>
         </div>
-      </form>
+      </div>
     </Layout>
+
+
   );
 };
 

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import React from "react";
 import Layout from "../components/layout/layout";
-import { useNavigate, NavLink } from "react-router-dom";
+import { useNavigate, NavLink , useLocation} from "react-router-dom";
 import toast from "react-hot-toast";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import {
@@ -11,6 +11,7 @@ import {
 } from "react-country-region-selector";
 
 const Register = () => {
+  const Locate = useLocation();
   const [Name, SetName] = useState("");
   const [Email, SetEmail] = useState("");
   const [Password, SetPassword] = useState("");
@@ -82,30 +83,30 @@ const Register = () => {
   return (
     <Layout>
       <div className="bg">
-        <div className="Registerlayout bg-light" style={{ width: "70%", height: "100%", padding: "20px", borderRadius: "10px"}}>
+        <div className="Registerlayout bg-light" style={{ width: "70%", height: "100%", padding: "20px", borderRadius: "10px" }}>
           <div className="d-flex mb-3">
             <button
-              className="align-items-center button-16 bg-primary text-white"
-              style={{ width: "50%", height: "50px", borderRadius: "5px",padding: "10px 20px" }}
+              className="align-items-center button-16 bg-primary"
+              style={{ width: "50%", height: "50px", borderRadius: "5px", padding: "10px 20px" }}
             >
               <NavLink
                 to="/register"
                 className="nav-link"
-                activeClassName="active-button"
+               
                 style={{ height: "100%", fontSize: "28px", textDecoration: "none" }}
               >
                 Register
               </NavLink>
             </button>
             <button
-              className="align-items-center button-16 custom-button"
-              style={{ width: "50%", height: "50px", fontSize: "20px", borderRadius: "5px" }}
+              className="align-items-center button-16 "
+              style={{ width: "50%", height: "50px", fontSize: "20px", borderRadius: "5px",backgroundColor:"gray" }}
             >
               <NavLink
                 to="/login"
-                className="nav-link"
-                activeClassName="active-button"
-                style={{ height: "100%", fontSize: "28px", textDecoration: "none", padding: "10px 20px" }}
+                className={`nav-link ${Locate.pathname === '/login' ? 'active-button' : ''}`}
+                
+                style={{ height: "100%", fontSize: "28px", textDecoration: "none", padding: "10px 20px",  }}
               >
                 Login
               </NavLink>
@@ -123,9 +124,15 @@ const Register = () => {
               handleSubmit(e);
             }}
           >
+
+            <div style={{ textAlign: "center" }}>
+              <h1 style={{ fontWeight: "600" }}>Register</h1>
+              <p style={{ fontSize: "20px" }}>Already have an account? <a href="/login">Login</a> here</p>
+            </div>
+
             <div style={{ width: "100%" }}>
               <div className="mb-3">
-                <label htmlFor="name" className="form-label smalltitlefont">
+                <label htmlFor="name" className="form-label smalltitlefont2">
                   Name
                 </label>
                 <input
@@ -144,7 +151,7 @@ const Register = () => {
               </div>
 
               <div className="mb-3">
-                <label htmlFor="email" className="form-label smalltitlefont">
+                <label htmlFor="email" className="form-label smalltitlefont2">
                   Email
                 </label>
                 <input
@@ -164,7 +171,7 @@ const Register = () => {
 
               <div className="mb-3 d-flex">
                 <div style={{ width: "50%", marginRight: "10px" }}>
-                  <label htmlFor="password" className="form-label smalltitlefont">
+                  <label htmlFor="password" className="form-label smalltitlefont2">
                     Password
                   </label>
                   <div style={{ display: "flex" }}>
@@ -191,7 +198,7 @@ const Register = () => {
                   </div>
                 </div>
                 <div style={{ width: "50%" }}>
-                  <label htmlFor="mobile" className="form-label smalltitlefont">
+                  <label htmlFor="mobile" className="form-label smalltitlefont2">
                     Mobile No.
                   </label>
                   <input
@@ -211,12 +218,12 @@ const Register = () => {
 
               <div className="d-flex">
                 <div style={{ width: "50%", marginRight: "10px" }}>
-                  <label htmlFor="country" className="form-label smalltitlefont">
+                  <label htmlFor="country" className="form-label smalltitlefont2">
                     Country
                   </label>
                 </div>
                 <div>
-                  <label htmlFor="city" className="form-label smalltitlefont">
+                  <label htmlFor="city" className="form-label smalltitlefont2">
                     City
                   </label>
                 </div>
@@ -246,7 +253,7 @@ const Register = () => {
               </div>
 
               <div className="mb-3">
-                <label htmlFor="securityQuestion" className="form-label smalltitlefont">
+                <label htmlFor="securityQuestion" className="form-label smalltitlefont2">
                   Security Question
                 </label>
                 <select
@@ -277,14 +284,14 @@ const Register = () => {
               </div>
 
               <div className="mb-3">
-                <label htmlFor="securityAnswer" className="form-label smalltitlefont">
+                <label htmlFor="securityAnswer" className="form-label smalltitlefont2">
                   Security Answer
                 </label>
                 <input
                   type="text"
                   className="form-control"
                   id="exampleInputPassword1"
-                  placeholder="Answer"
+                  placeholder="Your Answer"
                   value={Answer}
                   onChange={(e) => {
                     SetAnswer(e.target.value);
