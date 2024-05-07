@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import React from "react";
 import Layout from "../components/layout/layout";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 import toast from "react-hot-toast";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import {
@@ -24,7 +24,6 @@ const Register = () => {
   const [Location, setLocation] = useState("");
   const navigate = useNavigate();
   const [Loading, SetLoading] = useState(false);
-
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -82,164 +81,247 @@ const Register = () => {
   }
   return (
     <Layout>
-      <form
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-        onSubmit={(e) => {
-          handleSubmit(e);
-        }}
-        className="FormBackgound"
-      >
-        <div className="registerform  ">
-          <h1 style={{ margin: "0%" }}>Register</h1>
-
-          <div className="mb-2 wi">
-            <input
-              type="text"
-              className="form-control"
-              id="exampleInputEmail1"
-              placeholder="Name"
-              aria-describedby="emailHelp"
-              value={Name}
-              onChange={(e) => {
-                SetName(e.target.value);
-              }}
-              required
-            />
-          </div>
-
-          <div className="mb-2 wi">
-            <input
-              type="email"
-              className="form-control"
-              id="exampleInputEmail1"
-              placeholder="Email"
-              aria-describedby="emailHelp"
-              value={Email}
-              onChange={(e) => {
-                SetEmail(e.target.value);
-              }}
-              required
-            />
-          </div>
-
-          <div className="mb-2 wi">
-            <div style={{ display: "flex" }}>
-              <input
-                type={showPassword ? "text" : "password"}
-                className="form-control"
-                placeholder="Password"
-                id="exampleInputPassword1"
-                value={Password}
-                onChange={(e) => {
-                  SetPassword(e.target.value);
-                }}
-                required
-              />
-              <button
-                className="btn"
-                type="button"
-                onClick={togglePasswordVisibility}
-              >
-                {showPassword ? <FaEyeSlash /> : <FaEye />}
-              </button>
-            </div>
-          </div>
-
-          <div className="mb-2 wi d-flex flex-column  ">
-            <CountryDropdown
-              value={country}
-              onChange={(val) => {
-                setCountry(val);
-              }}
-            />
-            <RegionDropdown
-              country={country}
-              value={region}
-              onChange={(val) => {
-                setRegion(val);
-              }}
-            />
-          </div>
-          <div className="mb-2 wi">
-            <input
-              type="text"
-              className="form-control"
-              id="exampleInputPassword1"
-              placeholder="Mobile Number"
-              value={MobileNo}
-              onChange={(e) => {
-                SetMobileNo(e.target.value);
-              }}
-              required
-            />
-          </div>
-          <div className="mb-2 wi ">
-            <select
-              id="Questions"
-              className="w-100 mb-1"
-              onChange={(e) => {
-                SetSecurityQuestion(e.target.value);
-              }}
-              required
+      <div className="bg">
+        <div className="Registerlayout bg-light" style={{ width: "70%", height: "100%", padding: "20px", borderRadius: "10px"}}>
+          <div className="d-flex mb-3">
+            <button
+              className="align-items-center button-16 bg-primary text-white"
+              style={{ width: "50%", height: "50px", borderRadius: "5px",padding: "10px 20px" }}
             >
-              {console.log(SecurityQuestion)}
-              <option value="What is your mother's maiden name ?">
-                What is your mother's maiden name?
-              </option>
-
-              <option value="In which city were you born ?">
-                In which city were you born?
-              </option>
-
-              <option value="What is the name of your first pet ?">
-                What is the name of your first pet?
-              </option>
-
-              <option value="What is your favorite book?">
-                What is your favorite book?
-              </option>
-              <option value="What was the model of your first car?">
-                What was the model of your first car?
-              </option>
-            </select>
-            <input
-              type="text"
-              className="form-control"
-              id="exampleInputPassword1"
-              placeholder="Answer"
-              value={Answer}
-              onChange={(e) => {
-                SetAnswer(e.target.value);
-              }}
-              required
-            />
+              <NavLink
+                to="/register"
+                className="nav-link"
+                activeClassName="active-button"
+                style={{ height: "100%", fontSize: "28px", textDecoration: "none" }}
+              >
+                Register
+              </NavLink>
+            </button>
+            <button
+              className="align-items-center button-16 custom-button"
+              style={{ width: "50%", height: "50px", fontSize: "20px", borderRadius: "5px" }}
+            >
+              <NavLink
+                to="/login"
+                className="nav-link"
+                activeClassName="active-button"
+                style={{ height: "100%", fontSize: "28px", textDecoration: "none", padding: "10px 20px" }}
+              >
+                Login
+              </NavLink>
+            </button>
           </div>
 
-          <div className="d-flex justify-content-start w-100 border-2">
-            <label className="btn border border-3 w-100 btn-outline-primary ">
-              {photo ? photo.name : "Upload Photo"}
-              <input
-                type="file"
-                accept="image/*"
-                onChange={(e) => {
-                  SetPhoto(e.target.files[0]);
-                }}
-                hidden
-                required
-              ></input>
-            </label>
-          </div>
+          <form
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+            onSubmit={(e) => {
+              handleSubmit(e);
+            }}
+          >
+            <div style={{ width: "100%" }}>
+              <div className="mb-3">
+                <label htmlFor="name" className="form-label smalltitlefont">
+                  Name
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="exampleInputEmail1"
+                  placeholder="Enter your name"
+                  aria-describedby="emailHelp"
+                  value={Name}
+                  onChange={(e) => {
+                    SetName(e.target.value);
+                  }}
+                  required
+                  style={{ fontSize: "16px" }}
+                />
+              </div>
 
-          <button type="submit" className="btn btn-dark" disabled={Loading}>
-            {Loading ? "Loading..." : " Register"}
-          </button>
+              <div className="mb-3">
+                <label htmlFor="email" className="form-label smalltitlefont">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  className="form-control"
+                  id="exampleInputEmail1"
+                  placeholder="Enter your email"
+                  aria-describedby="emailHelp"
+                  value={Email}
+                  onChange={(e) => {
+                    SetEmail(e.target.value);
+                  }}
+                  required
+                  style={{ fontSize: "16px" }}
+                />
+              </div>
+
+              <div className="mb-3 d-flex">
+                <div style={{ width: "50%", marginRight: "10px" }}>
+                  <label htmlFor="password" className="form-label smalltitlefont">
+                    Password
+                  </label>
+                  <div style={{ display: "flex" }}>
+                    <input
+                      type={showPassword ? "text" : "password"}
+                      className="form-control"
+                      placeholder="Password"
+                      id="exampleInputPassword1"
+                      value={Password}
+                      onChange={(e) => {
+                        SetPassword(e.target.value);
+                      }}
+                      required
+                      style={{ fontSize: "16px" }}
+                    />
+                    <button
+                      className="btn btn-outline-primary"
+                      type="button"
+                      onClick={togglePasswordVisibility}
+                      style={{ marginLeft: "5px" }}
+                    >
+                      {showPassword ? <FaEyeSlash /> : <FaEye />}
+                    </button>
+                  </div>
+                </div>
+                <div style={{ width: "50%" }}>
+                  <label htmlFor="mobile" className="form-label smalltitlefont">
+                    Mobile No.
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="exampleInputPassword1"
+                    placeholder="Enter your Mobile Number"
+                    value={MobileNo}
+                    onChange={(e) => {
+                      SetMobileNo(e.target.value);
+                    }}
+                    required
+                    style={{ fontSize: "16px" }}
+                  />
+                </div>
+              </div>
+
+              <div className="d-flex">
+                <div style={{ width: "50%", marginRight: "10px" }}>
+                  <label htmlFor="country" className="form-label smalltitlefont">
+                    Country
+                  </label>
+                </div>
+                <div>
+                  <label htmlFor="city" className="form-label smalltitlefont">
+                    City
+                  </label>
+                </div>
+              </div>
+              <div className="mb-3 d-flex">
+                <div style={{ width: "50%", marginRight: "10px" }}>
+
+                  <CountryDropdown
+                    value={country}
+                    onChange={(val) => {
+                      setCountry(val);
+                    }}
+                    style={{ height: '40px', fontSize: "16px" }}
+                  />
+                </div>
+                <div style={{ width: "50%" }}>
+
+                  <RegionDropdown
+                    country={country}
+                    value={region}
+                    onChange={(val) => {
+                      setRegion(val);
+                    }}
+                    style={{ height: '40px', fontSize: "16px" }}
+                  />
+                </div>
+              </div>
+
+              <div className="mb-3">
+                <label htmlFor="securityQuestion" className="form-label smalltitlefont">
+                  Security Question
+                </label>
+                <select
+                  id="Questions"
+                  className="w-100 mb-1"
+                  onChange={(e) => {
+                    SetSecurityQuestion(e.target.value);
+                  }}
+                  required
+                  style={{ height: '40px', fontSize: "16px" }}
+                >
+                  <option value="What is your mother's maiden name ?">
+                    What is your mother's maiden name?
+                  </option>
+                  <option value="In which city were you born ?">
+                    In which city were you born?
+                  </option>
+                  <option value="What is the name of your first pet ?">
+                    What is the name of your first pet?
+                  </option>
+                  <option value="What is your favorite book?">
+                    What is your favorite book?
+                  </option>
+                  <option value="What was the model of your first car?">
+                    What was the model of your first car?
+                  </option>
+                </select>
+              </div>
+
+              <div className="mb-3">
+                <label htmlFor="securityAnswer" className="form-label smalltitlefont">
+                  Security Answer
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="exampleInputPassword1"
+                  placeholder="Answer"
+                  value={Answer}
+                  onChange={(e) => {
+                    SetAnswer(e.target.value);
+                  }}
+                  required
+                  style={{ fontSize: "16px" }}
+                />
+              </div>
+
+              <div className="d-flex justify-content-start w-100 border-2">
+                <label className="btn border border-3 w-100 btn-outline-primary">
+                  {photo ? photo.name : "Upload Photo"}
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => {
+                      SetPhoto(e.target.files[0]);
+                    }}
+                    hidden
+                    required
+                  />
+                </label>
+              </div>
+              <div className="d-flex justify-content-center">
+                <button type="submit" className="btn btn-primary align-items-center" disabled={Loading}>
+                  {Loading ? "Loading..." : " Register"}
+                </button>
+              </div>
+
+
+            </div>
+          </form>
         </div>
-      </form>
-    </Layout>
+      </div>
+
+
+    </Layout >
   );
 };
 

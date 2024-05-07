@@ -106,12 +106,7 @@ function Header() {
                 <>
                   <li className="nav-item">
                     <NavLink to="/register" className="nav-link" href="#">
-                      Register
-                    </NavLink>
-                  </li>
-                  <li className="nav-item">
-                    <NavLink to="/login" className="nav-link" href="#">
-                      Login
+                      Join us
                     </NavLink>
                   </li>
                 </>

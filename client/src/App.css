@@ -978,3 +978,100 @@ UserInfo .col-md-4 img {
 .ask-button:hover {
   background-color: #2cf005;
 } */
+
+.homepage-section:nth-child(odd) {
+  background-color: #c5bdbd; /* Light grey */
+}
+
+.homepage-section:nth-child(even) {
+  background-color: #ffffff; /* White */
+}
+ 
+.active-button {
+  background-color: #0d6efd;
+  color: white;
+}
+
+.bg{
+  background-color: rgba(131, 199, 218, 0.205);
+}
+
+.bg-white{
+  background-color: rgba(255, 255, 255, 0.253);
+}
+/* Add custom styles for the form */
+.bg {
+  background-color: #f2f2f2; /* Light background color */
+  padding: 20px;
+}
+
+.Registerlayout {
+  background-color: #ffffff; /* White background color */
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.button-16 {
+  font-size: 16px;
+}
+
+.custom-button {
+  background-color: #f0f0f0; /* Light gray background color */
+  color: #333333; /* Dark text color */
+  border: 1px solid #cccccc; /* Light border color */
+}
+
+.custom-button:hover {
+  background-color: #e0e0e0; /* Darker gray background color on hover */
+}
+
+.active-button {
+  background-color: rgb(61, 107, 145); /* Navy blue background color for active button */
+  color: white; /* White text color */
+}
+
+.active-button:hover {
+  background-color: #4590db; /* Darker navy blue background color on hover */
+}
+
+.form-control {
+  font-size: 16px;
+}
+
+.smalltitlefont {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.btn-primary {
+  background-color: navy; /* Navy blue background color for primary button */
+  border-color: navy; /* Navy blue border color */
+}
+
+.btn-primary:hover {
+  background-color: #001f3f; /* Darker navy blue background color on hover */
+  border-color: #001f3f; /* Darker navy blue border color on hover */
+}
+
+.btn-outline-primary {
+  color: navy; /* Navy blue text color for outline button */
+  border-color: navy; /* Navy blue border color */
+}
+
+.btn-outline-primary:hover {
+  color: #001f3f; /* Darker navy blue text color on hover for outline button */
+  border-color: #001f3f; /* Darker navy blue border color on hover for outline button */
+}
+
+
+.Registerlayout {
+  height: 100%;
+  width: 80%;
+  margin: auto;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}

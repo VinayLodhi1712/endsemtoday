@@ -101,7 +101,7 @@ function Home() {
   return (
     <HomeLayout>
       <div className="d-flex flex-column">
-        <div className="d-flex justify-content-around align-items-center HomeFirstDiv">
+        <div className="homepage-section d-flex justify-content-around align-items-center HomeFirstDiv">
           <div
             className="w-50 d-flex flex-column justify-content-center align-items-center"
             data-aos="fade-right"
@@ -126,7 +126,7 @@ function Home() {
           </div>
           <img src={HomeImg} className="h-75 " data-aos="fade-left"></img>
         </div>{" "}
-        <div className="d-flex align-items-center flex-column justify-content-center w-100 HomeSecondDiv">
+        <div className="homepage-section d-flex align-items-center flex-column justify-content-center w-100 HomeSecondDiv">
           <h1 className=" w-50 text-center WelcomeText" data-aos="fade-left">
             {" "}
             Our Services
@@ -234,7 +234,7 @@ function Home() {
             </Swiper>
           </div>
         </div>
-        <div className="AccordianParent">
+        <div className="homepage-section AccordianParent">
           <h1
             className=" w-100 text-center WelcomeText mb-3"
             data-aos="fade-right"
