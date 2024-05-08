@@ -17,7 +17,7 @@ const UserContributions = () => {
   const [response, setResponse] = useState([]);
   const [open, setOpen] = useState(false);
   const [selectedId, setSelectedId] = useState(null); // State to store the selected contribution ID
-
+  const [expandedId, setExpandedId] = useState(null);
   async function getUserAnswer() {
     try {
       const response = await fetch(
@@ -111,37 +111,58 @@ const UserContributions = () => {
     setAnswer(answer);
   };
 
+  const handleSeeMore = (id) => {
+    // Expand or collapse the content based on current state
+    setExpandedId(expandedId === id ? null : id);
+  };
+
   return (
     <Layout>
-      <div className="w-100 d-flex justify-content-around mt-3">
+      <div className="bg w-100 d-flex justify-content-around ">
         <div className="w-25">
           <UserMEnu />
         </div>
-        <div className="d-flex flex-column align-items-center mt-2 w-50">
+        <div className="d-flex flex-column align-items-center w-50">
           <h1>Your Contributions</h1>
           <div
-            className="w-100 d-flex flex-column mb-3"
+            className="w-100 d-flex flex-column"
             style={{ gap: "1rem" }}
           >
             {response.length > 0 ? (
               response.map((R) => (
                 <div key={R._id}>
                   <Card
-                    title={R.questionid.title}
-                    style={{ width: "100%", border: "2px solid black" }}
+                    title={<span className="smalltitlefont3 bullet-circle">&#8226; {R.questionid.title}</span>}
+                    style={{ width: "100%", border: "2px solid black", paddingBottom:"0px" }}
                   >
-                    <p>{R.answer}</p>
-                  </Card>
+                    <div style={{ display: "flex", alignItems: "center" }}></div>
+                    <p className="arrow-bullet ff" style={{ fontSize: "18px", marginTop: "-2rem", flex: "1" }}>
+                      &rarr;  {expandedId === R._id
+                        ? R.answer
+                        : `${R.answer.slice(0, 47)}...`}
 
+                      {R.answer.length > 50 && (
+                        <button
+                         type="link"
+                          onClick={() => handleSeeMore(R._id)} style={{ marginLeft: "5px" }}
+                        >
+                          {expandedId === R._id ? "See less" : "See more"}
+                        </button>
+                      )}
+                    </p>
+
+                  </Card>
                   <div
-                    className="d-flex justify-content-around mt-1"
-                    style={{ width: "30%" }}
+                    className="d-flex justify-content-center mt-1"
+                    style={{ width: "63%" }}
                   >
                     <ThemeProvider theme={theme}>
                       <Button
                         variant="contained"
                         sx={{
                           bgcolor: "ochre.Update",
+                          marginLeft:"12rem",
+                          marginRight:"1rem"
                         }}
                         onClick={() => handleUpdateClick(R._id, R.answer)}
                       >
@@ -182,7 +203,7 @@ const UserContributions = () => {
             )}
           </div>
           <Modal
-            title="Enter Updated Answer"
+            title={<h2 className="modaltitle ff">Enter Updated Answer</h2>}
             centered
             visible={open}
             onOk={() => updateContribution(selectedId)} // Pass the selected ID to the update function

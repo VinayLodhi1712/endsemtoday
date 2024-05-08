@@ -149,13 +149,13 @@ const AdminQuestions = () => {
 
   return (
     <Layout>
-      <div className="d-flex justify-content-around">
+      <div className="bg d-flex justify-content-around">
         <div className="w-25 mt-3">
           <UserMEnu />
         </div>
 
         <Tabs className="w-50">
-          <TabPane tab="Your Questions" key="1">
+          <TabPane  tab={<span className="tabtitle">Your Questions</span>} key="1">
             <div className="d-flex w-100 justify-content-around mt-3  ">
               <div
                 className="d-flex justify-content-center flex-column align-items-center w-100"
@@ -164,18 +164,18 @@ const AdminQuestions = () => {
                 {Questions.length > 0 ? (
                   Questions.map((q) => (
                     <div class="card w-100 p-2">
-                      <div class="card-body">
+                      <div >
                         <blockquote class="blockquote mb-0">
-                          <p style={{ marginBottom: "0rem" }}>{q.title.substring(0,40)}..... </p>
+                          <p className="ff smalltitlefont3 bulletcircle mb-0" style={{ marginLeft:"2px"}}>&#8226; {q.title.substring(0,40)}..... </p>
                           <div className="d-flex align-items-center w-100 justify-content-between">
                             {" "}
                             <div>
                               {" "}
                               {q.tags.map((tag, index) => (
-                                <Tag color="blue">{tag}</Tag>
+                                <Tag color="blue" className="ff" style={{marginLeft:"2px"}}>{tag}</Tag>
                               ))}
                             </div>
-                            <footer class="blockquote-footer">
+                            <footer class="blockquote-footer mt-1 ff">
                               asked by{" "}
                               <cite title="Source Title">
                                 <b>{q.user.Name}</b>
@@ -185,7 +185,7 @@ const AdminQuestions = () => {
                           </div>
                         </blockquote>
                       </div>
-                      <div className="d-flex" style={{ gap: "1rem" }}>
+                      <div className="d-flex" style={{ gap: "1rem",marginLeft:"10rem"}}>
                         <NavLink to={`/dashboard/user/answers/${q._id}`}>
                           <Button variant="contained" color="success">
                             Answer
@@ -241,7 +241,7 @@ const AdminQuestions = () => {
             </div>
           </TabPane>
 
-          <TabPane tab="Bookmarked" key="2">
+          <TabPane tab={<span className="tabtitle">BookMarked</span>} key="2">
             <div>
               <div
                 className="d-flex justify-content-center flex-column align-items-center w-100"
@@ -250,18 +250,18 @@ const AdminQuestions = () => {
                 {BookMarked.length > 0 ? (
                   BookMarked.map((q) => (
                     <div class="card w-100 p-2">
-                      <div class="card-body">
-                        <blockquote class="blockquote mb-0">
-                          <p style={{ marginBottom: "0rem" }}>{q.title.substring(0,100)}..... </p>
+                      <div>
+                        <blockquote class="blockquote mb-0 ff">
+                          <p className="mb-0 ff smalltitlefont3"> &#8226; {q.title.substring(0,100)}..... </p>
                           <div className="d-flex align-items-center w-100 justify-content-between">
                             {" "}
                             <div>
                               {" "}
                               {q.tags.map((tag, index) => (
-                                <Tag color="blue">{tag}</Tag>
+                                <Tag className="ff" color="blue">{tag}</Tag>
                               ))}
                             </div>
-                            <footer class="blockquote-footer">
+                            <footer class="blockquote-footer mt-2">
                               asked by{" "}
                               <cite title="Source Title">
                                 <b>{UserName}</b>
@@ -271,7 +271,7 @@ const AdminQuestions = () => {
                           </div>
                         </blockquote>
                       </div>
-                      <div className="d-flex" style={{ gap: "1rem" }}>
+                      <div className="d-flex" style={{ gap: "1rem", marginLeft:"10rem" }}>
                         <NavLink to={`/dashboard/user/answers/${q._id}`}>
                           <Button variant="contained" color="success">
                             Answer

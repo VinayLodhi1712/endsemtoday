@@ -8,7 +8,7 @@ body {
 /* navbar css */
 
 .navbar {
-  padding:1.2rem 0rem 1.2rem 0rem;
+  padding: 1.2rem 0rem 1.2rem 0rem;
   text-transform: uppercase;
   box-shadow: 0 1px 5px;
   background-color: #0d7df4 !important;
@@ -18,10 +18,12 @@ body {
   font-weight: 500;
   color: white !important;
 }
-.navbar-brand{
+
+.navbar-brand {
   color: white;
   font-weight: 600;
 }
+
 .nav-link.active {
   background-color: rgba(255, 255, 255, 0.116);
 }
@@ -977,29 +979,34 @@ UserInfo .col-md-4 img {
 } */
 
 .homepage-section:nth-child(odd) {
-  background-color: #c5bdbd; /* Light grey */
+  background-color: #c5bdbd;
+  /* Light grey */
 }
 
 .homepage-section:nth-child(even) {
-  background-color: #ffffff; /* White */
+  background-color: #ffffff;
+  /* White */
 }
- 
+
 .active-button {
   background-color: #0d6efd;
   color: white;
 }
 
-.bg-white{
+.bg-white {
   background-color: rgba(255, 255, 255, 0.253);
 }
+
 /* Add custom styles for the form */
 .bg {
-  background-color: #f2f2f2; /* Light background color */
+  background-color: #f2f2f2;
+  /* Light background color */
   padding: 20px;
 }
 
 .Registerlayout {
-  background-color: #ffffff; /* White background color */
+  background-color: #ffffff;
+  /* White background color */
   border-radius: 10px;
   padding: 20px;
 }
@@ -1009,7 +1016,8 @@ UserInfo .col-md-4 img {
 }
 
 .active-button:hover {
-  background-color: #4590db; /* Darker navy blue background color on hover */
+  background-color: #4590db;
+  /* Darker navy blue background color on hover */
 }
 
 .form-control {
@@ -1020,31 +1028,43 @@ UserInfo .col-md-4 img {
   font-size: 18px;
   font-weight: bold;
 }
+
 .smalltitlefont3 {
-  font-size: 18px;
-  font-weight: 400;
+  font-size: 21px;
+  font-weight: 500;
   font-family: Georgia, "Times New Roman", Times, serif;
 }
 
+.ff {
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
 
 .btn-primary2 {
-  background-color: navy; /* Navy blue background color for primary button */
-  border-color: navy; /* Navy blue border color */
+  background-color: navy;
+  /* Navy blue background color for primary button */
+  border-color: navy;
+  /* Navy blue border color */
 }
 
 .btn-primary:hover {
-  background-color: #001f3f; /* Darker navy blue background color on hover */
-  border-color: #001f3f; /* Darker navy blue border color on hover */
+  background-color: #001f3f;
+  /* Darker navy blue background color on hover */
+  border-color: #001f3f;
+  /* Darker navy blue border color on hover */
 }
 
 .btn-outline-primary {
-  color: navy; /* Navy blue text color for outline button */
-  border-color: navy; /* Navy blue border color */
+  color: navy;
+  /* Navy blue text color for outline button */
+  border-color: navy;
+  /* Navy blue border color */
 }
 
 .btn-outline-primary:hover {
-  color: #001f3f; /* Darker navy blue text color on hover for outline button */
-  border-color: #001f3f; /* Darker navy blue border color on hover for outline button */
+  color: #001f3f;
+  /* Darker navy blue text color on hover for outline button */
+  border-color: #001f3f;
+  /* Darker navy blue border color on hover for outline button */
 }
 
 
@@ -1090,6 +1110,33 @@ UserInfo .col-md-4 img {
   padding: 10px 20px;
 }
 
-.tabtitle{
+.tabtitle {
   font-size: 20px;
+}
+
+.bullet-circle {
+  margin-right: 0.5rem;
+  color: #000;
+  font-size: 1.2rem;
+}
+
+.arrow-bullet {
+  margin-right: 0.5rem;
+  color: #000;
+  font-size: 1.2rem;
+}
+
+.modalhelper {
+  width: 75%;
+  text-align: center;
+  display: block;
+  font-size: 15px;
+  margin-left: 4rem;
+  color: red;
+}
+
+.modaltitle{
+  font-weight: 500;
+  text-align: center;
+  display: block;
 }

@@ -240,7 +240,7 @@ const Forgotpassword = () => {
                 {!loading ? "Reset By Email" : "Sending..."}
               </button>
               <Modal
-                title={<h2 style={{ fontWeight: "500", textAlign: "center", display: "block" }}>Reset Password via Email</h2>}
+                title={<h2 className="modaltitle">Reset Password via Email</h2>}
 
                 open={isModalOpen}
                 onOk={() => {
@@ -250,7 +250,7 @@ const Forgotpassword = () => {
                 onCancel={handleCancel}
                 okText="Submit"
               >
-                <p style={{ width: "75%", textAlign: "center", display: "block", fontSize: "15px", marginLeft: "4rem", color:"red" }}>Enter your email and we will send you a link to reset your password</p>
+                <p className="modalhelper">Enter your email and we will send you a link to reset your password</p>
                 <label htmlFor="exampleInputEmail1" className="form-label smalltitlefont2">
                   Email address
                 </label>

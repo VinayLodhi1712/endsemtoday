@@ -67,7 +67,7 @@ const Register = () => {
 
         toast.success("Registration Successful");
         setTimeout(() => {
-          navigate("/");
+          navigate("/login");
         }, 2000);
       } else if (response.status === 409) {
         // User already exists
