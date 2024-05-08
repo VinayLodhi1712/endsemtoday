@@ -245,33 +245,24 @@ const ProductDetails = () => {
                     effect={"coverflow"}
                     grabCursor={true}
                     centeredSlides={true}
-                    slidesPerView={"auto"}
+                    slidesPerView={Math.min(3, p.reviews.length)} // Ensure at least 3 reviews are visible
                     loop={true}
-                    // pagination={{
-                    //   clickable: true,
-                    // }}
                     navigation={true}
                     coverflowEffect={{
                       rotate: 50,
                       stretch: 0,
-
                       modifier: 0,
                       slideShadows: true,
                     }}
-                    modules={[EffectCoverflow, Pagination, Navigation]}
+                    modules={[EffectCoverflow, Navigation]}
                     className="mySwiper mb-3"
                     initialSlide={0}
                   >
                     {p.reviews.length > 0 && (
-                      <div>
+                      <>
                         {p.reviews.map((review) => (
-                          <SwiperSlide>
-                            <div
-                              className="boxlayout p-3"
-                              style={{
-                                width: "100%",
-                              }}
-                            >
+                          <SwiperSlide key={review._id}>
+                            <div className="boxlayout p-3" style={{ width: "100%" }}>
                               <div
                                 className="d-flex justify-content-between"
                                 style={{ marginRight: "10px" }}
@@ -300,21 +291,17 @@ const ProductDetails = () => {
                                   )}
                               </div>
 
-                              <p style={{ fontWeight: 600 }}>
-                                {review.comment}
-                              </p>
-                              <p
-                                className="mediumtitlefont"
-                                style={{ marginRight: "8rem" }}
-                              >
+                              <p style={{ fontWeight: 600 }}>{review.comment}</p>
+                              <p className="mediumtitlefont" style={{ marginRight: "8rem" }}>
                                 - {review.name}
                               </p>
                             </div>
                           </SwiperSlide>
                         ))}
-                      </div>
+                      </>
                     )}
                   </Swiper>
+
 
                   <Modal show={showModal} onHide={() => setShowModal(false)}>
                     <Modal.Header closeButton>
