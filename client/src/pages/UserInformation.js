@@ -250,7 +250,7 @@ const UserInformation = () => {
         </div>
 
         <NavLink to="/Users">
-          <button className="btn btn-dark">Back</button>
+          <button className="btn btn-primary">Back</button>
         </NavLink>
       </div>
     </Layout>

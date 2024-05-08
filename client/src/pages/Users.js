@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import Layout from "./../components/layout/layout";
 import { Tag } from "antd";
 import toast from "react-hot-toast";
-import { Pagination } from "antd";
-
+import { Pagination } from "antd"
+import { FaMapMarkerAlt, FaStar, FaLightbulb } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 const Users = () => {
   const [Page, Setpage] = useState(1);
@@ -12,7 +12,7 @@ const Users = () => {
 
   const [Users, SetUsers] = useState([]);
 
-  const [pageSize, setPageSize] = useState(12);
+  const [pageSize, setPageSize] = useState(9);
 
   async function GetAllUsers() {
     try {
@@ -48,6 +48,7 @@ const Users = () => {
 
   useEffect(() => {
     GetAllUsers();
+    GetCount();
   }, [Page]);
 
   useEffect(() => {
@@ -56,49 +57,40 @@ const Users = () => {
 
   return (
     <Layout>
-      <div
-        className="d-flex flex-column align-items-center"
-        style={{ width: "100%" }}
-      >
-        <h3 className="mt-2 ">Users</h3>
+      <div className="bg2 d-flex flex-column align-items-center" style={{ width: "100%" }}>
+        <h3 className="mt-3 Titlefont">Total Active Users</h3>
 
-        <div
-          className=" d-flex align-items-center flex-wrap justify-content-around w-75"
-          style={{ gap: "3rem" }}
-        >
-          {Users.map((u, _id) => (
-            <div
-              className="candidate-list candidate-grid d-flex flex-column align-items-start border p-2"
-              style={{ width: "20%" }}
-            >
-              <div className="UserImage d-flex justify-content-center w-100">
-                <img
-                  className="img-fluid "
-                  style={{ width: "10rem", height: "10rem" }}
-                  src={`http://localhost:8000/api/v1/auth/get-userPhoto/${u._id}`}
-                />
+        <div className="d-flex flex-wrap justify-content-around w-75">
+          {Users.map((u, index) => (
+            <div key={index} className="user-tile">
+              <div className="user-image">
+                <img className="img-fluid" style={{ width: "10rem", height: "10rem" }} src={`http://localhost:8000/api/v1/auth/get-userPhoto/${u._id}`} alt={u.Name} />
               </div>
-              <div className="d-flex flex-column align-items-start justify-content-start ">
-                <NavLink
-                  to={`/userinformation/${u._id}`}
-                  className="Nomarginpara UsernameLink"
-                >
-                  {u.Name}
-                </NavLink>
-                <p className="Nomarginpara">{u.Location}</p>
-                <p className="Nomarginpara">
-                  Reputation:<strong>{u.Reputation}</strong>
-                </p>
-                <div>
-                  {u.tags.length > 0 ? (
-                    <>
-                      <span> Skills: </span>
-                      {u.tags.map((t) => (
-                        <Tag color="blue">{t}</Tag>
-                      ))}
-                    </>
-                  ) : null}
+              <div className="user-details">
+                <NavLink to={`/userinformation/${u._id}`} className="Nomarginpara UsernameLink ff smalltitlefont3 center2">{u.Name}</NavLink>
+
+                {u.Location && (
+                  <div className="inline">
+                    <FaMapMarkerAlt style={{ color: '#0066CD', marginRight: '5px' }} />
+                    <p className="Nomarginpara" style={{ fontSize: '18px' }}>{u.Location}</p>
+                  </div>
+                )}
+
+
+                <div className="inline mb-2" >
+                  <FaStar style={{ color: '#0066CD', marginRight: '5px' }} />
+                  <p className="Nomarginpara" style={{ fontSize: '17px' }}>Reputation: <strong>{u.Reputation}</strong></p>
                 </div>
+
+
+                {u.tags.length > 0 && (
+                  <div className="center2" style={{ marginLeft: "1rem" }}>
+                    <span>Skills: </span>
+                    {u.tags.map((t, index) => (
+                      <Tag key={index} color="blue">{t}</Tag>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
           ))}
@@ -114,6 +106,7 @@ const Users = () => {
           }}
         />
       </div>
+
     </Layout>
   );
 };

@@ -1140,3 +1140,75 @@ UserInfo .col-md-4 img {
   text-align: center;
   display: block;
 }
+
+.bg2 {
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+.user-tile {
+  width: 30%;
+  margin: 10px; 
+  padding: 15px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.user-tile:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.user-image {
+  display: flex;
+  justify-content: center;
+}
+
+.user-image img {
+  width: 100%;
+  height: auto;
+  max-width: 150px;
+}
+
+.user-details {
+  margin-top: 10px;
+}
+
+.UsernameLink {
+  color: #333;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.UsernameLink:hover {
+  text-decoration: underline;
+}
+
+.Nomarginpara {
+  margin: 0;
+}
+
+.Tag2 {
+  margin-right: 5px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.center2{
+  text-align: center;
+  display: block;
+}
+
+.inline{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 1rem;
+  margin-top: 4px;
+}
+
