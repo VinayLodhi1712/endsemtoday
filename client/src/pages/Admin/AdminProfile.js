@@ -8,7 +8,8 @@ import { RxCross2 } from "react-icons/rx";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import AdminMenu from "./../../components/layout/AdminMenu";
 import { Modal } from "antd";
-
+import { Link } from "react-router-dom";
+import { FaArrowLeft } from "react-icons/fa";
 const Profile = () => {
   const [auth, Setauth] = useAuth();
   const [Name, SetName] = useState("");
@@ -247,20 +248,20 @@ const Profile = () => {
 
   return (
     <Layout>
-      <div className="d-flex justify-content-around">
+      <div className="bg d-flex justify-content-around">
         <div className="w-25 mt-3">
           <AdminMenu />
         </div>
         <Tabs centered style={{ width: "60%" }}>
           <TabPane
-            tab="Personal Information"
+            tab={<span className="tabtitle">Personal Infromation</span>}
             key="1"
             className="TabPanePersonalInfo"
           >
-            <div className="d-flex flex-column align-items-center">
+            <div className="d-flex flex-column align-items-center mt-5">
               {" "}
               <img
-                style={{ height: "10rem", width: "12rem" }}
+                style={{ height: "14rem", width: "14rem", marginRight: "2rem" }}
                 title
                 className="img-circle img-thumbnail isTooltip EditProfileUSerPhoto"
                 src={`http://localhost:8000/api/v1/auth/get-userPhoto/${auth.user._id}`}
@@ -299,9 +300,9 @@ const Profile = () => {
                 <div className="mb-1 w-100  d-flex align-items-center  justify-content-between">
                   <label
                     htmlFor="exampleInputName w-25 text-start"
-                    className="form-label"
+                    className="form-label smalltitlefont3"
                   >
-                    <strong>Name:</strong>
+                    <strong>Name :</strong>
                   </label>
                   <input
                     type="text"
@@ -318,7 +319,7 @@ const Profile = () => {
                 <div className="mb-1 w-100  d-flex align-items-center  justify-content-between">
                   <label
                     htmlFor="exampleInputEmail1 w-25"
-                    className="form-label"
+                    className="form-label smalltitlefont3"
                   >
                     <b>Email</b>
                   </label>
@@ -336,12 +337,12 @@ const Profile = () => {
                 </div>
 
                 <div className="mb-1  w-100  d-flex align-items-center  justify-content-between">
-                  <label htmlFor="exampleInputEmail1" className="form-label">
+                  <label htmlFor="exampleInputEmail1" className="form-label smalltitlefont3">
                     <b> Contact Number:</b>
                   </label>
                   <input
                     type="Number"
-                    className="form-control w-75"
+                    className="form-control w-100"
                     id="exampleInputEmail1"
                     aria-describedby="emailHelp"
                     value={Number}
@@ -352,7 +353,7 @@ const Profile = () => {
                 </div>
 
                 <div className="mb-2 w-100  d-flex align-items-center  justify-content-between">
-                  <label className="form-label">
+                  <label className="form-label smalltitlefont3">
                     <b>Location:</b>
                   </label>
                   <input
@@ -366,14 +367,18 @@ const Profile = () => {
                   />
                 </div>
 
-                <button type="submit" className="btn btn-dark ">
+                <button type="submit" className="btn btn-primary" style={{ width: "8rem" }}>
                   Save
                 </button>
+                <Link to="/dashboard/user" className="mt-3 btn btn-outline-primary d-flex align-items-center text-decoration-none">
+                  <FaArrowLeft className="me-1" />
+                  Back to Dashboard
+                </Link>
               </div>
             </form>
           </TabPane>
 
-          <TabPane tab="Change Password" key="2">
+          <TabPane tab={<span className="tabtitle">Change Password</span>} key="2">
             <form
               style={{
                 display: "flex",
@@ -391,7 +396,7 @@ const Profile = () => {
                 <h3>
                   Change Password{" "}
                   <button
-                    className="btn "
+                    className="btn btn-outline-primary"
                     type="button"
                     onClick={togglePasswordVisibility}
                   >
@@ -399,7 +404,7 @@ const Profile = () => {
                   </button>
                 </h3>
                 <div className="mb-1 w-100  d-flex align-items-center  justify-content-between">
-                  <label htmlFor="exampleInputPassword1" className="form-label">
+                  <label htmlFor="exampleInputPassword1" className="form-label smalltitlefont3">
                     <b>Old Password:</b>
                   </label>
                   <input
@@ -413,7 +418,7 @@ const Profile = () => {
                   />
                 </div>
                 <div className="mb-1 w-100  d-flex align-items-center  justify-content-between">
-                  <label htmlFor="exampleInputPassword1" className="form-label">
+                  <label htmlFor="exampleInputPassword1" className="form-label smalltitlefont3">
                     <b>New Password:</b>
                   </label>
                   <input
@@ -427,14 +432,18 @@ const Profile = () => {
                   />
                 </div>
 
-                <button type="submit" className="btn btn-dark ">
+                <button type="submit" className="btn btn-primary " style={{ width: "8rem" }}>
                   Save
                 </button>
+                <Link to="/dashboard/user" className="mt-3 btn btn-outline-primary d-flex align-items-center text-decoration-none">
+                  <FaArrowLeft className="me-1" />
+                  Back to Dashboard
+                </Link>
               </div>
             </form>
           </TabPane>
 
-          <TabPane tab="Additional Information" key="3">
+          <TabPane tab={<span className="tabtitle">Additional Information</span>} key="3">
             <form
               style={{
                 display: "flex",
@@ -450,7 +459,7 @@ const Profile = () => {
                 style={{ width: "100%" }}
               >
                 <div className="mb-1 w-100  d-flex align-items-center  justify-content-between">
-                  <label htmlFor="exampleInputPassword1" className="form-label">
+                  <label htmlFor="exampleInputPassword1" className="form-label smalltitlefont3">
                     <b>Github:</b>
                   </label>
                   <input
@@ -463,7 +472,7 @@ const Profile = () => {
                   />
                 </div>
                 <div className="mb-1 w-100  d-flex align-items-center  justify-content-between">
-                  <label htmlFor="exampleInputPassword1" className="form-label">
+                  <label htmlFor="exampleInputPassword1" className="form-label smalltitlefont3">
                     <b>Linked In:</b>
                   </label>
                   <input
@@ -477,7 +486,7 @@ const Profile = () => {
                   />
                 </div>
                 <div className="mb-1 w-100  d-flex align-items-center  justify-content-between">
-                  <label htmlFor="exampleInputPassword1" className="form-label">
+                  <label htmlFor="exampleInputPassword1" className="form-label smalltitlefont3">
                     <b>Website:</b>
                   </label>
                   <input
@@ -491,7 +500,7 @@ const Profile = () => {
                   />
                 </div>
                 <div className="d-flex align-items-center w-100 mb-3 justify-content-between">
-                  <label htmlFor="exampleInputPassword1" className="form-label">
+                  <label htmlFor="exampleInputPassword1" className="form-label smalltitlefont3">
                     <b>Skills:</b>
                   </label>
                   <div className="d-flex w-75 justify-content-between">
@@ -502,6 +511,7 @@ const Profile = () => {
                     </div>
                     <button
                       className="btn btn-primary"
+                      style={{ width: "8rem" }}
                       onClick={() => {
                         Setvisible(true);
                       }}
@@ -533,7 +543,7 @@ const Profile = () => {
                 </div>
 
                 <div className="d-flex align-items-center w-100 mb-3 justify-content-between">
-                  <label htmlFor="exampleInputPassword1" className="form-label">
+                  <label htmlFor="exampleInputPassword1" className="form-label smalltitlefont3">
                     <b>Add Skills:</b>
                   </label>
                   <div className="d-flex w-75 justify-content-between">
@@ -549,6 +559,7 @@ const Profile = () => {
                     ></input>{" "}
                     <button
                       className="btn btn-primary"
+                      style={{ width: "8rem" }}
                       onClick={(e) => {
                         handleTagInputChange(e);
                       }}
@@ -560,21 +571,25 @@ const Profile = () => {
                 <div>
                   {tags.length > 0
                     ? tags.map((t) => (
-                        <Tag color="blue">
-                          {t}
-                          <RxCross2
-                            onClick={(e) => {
-                              handleTagRemove(e, t);
-                            }}
-                          />
-                        </Tag>
-                      ))
+                      <Tag color="blue">
+                        {t}
+                        <RxCross2
+                          onClick={(e) => {
+                            handleTagRemove(e, t);
+                          }}
+                        />
+                      </Tag>
+                    ))
                     : null}
                 </div>
 
-                <button type="submit" className="btn btn-dark ">
+                <button type="submit" className="btn btn-primary" style={{ width: "8rem" }}>
                   Save
                 </button>
+                <Link to="/dashboard/user" className="mt-3 btn btn-outline-primary d-flex align-items-center text-decoration-none">
+                  <FaArrowLeft className="me-1" />
+                  Back to Dashboard
+                </Link>
               </div>
             </form>
           </TabPane>

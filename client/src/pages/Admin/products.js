@@ -33,7 +33,7 @@ const Products = () => {
 
   return (
     <Layout>
-      <div className="d-flex justify-content-around mt-3">
+      <div className="bg d-flex justify-content-around mt-3">
         <div className="w-25">
           <AdminMenu></AdminMenu>
         </div>

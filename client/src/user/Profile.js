@@ -299,7 +299,7 @@ const Profile = () => {
                     htmlFor="exampleInputName w-25 text-start"
                     className="form-label smalltitlefont3"
                   >
-                    <strong>Name:</strong>
+                    <strong>Name :</strong>
                   </label>
                   <input
                     type="text"

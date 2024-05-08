@@ -147,14 +147,14 @@ const AdminQuestions = () => {
   };
 
   return (
-    <Layout>
-      <div className="d-flex justify-content-around">
+    <Layout >
+      <div className="bg d-flex justify-content-around">
         <div className="w-25 ">
           <AdminMenu />
         </div>
 
         <Tabs className="w-50">
-          <TabPane tab="Your Questions" key="1">
+          <TabPane tab={<span className="tabtitle">Your Questions</span>} key="1">
             <div className="d-flex w-100 justify-content-around mt-3  ">
               <div
                 className="d-flex justify-content-center flex-column align-items-center w-100"
@@ -240,7 +240,7 @@ const AdminQuestions = () => {
             </div>
           </TabPane>
 
-          <TabPane tab="Bookmarked" key="2">
+          <TabPane tab={<span className="tabtitle">BookMarked</span>} key="2">
             <div>
               <div
                 className="d-flex justify-content-center flex-column align-items-center w-100"

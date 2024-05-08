@@ -112,7 +112,7 @@ const UserContributions = () => {
   };
 
   const handleSeeMore = (id) => {
-    // Expand or collapse the content based on current state
+    
     setExpandedId(expandedId === id ? null : id);
   };
 

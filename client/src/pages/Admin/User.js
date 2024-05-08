@@ -77,7 +77,7 @@ const User = () => {
 
   return (
     <Layout>
-      <div className="d-flex justify-content-around" style={{ width: "100%" }}>
+      <div className="bg d-flex justify-content-around" style={{ width: "100%" }}>
         <div className="w-25">
           <AdminMenu />
         </div>

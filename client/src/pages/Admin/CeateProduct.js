@@ -83,7 +83,7 @@ const CreateProduct = () => {
   return (
     <Layout>
       <div
-        className="d-flex justify-content-around mt-3 overflow-auto"
+        className="bg d-flex justify-content-around mt-3 overflow-auto"
         style={{ height: "100%" }}
       >
         <div className="w-25">

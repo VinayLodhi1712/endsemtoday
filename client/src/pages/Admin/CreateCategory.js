@@ -127,7 +127,7 @@ const CreateCategory = () => {
   return (
     <Layout>
       <div
-        className="d-flex justify-content-around mt-3 "
+        className="bg d-flex justify-content-around"
         style={{ height: "100%" }}
       >
         <div className="w-25">
@@ -137,11 +137,11 @@ const CreateCategory = () => {
           className=" d-flex flex-column"
           style={{ gap: "2rem", height: "100%", width: "60%" }}
         >
-          <h1 className=" mt-2">Manage Category</h1>
+          <h1 className="mt-2" style={{textAlign:"center"}}>Manage Category</h1>
           <div>
             <div>
               <form onSubmit={HandleSubmit}>
-                <div className="mb-3 ">
+                <div className="mb-3 d-flex w-75 gap-3">
                   <input
                     type="text"
                     placeholder="Add New Category"
@@ -149,13 +149,12 @@ const CreateCategory = () => {
                     onChange={(e) => {
                       SetName(e.target.value);
                     }}
-                    className="w-100"
+                    className="w-75"
                   ></input>
+                  <button type="submit" className="btn btn-primary w-25">
+                    Submit
+                  </button>
                 </div>
-
-                <button type="submit" className="btn btn-primary">
-                  Submit
-                </button>
               </form>
             </div>
           </div>
@@ -170,10 +169,10 @@ const CreateCategory = () => {
               <tbody>
                 {categories?.map((c, index) => (
                   <tr key={c.id}>
-                    <td>{c.name}</td>
+                    <td >{c.name}</td>
                     <td>
                       <button
-                        className="btn  btn-primary"
+                        className="btn btn-primary"
                         onClick={() => {
                           Setvisible(true);
                           SetUpdateName(c.name);

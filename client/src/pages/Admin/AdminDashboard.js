@@ -70,7 +70,7 @@ const AdminDashboard = () => {
 
   return (
     <Layout>
-      <div className="d-flex justify-content-center align-items-center h-100 p-3">
+      <div className="bg d-flex justify-content-center align-items-center h-100 p-3">
         <div className="d-flex flex-column justify-content-center  align-items-center"></div>
         <Drawer
           title="User Dashboard"
@@ -160,21 +160,6 @@ const AdminDashboard = () => {
                     style={{ width: "90%" }}
                     src={`http://localhost:8000/api/v1/auth/get-userPhoto/${auth.user._id}`}
                   />
-                  <div className="d-flex gap-3">
-                    <NavLink to={auth.user.Github} className="NavlinksDesign">
-                      {" "}
-                      <FaGithub />
-                    </NavLink>
-                    <NavLink to={auth.user.LinkedIn} className="NavlinksDesign">
-                      {" "}
-                      <FaLinkedin />
-                    </NavLink>
-                    <NavLink to={auth.user.Website} className="NavlinksDesign">
-                      {" "}
-                      <FaGlobe />{" "}
-                      <span className="Smalltxt"> {auth.user.Website}</span>
-                    </NavLink>
-                  </div>
                 </div>
               </div>
               <div className="col-md-6">
@@ -251,6 +236,30 @@ const AdminDashboard = () => {
                           {moment(auth.user.createdAt).fromNow()}
                         </td>
                       </tr>
+                      <tr>
+                        <td>
+                          <span className="glyphicon glyphicon-calendar text-primary" />
+                          Get connected with social media
+                        </td>
+                        <td className="Info">
+                          <div className="d-flex gap-4">
+                            <NavLink to={auth.user.Github} className="NavlinksDesign" >
+                              {" "}
+                              <FaGithub />
+                            </NavLink>
+                            <NavLink to={auth.user.LinkedIn} className="NavlinksDesign">
+                              {" "}
+                              <FaLinkedin />
+                            </NavLink>
+                            <NavLink to={auth.user.Website} className="NavlinksDesign">
+                              {" "}
+                              <FaGlobe />{" "}
+                              <span className="Smalltxt"> {auth.user.Website}</span>
+                            </NavLink>
+                          </div>
+                        </td>
+                      </tr>
+
                       <Space>
                         <Button type="primary" onClick={showDrawer}>
                           Admin Dashboard
