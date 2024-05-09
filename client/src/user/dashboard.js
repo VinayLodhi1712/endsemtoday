@@ -184,33 +184,6 @@ const UserDashboard = () => {
                     style={{ width: "90%" }}
                     src={`http://localhost:8000/api/v1/auth/get-userPhoto/${auth.user._id}`}
                   />
-                  <div className="d-flex gap-3">
-                    {auth.user.Github ? (
-                      <NavLink to={auth.user.Github} className="NavlinksDesign">
-                        {" "}
-                        <FaGithub />
-                      </NavLink>
-                    ) : null}
-                    {auth.user.LinkedIn ? (
-                      <NavLink
-                        to={auth.user.LinkedIn}
-                        className="NavlinksDesign"
-                      >
-                        {" "}
-                        <FaLinkedin />
-                      </NavLink>
-                    ) : null}
-                    {auth.user.Website ? (
-                      <NavLink
-                        to={auth.user.Website}
-                        className="NavlinksDesign"
-                      >
-                        {" "}
-                        <FaGlobe />{" "}
-                        <span className="Smalltxt"> {auth.user.Website}</span>
-                      </NavLink>
-                    ) : null}
-                  </div>
                 </div>
               </div>
               <div className="col-md-6">
@@ -285,6 +258,47 @@ const UserDashboard = () => {
                         </td>
                         <td className="Info">
                           {moment(auth.user.createdAt).fromNow()}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span className="glyphicon glyphicon-calendar text-primary" />
+                          Get connected with social media
+                        </td>
+                        <td className="Info">
+                          <div className="d-flex gap-4">
+                            {auth.user.Github ? (
+                              <NavLink
+                                to={auth.user.Github}
+                                className="NavlinksDesign"
+                              >
+                                {" "}
+                                <FaGithub />
+                              </NavLink>
+                            ) : null}
+                            {auth.user.LinkedIn ? (
+                              <NavLink
+                                to={auth.user.LinkedIn}
+                                className="NavlinksDesign"
+                              >
+                                {" "}
+                                <FaLinkedin />
+                              </NavLink>
+                            ) : null}
+                            {auth.user.Website ? (
+                              <NavLink
+                                to={auth.user.Website}
+                                className="NavlinksDesign"
+                              >
+                                {" "}
+                                <FaGlobe />{" "}
+                                <span className="Smalltxt">
+                                  {" "}
+                                  {auth.user.Website}
+                                </span>
+                              </NavLink>
+                            ) : null}
+                          </div>
                         </td>
                       </tr>
                       <Space>

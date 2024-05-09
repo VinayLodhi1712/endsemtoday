@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import React from "react";
 import Layout from "../components/layout/layout";
-import { useNavigate, NavLink , useLocation} from "react-router-dom";
+import { useNavigate, NavLink, useLocation } from "react-router-dom";
 import toast from "react-hot-toast";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import {
@@ -29,7 +29,7 @@ const Register = () => {
     setShowPassword(!showPassword);
   };
   const Setlocation = () => {
-    setLocation(country + " " + region);
+    setLocation(region + " " + country);
   };
 
   useEffect(() => {
@@ -83,30 +83,58 @@ const Register = () => {
   return (
     <Layout>
       <div className="bg">
-        <div className="Registerlayout bg-light" style={{ width: "70%", height: "100%", padding: "20px", borderRadius: "10px" }}>
+        <div
+          className="Registerlayout bg-light"
+          style={{
+            width: "70%",
+            height: "100%",
+            padding: "20px",
+            borderRadius: "10px",
+          }}
+        >
           <div className="d-flex mb-3">
             <button
               className="align-items-center button-16 bg-primary"
-              style={{ width: "50%", height: "50px", borderRadius: "5px", padding: "10px 20px" }}
+              style={{
+                width: "50%",
+                height: "50px",
+                borderRadius: "5px",
+                padding: "10px 20px",
+              }}
             >
               <NavLink
                 to="/register"
                 className="nav-link"
-               
-                style={{ height: "100%", fontSize: "28px", textDecoration: "none" }}
+                style={{
+                  height: "100%",
+                  fontSize: "28px",
+                  textDecoration: "none",
+                }}
               >
                 Register
               </NavLink>
             </button>
             <button
               className="align-items-center button-16 "
-              style={{ width: "50%", height: "50px", fontSize: "20px", borderRadius: "5px",backgroundColor:"gray" }}
+              style={{
+                width: "50%",
+                height: "50px",
+                fontSize: "20px",
+                borderRadius: "5px",
+                backgroundColor: "gray",
+              }}
             >
               <NavLink
                 to="/login"
-                className={`nav-link ${Locate.pathname === '/login' ? 'active-button' : ''}`}
-                
-                style={{ height: "100%", fontSize: "28px", textDecoration: "none", padding: "10px 20px",  }}
+                className={`nav-link ${
+                  Locate.pathname === "/login" ? "active-button" : ""
+                }`}
+                style={{
+                  height: "100%",
+                  fontSize: "28px",
+                  textDecoration: "none",
+                  padding: "10px 20px",
+                }}
               >
                 Login
               </NavLink>
@@ -124,10 +152,11 @@ const Register = () => {
               handleSubmit(e);
             }}
           >
-
             <div style={{ textAlign: "center" }}>
               <h1 style={{ fontWeight: "600" }}>Register</h1>
-              <p style={{ fontSize: "20px" }}>Already have an account? <a href="/login">Login</a> here</p>
+              <p style={{ fontSize: "20px" }}>
+                Already have an account? <a href="/login">Login</a> here
+              </p>
             </div>
 
             <div style={{ width: "100%" }}>
@@ -171,7 +200,10 @@ const Register = () => {
 
               <div className="mb-3 d-flex">
                 <div style={{ width: "50%", marginRight: "10px" }}>
-                  <label htmlFor="password" className="form-label smalltitlefont2">
+                  <label
+                    htmlFor="password"
+                    className="form-label smalltitlefont2"
+                  >
                     Password
                   </label>
                   <div style={{ display: "flex" }}>
@@ -198,7 +230,10 @@ const Register = () => {
                   </div>
                 </div>
                 <div style={{ width: "50%" }}>
-                  <label htmlFor="mobile" className="form-label smalltitlefont2">
+                  <label
+                    htmlFor="mobile"
+                    className="form-label smalltitlefont2"
+                  >
                     Mobile No.
                   </label>
                   <input
@@ -218,7 +253,10 @@ const Register = () => {
 
               <div className="d-flex">
                 <div style={{ width: "50%", marginRight: "10px" }}>
-                  <label htmlFor="country" className="form-label smalltitlefont2">
+                  <label
+                    htmlFor="country"
+                    className="form-label smalltitlefont2"
+                  >
                     Country
                   </label>
                 </div>
@@ -230,30 +268,31 @@ const Register = () => {
               </div>
               <div className="mb-3 d-flex">
                 <div style={{ width: "50%", marginRight: "10px" }}>
-
                   <CountryDropdown
                     value={country}
                     onChange={(val) => {
                       setCountry(val);
                     }}
-                    style={{ height: '40px', fontSize: "16px" }}
+                    style={{ height: "40px", fontSize: "16px" }}
                   />
                 </div>
                 <div style={{ width: "50%" }}>
-
                   <RegionDropdown
                     country={country}
                     value={region}
                     onChange={(val) => {
                       setRegion(val);
                     }}
-                    style={{ height: '40px', fontSize: "16px" }}
+                    style={{ height: "40px", fontSize: "16px" }}
                   />
                 </div>
               </div>
 
               <div className="mb-3">
-                <label htmlFor="securityQuestion" className="form-label smalltitlefont2">
+                <label
+                  htmlFor="securityQuestion"
+                  className="form-label smalltitlefont2"
+                >
                   Security Question
                 </label>
                 <select
@@ -263,7 +302,7 @@ const Register = () => {
                     SetSecurityQuestion(e.target.value);
                   }}
                   required
-                  style={{ height: '40px', fontSize: "16px" }}
+                  style={{ height: "40px", fontSize: "16px" }}
                 >
                   <option value="What is your mother's maiden name ?">
                     What is your mother's maiden name?
@@ -284,7 +323,10 @@ const Register = () => {
               </div>
 
               <div className="mb-3">
-                <label htmlFor="securityAnswer" className="form-label smalltitlefont2">
+                <label
+                  htmlFor="securityAnswer"
+                  className="form-label smalltitlefont2"
+                >
                   Security Answer
                 </label>
                 <input
@@ -316,19 +358,19 @@ const Register = () => {
                 </label>
               </div>
               <div className="d-flex justify-content-center">
-                <button type="submit" className="btn btn-primary align-items-center" disabled={Loading}>
+                <button
+                  type="submit"
+                  className="btn btn-primary align-items-center"
+                  disabled={Loading}
+                >
                   {Loading ? "Loading..." : " Register"}
                 </button>
               </div>
-
-
             </div>
           </form>
         </div>
       </div>
-
-
-    </Layout >
+    </Layout>
   );
 };
 

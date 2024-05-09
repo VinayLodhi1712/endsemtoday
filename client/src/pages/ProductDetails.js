@@ -256,7 +256,7 @@ const ProductDetails = () => {
                     }}
                     modules={[EffectCoverflow, Navigation]}
                     className="mySwiper mb-3"
-                    initialSlide={0}
+                    initialSlide={1}
                   >
                     {p.reviews.length > 0 && (
                       <>

@@ -68,6 +68,9 @@ function App() {
 
         <Route path="/technews" element={<Technews />}></Route>
 
+
+  {/* private routes */}
+  
         <Route path="/Dashboard" element={<PrivateRoute />}>
           <Route path="user/interaction" element={<Interaction />}></Route>
           <Route path="user" element={<Dashboard />}></Route>

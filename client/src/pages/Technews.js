@@ -50,7 +50,7 @@ const Technews = () => {
         console.error(error);
       }
     }
-    // fetchNews();
+    fetchNews();
   }, []);
 
   return (
@@ -103,11 +103,8 @@ const Technews = () => {
               effect={"coverflow"}
               grabCursor={true}
               centeredSlides={true}
-              slidesPerView={"auto"}
+              slidesPerView={4}
               loop={true}
-              // pagination={{
-              //   clickable: true,
-              // }}
               navigation={true}
               coverflowEffect={{
                 rotate: 50,
@@ -138,7 +135,12 @@ const Technews = () => {
                         <Typography gutterBottom variant="h5" component="div">
                           {newsItem.Title.substring(0, 50)}....
                         </Typography>
-                        <a href={newsItem.Url} style={{ marginBottom: "1rem" }}>
+                        <a
+                          href={newsItem.Url}
+                          style={{ marginBottom: "1rem" }}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
                           {newsItem.Url.substring(0, 30)}
                         </a>
                       </CardContent>

@@ -2,7 +2,9 @@ import HomeLayout from "../components/layout/HomePageLayout";
 
 import React, { useEffect } from "react";
 import Card from "react-bootstrap/Card";
-import products from "../assests/products.jpeg";
+import products from "../assests/laptop.jpeg";
+import book from "../assests/bookimage.jpg";
+import book2 from "../assests/book.jpg";
 import stack from "../assests/stack.jpeg";
 import technews from "../assests/techphoto.jpeg";
 import HomeImg from "../assests/homepageimage.png";
@@ -78,16 +80,6 @@ function Home() {
     setExpanded(newExpanded ? panel : false);
   };
 
-  // const settings = {
-  //   dots: true,
-  //   infinite: true,
-  //   speed: 500,
-  //   slidesToShow: 1,
-  //   slidesToScroll: 1,
-  //   autoplay: true,
-  //   autoplaySpeed: 5000,
-  // };
-
   const theme = createTheme({
     palette: {
       ochre: {
@@ -104,10 +96,10 @@ function Home() {
         <div className="homepage-section d-flex justify-content-around align-items-center HomeFirstDiv">
           <div
             className="w-50 d-flex flex-column justify-content-center align-items-center"
-            data-aos="fade-right"
             style={{ gap: "1rem" }}
+            data-aos="fade-right"
           >
-            <h1 className=" mt-3  text-center WelcomeText">
+            <h1 className=" mt-3 text-center WelcomeText">
               {" "}
               Welcome to <mark>TalkOfCode</mark>
               <br></br>
@@ -124,12 +116,15 @@ function Home() {
               </NavLink>
             </ThemeProvider>
           </div>
-          <img src={HomeImg} className="h-75 " data-aos="fade-left"></img>
+          <img src={HomeImg} className="h-75 "  data-aos="fade-left"></img>
         </div>{" "}
-        <div className="homepage-section d-flex align-items-center flex-column justify-content-center w-100 HomeSecondDiv">
-          <h1 className=" w-50 text-center WelcomeText" data-aos="fade-left">
+        <div
+          className="homepage-section d-flex align-items-center flex-column justify-content-center w-100 HomeSecondDiv mb-3"
+          data-aos="fade-up"
+        >
+          <h1 className=" w-50 text-center WelcomeText mt-3">
             {" "}
-            Our Services
+            More than 30+ Products Listed. Checkout Now!
           </h1>
           <div style={{ width: "100%", marginTop: "0%" }}>
             <Swiper
@@ -137,12 +132,14 @@ function Home() {
               navigation={true}
               grabCursor={true}
               centeredSlides={true}
-              slidesPerView={"auto"}
+              loop={true}
+              spaceBetween={10}
+              slidesPerView={4}
               coverflowEffect={{
                 rotate: 50,
                 stretch: 0,
-                depth: 100,
-                modifier: 1,
+
+                modifier: 0,
                 slideShadows: true,
               }}
               pagination={true}
@@ -154,8 +151,7 @@ function Home() {
               <SwiperSlide>
                 <Card
                   className="boxlayout"
-                  style={{ width: "25rem", height: "25rem" }}
-                  data-aos="fade-right"
+                  style={{ width: "20rem", height: "25rem" }}
                 >
                   <Card.Img
                     variant="top"
@@ -180,14 +176,13 @@ function Home() {
 
               <SwiperSlide>
                 <Card
-                  data-aos="fade-up"
                   // data-aos-duration="1000"
                   className="boxlayout"
-                  style={{ width: "25rem", height: "25rem" }}
+                  style={{ width: "20rem", height: "25rem" }}
                 >
                   <Card.Img
                     variant="top"
-                    src={stack}
+                    src={book}
                     style={{ height: "70%" }}
                     className="unselectable"
                   />
@@ -208,13 +203,12 @@ function Home() {
               {/* slide 3 */}
               <SwiperSlide>
                 <Card
-                  data-aos="fade-left"
                   className="boxlayout "
-                  style={{ width: "25rem", height: "25rem" }}
+                  style={{ width: "20rem", height: "25rem" }}
                 >
                   <Card.Img
                     variant="top"
-                    src={technews}
+                    src={book2}
                     style={{ height: "60%" }}
                     className="unselectable"
                   />
@@ -231,18 +225,97 @@ function Home() {
                   </Card.Body>
                 </Card>
               </SwiperSlide>
+
+              <SwiperSlide>
+                <Card
+                  className="boxlayout "
+                  style={{ width: "20rem", height: "25rem" }}
+                >
+                  <Card.Img
+                    variant="top"
+                    src={book2}
+                    style={{ height: "60%" }}
+                    className="unselectable"
+                  />
+                  <Card.Body>
+                    <Card.Title className="mediumtitlefont unselectable">
+                      Browse Tech News
+                    </Card.Title>
+
+                    <Link to="/technews">
+                      <button className="btn btn-primary w-100">
+                        See Latest TechNews
+                      </button>
+                    </Link>
+                  </Card.Body>
+                </Card>
+              </SwiperSlide>
+
+              <SwiperSlide>
+                <Card
+                  className="boxlayout"
+                  style={{ width: "20rem", height: "25rem" }}
+                >
+                  <Card.Img
+                    variant="top"
+                    src={products}
+                    style={{ height: "70%" }}
+                    className="unselectable"
+                  />
+                  <Card.Body>
+                    <Card.Title className="mediumtitlefont unselectable">
+                      Buy and Sell Products
+                    </Card.Title>
+
+                    <Link to="/products">
+                      <button className="btn btn-primary w-100">
+                        See Products
+                      </button>
+                    </Link>
+                  </Card.Body>
+                </Card>
+              </SwiperSlide>
+              <SwiperSlide>
+                <Card
+                  className="boxlayout"
+                  style={{ width: "20rem", height: "25rem" }}
+                >
+                  <Card.Img
+                    variant="top"
+                    src={products}
+                    style={{ height: "70%" }}
+                    className="unselectable"
+                  />
+                  <Card.Body>
+                    <Card.Title className="mediumtitlefont unselectable">
+                      Buy and Sell Products
+                    </Card.Title>
+
+                    <Link to="/products">
+                      <button className="btn btn-primary w-100">
+                        See Products
+                      </button>
+                    </Link>
+                  </Card.Body>
+                </Card>
+              </SwiperSlide>
+              <div className="center3">
+                <NavLink to="/products">
+                  <button type="submit" className="btn btn-primary mt-3">
+                    See More
+                  </button>
+                </NavLink>
+              </div>
             </Swiper>
           </div>
         </div>
+        <div className="homepage-section d-flex justify-content-around align-items-center HomeFirstDiv"></div>
         <div className="homepage-section AccordianParent">
-          <h1
-            className=" w-100 text-center WelcomeText mb-3"
-            data-aos="fade-right"
-          >
+          <h1 className=" w-100 text-center WelcomeText mb-3">
             {" "}
             Frequently Asked Questions
           </h1>
-          <div className="Accordian1" data-aos="fade-left">
+          <div className="Accordian1">
             <Accordion
               expanded={expanded === "panel1"}
               onChange={handleChange("panel1")}

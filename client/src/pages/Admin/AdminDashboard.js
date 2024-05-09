@@ -243,19 +243,37 @@ const AdminDashboard = () => {
                         </td>
                         <td className="Info">
                           <div className="d-flex gap-4">
-                            <NavLink to={auth.user.Github} className="NavlinksDesign" >
-                              {" "}
-                              <FaGithub />
-                            </NavLink>
-                            <NavLink to={auth.user.LinkedIn} className="NavlinksDesign">
-                              {" "}
-                              <FaLinkedin />
-                            </NavLink>
-                            <NavLink to={auth.user.Website} className="NavlinksDesign">
-                              {" "}
-                              <FaGlobe />{" "}
-                              <span className="Smalltxt"> {auth.user.Website}</span>
-                            </NavLink>
+                            {auth.user.Github ? (
+                              <NavLink
+                                to={auth.user.Github}
+                                className="NavlinksDesign"
+                              >
+                                {" "}
+                                <FaGithub />
+                              </NavLink>
+                            ) : null}
+                            {auth.user.LinkedIn ? (
+                              <NavLink
+                                to={auth.user.LinkedIn}
+                                className="NavlinksDesign"
+                              >
+                                {" "}
+                                <FaLinkedin />
+                              </NavLink>
+                            ) : null}
+                            {auth.user.Website ? (
+                              <NavLink
+                                to={auth.user.Website}
+                                className="NavlinksDesign"
+                              >
+                                {" "}
+                                <FaGlobe />{" "}
+                                <span className="Smalltxt">
+                                  {" "}
+                                  {auth.user.Website}
+                                </span>
+                              </NavLink>
+                            ) : null}
                           </div>
                         </td>
                       </tr>

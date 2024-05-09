@@ -296,7 +296,7 @@ async function UpdatePasswordController(req, res) {
 async function GetUsersList(req, resp) {
   try {
     const page = req.params.page ? req.params.page : 1;
-    const PerPage = 12;
+    const PerPage = 9;
     const AllUsers = await Usermodel.find({ Role: { $ne: 1 } })
       .select("-photo") // do not include admins in the response
       .skip((page - 1) * PerPage) //skip users according to page

@@ -11,9 +11,12 @@ body {
   padding: 1.2rem 0rem 1.2rem 0rem;
   text-transform: uppercase;
   box-shadow: 0 1px 5px;
-  background-color: #0d7df4 !important;
+  background-color: #1985f9 !important;
 }
 
+.navbar-nav {
+  gap: 1.5rem;
+}
 .nav-link {
   font-weight: 500;
   color: white !important;
@@ -25,7 +28,7 @@ body {
 }
 
 .nav-link.active {
-  background-color: rgba(255, 255, 255, 0.116);
+  background-color: rgba(255, 255, 255, 0.132);
 }
 
 .footer a {
@@ -566,7 +569,6 @@ UserInfo .col-md-4 img {
   margin-left: 10px;
 }
 
-
 .TeamNames {
   color: orange;
   font-weight: 600;
@@ -708,8 +710,8 @@ UserInfo .col-md-4 img {
   width: 80%;
 }
 
-.swiper-wrapper {
-  width: 30% !important;
+.swipe {
+  width: 100% !important;
 }
 
 .swiper-slide {
@@ -718,7 +720,7 @@ UserInfo .col-md-4 img {
 }
 
 .swiper-pagination {
-  bottom: -1% !important;
+  bottom: 9% !important;
 }
 
 .unselectable {
@@ -737,26 +739,32 @@ UserInfo .col-md-4 img {
   background-position: center;
   background-size: cover;
 }
-
 .swiper-button-prev,
 .swiper-button-next {
   position: absolute;
-  top: 50%;
-  width: 40px;
-  height: 40px;
+  top: 40%;
   transform: translateY(-50%);
   z-index: 10;
   cursor: pointer;
+  background-color: transparent;
+
+  color: #007bff;
+  transition: background-color 0.3s ease;
+}
+
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+  background-color: #0000002e;
 }
 
 .swiper-button-prev {
   top: 100% !important;
-  left: 30% !important;
+  left: 41% !important;
 }
 
 .swiper-button-next {
   top: 100% !important;
-  right: 30% !important;
+  right: 41% !important;
 }
 
 .mySwiper {
@@ -768,15 +776,13 @@ UserInfo .col-md-4 img {
 }
 
 .swiper-button-prev {
-  background-color: black;
-  padding: 5px;
-  border-radius: 10%;
+  background-color: white;
+  padding: 1rem;
 }
 
 .swiper-button-next {
-  background-color: black;
-  padding: 5px;
-  border-radius: 10%;
+  background-color: white;
+  padding: 1rem;
 }
 
 .TabPanePersonalInfo {
@@ -1067,7 +1073,6 @@ UserInfo .col-md-4 img {
   /* Darker navy blue border color on hover for outline button */
 }
 
-
 .Registerlayout {
   height: 100%;
   width: 80%;
@@ -1135,7 +1140,7 @@ UserInfo .col-md-4 img {
   color: red;
 }
 
-.modaltitle{
+.modaltitle {
   font-weight: 500;
   text-align: center;
   display: block;
@@ -1148,7 +1153,7 @@ UserInfo .col-md-4 img {
 
 .user-tile {
   width: 30%;
-  margin: 10px; 
+  margin: 10px;
   padding: 15px;
   background-color: #fff;
   border: 1px solid #ccc;
@@ -1199,12 +1204,12 @@ UserInfo .col-md-4 img {
   margin-top: 20px;
 }
 
-.center2{
+.center2 {
   text-align: center;
   display: block;
 }
 
-.inline{
+.inline {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1212,3 +1217,7 @@ UserInfo .col-md-4 img {
   margin-top: 4px;
 }
 
+.center3 {
+  display: flex;
+  justify-content: center;
+}
