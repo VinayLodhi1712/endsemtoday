@@ -9,6 +9,7 @@ import { FaGlobe } from "react-icons/fa";
 import { useParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import { IoCall } from "react-icons/io5";
+import Image from "antd";
 
 import { Tag } from "antd";
 const UserInformation = () => {

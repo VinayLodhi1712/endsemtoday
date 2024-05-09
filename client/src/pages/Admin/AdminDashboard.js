@@ -1,27 +1,33 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../../components/layout/layout";
 import { NavLink } from "react-router-dom";
 import { Button, Drawer, Space } from "antd";
+
 import { useAuth } from "../../context/auth";
-import { FaGithub } from "react-icons/fa";
+import { FaUserEdit } from "react-icons/fa";
+import { FaPlusSquare } from "react-icons/fa";
+import { MdPublishedWithChanges } from "react-icons/md";
+import { BsFillQuestionSquareFill } from "react-icons/bs";
+import { FaHandsHelping } from "react-icons/fa";
 import moment from "moment";
+import { FaGithub } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
 import { FaGlobe } from "react-icons/fa";
 
-const AdminDashboard = () => {
+const UserDashboard = () => {
   const [open, setOpen] = useState(false);
   const [placement, setPlacement] = useState("left");
   const [auth, SetAuth] = useAuth();
   const [QuestionAsked, SetQuestionAsked] = useState(0);
   const [AnswerAsked, SetAnswerAsked] = useState(0);
   const [Reputation, SetReputation] = useState(0);
-
   const onClose = () => {
     setOpen(false);
   };
   const showDrawer = () => {
     setOpen(true);
   };
+
   async function GetAllUserQuestion() {
     try {
       const AllQuestion = await fetch(
@@ -37,6 +43,7 @@ const AdminDashboard = () => {
       console.log(error);
     }
   }
+
   async function GetAllUserAnswers() {
     try {
       const AllAnswer = await fetch(
@@ -52,7 +59,6 @@ const AdminDashboard = () => {
       console.log(error);
     }
   }
-
   async function GetUserReputation() {
     const resp = await fetch(
       `http://localhost:8000/api/v1/auth/GetReputation/${auth.user._id}`
@@ -62,6 +68,7 @@ const AdminDashboard = () => {
       SetReputation(reputation.Rep.Reputation);
     }
   }
+
   useEffect(() => {
     GetAllUserQuestion();
     GetAllUserAnswers();
@@ -70,7 +77,7 @@ const AdminDashboard = () => {
 
   return (
     <Layout>
-      <div className="bg d-flex justify-content-center align-items-center h-100 p-3">
+      <div className="d-flex justify-content-center align-items-center h-100 p-3">
         <div className="d-flex flex-column justify-content-center  align-items-center"></div>
         <Drawer
           title="User Dashboard"
@@ -85,67 +92,73 @@ const AdminDashboard = () => {
           }
         >
           <div
-            className="d-flex  flex-column "
-            style={{ gap: "1rem", width: "100%" }}
+            className="d-flex justify-content-center flex-column align-items-center"
+            style={{ gap: "2rem" }}
           >
-            <button className="btn btn-dark btn-lg ButtonBorder">
+            <button
+              className="btn btn-dark ButtonBorder w-100"
+              style={{ fontWeight: "700" }}
+            >
               <NavLink
-                to="/dashboard/admin/create-Category"
-                className="list-group-item list-group-item-action"
-              >
-                Create Category
-              </NavLink>
-            </button>
-            <button className="btn btn-dark  btn-lg  ButtonBorder">
-              <NavLink
-                to="/dashboard/admin/create-product"
-                className="list-group-item list-group-item-action"
-              >
-                Create New Product
-              </NavLink>
-            </button>
-            <button className="btn btn-dark  btn-lg ButtonBorder">
-              <NavLink
-                to="/dashboard/admin/Product"
-                className="list-group-item list-group-item-action"
-              >
-                Edit a Product
-              </NavLink>
-            </button>
-
-            <button className="btn btn-dark  btn-lg ButtonBorder">
-              <NavLink
-                to="/dashboard/Admin/Profile"
-                className="list-group-item list-group-item-action"
-              >
-                Edit Your Profile
-              </NavLink>
-            </button>
-
-            <button className="btn btn-dark  btn-lg ButtonBorder">
-              <NavLink
-                to="/dashboard/Admin/Users"
-                className="list-group-item list-group-item-action"
-              >
-                Manage Users
-              </NavLink>
-            </button>
-
-            <button className="btn btn-dark  btn-lg ButtonBorder">
-              <NavLink
-                to="/dashboard/admin/questions"
-                className="list-group-item list-group-item-action d-flex justify-content-center  align-items-center"
-              >
-                Your Questions
-              </NavLink>
-            </button>
-
-            <button className="btn btn-dark  btn-lg ButtonBorder">
-              <NavLink
-                to="/dashboard/admin/Contributions"
+                to="/dashboard/user/Profile"
                 className="list-group-item list-group-item-action d-flex justify-content-center  align-items-center"
                 style={{ gap: "0.5rem" }}
               >
+                <FaUserEdit /> Edit Profile
+              </NavLink>
+            </button>
+
+       
+
+            <button
+              className="btn btn-dark ButtonBorder w-100"
+              style={{ fontWeight: "700" }}
+            >
+              <NavLink
+                to="/dashboard/user/Create-Product"
+                className="list-group-item list-group-item-action d-flex justify-content-center  align-items-center"
+                style={{ gap: "0.5rem" }}
+              >
+                <FaPlusSquare /> Create Product
+              </NavLink>
+            </button>
+            <button
+              className="btn btn-dark ButtonBorder w-100"
+              style={{ fontWeight: "700" }}
+            >
+              <NavLink
+                to="/dashboard/user/Product"
+                className="list-group-item list-group-item-action d-flex justify-content-center  align-items-center"
+                style={{ gap: "0.5rem" }}
+              >
+                <MdPublishedWithChanges />
+                Update Product
+              </NavLink>
+            </button>
+
+            <button
+              className="btn btn-dark ButtonBorder w-100"
+              style={{ fontWeight: "700" }}
+            >
+              <NavLink
+                to="/dashboard/user/questions"
+                className="list-group-item list-group-item-action d-flex justify-content-center  align-items-center"
+                style={{ gap: "0.5rem" }}
+              >
+                <BsFillQuestionSquareFill /> Your Questions
+              </NavLink>
+            </button>
+
+            <button
+              className="btn btn-dark ButtonBorder w-100"
+              style={{ fontWeight: "700" }}
+            >
+              <NavLink
+                to="/dashboard/user/Contributions"
+                className="list-group-item list-group-item-action d-flex justify-content-center  align-items-center"
+                style={{ gap: "0.5rem" }}
+              >
+                <FaHandsHelping />
                 Your Contributions
               </NavLink>
             </button>
@@ -163,7 +176,7 @@ const AdminDashboard = () => {
                 </div>
               </div>
               <div className="col-md-6">
-                <strong className="UserInfo">Admin Information</strong>
+                <strong className="UserInfo">User Information</strong>
                 <br />
                 <div className="table-responsive">
                   <table className="table table-user-information">
@@ -277,10 +290,9 @@ const AdminDashboard = () => {
                           </div>
                         </td>
                       </tr>
-
                       <Space>
                         <Button type="primary" onClick={showDrawer}>
-                          Admin Dashboard
+                          User Dashboard
                         </Button>
                       </Space>
                     </tbody>
@@ -295,4 +307,4 @@ const AdminDashboard = () => {
   );
 };
 
-export default AdminDashboard;
+export default UserDashboard;
