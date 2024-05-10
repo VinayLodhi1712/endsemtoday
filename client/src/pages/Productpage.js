@@ -248,9 +248,7 @@ function Productpage() {
                               "Cart",
                               JSON.stringify([...Cart, p])
                             );
-                            toast("Item Added to cart!", {
-                              icon: "👌",
-                            });
+                            toast("Item Added to cart!");
                           }
                         }}
                       >
