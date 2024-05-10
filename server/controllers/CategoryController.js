@@ -105,7 +105,6 @@ async function GetSingleCategoryController(req, resp) {
 }
 
 //delete category
-
 async function DeleteCategoryController(req, res) {
   try {
     const { id } = req.params;

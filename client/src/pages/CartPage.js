@@ -109,7 +109,7 @@ const CartPage = () => {
                   className="d-flex flex-column CartFixed"
                   style={{ width: "40%" }}
                 >
-                  <h2 className="text-center " style={{ margin: "0" }}>
+                  <h2 className="text-center mt-3 ">
                     Cart Summary
                   </h2>
 

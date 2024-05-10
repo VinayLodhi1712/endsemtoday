@@ -50,7 +50,7 @@ const Technews = () => {
         console.error(error);
       }
     }
-    fetchNews();
+    // fetchNews();
   }, []);
 
   return (

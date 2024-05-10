@@ -8,7 +8,7 @@ function Footer() {
     <div className="bg-dark text-light footer">
       <div className="container-fluid">
         <div className="row">
-          <div className="col-md-6 text-center">
+          <div className="col-md-6 text-center footer-brand">
             <h3 className="text-center mt-2 pt-1">TALKOFCODE</h3>
             <p>© 2024 All rights reserved.</p>
           </div>
@@ -18,15 +18,15 @@ function Footer() {
                 <NavLink to="/About" className="mx-2">
                   About
                 </NavLink>
-                |
+                <span className="Danda">|</span>
                 <NavLink to="/ContactUs" className="mx-2">
                   Contact
                 </NavLink>
-                |
+                <span className="Danda">|</span>
                 <NavLink to="#" className="mx-2">
                   Terms
                 </NavLink>
-                |
+                <span className="Danda">|</span>
                 <NavLink to="#" className="mx-2">
                   Privacy
                 </NavLink>
