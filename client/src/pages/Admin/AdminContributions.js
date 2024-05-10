@@ -18,6 +18,7 @@ const UserContributions = () => {
   const [open, setOpen] = useState(false);
   const [selectedId, setSelectedId] = useState(null); // State to store the selected contribution ID
   const [expandedId, setExpandedId] = useState(null);
+
   async function getUserAnswer() {
     try {
       const response = await fetch(
@@ -42,7 +43,7 @@ const UserContributions = () => {
       );
       if (confirmed) {
         const del = await fetch(
-          `http://localhost:8000/api/v1/Answer/delete_Answer/${aid}/${qid}`,
+          `http://localhost:8000/api/v1/Answer/delete_Answer/${aid}/${qid}/${auth.user._id}`,
           {
             method: "DELETE",
             headers: {
@@ -124,33 +125,47 @@ const UserContributions = () => {
         </div>
         <div className="d-flex flex-column align-items-center w-50">
           <h1>Your Contributions</h1>
-          <div
-            className="w-100 d-flex flex-column"
-            style={{ gap: "1rem" }}
-          >
+          <div className="w-100 d-flex flex-column" style={{ gap: "1rem" }}>
             {response.length > 0 ? (
               response.map((R) => (
                 <div key={R._id}>
                   <Card
-                    title={<span className="smalltitlefont3 bullet-circle">&#8226; {R.questionid.title}</span>}
-                    style={{ width: "100%", border: "2px solid black", paddingBottom:"0px" }}
+                    title={
+                      <span className="smalltitlefont3 bullet-circle">
+                        &#8226; {R.questionid.title}
+                      </span>
+                    }
+                    style={{
+                      width: "100%",
+                      border: "2px solid black",
+                      paddingBottom: "0px",
+                    }}
                   >
-                    <div style={{ display: "flex", alignItems: "center" }}></div>
-                    <p className="arrow-bullet ff" style={{ fontSize: "18px", marginTop: "-2rem", flex: "1" }}>
-                      &rarr;  {expandedId === R._id
+                    <div
+                      style={{ display: "flex", alignItems: "center" }}
+                    ></div>
+                    <p
+                      className="arrow-bullet ff"
+                      style={{
+                        fontSize: "18px",
+                        marginTop: "-2rem",
+                        flex: "1",
+                      }}
+                    >
+                      &rarr;{" "}
+                      {expandedId === R._id
                         ? R.answer
                         : `${R.answer.slice(0, 47)}...`}
-
                       {R.answer.length > 50 && (
                         <button
-                         type="link"
-                          onClick={() => handleSeeMore(R._id)} style={{ marginLeft: "5px" }}
+                          type="link"
+                          onClick={() => handleSeeMore(R._id)}
+                          style={{ marginLeft: "5px" }}
                         >
                           {expandedId === R._id ? "See less" : "See more"}
                         </button>
                       )}
                     </p>
-
                   </Card>
                   <div
                     className="d-flex justify-content-center mt-1"
@@ -161,8 +176,8 @@ const UserContributions = () => {
                         variant="contained"
                         sx={{
                           bgcolor: "ochre.Update",
-                          marginLeft:"12rem",
-                          marginRight:"1rem"
+                          marginLeft: "12rem",
+                          marginRight: "1rem",
                         }}
                         onClick={() => handleUpdateClick(R._id, R.answer)}
                       >

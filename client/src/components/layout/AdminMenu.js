@@ -3,9 +3,9 @@ import { NavLink } from "react-router-dom";
 
 const AdminMenu = () => {
   return (
-    <div>
+    <div >
       <div className="text-center AdminMenu w-25">
-        <div className="list-group ">
+        <div className="list-group mt-3">
           <h1>Admin Panel</h1>
           <NavLink
             to="/dashboard/admin/create-Category"
