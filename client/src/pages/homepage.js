@@ -1,15 +1,11 @@
 import HomeLayout from "../components/layout/HomePageLayout";
-
+import BannerCard from "./BannerCard";
 import React, { useEffect } from "react";
 import Card from "react-bootstrap/Card";
-import products from "../assests/laptop.jpeg";
-import book from "../assests/bookimage.jpg";
-import book2 from "../assests/book.jpg";
-import stack from "../assests/stack.jpeg";
-import technews from "../assests/techphoto.jpeg";
 import HomeImg from "../assests/homepageimage.png";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { FaCartShopping } from 'react-icons/fa6'
 import { NavLink, Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -22,15 +18,12 @@ import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper/modules";
 
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
-// import required modules
 import { EffectCoverflow, Pagination } from "swiper/modules";
 
 const Accordion = styled((props) => (
@@ -75,6 +68,23 @@ function Home() {
     AOS.init({ duration: "1000" });
   }, []);
   const [expanded, setExpanded] = React.useState("false");
+  const [product, setProduct] = React.useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://localhost:8000/api/v1/product/get-product");
+        const data = await response.json();
+
+        setProduct(data.products.slice(0, 10));
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
 
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
@@ -116,192 +126,89 @@ function Home() {
               </NavLink>
             </ThemeProvider>
           </div>
-          <img src={HomeImg} className="h-75 "  data-aos="fade-left"></img>
+          <img src={HomeImg} className="h-75 " data-aos="fade-left"></img>
         </div>{" "}
         <div
-          className="homepage-section d-flex align-items-center flex-column justify-content-center w-100 HomeSecondDiv mb-3"
+          className="homepage-section d-flex align-items-center flex-column justify-content-center w-100  mb-3"
           data-aos="fade-up"
         >
-          <h1 className=" w-50 text-center WelcomeText mt-3">
+          <h1 className=" w-50 text-center WelcomeText mt-5">
             {" "}
             More than 30+ Products Listed. Checkout Now!
           </h1>
-          <div style={{ width: "100%", marginTop: "0%" }}>
+          <div style={{ width: "100%", marginTop: "0%", marginBottom: "2rem" }}>
             <Swiper
               effect={"coverflow"}
-              navigation={true}
               grabCursor={true}
-              centeredSlides={true}
-              loop={true}
-              spaceBetween={10}
+              spaceBetween={20}
               slidesPerView={4}
               coverflowEffect={{
                 rotate: 50,
                 stretch: 0,
-
                 modifier: 0,
                 slideShadows: true,
               }}
-              pagination={true}
-              modules={[EffectCoverflow, Pagination, Navigation]}
+              breakpoints={{
+                640: {
+                  slidesPerView: 1,
+                  spaceBetween: 20,
+                },
+                768: {
+                  slidesPerView: 3,
+                  spaceBetween: 40,
+                },
+                1024: {
+                  slidesPerView: 4,
+                  spaceBetween: 50,
+                },
+              }}
+              pagination={{
+                clickable: true,
+              }}
+
+              modules={[EffectCoverflow, Pagination]}
               className="mySwiper"
-              initialSlide={1}
+              style={{ marginBottom: "2rem" }}
+              initialSlide={0}
             >
-              {/* slide 1 */}
-              <SwiperSlide>
-                <Card
-                  className="boxlayout"
-                  style={{ width: "20rem", height: "25rem" }}
-                >
-                  <Card.Img
-                    variant="top"
-                    src={products}
-                    style={{ height: "70%" }}
-                    className="unselectable"
-                  />
-                  <Card.Body>
-                    <Card.Title className="mediumtitlefont unselectable">
-                      Buy and Sell Products
-                    </Card.Title>
+              {
+                product.map((p) => (
+                  <SwiperSlide key={p._id}>
+                    <Card style={{ width: "16rem", height: "auto", margin: "5px", position: "relative" }}>
 
-                    <Link to="/products">
-                      <button className="btn btn-primary w-100">
-                        See Products
-                      </button>
-                    </Link>
-                  </Card.Body>
-                </Card>
-              </SwiperSlide>
-              {/* slide 2 */}
+                      <div className="user-image2 boxshadow">
 
-              <SwiperSlide>
-                <Card
-                  // data-aos-duration="1000"
-                  className="boxlayout"
-                  style={{ width: "20rem", height: "25rem" }}
-                >
-                  <Card.Img
-                    variant="top"
-                    src={book}
-                    style={{ height: "70%" }}
-                    className="unselectable"
-                  />
-                  <Card.Body>
-                    <Card.Title className="mediumtitlefont  unselectable w-100">
-                      Student Doubts Solver
-                    </Card.Title>
+                        <Card.Img
+                          variant="top"
+                          src={`http://localhost:8000/api/v1/product/get-productPhoto/${p._id}`}
+                          style={{ width: "100%", height: "17rem", objectFit: "cover" }}
+                          className="unselectable img-fluid"
+                        />
 
-                    <Link to="/dashboard/user/interaction">
-                      <button className="btn btn-primary w-100">
-                        Visit Code-Connect
-                      </button>
-                    </Link>
-                  </Card.Body>
-                </Card>
-              </SwiperSlide>
+                        <div style={{ position: "absolute", top: "0.5rem", right: "0.5rem" }}>
+                          <div className="bg-primary rounded-circle p-2 d-flex align-items-center justify-content-center">
+                            <FaCartShopping className="text-white" style={{ width: "1.5rem", height: "1.5rem" }} />
+                          </div>
+                        </div>
+                      </div>
 
-              {/* slide 3 */}
-              <SwiperSlide>
-                <Card
-                  className="boxlayout "
-                  style={{ width: "20rem", height: "25rem" }}
-                >
-                  <Card.Img
-                    variant="top"
-                    src={book2}
-                    style={{ height: "60%" }}
-                    className="unselectable"
-                  />
-                  <Card.Body>
-                    <Card.Title className="mediumtitlefont unselectable">
-                      Browse Tech News
-                    </Card.Title>
 
-                    <Link to="/technews">
-                      <button className="btn btn-primary w-100">
-                        See Latest TechNews
-                      </button>
-                    </Link>
-                  </Card.Body>
-                </Card>
-              </SwiperSlide>
+                      <Card.Body>
 
-              <SwiperSlide>
-                <Card
-                  className="boxlayout "
-                  style={{ width: "20rem", height: "25rem" }}
-                >
-                  <Card.Img
-                    variant="top"
-                    src={book2}
-                    style={{ height: "60%" }}
-                    className="unselectable"
-                  />
-                  <Card.Body>
-                    <Card.Title className="mediumtitlefont unselectable">
-                      Browse Tech News
-                    </Card.Title>
-
-                    <Link to="/technews">
-                      <button className="btn btn-primary w-100">
-                        See Latest TechNews
-                      </button>
-                    </Link>
-                  </Card.Body>
-                </Card>
-              </SwiperSlide>
-
-              <SwiperSlide>
-                <Card
-                  className="boxlayout"
-                  style={{ width: "20rem", height: "25rem" }}
-                >
-                  <Card.Img
-                    variant="top"
-                    src={products}
-                    style={{ height: "70%" }}
-                    className="unselectable"
-                  />
-                  <Card.Body>
-                    <Card.Title className="mediumtitlefont unselectable">
-                      Buy and Sell Products
-                    </Card.Title>
-
-                    <Link to="/products">
-                      <button className="btn btn-primary w-100">
-                        See Products
-                      </button>
-                    </Link>
-                  </Card.Body>
-                </Card>
-              </SwiperSlide>
-              <SwiperSlide>
-                <Card
-                  className="boxlayout"
-                  style={{ width: "20rem", height: "25rem" }}
-                >
-                  <Card.Img
-                    variant="top"
-                    src={products}
-                    style={{ height: "70%" }}
-                    className="unselectable"
-                  />
-                  <Card.Body>
-                    <Card.Title className="mediumtitlefont unselectable">
-                      Buy and Sell Products
-                    </Card.Title>
-
-                    <Link to="/products">
-                      <button className="btn btn-primary w-100">
-                        See Products
-                      </button>
-                    </Link>
-                  </Card.Body>
-                </Card>
-              </SwiperSlide>
+                        <div className="d-flex justify-content-around smalltitlefont4">
+                          <Card.Title className="ff smalltitlefont4 unselectable mb-0 w-60">
+                            {p.name}
+                          </Card.Title>
+                          <p className="text-gray-600 mb-3 w-35">₹{p.price}</p>
+                        </div>
+                      </Card.Body>
+                    </Card>
+                  </SwiperSlide>
+                ))
+              }
               <div className="center3">
                 <NavLink to="/products">
-                  <button type="submit" className="btn btn-primary mt-3">
+                  <button type="submit" className="btn btn-primary mt-4">
                     See More
                   </button>
                 </NavLink>
@@ -309,8 +216,44 @@ function Home() {
             </Swiper>
           </div>
         </div>
-        <div className="homepage-section d-flex justify-content-around align-items-center HomeFirstDiv"></div>
+        <div className="homepage-section justify-content-around align-items-center mb-3">
+          <h1 className="text-center WelcomeText mb-3 mt-5">
+            Get instant technical <span className="d-block">news</span>
+          </h1>
+
+          <div className="d-flex mb-3">
+            {/* Left side */}
+            <div className="d-flex flex-column justify-content-center mb-3">
+              <h2 className="font-bold text-black " style={{ marginLeft: "2rem" }}>
+                Stay updated with the latest tech news<span className="highlighted ff"> on our website!</span>
+              </h2>
+
+              <p className="w-50 ff" style={{ marginLeft: "2rem", fontSize: "20px" }}>
+
+                Explore the latest in tech news and stay informed about cutting-edge developments, innovations, and trends in the ever-evolving world of technology.
+              </p>
+
+              <Link to="/technews">
+                <div style={{ marginLeft: "2rem" }}>
+                  <button className="btn btn-primary">Explore &rarr;</button>
+                </div>
+              </Link>
+
+            </div>
+
+            {/* Right side */}
+            <div className="col-md-6" >
+              <BannerCard />
+            </div>
+          </div>
+
+
+
+
+        </div>
         <div className="homepage-section AccordianParent">
+
+
           <h1 className=" w-100 text-center WelcomeText mb-3">
             {" "}
             Frequently Asked Questions

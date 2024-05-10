@@ -17,7 +17,8 @@ const {
   CatergoryWiseProductController,
   GetUserProductController,
   createProductReview,
-  deleteReview
+  deleteReview,
+  GetAllProductsController
 } = require("../controllers/ProductController");
 const formidable = require("express-formidable");
 //routes
@@ -28,6 +29,9 @@ router.post(
   formidable(),
   CreateProductController
 );
+
+// get all products without id 
+router.get("/get-product", GetAllProductsController)
 
 //get All products 
 router.get("/get-product/:id", GetProductController);

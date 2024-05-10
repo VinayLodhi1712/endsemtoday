@@ -50,6 +50,29 @@ async function CreateProductController(req, resp) {
   }
 }
 
+//getAllproductscontroller without an ID  
+async function GetAllProductsController(req, resp) {
+  try {
+    const products = await ProductModel.find()
+      .populate("category")
+      .select("-photo")
+      .limit(6)
+      .sort({ createdAt: -1 });
+    resp.status(200).send({
+      success: true,
+      products,
+    });
+  } catch (error) {
+    console.log(error);
+    resp.status(404).send({
+      success: false,
+      message: "Error showing products",
+      error,
+    });
+  }
+}
+
+
 //get products
 async function GetProductController(req, resp) {
   try {
@@ -465,6 +488,7 @@ async function GetUserProductController(req, resp) {
 
 module.exports = {
   CreateProductController,
+  GetAllProductsController,
   GetProductController,
   GetSingleProductController,
   GetProductPhotoController,

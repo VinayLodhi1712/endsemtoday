@@ -590,6 +590,29 @@ UserInfo .col-md-4 img {
   margin-left: 10px;
 }
 
+
+.boxshadow {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.bg-primary {
+  background-color: #007bff !important;
+}
+
+.rounded-circle {
+  border-radius: 50% !important;
+}
+
+
+
+.unselectable {
+  user-select: none;
+}
+
+.text-gray-600 {
+  color: #6c757d !important;
+}
+
 .TeamNames {
   color: orange;
   font-weight: 600;
@@ -741,16 +764,8 @@ UserInfo .col-md-4 img {
 }
 
 .swiper-pagination {
-  bottom: 9% !important;
-}
-
-.unselectable {
-  user-select: none;
-}
-
-.mySwiper {
-  margin-top: 1rem;
-}
+  bottom: 8% !important;
+} 
 
 .icon {
   margin: 0;
@@ -760,7 +775,7 @@ UserInfo .col-md-4 img {
   background-position: center;
   background-size: cover;
 }
-.swiper-button-prev,
+/* .swiper-button-prev,
 .swiper-button-next {
   position: absolute;
   top: 40%;
@@ -786,17 +801,18 @@ UserInfo .col-md-4 img {
 .swiper-button-next {
   top: 100% !important;
   right: 41% !important;
-}
+} */
 
 .mySwiper {
-  width: 100% !important;
+ width: 100% !important;
+  margin-top: 2rem;
 }
 
 #SwiperWrapper {
   width: 100% !important;
 }
 
-.swiper-button-prev {
+/* .swiper-button-prev {
   background-color: white;
   padding: 1rem;
 }
@@ -804,7 +820,7 @@ UserInfo .col-md-4 img {
 .swiper-button-next {
   background-color: white;
   padding: 1rem;
-}
+} */
 
 .TabPanePersonalInfo {
   display: flex;
@@ -1062,6 +1078,12 @@ UserInfo .col-md-4 img {
   font-family: Georgia, "Times New Roman", Times, serif;
 }
 
+.smalltitlefont4 {
+  font-size: 18px;
+  font-weight: 500;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
 .ff {
   font-family: Georgia, "Times New Roman", Times, serif;
 }
@@ -1186,6 +1208,13 @@ UserInfo .col-md-4 img {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
+.card{
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+
 .user-image {
   display: flex;
   justify-content: center;
@@ -1195,6 +1224,19 @@ UserInfo .col-md-4 img {
   width: 100%;
   height: auto;
   max-width: 150px;
+}
+
+.user-image2 {
+  display: flex;
+  justify-content: center;
+  margin-top: 2px;
+  border-radius: 10px;
+}
+
+.user-image2 img {
+  width: 100%;
+  height: auto;
+  max-width: 250px;
 }
 
 .user-details {

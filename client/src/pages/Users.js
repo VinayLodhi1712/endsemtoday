@@ -86,7 +86,7 @@ const Users = () => {
                 {u.tags.length > 0 && (
                   <div className="center2" style={{ marginLeft: "1rem" }}>
                     <span>Skills: </span>
-                    {u.tags.map((t, index) => (
+                    {u.tags.map((t, idnex) => (
                       <Tag key={index} color="blue">{t}</Tag>
                     ))}
                   </div>
