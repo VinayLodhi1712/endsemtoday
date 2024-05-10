@@ -1022,8 +1022,10 @@ UserInfo .col-md-4 img {
 } */
 
 .homepage-section:nth-child(odd) {
-  background-color: #c5bdbd;
-  /* Light grey */
+  background-color: rgba(255,127,80,0.564);
+  
+  /* //background-color: #c5bdbd; 
+  Light grey */
 }
 
 .homepage-section:nth-child(even) {
@@ -1143,6 +1145,22 @@ UserInfo .col-md-4 img {
 .registerform .form-label {
   font-size: 16px;
 }
+.faq-list {
+  list-style-type: circle;
+  padding: 0;
+}
+
+.faq-list li {
+  margin-bottom: 10px;
+}
+
+.codeconnect-img {
+  max-height: 100%;
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
 
 .registerform .form-control {
   width: 100%;

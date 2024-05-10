@@ -16,9 +16,10 @@ import MuiAccordion from "@mui/material/Accordion";
 import MuiAccordionSummary from "@mui/material/AccordionSummary";
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
-
+import FadeIn from "./FadeIn";
 import { Swiper, SwiperSlide } from "swiper/react";
-
+import { MdOutlineConnectingAirports } from "react-icons/md";
+import codeconnect from '../assests/codeconnect.jpg'
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
@@ -216,14 +217,36 @@ function Home() {
             </Swiper>
           </div>
         </div>
-        <div className="homepage-section justify-content-around align-items-center mb-3">
-          <h1 className="text-center WelcomeText mb-3 mt-5">
+        <div className="homepage-section justify-content-around align-items-center mb-3 mt-2">
+          <h1 className="text-center WelcomeText mb-1 mt-2">
+            Code  <MdOutlineConnectingAirports /> Connect, <br></br><span className="text-center">where Knowledge Meets Collaboration. </span>
+          </h1>
+          <FadeIn />
+          <div className="d-flex  mb-3">
+            <div className="w-50 user-tile" style={{ marginLeft: "4rem" }}>
+              <span className="mediumtitlefont highlighted ff" style={{ marginLeft: "6rem" }}> Have Doubts?</span>
+              <ul className="faq-list smalltitlefont3" style={{ marginLeft: "1rem" }}>
+                <li>Ask questions from experienced people.</li>
+                <li>Find solutions to common coding problems.</li>
+                <li>Share knowledge and learn from others in the community.</li>
+              </ul>
+              <Link to='/dashboard/user/interaction'>
+                <button size="small" className="btn-outline-primary" style={{ display: "block", textAlign: "center" }}>Get Help...</button>
+              </Link>
+            </div>
+            <div className="w-50 justify-content-center mt-4" style={{ width: "250px", height: "250px", marginLeft: "18rem" }}>
+              <img src={codeconnect} alt="CodeConnect" className="codeconnect-img" />
+            </div>
+          </div>
+        </div>
+        <div className="homepage-section justify-content-around align-items-center ">
+          <h1 className="text-center WelcomeText mt-2">
             Get instant technical <span className="d-block">news</span>
           </h1>
 
-          <div className="d-flex mb-3">
+          <div className="d-flex">
             {/* Left side */}
-            <div className="d-flex flex-column justify-content-center mb-3">
+            <div className="d-flex flex-column justify-content-center">
               <h2 className="font-bold text-black " style={{ marginLeft: "2rem" }}>
                 Stay updated with the latest tech news<span className="highlighted ff"> on our website!</span>
               </h2>
