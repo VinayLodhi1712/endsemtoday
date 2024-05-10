@@ -92,10 +92,11 @@ const UserInformation = () => {
         <div className=" d-flex justify-content-around w-100">
           <div className="panel-body inf-content " style={{ width: "65%" }}>
             <div className="row">
-              <div className="col-md-4 ">
+              <div className="col-md-4 UserInfoImage">
                 <img
-                  style={{ width: "100%" }}
+                  style={{ width: "100%",height:"28rem" }}
                   src={`http://localhost:8000/api/v1/auth/get-userPhoto/${Userid}`}
+                  
                 />
               </div>
               <div className="col-md-6">
