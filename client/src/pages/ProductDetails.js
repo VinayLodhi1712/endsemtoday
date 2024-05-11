@@ -137,7 +137,7 @@ const ProductDetails = () => {
         width: 100% !important;
       }
       `}</style>
-      <div className="container mt-3">
+      <div className=" mt-3 d-flex flex-column">
         <h3 className="text-center mb-5 Titlefont">Product Details</h3>
         {Detail.map((p) => (
           <div className="row">
