@@ -505,7 +505,7 @@ async function ResetPasswordEmail(req, resp) {
     subject: "Reset password",
     html: `
     <p>Reset your password from the link .</p>
-    <p><a href="https://talkofcode.vercel.app/api/v1/auth/Resetbyemail/${UserEmail}"><button>Click here</button></a> to reset password.</p>`,
+    <a href="https://talkofcode.vercel.app/Resetbyemail/${UserEmail}"><button>Click here</button></a> to reset password`,
   };
 
   transporter.sendMail(mailOptions, (error, info) => {

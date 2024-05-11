@@ -289,7 +289,7 @@ const Forgotpassword = () => {
                 ></input>
               </Modal>
             </div>
-            <Link
+            <Link  
               to="/login"
               className="mt-3 btn btn-outline-primary d-flex align-items-center text-decoration-none"
             >

@@ -50,7 +50,9 @@ const Resetpasswordemail = () => {
           flexDirection: "column",
           alignItems: "center",
         }}
-        onSubmit={(e) => {}}
+        onSubmit={(e) => {
+          ResetPassword(e);
+        }}
         className="FormBackgound"
       >
         <div className="registerform ">

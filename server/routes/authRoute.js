@@ -81,6 +81,12 @@ router.put(
 );
 router.get("/Getuserinfo/:uid", GetSingleUserInfo);
 
+
+//api to send email
 router.post("/SendResetEmail", ResetPasswordEmail);
+
+
+//api to reset email directly
 router.post("/DirectReset/:Email", ResetPasswordDirectly);
+
 module.exports = router;
