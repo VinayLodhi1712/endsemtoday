@@ -14,7 +14,7 @@ const AnswerQuestion = () => {
   async function GetSingleQuestion() {
     try {
       const que = await fetch(
-        `http://localhost:8000/api/v1/Questions/getSingleQuestion/${params.id}`
+        `https://talkofcodebackend.onrender.com/api/v1/Questions/getSingleQuestion/${params.id}`
       );
       const data = await que.json();
       if (data) {
@@ -34,7 +34,7 @@ const AnswerQuestion = () => {
     e.preventDefault();
     try {
       const response = await fetch(
-        `http://localhost:8000/api/v1/Answer/post_Answer/${auth.user._id}/${params.id}`,
+        `https://talkofcodebackend.onrender.com/api/v1/Answer/post_Answer/${auth.user._id}/${params.id}`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -58,7 +58,7 @@ const AnswerQuestion = () => {
   async function SendEmail() {
     try {
       const response = await fetch(
-        `http://localhost:8000/api/v1/Answer/EmailUser/${Email}`,
+        `https://talkofcodebackend.onrender.com/api/v1/Answer/EmailUser/${Email}`,
         {
           method: "POST",
           headers: {
@@ -80,7 +80,9 @@ const AnswerQuestion = () => {
   return (
     <Layout>
       <div className="d-flex flex-column align-items-center ">
-        <h1 className="Titlefont mt-2" style={{marginBottom:"-1rem"}}>Contribute</h1>
+        <h1 className="Titlefont mt-2" style={{ marginBottom: "-1rem" }}>
+          Contribute
+        </h1>
         <div className="d-flex flex-column contactlayout">
           <h3 className="mediumtitlefont">Question: {Title} ?</h3>
           <p>

@@ -25,7 +25,7 @@ const AdminQuestions = () => {
     try {
       setloading(true);
       const response = await fetch(
-        `http://localhost:8000/api/v1/Questions/UserQuestions/${auth.user._id}/${SkipCount}`
+        `https://talkofcodebackend.onrender.com/api/v1/Questions/UserQuestions/${auth.user._id}/${SkipCount}`
       );
       const data = await response.json();
       if (response.status == 200) {
@@ -46,7 +46,7 @@ const AdminQuestions = () => {
   async function GetNumberofQuestion() {
     try {
       const data = await fetch(
-        "http://localhost:8000/api/v1/Questions/QuestionCount"
+        "https://talkofcodebackend.onrender.com/api/v1/Questions/QuestionCount"
       );
 
       if (data) {
@@ -66,7 +66,7 @@ const AdminQuestions = () => {
       );
       if (confirmed) {
         const del = await fetch(
-          `http://localhost:8000/api/v1/Questions/delete_question/${question}`,
+          `https://talkofcodebackend.onrender.com/api/v1/Questions/delete_question/${question}`,
           {
             method: "DELETE",
             headers: { "Content-Type": "application/json" },
@@ -88,7 +88,7 @@ const AdminQuestions = () => {
   async function GetBookmarkedQuestion() {
     try {
       const response = await fetch(
-        `http://localhost:8000/api/v1/Questions/getBookmarked/${auth.user._id}`
+        `https://talkofcodebackend.onrender.com/api/v1/Questions/getBookmarked/${auth.user._id}`
       );
       const data = await response.json();
       if (response.status === 200) {
@@ -107,7 +107,7 @@ const AdminQuestions = () => {
   async function RemoveBookmark(qid) {
     try {
       const response = await fetch(
-        `http://localhost:8000/api/v1/Questions/removeBookmarked/${auth.user._id}/${qid}`,
+        `https://talkofcodebackend.onrender.com/api/v1/Questions/removeBookmarked/${auth.user._id}/${qid}`,
         {
           method: "PUT",
           headers: {
@@ -155,7 +155,10 @@ const AdminQuestions = () => {
         </div>
 
         <Tabs className="w-50">
-          <TabPane  tab={<span className="tabtitle">Your Questions</span>} key="1">
+          <TabPane
+            tab={<span className="tabtitle">Your Questions</span>}
+            key="1"
+          >
             <div className="d-flex w-100 justify-content-around mt-3  ">
               <div
                 className="d-flex justify-content-center flex-column align-items-center w-100"
@@ -164,15 +167,26 @@ const AdminQuestions = () => {
                 {Questions.length > 0 ? (
                   Questions.map((q) => (
                     <div class="card w-100 p-2">
-                      <div >
+                      <div>
                         <blockquote class="blockquote mb-0">
-                          <p className="ff smalltitlefont3 bulletcircle mb-0" style={{ marginLeft:"2px"}}>&#8226; {q.title.substring(0,40)}..... </p>
+                          <p
+                            className="ff smalltitlefont3 bulletcircle mb-0"
+                            style={{ marginLeft: "2px" }}
+                          >
+                            &#8226; {q.title.substring(0, 40)}.....{" "}
+                          </p>
                           <div className="d-flex align-items-center w-100 justify-content-between">
                             {" "}
                             <div>
                               {" "}
                               {q.tags.map((tag, index) => (
-                                <Tag color="blue" className="ff" style={{marginLeft:"2px"}}>{tag}</Tag>
+                                <Tag
+                                  color="blue"
+                                  className="ff"
+                                  style={{ marginLeft: "2px" }}
+                                >
+                                  {tag}
+                                </Tag>
                               ))}
                             </div>
                             <footer class="blockquote-footer mt-1 ff">
@@ -185,7 +199,10 @@ const AdminQuestions = () => {
                           </div>
                         </blockquote>
                       </div>
-                      <div className="d-flex" style={{ gap: "1rem",marginLeft:"10rem"}}>
+                      <div
+                        className="d-flex"
+                        style={{ gap: "1rem", marginLeft: "10rem" }}
+                      >
                         <NavLink to={`/dashboard/user/answers/${q._id}`}>
                           <Button variant="contained" color="success">
                             Answer
@@ -252,13 +269,18 @@ const AdminQuestions = () => {
                     <div class="card w-100 p-2">
                       <div>
                         <blockquote class="blockquote mb-0 ff">
-                          <p className="mb-0 ff smalltitlefont3"> &#8226; {q.title.substring(0,100)}..... </p>
+                          <p className="mb-0 ff smalltitlefont3">
+                            {" "}
+                            &#8226; {q.title.substring(0, 100)}.....{" "}
+                          </p>
                           <div className="d-flex align-items-center w-100 justify-content-between">
                             {" "}
                             <div>
                               {" "}
                               {q.tags.map((tag, index) => (
-                                <Tag className="ff" color="blue">{tag}</Tag>
+                                <Tag className="ff" color="blue">
+                                  {tag}
+                                </Tag>
                               ))}
                             </div>
                             <footer class="blockquote-footer mt-2">
@@ -271,7 +293,10 @@ const AdminQuestions = () => {
                           </div>
                         </blockquote>
                       </div>
-                      <div className="d-flex" style={{ gap: "1rem", marginLeft:"10rem" }}>
+                      <div
+                        className="d-flex"
+                        style={{ gap: "1rem", marginLeft: "10rem" }}
+                      >
                         <NavLink to={`/dashboard/user/answers/${q._id}`}>
                           <Button variant="contained" color="success">
                             Answer

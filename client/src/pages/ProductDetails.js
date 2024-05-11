@@ -37,7 +37,7 @@ const ProductDetails = () => {
   async function GetProduct() {
     try {
       const response = await fetch(
-        `http://localhost:8000/api/v1/product/getSingle-product/${params.slug}`
+        `https://talkofcodebackend.onrender.com/api/v1/product/getSingle-product/${params.slug}`
       );
       const data = await response.json();
       console.log(data);
@@ -70,7 +70,7 @@ const ProductDetails = () => {
     if (comment && !isNaN(rating) && rating >= 1 && rating <= 5) {
       try {
         const response = await fetch(
-          `http://localhost:8000/api/v1/product/get-product/${productId}/${authId}/create-review`,
+          `https://talkofcodebackend.onrender.com/api/v1/product/get-product/${productId}/${authId}/create-review`,
           {
             method: "PUT",
             headers: {
@@ -103,7 +103,7 @@ const ProductDetails = () => {
     const productId = Detail[0]._id;
     try {
       const response = await fetch(
-        `http://localhost:8000/api/v1/product/get-product/${productId}/${authId}/delete-review/${reviewId}`,
+        `https://talkofcodebackend.onrender.com/api/v1/product/get-product/${productId}/${authId}/delete-review/${reviewId}`,
         {
           method: "delete",
         }
@@ -143,7 +143,7 @@ const ProductDetails = () => {
           <div className="row">
             <div className="col-md-6" style={{ width: "40%" }}>
               <Image
-                src={`http://localhost:8000/api/v1/product/get-productPhoto/${p._id}`}
+                src={`https://talkofcodebackend.onrender.com/api/v1/product/get-productPhoto/${p._id}`}
                 className="card-Image-top"
                 style={{ height: "25rem" }}
               />
@@ -262,7 +262,10 @@ const ProductDetails = () => {
                       <>
                         {p.reviews.map((review) => (
                           <SwiperSlide key={review._id}>
-                            <div className="boxlayout p-3" style={{ width: "100%" }}>
+                            <div
+                              className="boxlayout p-3"
+                              style={{ width: "100%" }}
+                            >
                               <div
                                 className="d-flex justify-content-between"
                                 style={{ marginRight: "10px" }}
@@ -291,8 +294,13 @@ const ProductDetails = () => {
                                   )}
                               </div>
 
-                              <p style={{ fontWeight: 600 }}>{review.comment}</p>
-                              <p className="mediumtitlefont" style={{ marginRight: "8rem" }}>
+                              <p style={{ fontWeight: 600 }}>
+                                {review.comment}
+                              </p>
+                              <p
+                                className="mediumtitlefont"
+                                style={{ marginRight: "8rem" }}
+                              >
                                 - {review.name}
                               </p>
                             </div>
@@ -301,7 +309,6 @@ const ProductDetails = () => {
                       </>
                     )}
                   </Swiper>
-
 
                   <Modal show={showModal} onHide={() => setShowModal(false)}>
                     <Modal.Header closeButton>

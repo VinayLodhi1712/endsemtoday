@@ -23,7 +23,7 @@ const UserInformation = () => {
   async function GetUserDetails() {
     try {
       const Response = await fetch(
-        `http://localhost:8000/api/v1/auth/Getuserinfo/${Userid}`
+        `https://talkofcodebackend.onrender.com/api/v1/auth/Getuserinfo/${Userid}`
       );
       if (Response) {
         const data = await Response.json();
@@ -41,7 +41,7 @@ const UserInformation = () => {
   async function GetAllUserQuestion() {
     try {
       const AllQuestion = await fetch(
-        `http://localhost:8000/api/v1/Questions/AskedUserQuestion/${Userid}`
+        `https://talkofcodebackend.onrender.com/api/v1/Questions/AskedUserQuestion/${Userid}`
       );
 
       if (AllQuestion.status == 200) {
@@ -57,7 +57,7 @@ const UserInformation = () => {
   async function GetAllUserAnswers() {
     try {
       const AllAnswer = await fetch(
-        `http://localhost:8000/api/v1/Answer/GetNumberOfQuestions/${Userid}`
+        `https://talkofcodebackend.onrender.com/api/v1/Answer/GetNumberOfQuestions/${Userid}`
       );
 
       if (AllAnswer.status == 200) {
@@ -71,7 +71,7 @@ const UserInformation = () => {
   }
   async function GetUserReputation() {
     const resp = await fetch(
-      `http://localhost:8000/api/v1/auth/GetReputation/${Userid}`
+      `https://talkofcodebackend.onrender.com/api/v1/auth/GetReputation/${Userid}`
     );
     if (resp.status === 200) {
       const reputation = await resp.json();
@@ -85,7 +85,7 @@ const UserInformation = () => {
     GetAllUserAnswers();
     GetUserReputation();
   }, []);
-  
+
   return (
     <Layout>
       <div className="d-flex align-items-center h-100 flex-column justify-content-center gap-2 ">
@@ -94,9 +94,8 @@ const UserInformation = () => {
             <div className="row">
               <div className="col-md-4 UserInfoImage">
                 <img
-                  style={{ width: "100%",height:"28rem" }}
-                  src={`http://localhost:8000/api/v1/auth/get-userPhoto/${Userid}`}
-                  
+                  style={{ width: "100%", height: "28rem" }}
+                  src={`https://talkofcodebackend.onrender.com/api/v1/auth/get-userPhoto/${Userid}`}
                 />
               </div>
               <div className="col-md-6">

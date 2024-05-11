@@ -68,7 +68,7 @@ const CartPage = () => {
                       style={{ width: "40%" }}
                     >
                       <Image
-                        src={`http://localhost:8000/api/v1/product/get-productPhoto/${p._id}`}
+                        src={`https://talkofcodebackend.onrender.com/api/v1/product/get-productPhoto/${p._id}`}
                         className="card-Image-top productimage"
                         style={{ height: "15rem", width: "100%" }}
                       />
@@ -109,9 +109,7 @@ const CartPage = () => {
                   className="d-flex flex-column CartFixed"
                   style={{ width: "40%" }}
                 >
-                  <h2 className="text-center mt-3 ">
-                    Cart Summary
-                  </h2>
+                  <h2 className="text-center mt-3 ">Cart Summary</h2>
 
                   <hr />
                   <div className="card p-2">

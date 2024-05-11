@@ -17,7 +17,7 @@
 }
 
 .banner .swiper-slide:nth-child(1n) {
-    background-image: url('../assests/News1.png');
+    background-image: url('../assests/News8.jpg');
 }
 
 .banner .swiper-slide:nth-child(2n) {
@@ -49,7 +49,7 @@
 }
 
 .banner .swiper-slide:nth-child(9n) {
-    background-image: url('../assests/News8.jpg');
+    background-image: url('../assests/News1.png');
 }
 
 .banner .swiper-slide:nth-child(10n) {

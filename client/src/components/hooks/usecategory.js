@@ -7,7 +7,7 @@ const Usecategory = () => {
   async function getCatagories() {
     try {
       const response = await fetch(
-        "http://localhost:8000/api/v1/category/GetAll-category"
+        "https://talkofcodebackend.onrender.com/api/v1/category/GetAll-category"
       );
       if (response) {
         const data = await response.json();

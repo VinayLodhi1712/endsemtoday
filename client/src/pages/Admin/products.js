@@ -13,7 +13,7 @@ const Products = () => {
   async function GetAllProducts() {
     try {
       const response = await fetch(
-        `http://localhost:8000/api/v1/product/get-product/${auth.user._id}`
+        `https://talkofcodebackend.onrender.com/api/v1/product/get-product/${auth.user._id}`
       );
       const data = await response.json();
       if (data?.success) {
@@ -50,7 +50,7 @@ const Products = () => {
                 style={{ width: "25%", height: "100%" }}
               >
                 <Image
-                  src={`http://localhost:8000/api/v1/product/get-productPhoto/${p._id}`}
+                  src={`https://talkofcodebackend.onrender.com/api/v1/product/get-productPhoto/${p._id}`}
                   className="card-Image-top productimage"
                   style={{ height: "15rem", width: "100%" }}
                 />

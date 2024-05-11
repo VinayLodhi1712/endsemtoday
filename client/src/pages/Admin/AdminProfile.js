@@ -57,7 +57,7 @@ const Profile = () => {
 
       e.preventDefault();
       const response = await fetch(
-        "http://localhost:8000/api/v1/auth/profile",
+        "https://talkofcodebackend.onrender.com/api/v1/auth/profile",
         {
           method: "PUT",
           headers: {
@@ -102,7 +102,7 @@ const Profile = () => {
       formData.append("NewPassword", NewPassword);
 
       const response = await fetch(
-        "http://localhost:8000/api/v1/auth/ProfilePassword",
+        "https://talkofcodebackend.onrender.com/api/v1/auth/ProfilePassword",
         {
           method: "PUT",
           headers: {
@@ -145,7 +145,7 @@ const Profile = () => {
       e.preventDefault();
 
       const response = await fetch(
-        "http://localhost:8000/api/v1/auth/ProfileLinks",
+        "https://talkofcodebackend.onrender.com/api/v1/auth/ProfileLinks",
         {
           method: "PUT",
           headers: {
@@ -196,7 +196,7 @@ const Profile = () => {
       e.preventDefault();
 
       const response = await fetch(
-        `http://localhost:8000/api/v1/auth/userskillsupdate/${skilltoremove}`,
+        `https://talkofcodebackend.onrender.com/api/v1/auth/userskillsupdate/${skilltoremove}`,
         {
           method: "PUT",
           headers: {
@@ -264,7 +264,7 @@ const Profile = () => {
                 style={{ height: "14rem", width: "14rem", marginRight: "2rem" }}
                 title
                 className="img-circle img-thumbnail isTooltip EditProfileUSerPhoto"
-                src={`http://localhost:8000/api/v1/auth/get-userPhoto/${auth.user._id}`}
+                src={`https://talkofcodebackend.onrender.com/api/v1/auth/get-userPhoto/${auth.user._id}`}
                 data-original-title="Usuario"
               />
               <div className="d-flex justify-content-start w-100 border-2 mb-2">
@@ -337,7 +337,10 @@ const Profile = () => {
                 </div>
 
                 <div className="mb-1  w-100  d-flex align-items-center  justify-content-between">
-                  <label htmlFor="exampleInputEmail1" className="form-label smalltitlefont3">
+                  <label
+                    htmlFor="exampleInputEmail1"
+                    className="form-label smalltitlefont3"
+                  >
                     <b> Contact Number:</b>
                   </label>
                   <input
@@ -367,10 +370,17 @@ const Profile = () => {
                   />
                 </div>
 
-                <button type="submit" className="btn btn-primary" style={{ width: "8rem" }}>
+                <button
+                  type="submit"
+                  className="btn btn-primary"
+                  style={{ width: "8rem" }}
+                >
                   Save
                 </button>
-                <Link to="/dashboard/user" className="mt-3 btn btn-outline-primary d-flex align-items-center text-decoration-none">
+                <Link
+                  to="/dashboard/user"
+                  className="mt-3 btn btn-outline-primary d-flex align-items-center text-decoration-none"
+                >
                   <FaArrowLeft className="me-1" />
                   Back to Dashboard
                 </Link>
@@ -378,7 +388,10 @@ const Profile = () => {
             </form>
           </TabPane>
 
-          <TabPane tab={<span className="tabtitle">Change Password</span>} key="2">
+          <TabPane
+            tab={<span className="tabtitle">Change Password</span>}
+            key="2"
+          >
             <form
               style={{
                 display: "flex",
@@ -404,7 +417,10 @@ const Profile = () => {
                   </button>
                 </h3>
                 <div className="mb-1 w-100  d-flex align-items-center  justify-content-between">
-                  <label htmlFor="exampleInputPassword1" className="form-label smalltitlefont3">
+                  <label
+                    htmlFor="exampleInputPassword1"
+                    className="form-label smalltitlefont3"
+                  >
                     <b>Old Password:</b>
                   </label>
                   <input
@@ -418,7 +434,10 @@ const Profile = () => {
                   />
                 </div>
                 <div className="mb-1 w-100  d-flex align-items-center  justify-content-between">
-                  <label htmlFor="exampleInputPassword1" className="form-label smalltitlefont3">
+                  <label
+                    htmlFor="exampleInputPassword1"
+                    className="form-label smalltitlefont3"
+                  >
                     <b>New Password:</b>
                   </label>
                   <input
@@ -432,10 +451,17 @@ const Profile = () => {
                   />
                 </div>
 
-                <button type="submit" className="btn btn-primary " style={{ width: "8rem" }}>
+                <button
+                  type="submit"
+                  className="btn btn-primary "
+                  style={{ width: "8rem" }}
+                >
                   Save
                 </button>
-                <Link to="/dashboard/user" className="mt-3 btn btn-outline-primary d-flex align-items-center text-decoration-none">
+                <Link
+                  to="/dashboard/user"
+                  className="mt-3 btn btn-outline-primary d-flex align-items-center text-decoration-none"
+                >
                   <FaArrowLeft className="me-1" />
                   Back to Dashboard
                 </Link>
@@ -443,7 +469,10 @@ const Profile = () => {
             </form>
           </TabPane>
 
-          <TabPane tab={<span className="tabtitle">Additional Information</span>} key="3">
+          <TabPane
+            tab={<span className="tabtitle">Additional Information</span>}
+            key="3"
+          >
             <form
               style={{
                 display: "flex",
@@ -459,7 +488,10 @@ const Profile = () => {
                 style={{ width: "100%" }}
               >
                 <div className="mb-1 w-100  d-flex align-items-center  justify-content-between">
-                  <label htmlFor="exampleInputPassword1" className="form-label smalltitlefont3">
+                  <label
+                    htmlFor="exampleInputPassword1"
+                    className="form-label smalltitlefont3"
+                  >
                     <b>Github:</b>
                   </label>
                   <input
@@ -472,7 +504,10 @@ const Profile = () => {
                   />
                 </div>
                 <div className="mb-1 w-100  d-flex align-items-center  justify-content-between">
-                  <label htmlFor="exampleInputPassword1" className="form-label smalltitlefont3">
+                  <label
+                    htmlFor="exampleInputPassword1"
+                    className="form-label smalltitlefont3"
+                  >
                     <b>Linked In:</b>
                   </label>
                   <input
@@ -486,7 +521,10 @@ const Profile = () => {
                   />
                 </div>
                 <div className="mb-1 w-100  d-flex align-items-center  justify-content-between">
-                  <label htmlFor="exampleInputPassword1" className="form-label smalltitlefont3">
+                  <label
+                    htmlFor="exampleInputPassword1"
+                    className="form-label smalltitlefont3"
+                  >
                     <b>Website:</b>
                   </label>
                   <input
@@ -500,7 +538,10 @@ const Profile = () => {
                   />
                 </div>
                 <div className="d-flex align-items-center w-100 mb-3 justify-content-between">
-                  <label htmlFor="exampleInputPassword1" className="form-label smalltitlefont3">
+                  <label
+                    htmlFor="exampleInputPassword1"
+                    className="form-label smalltitlefont3"
+                  >
                     <b>Skills:</b>
                   </label>
                   <div className="d-flex w-75 justify-content-between">
@@ -543,7 +584,10 @@ const Profile = () => {
                 </div>
 
                 <div className="d-flex align-items-center w-100 mb-3 justify-content-between">
-                  <label htmlFor="exampleInputPassword1" className="form-label smalltitlefont3">
+                  <label
+                    htmlFor="exampleInputPassword1"
+                    className="form-label smalltitlefont3"
+                  >
                     <b>Add Skills:</b>
                   </label>
                   <div className="d-flex w-75 justify-content-between">
@@ -571,22 +615,29 @@ const Profile = () => {
                 <div>
                   {tags.length > 0
                     ? tags.map((t) => (
-                      <Tag color="blue">
-                        {t}
-                        <RxCross2
-                          onClick={(e) => {
-                            handleTagRemove(e, t);
-                          }}
-                        />
-                      </Tag>
-                    ))
+                        <Tag color="blue">
+                          {t}
+                          <RxCross2
+                            onClick={(e) => {
+                              handleTagRemove(e, t);
+                            }}
+                          />
+                        </Tag>
+                      ))
                     : null}
                 </div>
 
-                <button type="submit" className="btn btn-primary" style={{ width: "8rem" }}>
+                <button
+                  type="submit"
+                  className="btn btn-primary"
+                  style={{ width: "8rem" }}
+                >
                   Save
                 </button>
-                <Link to="/dashboard/user" className="mt-3 btn btn-outline-primary d-flex align-items-center text-decoration-none">
+                <Link
+                  to="/dashboard/user"
+                  className="mt-3 btn btn-outline-primary d-flex align-items-center text-decoration-none"
+                >
                   <FaArrowLeft className="me-1" />
                   Back to Dashboard
                 </Link>

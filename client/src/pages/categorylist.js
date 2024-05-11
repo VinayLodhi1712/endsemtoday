@@ -15,9 +15,9 @@ const Categorylist = () => {
     try {
       let url;
       if (auth.user) {
-        url = `http://localhost:8000/api/v1/product/product-CategoryWise/${Params.id}/${auth.user._id}`;
+        url = `https://talkofcodebackend.onrender.com/api/v1/product/product-CategoryWise/${Params.id}/${auth.user._id}`;
       } else {
-        url = `http://localhost:8000/api/v1/product/product-CategoryWise/${Params.id}/65f9bb4749049ec84f1de5be`;
+        url = `https://talkofcodebackend.onrender.com/api/v1/product/product-CategoryWise/${Params.id}/65f9bb4749049ec84f1de5be`;
       }
       const response = await fetch(url);
       const data = await response.json();
@@ -50,7 +50,7 @@ const Categorylist = () => {
                 style={{ width: "22%", height: "100%" }}
               >
                 <Image
-                  src={`http://localhost:8000/api/v1/product/get-productPhoto/${p._id}`}
+                  src={`https://talkofcodebackend.onrender.com/api/v1/product/get-productPhoto/${p._id}`}
                   className="card-Image-top productimage"
                   style={{ height: "15rem", width: "100%" }}
                 />

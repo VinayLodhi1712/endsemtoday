@@ -17,7 +17,7 @@ const CreateCategory = () => {
   async function GetCategories() {
     try {
       const response = await fetch(
-        "http://localhost:8000/api/v1/category/GetAll-category",
+        "https://talkofcodebackend.onrender.com/api/v1/category/GetAll-category",
 
         {
           headers: {
@@ -41,7 +41,7 @@ const CreateCategory = () => {
     e.preventDefault();
     try {
       const response = await fetch(
-        "http://localhost:8000/api/v1/category/create-category",
+        "https://talkofcodebackend.onrender.com/api/v1/category/create-category",
         {
           method: "POST",
           headers: {
@@ -72,7 +72,7 @@ const CreateCategory = () => {
     e.preventDefault();
     try {
       const response = await fetch(
-        `http://localhost:8000/api/v1/category/update-category/${selected._id}`,
+        `https://talkofcodebackend.onrender.com/api/v1/category/update-category/${selected._id}`,
         {
           method: "PUT",
           headers: {
@@ -103,7 +103,7 @@ const CreateCategory = () => {
   async function HandleDelete(id) {
     try {
       const response = await fetch(
-        `http://localhost:8000/api/v1/category/Delete-category/${id}`,
+        `https://talkofcodebackend.onrender.com/api/v1/category/Delete-category/${id}`,
         {
           method: "DELETE",
           headers: {
@@ -137,7 +137,9 @@ const CreateCategory = () => {
           className=" d-flex flex-column"
           style={{ gap: "2rem", height: "100%", width: "60%" }}
         >
-          <h1 className="mt-2" style={{textAlign:"center"}}>Manage Category</h1>
+          <h1 className="mt-2" style={{ textAlign: "center" }}>
+            Manage Category
+          </h1>
           <div>
             <div>
               <form onSubmit={HandleSubmit}>
@@ -169,7 +171,7 @@ const CreateCategory = () => {
               <tbody>
                 {categories?.map((c, index) => (
                   <tr key={c.id}>
-                    <td >{c.name}</td>
+                    <td>{c.name}</td>
                     <td>
                       <button
                         className="btn btn-primary"

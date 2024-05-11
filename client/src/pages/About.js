@@ -77,7 +77,9 @@ const About = () => {
 
   const fetchTotalUsers = async () => {
     try {
-      const response = await fetch("http://localhost:8000/api/v1/auth/count");
+      const response = await fetch(
+        "https://talkofcodebackend.onrender.com/api/v1/auth/count"
+      );
 
       if (!response.ok) {
         throw new Error("Failed to fetch total users");
@@ -92,7 +94,7 @@ const About = () => {
   const fetchProductCount = async () => {
     try {
       const response = await fetch(
-        "http://localhost:8000/api/v1/product/product-count"
+        "https://talkofcodebackend.onrender.com/api/v1/product/product-count"
       );
       const data = await response.json();
       setTotalProducts(data.Total);
@@ -104,7 +106,7 @@ const About = () => {
   const fetchQuestionCount = async () => {
     try {
       const response = await fetch(
-        "http://localhost:8000/api/v1/Questions/QuestionCount"
+        "https://talkofcodebackend.onrender.com/api/v1/Questions/QuestionCount"
       );
       const data = await response.json();
       setTotalQuestions(data.Total);

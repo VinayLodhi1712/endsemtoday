@@ -121,7 +121,7 @@ function Header() {
                       {" "}
                       <Avatar
                         alt={auth.user.Name}
-                        src={`http://localhost:8000/api/v1/auth/get-userPhoto/${auth.user._id}`}
+                        src={`https://talkofcodebackend.onrender.com/api/v1/auth/get-userPhoto/${auth.user._id}`}
                         sx={{ width: 30, height: 30 }}
                       />
                       {auth.user.Name}

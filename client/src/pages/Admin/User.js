@@ -15,7 +15,7 @@ const User = () => {
     try {
       setLoading(true);
       const response = await fetch(
-        `http://localhost:8000/api/v1/auth/UsersList/${Page}`,
+        `https://talkofcodebackend.onrender.com/api/v1/auth/UsersList/${Page}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -39,7 +39,7 @@ const User = () => {
   async function HandleUserDelete(id) {
     try {
       const response = await fetch(
-        `http://localhost:8000/api/v1/auth/UserDelete/${id}`,
+        `https://talkofcodebackend.onrender.com/api/v1/auth/UserDelete/${id}`,
         {
           method: "Delete",
           headers: {
@@ -61,7 +61,7 @@ const User = () => {
   async function GetCount() {
     try {
       const response = await fetch(
-        `http://localhost:8000/api/v1/auth/UserCount`
+        `https://talkofcodebackend.onrender.com/api/v1/auth/UserCount`
       );
       const data = await response.json();
       SetTotalvalue(data?.Total);
@@ -77,7 +77,10 @@ const User = () => {
 
   return (
     <Layout>
-      <div className="bg d-flex justify-content-around" style={{ width: "100%" }}>
+      <div
+        className="bg d-flex justify-content-around"
+        style={{ width: "100%" }}
+      >
         <div className="w-25">
           <AdminMenu />
         </div>

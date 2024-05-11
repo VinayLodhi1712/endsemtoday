@@ -16,12 +16,15 @@ const Orders = () => {
 
   async function GetOrders() {
     try {
-      const response = await fetch("http://localhost:8000/api/v1/auth/orders", {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: auth?.token,
-        },
-      });
+      const response = await fetch(
+        "https://talkofcodebackend.onrender.com/api/v1/auth/orders",
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: auth?.token,
+          },
+        }
+      );
       const data = await response.json();
       if (data) {
         SetOrders(data.orders);
@@ -36,7 +39,7 @@ const Orders = () => {
   async function CancelOrder(id) {
     try {
       const response = await fetch(
-        `http://localhost:8000/api/v1/auth/OrderDelete/${id}`,
+        `https://talkofcodebackend.onrender.com/api/v1/auth/OrderDelete/${id}`,
         {
           method: "DELETE",
           headers: {
@@ -114,7 +117,7 @@ const Orders = () => {
                     <div className="d-flex justify-content-between border border-2 p-2">
                       <div style={{ width: "50%" }}>
                         <Image
-                          src={`http://localhost:8000/api/v1/product/get-productPhoto/${p._id}`}
+                          src={`https://talkofcodebackend.onrender.com/api/v1/product/get-productPhoto/${p._id}`}
                           className="card-Image-top"
                           style={{ height: "100%", width: "10rem" }}
                         />

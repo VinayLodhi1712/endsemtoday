@@ -19,16 +19,19 @@ const Login = () => {
       e.preventDefault();
 
       SetLoading(true);
-      const response = await fetch("http://localhost:8000/api/v1/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          Email,
-          Password,
-        }),
-      });
+      const response = await fetch(
+        "https://talkofcodebackend.onrender.com/api/v1/auth/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            Email,
+            Password,
+          }),
+        }
+      );
       const data = await response.json();
 
       if (response.status === 404) {
@@ -114,6 +117,7 @@ const Login = () => {
               style={{
                 width: "50%",
                 height: "50px",
+
                 borderRadius: "5px",
                 padding: "10px 20px",
                 backgroundColor: "grey",
@@ -128,6 +132,7 @@ const Login = () => {
                   height: "100%",
                   fontSize: "28px",
                   textDecoration: "none",
+                  color: "black",
                 }}
               >
                 Login

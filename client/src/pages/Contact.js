@@ -18,7 +18,7 @@ const ContactForm = () => {
       Setloading(true);
       e.preventDefault();
       const response = await fetch(
-        "http://localhost:8000/api/v1/auth/SubmitUserQueryForm",
+        "https://talkofcodebackend.onrender.com/api/v1/auth/SubmitUserQueryForm",
         {
           method: "POST",
           headers: {
@@ -241,7 +241,7 @@ const Contact = () => {
             <p className=" TeamNames">Vinay Anand Lodhi</p>
             <p className="smalltitlefont" style={{ margin: "0" }}>
               Developer and Project Manager
-            </p>  
+            </p>
             <div style={{ display: "flex" }}>
               <div className="icons" style={{ backgroundColor: "black" }}>
                 <a

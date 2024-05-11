@@ -25,7 +25,7 @@ const AdminQuestions = () => {
     try {
       setloading(true);
       const response = await fetch(
-        `http://localhost:8000/api/v1/Questions/UserQuestions/${auth.user._id}/${SkipCount}`
+        `https://talkofcodebackend.onrender.com/api/v1/Questions/UserQuestions/${auth.user._id}/${SkipCount}`
       );
       const data = await response.json();
       if (response.status == 200) {
@@ -46,7 +46,7 @@ const AdminQuestions = () => {
   async function GetNumberofQuestion() {
     try {
       const data = await fetch(
-        "http://localhost:8000/api/v1/Questions/QuestionCount"
+        "https://talkofcodebackend.onrender.com/api/v1/Questions/QuestionCount"
       );
 
       if (data) {
@@ -66,7 +66,7 @@ const AdminQuestions = () => {
       );
       if (confirmed) {
         const del = await fetch(
-          `http://localhost:8000/api/v1/Questions/delete_question/${question}`,
+          `https://talkofcodebackend.onrender.com/api/v1/Questions/delete_question/${question}`,
           {
             method: "DELETE",
             headers: { "Content-Type": "application/json" },
@@ -88,7 +88,7 @@ const AdminQuestions = () => {
   async function GetBookmarkedQuestion() {
     try {
       const response = await fetch(
-        `http://localhost:8000/api/v1/Questions/getBookmarked/${auth.user._id}`
+        `https://talkofcodebackend.onrender.com/api/v1/Questions/getBookmarked/${auth.user._id}`
       );
       const data = await response.json();
       if (response.status === 200) {
@@ -106,7 +106,7 @@ const AdminQuestions = () => {
   async function RemoveBookmark(qid) {
     try {
       const response = await fetch(
-        `http://localhost:8000/api/v1/Questions/removeBookmarked/${auth.user._id}/${qid}`,
+        `https://talkofcodebackend.onrender.com/api/v1/Questions/removeBookmarked/${auth.user._id}/${qid}`,
         {
           method: "PUT",
           headers: {
@@ -147,14 +147,17 @@ const AdminQuestions = () => {
   };
 
   return (
-    <Layout >
+    <Layout>
       <div className="bg d-flex justify-content-around">
         <div className="w-25 ">
           <AdminMenu />
         </div>
 
         <Tabs className="w-50">
-          <TabPane tab={<span className="tabtitle">Your Questions</span>} key="1">
+          <TabPane
+            tab={<span className="tabtitle">Your Questions</span>}
+            key="1"
+          >
             <div className="d-flex w-100 justify-content-around mt-3  ">
               <div
                 className="d-flex justify-content-center flex-column align-items-center w-100"
@@ -272,14 +275,12 @@ const AdminQuestions = () => {
                       </div>
                       <div className="d-flex" style={{ gap: "1rem" }}>
                         <NavLink to={`/dashboard/user/answers/${q._id}`}>
-                        <Button variant="contained" color="success">
+                          <Button variant="contained" color="success">
                             Answer
                           </Button>
                         </NavLink>
                         <NavLink to={`/dashboard/user/ViewQuestion/${q._id}`}>
-                          <button className="btn btn-primary">
-                            View 
-                          </button>
+                          <button className="btn btn-primary">View</button>
                         </NavLink>
                         <button
                           className="btn btn-warning"

@@ -729,7 +729,7 @@ UserInfo .col-md-4 img {
 }
 
 .HomeFirstDiv {
-  height: 77vh;
+  height: 90vh;
 }
 
 .Div {
@@ -1023,6 +1023,10 @@ UserInfo .col-md-4 img {
 
   /* //background-color: #c5bdbd; 
   Light grey */
+  background-color: rgba(255,127,80,0.564);
+  
+  /* //background-color: #c5bdbd; 
+  Light grey */
 }
 
 .homepage-section:nth-child(even) {
@@ -1157,6 +1161,22 @@ UserInfo .col-md-4 img {
   height: auto;
   object-fit: cover;
 }
+.faq-list {
+  list-style-type: circle;
+  padding: 0;
+}
+
+.faq-list li {
+  margin-bottom: 10px;
+}
+
+.codeconnect-img {
+  max-height: 100%;
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
 
 .registerform .form-control {
   width: 100%;

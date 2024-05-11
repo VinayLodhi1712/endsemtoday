@@ -25,7 +25,7 @@ const Adminorder = () => {
   async function GetOrders() {
     try {
       const response = await fetch(
-        "http://localhost:8000/api/v1/auth/Adminorders",
+        "https://talkofcodebackend.onrender.com/api/v1/auth/Adminorders",
         {
           headers: {
             "Content-Type": "application/json",

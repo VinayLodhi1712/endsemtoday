@@ -10,12 +10,15 @@ export default function AdminRoute() {
   useEffect(() => {
     const AuthCheck = async () => {
       try {
-        const res = await fetch("http://localhost:8000/api/v1/auth/AdminAuth", {
-          headers: {
-            Authorization: auth?.token,
-            "Content-Type": "application/json",
-          },
-        });
+        const res = await fetch(
+          "https://talkofcodebackend.onrender.com/api/v1/auth/AdminAuth",
+          {
+            headers: {
+              Authorization: auth?.token,
+              "Content-Type": "application/json",
+            },
+          }
+        );
 
         if (res.ok) {
           const data = await res.json();

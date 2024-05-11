@@ -14,11 +14,11 @@ const SearchBar = () => {
     let geturl;
     try {
       if (auth.user) {
-        url = `http://localhost:8000/api/v1/product/product-search/${Keyword}/${auth.user._id}`;
-        geturl = `http://localhost:8000/api/v1/product/get-product/${auth.user._id}`;
+        url = `https://talkofcodebackend.onrender.com/api/v1/product/product-search/${Keyword}/${auth.user._id}`;
+        geturl = `https://talkofcodebackend.onrender.com/api/v1/product/get-product/${auth.user._id}`;
       } else {
-        url = `http://localhost:8000/api/v1/product/product-search/${Keyword}/65f9bb4749049ec84f1de5be`;
-        geturl = `http://localhost:8000/api/v1/product/get-product/65f9bb4749049ec84f1de5be`;
+        url = `https://talkofcodebackend.onrender.com/api/v1/product/product-search/${Keyword}/65f9bb4749049ec84f1de5be`;
+        geturl = `https://talkofcodebackend.onrender.com/api/v1/product/get-product/65f9bb4749049ec84f1de5be`;
       }
       if (Keyword) {
         const response = await fetch(url);

@@ -10,11 +10,14 @@ export default function PrivateRoute() {
   useEffect(() => {
     const AuthCheck = async () => {
       try {
-        const res = await fetch("http://localhost:8000/api/v1/auth/userAuth", {
-          headers: {
-            Authorization: auth?.token,
-          },
-        });
+        const res = await fetch(
+          "https://talkofcodebackend.onrender.com/api/v1/auth/userAuth",
+          {
+            headers: {
+              Authorization: auth?.token,
+            },
+          }
+        );
 
         if (res.ok) {
           const data = await res.json();

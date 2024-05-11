@@ -107,7 +107,7 @@ const Interaction = () => {
         return;
       }
       const response = await fetch(
-        `http://localhost:8000/api/v1/Questions/Question_search/${keywordToSearch}`
+        `https://talkofcodebackend.onrender.com/api/v1/Questions/Question_search/${keywordToSearch}`
       );
       const data = await response.json();
       if (response.status === 200) {
@@ -127,7 +127,7 @@ const Interaction = () => {
       );
       if (confirmed) {
         const del = await fetch(
-          `http://localhost:8000/api/v1/Questions/delete_question/${question}`,
+          `https://talkofcodebackend.onrender.com/api/v1/Questions/delete_question/${question}`,
           {
             method: "DELETE",
             headers: { "Content-Type": "application/json" },
@@ -149,7 +149,7 @@ const Interaction = () => {
   async function GetQuestions() {
     try {
       const response = await fetch(
-        `http://localhost:8000/api/v1/Questions/get_question/${Page}`
+        `https://talkofcodebackend.onrender.com/api/v1/Questions/get_question/${Page}`
       );
       const data = await response.json();
       if (response.status === 200) {
@@ -166,7 +166,7 @@ const Interaction = () => {
   async function GetNumberofQuestion() {
     try {
       const data = await fetch(
-        "http://localhost:8000/api/v1/Questions/QuestionCount"
+        "https://talkofcodebackend.onrender.com/api/v1/Questions/QuestionCount"
       );
 
       if (data) {
@@ -263,7 +263,7 @@ const Interaction = () => {
                   {message.role === "user" ? (
                     <div className="user-icon">
                       <Avatar
-                        src={`http://localhost:8000/api/v1/auth/get-userPhoto/${auth.user._id}`}
+                        src={`https://talkofcodebackend.onrender.com/api/v1/auth/get-userPhoto/${auth.user._id}`}
                         sx={{ width: 30, height: 30 }}
                       />
                     </div>
@@ -315,7 +315,7 @@ const Interaction = () => {
                       style={{ width: "50%" }}
                     >
                       <Avatar
-                        src={`http://localhost:8000/api/v1/auth/get-userPhoto/${q.user._id}`}
+                        src={`https://talkofcodebackend.onrender.com/api/v1/auth/get-userPhoto/${q.user._id}`}
                         sx={{ width: 30, height: 30 }} // Add margin for spacing
                       />
                       <p className="UserNameDisplay">{q.user.Name}</p>

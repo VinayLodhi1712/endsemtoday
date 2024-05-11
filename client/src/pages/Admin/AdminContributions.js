@@ -22,7 +22,7 @@ const UserContributions = () => {
   async function getUserAnswer() {
     try {
       const response = await fetch(
-        `http://localhost:8000/api/v1/Answer/Get_User_Answers/${auth.user._id}`
+        `https://talkofcodebackend.onrender.com/api/v1/Answer/Get_User_Answers/${auth.user._id}`
       );
       const answers = await response.json();
       if (answers) {
@@ -43,7 +43,7 @@ const UserContributions = () => {
       );
       if (confirmed) {
         const del = await fetch(
-          `http://localhost:8000/api/v1/Answer/delete_Answer/${aid}/${qid}/${auth.user._id}`,
+          `https://talkofcodebackend.onrender.com/api/v1/Answer/delete_Answer/${aid}/${qid}/${auth.user._id}`,
           {
             method: "DELETE",
             headers: {
@@ -68,7 +68,7 @@ const UserContributions = () => {
   async function updateContribution(aid) {
     try {
       const updated = await fetch(
-        `http://localhost:8000/api/v1/Answer/Update_Answer/${aid}`,
+        `https://talkofcodebackend.onrender.com/api/v1/Answer/Update_Answer/${aid}`,
         {
           method: "PUT",
           headers: {

@@ -31,7 +31,7 @@ const UserDashboard = () => {
   async function GetAllUserQuestion() {
     try {
       const AllQuestion = await fetch(
-        `http://localhost:8000/api/v1/Questions/AskedUserQuestion/${auth.user._id}`
+        `https://talkofcodebackend.onrender.com/api/v1/Questions/AskedUserQuestion/${auth.user._id}`
       );
 
       if (AllQuestion.status == 200) {
@@ -47,7 +47,7 @@ const UserDashboard = () => {
   async function GetAllUserAnswers() {
     try {
       const AllAnswer = await fetch(
-        `http://localhost:8000/api/v1/Answer/GetNumberOfQuestions/${auth.user._id}`
+        `https://talkofcodebackend.onrender.com/api/v1/Answer/GetNumberOfQuestions/${auth.user._id}`
       );
 
       if (AllAnswer.status == 200) {
@@ -61,7 +61,7 @@ const UserDashboard = () => {
   }
   async function GetUserReputation() {
     const resp = await fetch(
-      `http://localhost:8000/api/v1/auth/GetReputation/${auth.user._id}`
+      `https://talkofcodebackend.onrender.com/api/v1/auth/GetReputation/${auth.user._id}`
     );
     if (resp.status === 200) {
       const reputation = await resp.json();
@@ -182,7 +182,7 @@ const UserDashboard = () => {
                 <div className="d-flex flex-column align-items-center">
                   <img
                     style={{ width: "90%" }}
-                    src={`http://localhost:8000/api/v1/auth/get-userPhoto/${auth.user._id}`}
+                    src={`https://talkofcodebackend.onrender.com/api/v1/auth/get-userPhoto/${auth.user._id}`}
                   />
                 </div>
               </div>
