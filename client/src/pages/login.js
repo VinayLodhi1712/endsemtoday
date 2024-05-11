@@ -63,7 +63,7 @@ const Login = () => {
       }
     } catch (error) {
       SetLoading(false);
-      console.log(error)
+      console.log(error);
       toast.error("Something went wrong try again");
     }
   }
@@ -76,35 +76,64 @@ const Login = () => {
     <Layout>
       <ToastContainer />
       <div className="bg">
-        <div className="Registerlayout bg-light" style={{ width: "70%", padding: "20px", borderRadius: "10px" }}>
+        <div
+          className="Registerlayout bg-light"
+          style={{ width: "70%", padding: "20px", borderRadius: "10px" }}
+        >
           <div className="d-flex mb-3">
             <button
-              className={`align-items-center button-16 ${location.pathname === '/register' ? 'bg-primary' : ''}`}
-              style={{ width: "50%", height: "50px", borderRadius: "5px", padding: "10px 20px", backgroundColor:"grey"}}
+              className={`align-items-center button-16 ${
+                location.pathname === "/register" ? "bg-primary" : ""
+              }`}
+              style={{
+                width: "50%",
+                height: "50px",
+                borderRadius: "5px",
+                padding: "10px 20px",
+                backgroundColor: "grey",
+              }}
             >
               <NavLink
                 to="/register"
-                className={`nav-link ${location.pathname === '/register' ? 'active-button' : ''}`}
-                style={{ height: "100%", fontSize: "28px", textDecoration: "none" }}
+                className={`nav-link ${
+                  location.pathname === "/register" ? "active-button" : ""
+                }`}
+                style={{
+                  height: "100%",
+                  fontSize: "28px",
+                  textDecoration: "none",
+                }}
               >
                 Register
               </NavLink>
             </button>
             <button
-              className={`align-items-center button-16 ${location.pathname === '/login' ? 'bg-primary' : ''}`}
-              style={{ width: "50%", height: "50px", fontSize: "20px", borderRadius: "5px" }}
+              className={`align-items-center button-16 ${
+                location.pathname === "/login" ? "bg-primary" : ""
+              }`}
+              style={{
+                width: "50%",
+                height: "50px",
+                borderRadius: "5px",
+                padding: "10px 20px",
+                backgroundColor: "grey",
+              }}
             >
               <NavLink
                 to="/login"
-                className={`nav-link ${location.pathname === '/login' ? 'active-button' : ''}`}
-                style={{ height: "100%", fontSize: "28px", textDecoration: "none", padding: "10px 20px" }}
+                className={`nav-link ${
+                  location.pathname === "/login" ? "active-button" : ""
+                }`}
+                style={{
+                  height: "100%",
+                  fontSize: "28px",
+                  textDecoration: "none",
+                }}
               >
                 Login
               </NavLink>
             </button>
           </div>
-          
-
 
           <form
             style={{ display: "flex", justifyContent: "center" }}
@@ -115,12 +144,17 @@ const Login = () => {
             <div className="mt-2" style={{ width: "100%" }}>
               <div style={{ textAlign: "center" }}>
                 <h1 style={{ fontWeight: "600" }}>Login</h1>
-                <p style={{ fontSize: "20px" }}>Doesn't have an account yet? <a href="/register">Sign-Up</a> here</p>
+                <p style={{ fontSize: "20px" }}>
+                  Doesn't have an account yet? <a href="/register">Sign-Up</a>{" "}
+                  here
+                </p>
               </div>
 
-
               <div className="mb-2 w-75" style={{ marginLeft: "5rem" }}>
-                <label htmlFor="exampleInputEmail1" className="form-label smalltitlefont2">
+                <label
+                  htmlFor="exampleInputEmail1"
+                  className="form-label smalltitlefont2"
+                >
                   Email address
                 </label>
                 <input
@@ -138,8 +172,14 @@ const Login = () => {
                 />
               </div>
 
-              <div className="mb-3" style={{ width: "75%", marginLeft: "5rem" }}>
-                <label htmlFor="exampleInputPassword1" className="form-label smalltitlefont2">
+              <div
+                className="mb-3"
+                style={{ width: "75%", marginLeft: "5rem" }}
+              >
+                <label
+                  htmlFor="exampleInputPassword1"
+                  className="form-label smalltitlefont2"
+                >
                   Password
                 </label>
                 <div style={{ display: "flex" }}>
@@ -153,7 +193,6 @@ const Login = () => {
                       SetPassword(e.target.value);
                     }}
                     required
-                  
                   />
                   <button
                     className="btn btn-outline-primary"
@@ -173,10 +212,15 @@ const Login = () => {
                   justifyContent: "space-around",
                   alignItems: "center",
                   width: "60%",
-                  marginLeft: "8rem"
+                  marginLeft: "8rem",
                 }}
               >
-                <button type="submit" className="btn btn-primary" disabled={Loading} style={{ width: "10rem" }}>
+                <button
+                  type="submit"
+                  className="btn btn-primary"
+                  disabled={Loading}
+                  style={{ width: "10rem" }}
+                >
                   {Loading ? "Loading..." : "Login"}
                 </button>
                 <button
@@ -194,8 +238,6 @@ const Login = () => {
         </div>
       </div>
     </Layout>
-
-
   );
 };
 

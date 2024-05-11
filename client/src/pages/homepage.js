@@ -5,7 +5,7 @@ import Card from "react-bootstrap/Card";
 import HomeImg from "../assests/homepageimage.png";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { FaCartShopping } from 'react-icons/fa6'
+import { FaCartShopping } from "react-icons/fa6";
 import { NavLink, Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -16,9 +16,10 @@ import MuiAccordion from "@mui/material/Accordion";
 import MuiAccordionSummary from "@mui/material/AccordionSummary";
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
-
+import FadeIn from "./FadeIn";
 import { Swiper, SwiperSlide } from "swiper/react";
-
+import { MdOutlineConnectingAirports } from "react-icons/md";
+import codeconnect from "../assests/codeconnect.jpg";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
@@ -73,7 +74,9 @@ function Home() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:8000/api/v1/product/get-product");
+        const response = await fetch(
+          "http://localhost:8000/api/v1/product/get-product"
+        );
         const data = await response.json();
 
         setProduct(data.products.slice(0, 10));
@@ -84,7 +87,6 @@ function Home() {
 
     fetchData();
   }, []);
-
 
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
@@ -165,47 +167,60 @@ function Home() {
               pagination={{
                 clickable: true,
               }}
-
               modules={[EffectCoverflow, Pagination]}
               className="mySwiper"
               style={{ marginBottom: "2rem" }}
               initialSlide={0}
             >
-              {
-                product.map((p) => (
-                  <SwiperSlide key={p._id}>
-                    <Card style={{ width: "16rem", height: "auto", margin: "5px", position: "relative" }}>
+              {product.map((p) => (
+                <SwiperSlide key={p._id}>
+                  <Card
+                    style={{
+                      width: "16rem",
+                      height: "auto",
+                      margin: "5px",
+                      position: "relative",
+                    }}
+                  >
+                    <div className="user-image2 boxshadow">
+                      <Card.Img
+                        variant="top"
+                        src={`http://localhost:8000/api/v1/product/get-productPhoto/${p._id}`}
+                        style={{
+                          width: "100%",
+                          height: "17rem",
+                          objectFit: "cover",
+                        }}
+                        className="unselectable img-fluid"
+                      />
 
-                      <div className="user-image2 boxshadow">
-
-                        <Card.Img
-                          variant="top"
-                          src={`http://localhost:8000/api/v1/product/get-productPhoto/${p._id}`}
-                          style={{ width: "100%", height: "17rem", objectFit: "cover" }}
-                          className="unselectable img-fluid"
-                        />
-
-                        <div style={{ position: "absolute", top: "0.5rem", right: "0.5rem" }}>
-                          <div className="bg-primary rounded-circle p-2 d-flex align-items-center justify-content-center">
-                            <FaCartShopping className="text-white" style={{ width: "1.5rem", height: "1.5rem" }} />
-                          </div>
+                      <div
+                        style={{
+                          position: "absolute",
+                          top: "0.5rem",
+                          right: "0.5rem",
+                        }}
+                      >
+                        <div className="bg-primary rounded-circle p-2 d-flex align-items-center justify-content-center">
+                          <FaCartShopping
+                            className="text-white"
+                            style={{ width: "1.5rem", height: "1.5rem" }}
+                          />
                         </div>
                       </div>
+                    </div>
 
-
-                      <Card.Body>
-
-                        <div className="d-flex justify-content-around smalltitlefont4">
-                          <Card.Title className="ff smalltitlefont4 unselectable mb-0 w-60">
-                            {p.name}
-                          </Card.Title>
-                          <p className="text-gray-600 mb-3 w-35">₹{p.price}</p>
-                        </div>
-                      </Card.Body>
-                    </Card>
-                  </SwiperSlide>
-                ))
-              }
+                    <Card.Body>
+                      <div className="d-flex justify-content-around smalltitlefont4">
+                        <Card.Title className="ff smalltitlefont4 unselectable mb-0 w-60">
+                          {p.name}
+                        </Card.Title>
+                        <p className="text-gray-600 mb-3 w-35">₹{p.price}</p>
+                      </div>
+                    </Card.Body>
+                  </Card>
+                </SwiperSlide>
+              ))}
               <div className="center3">
                 <NavLink to="/products">
                   <button type="submit" className="btn btn-primary mt-4">
@@ -216,21 +231,76 @@ function Home() {
             </Swiper>
           </div>
         </div>
-        <div className="homepage-section justify-content-around align-items-center mb-3">
-          <h1 className="text-center WelcomeText mb-3 mt-5">
+        <div className="homepage-section justify-content-around align-items-center mb-3 mt-2">
+          <h1 className="text-center WelcomeText mb-1 mt-2">
+            Code <MdOutlineConnectingAirports /> Connect, <br></br>
+            <span className="text-center">
+              where Knowledge Meets Collaboration.{" "}
+            </span>
+          </h1>
+          <FadeIn />
+          <div className="d-flex  mb-3">
+            <div className="w-50 user-tile" style={{ marginLeft: "4rem" }}>
+              <span
+                className="mediumtitlefont highlighted ff"
+                style={{ marginLeft: "6rem" }}
+              >
+                {" "}
+                Have Doubts?
+              </span>
+              <ul
+                className="faq-list smalltitlefont3"
+                style={{ marginLeft: "1rem" }}
+              >
+                <li>Ask questions from experienced people.</li>
+                <li>Find solutions to common coding problems.</li>
+                <li>Share knowledge and learn from others in the community.</li>
+              </ul>
+              <Link to="/dashboard/user/interaction">
+                <button
+                  size="small"
+                  className="btn-outline-primary"
+                  style={{ display: "block", textAlign: "center" }}
+                >
+                  Get Help...
+                </button>
+              </Link>
+            </div>
+            <div
+              className="w-50 justify-content-center mt-4"
+              style={{ width: "250px", height: "250px", marginLeft: "18rem" }}
+            >
+              <img
+                src={codeconnect}
+                alt="CodeConnect"
+                className="codeconnect-img"
+              />
+            </div>
+          </div>
+        </div>
+        <div className="homepage-section justify-content-around align-items-center ">
+          <h1 className="text-center WelcomeText mt-2">
             Get instant technical <span className="d-block">news</span>
           </h1>
 
-          <div className="d-flex mb-3">
+          <div className="d-flex">
             {/* Left side */}
-            <div className="d-flex flex-column justify-content-center mb-3">
-              <h2 className="font-bold text-black " style={{ marginLeft: "2rem" }}>
-                Stay updated with the latest tech news<span className="highlighted ff"> on our website!</span>
+            <div className="d-flex flex-column justify-content-center">
+              <h2
+                className="font-bold text-black "
+                style={{ marginLeft: "2rem" }}
+              >
+                Stay updated with the latest tech news
+                <span className="highlighted ff"> on our website!</span>
               </h2>
 
-              <p className="w-50 ff" style={{ marginLeft: "2rem", fontSize: "20px" }}>
-
-                Explore the latest in tech news and stay informed about cutting-edge developments, innovations, and trends in the ever-evolving world of technology.
+              <p
+                className="w-50 ff"
+                style={{ marginLeft: "2rem", fontSize: "20px" }}
+              >
+                Explore the latest in tech news and stay informed about
+                cutting-edge developments, innovations, and trends in the
+                ever-evolving world of technology.
               </p>
 
               <Link to="/technews">
@@ -238,22 +308,15 @@ function Home() {
                   <button className="btn btn-primary">Explore &rarr;</button>
                 </div>
               </Link>
-
             </div>
 
             {/* Right side */}
-            <div className="col-md-6" >
+            <div className="col-md-6">
               <BannerCard />
             </div>
           </div>
-
-
-
-
         </div>
         <div className="homepage-section AccordianParent">
-
-
           <h1 className=" w-100 text-center WelcomeText mb-3">
             {" "}
             Frequently Asked Questions

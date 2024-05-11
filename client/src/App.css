@@ -590,7 +590,6 @@ UserInfo .col-md-4 img {
   margin-left: 10px;
 }
 
-
 .boxshadow {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
 }
@@ -602,8 +601,6 @@ UserInfo .col-md-4 img {
 .rounded-circle {
   border-radius: 50% !important;
 }
-
-
 
 .unselectable {
   user-select: none;
@@ -765,7 +762,7 @@ UserInfo .col-md-4 img {
 
 .swiper-pagination {
   bottom: 8% !important;
-} 
+}
 
 .icon {
   margin: 0;
@@ -804,7 +801,7 @@ UserInfo .col-md-4 img {
 } */
 
 .mySwiper {
- width: 100% !important;
+  width: 100% !important;
   margin-top: 2rem;
 }
 
@@ -1022,8 +1019,10 @@ UserInfo .col-md-4 img {
 } */
 
 .homepage-section:nth-child(odd) {
-  background-color: #c5bdbd;
-  /* Light grey */
+  background-color: rgba(255, 127, 80, 0.564);
+
+  /* //background-color: #c5bdbd; 
+  Light grey */
 }
 
 .homepage-section:nth-child(even) {
@@ -1143,6 +1142,21 @@ UserInfo .col-md-4 img {
 .registerform .form-label {
   font-size: 16px;
 }
+.faq-list {
+  list-style-type: circle;
+  padding: 0;
+}
+
+.faq-list li {
+  margin-bottom: 10px;
+}
+
+.codeconnect-img {
+  max-height: 100%;
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+}
 
 .registerform .form-control {
   width: 100%;
@@ -1208,12 +1222,11 @@ UserInfo .col-md-4 img {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-.card{
+.card {
   border: 1px solid #ccc;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s ease;
 }
-
 
 .user-image {
   display: flex;
