@@ -19,7 +19,7 @@ import Typography from "@mui/material/Typography";
 import FadeIn from "./FadeIn";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { MdOutlineConnectingAirports } from "react-icons/md";
-import codeconnect from "../assests/codeconnect.jpg";
+import codeconnect1 from "../assests/codeconnect1.jpg";
 
 import "swiper/css";
 import "swiper/css/effect-coverflow";
@@ -268,16 +268,23 @@ function Home() {
               </button>
             </Link>
           </div>
-          <div
+          {/* <div
             className="w-50 justify-content-center mt-4"
             style={{ width: "250px", height: "250px", marginLeft: "18rem" }}
           >
             <img
-              src={codeconnect}
-              alt="CodeConnect"
-              className="codeconnect-img"
+              src={codeconnect1}
+              alt="CodeConnect1"
+              style={{
+                width: "50%",
+                height: "100%",
+                objectFit: "cover",
+                borderRadius: "50%",
+                margin: "2rem",
+                marginBottom: "2rem",
+              }}
             />
-          </div>
+          </div> */}
         </div>
       </div>
 

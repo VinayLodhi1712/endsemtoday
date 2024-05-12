@@ -1,9 +1,9 @@
 .container {
   display: flex;
-  justify-content: center;
+
   align-items: center;
   height: 40vh;
- margin-left: 4rem;
+  margin-left: 4rem;
 }
 
 .question-box {
@@ -39,4 +39,3 @@
 .divider {
   margin: 15px 0;
 }
-
