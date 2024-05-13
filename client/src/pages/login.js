@@ -83,61 +83,16 @@ const Login = () => {
           className="Registerlayout bg-light"
           style={{ width: "70%", padding: "20px", borderRadius: "10px" }}
         >
-          <div className="d-flex mb-3">
-            <button
-              className={`align-items-center button-16 ${
-                location.pathname === "/register" ? "bg-primary" : ""
-              }`}
-              style={{
-                width: "50%",
-                height: "50px",
-                borderRadius: "5px",
-                padding: "10px 20px",
-                backgroundColor: "grey",
-              }}
-            >
-              <NavLink
-                to="/register"
-                className={`nav-link ${
-                  location.pathname === "/register" ? "active-button" : ""
-                }`}
-                style={{
-                  height: "100%",
-                  fontSize: "28px",
-                  textDecoration: "none",
-                }}
-              >
-                Register
-              </NavLink>
-            </button>
-            <button
-              className={`align-items-center button-16 ${
-                location.pathname === "/login" ? "bg-primary" : ""
-              }`}
-              style={{
-                width: "50%",
-                height: "50px",
+          <div className="d-flex mb-3 gap-2 loginheader">
+            <NavLink to="/register" className="w-50 loginreglink"  >
+              {" "} 
+           Register 
+            </NavLink>
 
-                borderRadius: "5px",
-                padding: "10px 20px",
-                backgroundColor: "grey",
-              }}
-            >
-              <NavLink
-                to="/login"
-                className={`nav-link ${
-                  location.pathname === "/login" ? "active-button" : ""
-                }`}
-                style={{
-                  height: "100%",
-                  fontSize: "28px",
-                  textDecoration: "none",
-                  color: "black",
-                }}
-              >
-                Login
-              </NavLink>
-            </button>
+            <NavLink to="/login" className="w-50 loginreglink" >
+              {" "}
+            Login 
+            </NavLink>
           </div>
 
           <form

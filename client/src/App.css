@@ -621,7 +621,7 @@ UserInfo .col-md-4 img {
   height: 80vh;
   padding: 0 20px;
   min-width: 450px;
-  /* Add some padding to prevent the cards from sticking to the edges */
+ 
 }
 
 .card-wrapper {
@@ -668,7 +668,7 @@ UserInfo .col-md-4 img {
   margin: 5px 0;
 }
 
-/* CSS for the heading of each statement */
+
 .statement-heading {
   font-size: 1.2rem;
   font-weight: bold;
@@ -706,8 +706,7 @@ UserInfo .col-md-4 img {
   margin: 0;
 }
 
-/* 
-//crousal settings */
+
 
 .slick-prev,
 .slick-next {
@@ -772,33 +771,7 @@ UserInfo .col-md-4 img {
   background-position: center;
   background-size: cover;
 }
-/* .swiper-button-prev,
-.swiper-button-next {
-  position: absolute;
-  top: 40%;
-  transform: translateY(-50%);
-  z-index: 10;
-  cursor: pointer;
-  background-color: transparent;
 
-  color: #007bff;
-  transition: background-color 0.3s ease;
-}
-
-.swiper-button-prev:hover,
-.swiper-button-next:hover {
-  background-color: #0000002e;
-}
-
-.swiper-button-prev {
-  top: 100% !important;
-  left: 41% !important;
-}
-
-.swiper-button-next {
-  top: 100% !important;
-  right: 41% !important;
-} */
 
 .mySwiper {
   width: 100% !important;
@@ -809,15 +782,6 @@ UserInfo .col-md-4 img {
   width: 100% !important;
 }
 
-/* .swiper-button-prev {
-  background-color: white;
-  padding: 1rem;
-}
-
-.swiper-button-next {
-  background-color: white;
-  padding: 1rem;
-} */
 
 .TabPanePersonalInfo {
   display: flex;
@@ -983,7 +947,7 @@ UserInfo .col-md-4 img {
 .user-icon,
 .chatbot-icon {
   margin-right: 0.5rem;
-  /* Adjust margin between icon and message content */
+ 
 }
 
 .message-content {
@@ -1005,33 +969,15 @@ UserInfo .col-md-4 img {
   margin-right: 10px;
 }
 
-/* .ask-button {
-  width: 100px;
-  height: 40px;
-  font-size: 16px;
-  border-radius: 10px;
-  border: 2px solid;
-  cursor: pointer;
-}
-
-.ask-button:hover {
-  background-color: #2cf005;
-} */
-
 .homepage-section:nth-child(odd) {
   background-color: rgba(255, 127, 80, 0.564);
 
-  /* //background-color: #c5bdbd; 
-  Light grey */
-  background-color: rgba(255,127,80,0.564);
-  
-  /* //background-color: #c5bdbd; 
-  Light grey */
+  background-color: rgba(255, 127, 80, 0.564);
 }
 
 .homepage-section:nth-child(even) {
   background-color: #ffffff;
-  /* White */
+ 
 }
 
 .active-button {
@@ -1177,7 +1123,6 @@ UserInfo .col-md-4 img {
   object-fit: cover;
 }
 
-
 .registerform .form-control {
   width: 100%;
   padding: 8px;
@@ -1316,4 +1261,26 @@ UserInfo .col-md-4 img {
 .center3 {
   display: flex;
   justify-content: center;
+}
+
+.loginreglink {
+  background-color: rgba(128, 128, 128, 0.522);
+  text-decoration: none;
+  color: #000;
+  font-size: 1.5rem;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  padding: 0.2rem;
+  border-radius: 5px;
+}
+.loginreglink:hover {
+  color: #000;
+  text-decoration: none;
+}
+
+.loginreglink.active {
+  background-color: #007bff;
+  color: white;
+  font-weight: 700;
 }

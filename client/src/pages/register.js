@@ -92,53 +92,16 @@ const Register = () => {
             borderRadius: "10px",
           }}
         >
-          <div className="d-flex mb-3">
-            <button
-              className="align-items-center button-16 bg-primary"
-              style={{
-                width: "50%",
-                height: "50px",
-                borderRadius: "5px",
-                padding: "10px 20px",
-              }}
-            >
-              <NavLink
-                to="/register"
-                className="nav-link"
-                style={{
-                  height: "100%",
-                  fontSize: "28px",
-                  textDecoration: "none",
-                }}
-              >
-                Register
-              </NavLink>
-            </button>
-            <button
-              className="align-items-center button-16 "
-              style={{
-                width: "50%",
-                height: "50px",
-                fontSize: "20px",
-                borderRadius: "5px",
-                backgroundColor: "gray",
-              }}
-            >
-              <NavLink
-                to="/login"
-                className={`nav-link ${
-                  Locate.pathname === "/login" ? "active-button" : ""
-                }`}
-                style={{
-                  height: "100%",
-                  fontSize: "28px",
-                  textDecoration: "none",
-                  padding: "10px 20px",
-                }}
-              >
-                Login
-              </NavLink>
-            </button>
+          <div className="d-flex mb-3 gap-2 loginheader">
+            <NavLink to="/register" className="w-50 loginreglink">
+              {" "}
+              Register
+            </NavLink>
+
+            <NavLink to="/login" className="w-50 loginreglink">
+              {" "}
+              Login
+            </NavLink>
           </div>
 
           <form

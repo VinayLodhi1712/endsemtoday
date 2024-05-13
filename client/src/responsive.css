@@ -1,0 +1,22 @@
+@media screen and (max-width: 450px) {
+  .registerformresponsicve {
+    width: 80%;
+  }
+  .FormBackground {
+    width: 100%;
+  }
+  .footerparent {
+    flex-direction: column !important;
+    align-items: center;
+  }
+  .footerlinks{
+    width: 100% !important;
+    font-size: small;
+  }
+  .footer-brand{
+    width: 100% !important;
+  }
+  .Danda{
+    display: none;
+  }
+}

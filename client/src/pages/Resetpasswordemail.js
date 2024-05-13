@@ -1,4 +1,4 @@
-import React, { useState, useSyncExternalStore } from "react";
+import React, { useState} from "react";
 import Layout from "../components/layout/layout";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useParams } from "react-router-dom";
@@ -44,18 +44,12 @@ const Resetpasswordemail = () => {
   return (
     <Layout>
       <form
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
         onSubmit={(e) => {
           ResetPassword(e);
         }}
-        className="FormBackgound"
+        className="FormBackgound d-flex justify-content-center align-items-center"
       >
-        <div className="registerform ">
+        <div className="registerform registerformresponsicve">
           <div className="d-flex align-items-center justify-content-center">
             <h1 style={{ fontWeight: "300" }}>Reset Password </h1>{" "}
             <button
