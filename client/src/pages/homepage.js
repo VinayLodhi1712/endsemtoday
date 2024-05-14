@@ -153,16 +153,24 @@ function Home() {
               slideShadows: true,
             }}
             breakpoints={{
-              640: {
+              0: {
                 slidesPerView: 1,
+                spaceBetween: 10,
+              },
+              576: {
+                slidesPerView: 2,
                 spaceBetween: 20,
               },
               768: {
                 slidesPerView: 3,
+                spaceBetween: 30,
+              },
+              992: {
+                slidesPerView: 4,
                 spaceBetween: 40,
               },
-              1024: {
-                slidesPerView: 4,
+              1200: {
+                slidesPerView: 5,
                 spaceBetween: 50,
               },
             }}
@@ -233,59 +241,42 @@ function Home() {
           </Swiper>
         </div>
       </div>
-      <div className="homepage-section justify-content-around align-items-center mb-3 mt-2">
-        <h1 className="text-center WelcomeText mb-1 mt-2">
-          Code <MdOutlineConnectingAirports /> Connect, <br></br>
-          <span className="text-center">
-            where Knowledge Meets Collaboration.{" "}
-          </span>
-        </h1>
-        <FadeIn />
-        <div className="d-flex  mb-3">
-          <div className="w-50 user-tile" style={{ marginLeft: "4rem" }}>
-            <span
-              className="mediumtitlefont highlighted ff"
-              style={{ marginLeft: "6rem" }}
-            >
-              {" "}
-              Have Doubts?
+      <div className="homepage-section justify-content-around align-items-center">
+        <div className="mt-3 mb-3">
+          <h1 className="text-center WelcomeText mb-4 mt-4">
+            Code <MdOutlineConnectingAirports /> Connect, <br></br>
+            <span className="text-center">
+              where Knowledge Meets Collaboration.{" "}
             </span>
-            <ul
-              className="faq-list smalltitlefont3"
-              style={{ marginLeft: "1rem" }}
-            >
-              <li>Ask questions from experienced people.</li>
-              <li>Find solutions to common coding problems.</li>
-              <li>Share knowledge and learn from others in the community.</li>
-            </ul>
-            <Link to="/dashboard/user/interaction">
-              <button
-                size="small"
-                className="btn-outline-primary"
-                style={{ display: "block", textAlign: "center" }}
-              >
-                Get Help...
-              </button>
-            </Link>
+          </h1>
+          <div className="d-flex"> <div className="w-50"><FadeIn /></div>
+
+            <div className="w-50 mt-4 user-tile" style={{ marginLeft: "4rem" }}>
+              <span className="mediumtitlefont highlighted ff" style={{ marginLeft: "6rem" }}>
+                {" "}
+                Have Doubts?
+              </span>
+              <ul className="faq-list smalltitlefont2 ff" style={{ marginLeft: "1rem" }}>
+                <li>Ask questions from experienced people.</li>
+                <li>Find solutions to common coding problems.</li>
+                <li>Share knowledge and learn from others in the community.</li>
+                <li>Explore resources for expanding your skills.</li>
+              </ul>
+              <div style={{ textAlign: "center" }}>
+                <Link to="/dashboard/user/interaction">
+                  <button
+                    size="small"
+                    className="btn-outline-primary"
+                    style={{ display: "inline-block", marginTop: "1rem" }}
+                  >
+                    Get Help...
+                  </button>
+                </Link>
+              </div>
+            </div>
           </div>
-          {/* <div
-            className="w-50 justify-content-center mt-4"
-            style={{ width: "250px", height: "250px", marginLeft: "18rem" }}
-          >
-            <img
-              src={codeconnect1}
-              alt="CodeConnect1"
-              style={{
-                width: "50%",
-                height: "100%",
-                objectFit: "cover",
-                borderRadius: "50%",
-                margin: "2rem",
-                marginBottom: "2rem",
-              }}
-            />
-          </div> */}
         </div>
+
       </div>
 
       <div className="homepage-section justify-content-around align-items-center ">

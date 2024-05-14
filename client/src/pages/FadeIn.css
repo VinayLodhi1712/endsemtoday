@@ -39,3 +39,23 @@
 .divider {
   margin: 15px 0;
 }
+
+@media (max-width: 768px) {
+  .container{
+    margin-top: 3rem;
+    margin-left: 0rem;
+    margin-bottom: 3rem;
+  }
+  .card {
+    max-width: 100%; 
+  }
+
+  .card .card-actions {
+    flex-direction: column; 
+  }
+
+  .card .answer {
+    font-size: 14px; 
+  }
+
+}

@@ -6,6 +6,7 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { FaUser } from "react-icons/fa";
 import { ReactTyped } from "react-typed";     
+
 import chatgpt from "../assests/chatgpt.png";
 import Avatar from "@mui/material/Avatar";
 import Divider from '@mui/material/Divider';
@@ -35,7 +36,7 @@ const FadeIn = () => {
             <Divider className="divider" />
             <Typography variant="body2" color="text.secondary" className="d-flex justify-content-center">
               <div className="chatbot-icon">
-                <Avatar src={chatgpt} sx={{ width: 30, height: 30 }} alt={<FaUser sx={{ width: 30, height: 30 }} />} />
+                <Avatar src={chatgpt} sx={{ width: 35, height: 40 }} alt={<FaUser sx={{ width: 30, height: 30 }} />} />
               </div>
               <ReactTyped
                 strings={[
