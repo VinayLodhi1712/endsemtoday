@@ -69,6 +69,7 @@ const Interaction = () => {
       headers: {
         "content-type": "application/json",
         "X-RapidAPI-Key": "c31e37b590msh53493f64684660cp15092ajsn8c95da3fe0c6",
+        //'3b66842437mshcaf81fced1636e6p15053bjsnf454e7c9cc4e'
         "X-RapidAPI-Host": "chatgpt-42.p.rapidapi.com",
       },
       body: JSON.stringify({
