@@ -13,10 +13,7 @@ function Footer() {
         </div>
 
         <div className="d-flex flex-column w-50 align-items-center footerlinks mb-3">
-          <div
-            style={{ marginTop: "1rem" }}
-            className="d-flex align-items-center flex-wrap justify-content-center"
-          >
+          <div className="d-flex align-items-center flex-wrap justify-content-center">
             <NavLink to="/About">About</NavLink>
             <span className="Danda">|</span>
             <NavLink to="/ContactUs">Contact</NavLink>
