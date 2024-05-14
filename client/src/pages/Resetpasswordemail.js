@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import Layout from "../components/layout/layout";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useParams } from "react-router-dom";
@@ -7,6 +7,7 @@ const Resetpasswordemail = () => {
   const [NewPass, SetNewPass] = useState("");
   const [NewPassAgain, SetNewPassAgain] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, Setloading] = useState(null);
   const params = useParams();
   const Email = params.email;
 
@@ -14,7 +15,9 @@ const Resetpasswordemail = () => {
     setShowPassword(!showPassword);
   };
 
-  async function ResetPassword() {
+  async function ResetPassword(e) {
+    Setloading(true);
+    e.preventDefault();
     try {
       if (NewPass === NewPassAgain) {
         const response = await fetch(
@@ -30,14 +33,26 @@ const Resetpasswordemail = () => {
           }
         );
         if (response.status === 200) {
+          Setloading(false);
+          SetNewPassAgain(" ");
+          SetNewPass(" ");
           toast.success("Password Reset Complete");
         } else if (response.status === 500) {
+          Setloading(false);
+          SetNewPassAgain(" ");
+          SetNewPass(" ");
           toast.error("Error Please try later");
         }
       } else {
+        Setloading(false);
+        SetNewPassAgain(" ");
+        SetNewPass(" ");
         toast("password do not match");
       }
     } catch (error) {
+      Setloading(false);
+      SetNewPassAgain(" ");
+      SetNewPass(" ");
       toast.error("Error in api");
     }
   }
@@ -93,8 +108,8 @@ const Resetpasswordemail = () => {
               value={NewPassAgain}
             />
           </div>
-          <button type="submit" className="btn btn-dark">
-            Reset
+          <button type="submit" className="btn btn-dark" disabled={loading}>
+            {loading ? "Processing..." : "Reset"}
           </button>
         </div>
       </form>

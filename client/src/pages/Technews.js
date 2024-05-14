@@ -39,6 +39,7 @@ const Technews = () => {
           "X-RapidAPI-Host": "news67.p.rapidapi.com",
         },
       };
+      
 
       try {
         const response = await fetch(url, options);
@@ -50,18 +51,14 @@ const Technews = () => {
         console.error(error);
       }
     }
-    fetchNews();
+    // fetchNews();
+    // df461d9036mshb4f44340f3538d7p13a8bajsn86cdae799e77
   }, []);
 
   return (
     <Layout>
       <div className="news-container">
-        <h2
-          className="text-center mb-4 Titlefont"
-          style={{ marginTop: "2rem" }}
-        >
-          Technews
-        </h2>
+        <h2 className="text-center mb-4 Titlefont">Technews</h2>
 
         <div className="card-wrapper">
           {" "}

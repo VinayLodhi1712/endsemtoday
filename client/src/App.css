@@ -618,10 +618,10 @@ UserInfo .col-md-4 img {
 
 .news-container {
   width: 100%;
-  height: 80vh;
-  padding: 0 20px;
+  height: 100%;
+
   min-width: 450px;
- 
+  background-color: rgba(255, 127, 80, 0.328);
 }
 
 .card-wrapper {
@@ -668,7 +668,6 @@ UserInfo .col-md-4 img {
   margin: 5px 0;
 }
 
-
 .statement-heading {
   font-size: 1.2rem;
   font-weight: bold;
@@ -705,8 +704,6 @@ UserInfo .col-md-4 img {
   font-weight: 600;
   margin: 0;
 }
-
-
 
 .slick-prev,
 .slick-next {
@@ -772,7 +769,6 @@ UserInfo .col-md-4 img {
   background-size: cover;
 }
 
-
 .mySwiper {
   width: 100% !important;
   margin-top: 2rem;
@@ -781,7 +777,6 @@ UserInfo .col-md-4 img {
 #SwiperWrapper {
   width: 100% !important;
 }
-
 
 .TabPanePersonalInfo {
   display: flex;
@@ -947,7 +942,6 @@ UserInfo .col-md-4 img {
 .user-icon,
 .chatbot-icon {
   margin-right: 0.5rem;
- 
 }
 
 .message-content {
@@ -977,7 +971,6 @@ UserInfo .col-md-4 img {
 
 .homepage-section:nth-child(even) {
   background-color: #ffffff;
- 
 }
 
 .active-button {
