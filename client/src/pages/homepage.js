@@ -241,7 +241,10 @@ function Home() {
           </Swiper>
         </div>
       </div>
-      <div className="homepage-section justify-content-around align-items-center">
+      <div
+        className="homepage-section justify-content-around align-items-center"
+        data-aos="fade-up"
+      >
         <div className="mt-3 mb-3">
           <h1 className="text-center WelcomeText mb-4 mt-4">
             Code <MdOutlineConnectingAirports /> Connect, <br></br>
@@ -249,14 +252,23 @@ function Home() {
               where Knowledge Meets Collaboration.{" "}
             </span>
           </h1>
-          <div className="d-flex"> <div className="w-50"><FadeIn /></div>
-
+          <div className="d-flex">
+            {" "}
+            <div className="w-50">
+              <FadeIn />
+            </div>
             <div className="w-50 mt-4 user-tile" style={{ marginLeft: "4rem" }}>
-              <span className="mediumtitlefont highlighted ff" style={{ marginLeft: "6rem" }}>
+              <span
+                className="mediumtitlefont highlighted ff"
+                style={{ marginLeft: "6rem" }}
+              >
                 {" "}
                 Have Doubts?
               </span>
-              <ul className="faq-list smalltitlefont2 ff" style={{ marginLeft: "1rem" }}>
+              <ul
+                className="faq-list smalltitlefont2 ff"
+                style={{ marginLeft: "1rem" }}
+              >
                 <li>Ask questions from experienced people.</li>
                 <li>Find solutions to common coding problems.</li>
                 <li>Share knowledge and learn from others in the community.</li>
@@ -276,10 +288,12 @@ function Home() {
             </div>
           </div>
         </div>
-
       </div>
 
-      <div className="homepage-section justify-content-around align-items-center ">
+      <div
+        className="homepage-section justify-content-around align-items-center "
+        data-aos="fade-up"
+      >
         <h1 className="text-center WelcomeText mt-2">
           Get instant technical <span className="d-block">news</span>
         </h1>

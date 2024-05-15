@@ -964,12 +964,12 @@ UserInfo .col-md-4 img {
 }
 
 .homepage-section:nth-child(odd) {
-  background-color: rgba(255, 127, 80, 0.564);
+  /* background-color: rgba(255, 127, 80, 0.564); */
+  background-image: url("../src/assests/backgroungimage.jpg");
 }
 
 .homepage-section:nth-child(even) {
   background-color: #ffffff;
-   /* background-image: url('../src/assests/backgroungimage.jpg') */
 }
 
 .active-button {
@@ -983,6 +983,7 @@ UserInfo .col-md-4 img {
 
 /* Add custom styles for the form */
 .bg {
+  /* background-image: url("../src/assests/backgroungimage.jpg"); */
   background-color: #f2f2f2;
   min-height: 100vh;
   padding: 20px;

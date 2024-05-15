@@ -78,6 +78,8 @@ const Login = () => {
   return (
     <Layout>
       <ToastContainer />
+      <div>
+        </div>
       <div className="bg">
         <div
           className="Registerlayout bg-light"

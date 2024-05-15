@@ -39,7 +39,6 @@ const Technews = () => {
           "X-RapidAPI-Host": "news67.p.rapidapi.com",
         },
       };
-      
 
       try {
         const response = await fetch(url, options);
@@ -53,6 +52,7 @@ const Technews = () => {
     }
     // fetchNews();
     // df461d9036mshb4f44340f3538d7p13a8bajsn86cdae799e77
+
     //'3b66842437mshcaf81fced1636e6p15053bjsnf454e7c9cc4e'
   }, []);
 
