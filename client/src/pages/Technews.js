@@ -35,7 +35,7 @@ const Technews = () => {
         method: "GET",
         headers: {
           "X-RapidAPI-Key":
-            "920ef80cd5msh4c5faac297a869bp14e7a6jsnaca2d223ae90",
+            "df461d9036mshb4f44340f3538d7p13a8bajsn86cdae799e77",
           "X-RapidAPI-Host": "news67.p.rapidapi.com",
         },
       };
@@ -50,8 +50,7 @@ const Technews = () => {
         console.error(error);
       }
     }
-    // fetchNews();
-    // df461d9036mshb4f44340f3538d7p13a8bajsn86cdae799e77
+    fetchNews();
 
     //'3b66842437mshcaf81fced1636e6p15053bjsnf454e7c9cc4e'
   }, []);
