@@ -3,6 +3,9 @@ import BannerCard from "./BannerCard";
 import React, { useEffect } from "react";
 import Card from "react-bootstrap/Card";
 import HomeImg from "../assests/homepageimage.png";
+import Codeconnectpage from "../assests/codeconnectpage.png";
+import productpage from "../assests/productpage.png";
+import techpage from "../assests/techpage.png";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { FaCartShopping } from "react-icons/fa6";
@@ -20,11 +23,12 @@ import FadeIn from "./FadeIn";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { MdOutlineConnectingAirports } from "react-icons/md";
 import codeconnect1 from "../assests/codeconnect1.jpg";
-
+import './service.css';
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import ScrollToTop from "react-scroll-to-top";
 
 import { EffectCoverflow, Pagination } from "swiper/modules";
 
@@ -108,29 +112,88 @@ function Home() {
       <div className="d-flex flex-column">
         <div className="homepage-section d-flex justify-content-around align-items-center HomeFirstDiv">
           <div
-            className="w-50 d-flex flex-column justify-content-center align-items-center"
+            className=" d-flex flex-column justify-content-center align-items-center"
             style={{ gap: "1rem" }}
-            data-aos="fade-right"
+
           >
             <h1 className=" mt-3 text-center WelcomeText">
               {" "}
-              Welcome to <mark>TalkOfCode</mark>
+              Welcome to <span style={{ color: "#1fa2ff" }}>TalkOfCode</span>
               <br></br>
-              Your Dynamic Tech Community
+              Your Dynamic Tech Platform
             </h1>
             <p className="text-center">
               Empowering Tech Enthusiasts to Learn, Connect, and Innovate.
             </p>
-            <ThemeProvider theme={theme}>
-              <NavLink to="/About">
-                <Button variant="contained" sx={{ bgcolor: "ochre.darker" }}>
-                  About us
-                </Button>
-              </NavLink>
-            </ThemeProvider>
+            <div className="d-flex justify-content-center">
+              <div style={{ marginRight: "1.5rem" }}>
+                <NavLink to="/register">
+                  <Button variant="contained" sx={{ bgcolor: "ochre.darker" }}>
+                    Get Started
+                  </Button>
+                </NavLink>
+              </div>
+              <div>
+                <NavLink to="/About">
+                  <Button variant="contained" sx={{ bgcolor: "ochre.darker" }}>
+                    About us
+                  </Button>
+                </NavLink>
+              </div>
+            </div>
+
+            <h3 className=" mt-3 text-center WelcomeText">
+              {" "}
+              Our Services</h3>
+            <div class="container1 d-flex">
+              <div class="card" >
+                <div class="imgbx">
+                  <img
+                    src={productpage}
+                  />
+                </div>
+                <div class="content">
+                  <h2 style={{ color: "#009688" }}>Awesome Featured Products</h2>
+                  <NavLink to="/products">
+                    <Button variant="contained" sx={{ bgcolor: "#009688" }}>
+                      Featured Products
+                    </Button>
+                  </NavLink>
+                </div>
+              </div>
+              <div class="card" >
+                <div class="imgbx">
+                  <img
+                    src={Codeconnectpage}
+                  />
+                </div>
+                <div class="content">
+                  <h2 style={{ color: "#03A9F4" }}>Ask technical questions</h2>
+                  <NavLink to="/dashboard/Admin/interaction">
+                    <Button variant="contained" sx={{ bgcolor: "#03A9F4 " }}>
+                      CodeConnect
+                    </Button>
+                  </NavLink>
+                </div>
+              </div>
+              <div class="card" >
+                <div class="imgbx">
+                  <img src={techpage} />
+                </div>
+                <div class="content">
+                  <h2 style={{ color: "#FF3E7F" }} >Get instant technical news</h2>
+                  <NavLink to="/technews">
+                    <Button variant="contained" sx={{ bgcolor: "#FF3E7F" }}>
+                      Tech_Newsy
+                    </Button>
+                  </NavLink>
+                </div>
+              </div>
+            </div>
           </div>
-          <img src={HomeImg} className="h-75 " data-aos="fade-left"></img>
+
         </div>{" "}
+
       </div>
       <div
         className="homepage-section d-flex align-items-center flex-column justify-content-center w-100  mb-3"
@@ -138,7 +201,7 @@ function Home() {
       >
         <h1 className=" w-50 text-center WelcomeText mt-5">
           {" "}
-          More than 30+ Products Listed. Checkout Now!
+          More than <span style={{ color: "#1fa2ff" }}>30+ Products</span> Listed. Checkout Now!
         </h1>
         <div style={{ width: "100%", marginTop: "0%", marginBottom: "2rem" }}>
           <Swiper
@@ -156,6 +219,10 @@ function Home() {
               0: {
                 slidesPerView: 1,
                 spaceBetween: 10,
+              },
+              400: {
+                slidesPerView: 1.3,
+                spaceBetween: 15,
               },
               576: {
                 slidesPerView: 2,
@@ -199,7 +266,7 @@ function Home() {
                       style={{
                         width: "100%",
                         height: "17rem",
-                        objectFit: "cover",
+                        overflow: "hidden"
                       }}
                       className="unselectable img-fluid"
                     />
@@ -241,187 +308,163 @@ function Home() {
           </Swiper>
         </div>
       </div>
-      <div
-        className="homepage-section justify-content-around align-items-center"
-        data-aos="fade-up"
-      >
-        <div className="mt-3 mb-3">
-          <h1 className="text-center WelcomeText mb-4 mt-4">
-            Code <MdOutlineConnectingAirports /> Connect, <br></br>
-            <span className="text-center">
-              where Knowledge Meets Collaboration.{" "}
-            </span>
-          </h1>
-          <div className="d-flex">
-            {" "}
-            <div className="w-50">
-              <FadeIn />
-            </div>
-            <div className="w-50 mt-4 user-tile" style={{ marginLeft: "4rem" }}>
-              <span
-                className="mediumtitlefont highlighted ff"
-                style={{ marginLeft: "6rem" }}
-              >
-                {" "}
-                Have Doubts?
-              </span>
-              <ul
-                className="faq-list smalltitlefont2 ff"
-                style={{ marginLeft: "1rem" }}
-              >
-                <li>Ask questions from experienced people.</li>
-                <li>Find solutions to common coding problems.</li>
-                <li>Share knowledge and learn from others in the community.</li>
-                <li>Explore resources for expanding your skills.</li>
-              </ul>
-              <div style={{ textAlign: "center" }}>
-                <Link to="/dashboard/user/interaction">
-                  <button
-                    size="small"
-                    className="btn-outline-primary"
-                    style={{ display: "inline-block", marginTop: "1rem" }}
-                  >
-                    Get Help...
-                  </button>
-                </Link>
-              </div>
+
+      <div className="homepage-section mb-5 w-75 h-60 custom-flex custom-gradient rounded-3xl custom-shadow " style={{ margin: "auto" }}>
+        
+          <div className="w-50">
+            <FadeIn />
+          </div>
+
+          <div className="w-50  mt-5  mb-4 " >
+            <h2 className="font-bold text-black mb-3" style={{ fontSize: "30px" }}>
+              Have Doubts? <br></br><div className="">Ask them at  <span className="highlighted ff">Code<MdOutlineConnectingAirports />Connect, </span></div>
+            </h2>
+            <p style={{ width: "70%", fontSize: "20px", fontFamily: "sans-serif", color: "rgb(131 136 148)" }} className="font-bold text-black ff">Ask doubts from experienced people. Share knowledge and learn from others in the community,  Get help from AI.</p>
+            <div className="flex ">
+              <NavLink to="/dashboard/Admin/interaction">
+                <button className="yellowbtn" style={{ marginRight: "4rem" }}>Try it Yourself&rarr;</button>
+              </NavLink >
+              <NavLink to="/dashboard/Admi n/interaction">
+                <button>Get AI help.</button>
+              </NavLink>
             </div>
           </div>
+
+      
+
+      </div>
+
+      {/* <h1 className="text-center WelcomeText mt-2 mb-2">
+          Get instant technical news
+        </h1> */}
+      <div className="w-75 h-60 custom-flex custom-gradient rounded-3xl custom-shadow" style={{ margin: "auto" }}>
+        <div className="d-flex flex-column justify-content-center">
+          <h2
+            className="font-bold text-black "
+            style={{ marginLeft: "2rem" }}
+          >
+            Stay updated with the latest tech news
+            <span className="highlighted ff"> on our website!</span>
+          </h2>
+          <p
+            className="w-50 ff"
+            style={{ marginLeft: "2rem", fontSize: "20px" }}
+          >
+            Explore the latest in tech news and stay informed about
+            cutting-edge developments, innovations, and trends in the
+            ever-evolving world of technology.
+          </p>
+
+          <NavLink to="/technews">
+            <div style={{ marginLeft: "2rem" }}>
+              <button className="yellowbtn text-black">Explore &rarr;</button>
+            </div>
+          </NavLink>
+        </div>
+
+        {/* Right side */}
+        <div className="col-md-6">
+          <BannerCard />
         </div>
       </div>
 
-      <div
-        className="homepage-section justify-content-around align-items-center "
-        data-aos="fade-up"
-      >
-        <h1 className="text-center WelcomeText mt-2">
-          Get instant technical <span className="d-block">news</span>
+      <div className="homepage-section AccordianParent">
+        <h1 className=" w-100 text-center WelcomeText mb-3">
+          {" "}
+          Frequently Asked Questions
         </h1>
+        <div className="Accordian1">
+          <Accordion
+            expanded={expanded === "panel1"}
+            onChange={handleChange("panel1")}
+          >
+            <AccordionSummary
+              aria-controls="panel1d-content"
+              id="panel1d-header"
+            >
+              <Typography style={{ fontFamily: "unset", fontWeight: "600" }}>
+                What is TalkOfCode?
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Typography style={{ fontFamily: "unset", fontWeight: "500" }}>
+                TalkOfCode is a dynamic tech community platform that brings
+                together tech enthusiasts, students, developers, and
+                entrepreneurs to learn, connect, and innovate in the world of
+                technology.
+              </Typography>
+            </AccordionDetails>
+          </Accordion>
+          <Accordion
+            expanded={expanded === "panel2"}
+            onChange={handleChange("panel2")}
+          >
+            <AccordionSummary
+              aria-controls="panel2d-content"
+              id="panel2d-header"
+            >
+              <Typography style={{ fontFamily: "unset", fontWeight: "600" }}>
+                How can I join TalkOfCode?
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Typography style={{ fontFamily: "unset", fontWeight: "500" }}>
+                Joining TalkOfCode is simple! Click on the "Sign Up" button on
+                our homepage, fill in your details, and become part of our
+                vibrant community.
+              </Typography>
+            </AccordionDetails>
+          </Accordion>
+          <Accordion
+            expanded={expanded === "panel3"}
+            onChange={handleChange("panel3")}
+          >
+            <AccordionSummary
+              aria-controls="panel3d-content"
+              id="panel3d-header"
+            >
+              <Typography style={{ fontFamily: "unset", fontWeight: "600" }}>
+                What services does TalkOfCode offer?
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Typography style={{ fontFamily: "unset", fontWeight: "500" }}>
+                TalkOfCode offers a range of services, including tech news
+                updates, a platform for solving student doubts, and a
+                marketplace for buying and selling study materials.
+              </Typography>
+            </AccordionDetails>
+          </Accordion>
+          <Accordion
+            expanded={expanded === "panel4"}
+            onChange={handleChange("panel4")}
+          >
+            <AccordionSummary
+              aria-controls="panel1d-content"
+              id="panel4d-header"
+            >
+              <Typography style={{ fontFamily: "unset", fontWeight: "600" }}>
+                How can I contribute to TalkOfCode?
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Typography style={{ fontFamily: "unset", fontWeight: "500" }}>
+                You can contribute to TalkOfCode by sharing your knowledge,
+                answering questions, participating in discussions, and helping
+                fellow members of the community.
+              </Typography>
+            </AccordionDetails>
+          </Accordion>
 
-        <div className="d-flex">
-          {/* Left side */}
-          <div className="d-flex  justify-content-center">
-            <div className="d-flex flex-column justify-content-center">
-              <h2
-                className="font-bold text-black "
-                style={{ marginLeft: "2rem" }}
-              >
-                Stay updated with the latest tech news
-                <span className="highlighted ff"> on our website!</span>
-              </h2>
-              <p
-                className="w-50 ff"
-                style={{ marginLeft: "2rem", fontSize: "20px" }}
-              >
-                Explore the latest in tech news and stay informed about
-                cutting-edge developments, innovations, and trends in the
-                ever-evolving world of technology.
-              </p>
+        </div>{" "}
 
-              <Link to="/technews">
-                <div style={{ marginLeft: "2rem" }}>
-                  <button className="btn btn-primary">Explore &rarr;</button>
-                </div>
-              </Link>
-            </div>
-
-            {/* Right side */}
-            <div className="col-md-6">
-              <BannerCard />
-            </div>
-          </div>
-        </div>
-        <div className="homepage-section AccordianParent">
-          <h1 className=" w-100 text-center WelcomeText mb-3">
-            {" "}
-            Frequently Asked Questions
-          </h1>
-          <div className="Accordian1">
-            <Accordion
-              expanded={expanded === "panel1"}
-              onChange={handleChange("panel1")}
-            >
-              <AccordionSummary
-                aria-controls="panel1d-content"
-                id="panel1d-header"
-              >
-                <Typography style={{ fontFamily: "unset", fontWeight: "600" }}>
-                  What is TalkOfCode?
-                </Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <Typography style={{ fontFamily: "unset", fontWeight: "600" }}>
-                  TalkOfCode is a dynamic tech community platform that brings
-                  together tech enthusiasts, students, developers, and
-                  entrepreneurs to learn, connect, and innovate in the world of
-                  technology.
-                </Typography>
-              </AccordionDetails>
-            </Accordion>
-            <Accordion
-              expanded={expanded === "panel2"}
-              onChange={handleChange("panel2")}
-            >
-              <AccordionSummary
-                aria-controls="panel2d-content"
-                id="panel2d-header"
-              >
-                <Typography style={{ fontFamily: "unset", fontWeight: "600" }}>
-                  How can I join TalkOfCode?
-                </Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <Typography style={{ fontFamily: "unset", fontWeight: "600" }}>
-                  Joining TalkOfCode is simple! Click on the "Sign Up" button on
-                  our homepage, fill in your details, and become part of our
-                  vibrant community.
-                </Typography>
-              </AccordionDetails>
-            </Accordion>
-            <Accordion
-              expanded={expanded === "panel3"}
-              onChange={handleChange("panel3")}
-            >
-              <AccordionSummary
-                aria-controls="panel3d-content"
-                id="panel3d-header"
-              >
-                <Typography style={{ fontFamily: "unset", fontWeight: "600" }}>
-                  What services does TalkOfCode offer?
-                </Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <Typography style={{ fontFamily: "unset", fontWeight: "600" }}>
-                  TalkOfCode offers a range of services, including tech news
-                  updates, a platform for solving student doubts, and a
-                  marketplace for buying and selling study materials.
-                </Typography>
-              </AccordionDetails>
-            </Accordion>
-            <Accordion
-              expanded={expanded === "panel4"}
-              onChange={handleChange("panel4")}
-            >
-              <AccordionSummary
-                aria-controls="panel1d-content"
-                id="panel4d-header"
-              >
-                <Typography style={{ fontFamily: "unset", fontWeight: "600" }}>
-                  How can I contribute to TalkOfCode?
-                </Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <Typography style={{ fontFamily: "unset", fontWeight: "600" }}>
-                  You can contribute to TalkOfCode by sharing your knowledge,
-                  answering questions, participating in discussions, and helping
-                  fellow members of the community.
-                </Typography>
-              </AccordionDetails>
-            </Accordion>
-          </div>{" "}
-        </div>
       </div>
-    </HomeLayout>
+      <ScrollToTop smooth color="#766c82" />
+      <NavLink to='/ContactUs'>
+        <button className="issue-btn" >🤔Facing an issue?</button>
+      </NavLink>
+
+    </HomeLayout >
   );
 }
 

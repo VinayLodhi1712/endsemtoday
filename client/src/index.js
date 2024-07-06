@@ -8,6 +8,8 @@ import { AuthProvider } from "./context/auth";
 import { SearchProvider } from "./context/Searchcontext";
 import "antd/dist/reset.css";
 import "react-toastify/dist/ReactToastify.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import { CartProvider } from "./context/cart";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

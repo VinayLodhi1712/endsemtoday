@@ -272,25 +272,19 @@ async function ProductPerController(req, resp) {
 }
 
 //search product
-
 async function ProductSearchController(req, resp) {
   try {
-    const id = req.params.id;
     const Keyword = req.params.Keyword ? req.params.Keyword : " ";
-    if (!Keyword) {
-      return resp.status(201).send({
-        message: "Please enter value in search field",
+    if (!Keyword.trim()) {
+      return resp.status(400).send({
+        message: "Please enter a value in the search field",
       });
     }
+
     const Products = await ProductModel.find({
-      $and: [
-        {
-          $or: [
-            { name: { $regex: Keyword, $options: "i" } },
-            { description: { $regex: Keyword, $options: "i" } },
-          ],
-        },
-        { owner: { $ne: id } },
+      $or: [
+        { name: { $regex: Keyword, $options: "i" } },
+        { description: { $regex: Keyword, $options: "i" } },
       ],
     }).select("-photo");
 
@@ -298,14 +292,15 @@ async function ProductSearchController(req, resp) {
       Products,
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
     resp.status(500).send({
       success: false,
-      message: "Error in  Searching Products",
+      message: "Error in searching products",
       error,
     });
   }
 }
+
 
 //simlar products
 async function SimilarProductController(req, resp) {

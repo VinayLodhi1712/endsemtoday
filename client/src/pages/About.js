@@ -119,7 +119,7 @@ const About = () => {
     <Layout>
       <p className="Titlefont center WelcomeTExt" style={{ marginTop: "2rem" }}>
         {" "}
-        Welcome to <mark>TALKOFCODE</mark>, your go-to destination for all
+        Welcome to <span style={{ color: "#1fa2ff" }}>TalkOfCode</span>, your go-to destination for all
         things code-related!
       </p>
       <div className="cards">

@@ -1,13 +1,7 @@
-import React, { useRef, useState } from 'react';
-
 import { Swiper, SwiperSlide } from 'swiper/react';
-
-
 import 'swiper/css';
 import 'swiper/css/effect-cards';
-
 import './BannerCard.css';
-
 import { EffectCards } from 'swiper/modules';
 
 function BannerCard() {

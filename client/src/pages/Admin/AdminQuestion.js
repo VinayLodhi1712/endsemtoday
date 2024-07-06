@@ -11,6 +11,8 @@ import { useAuth } from "../../context/auth";
 import { Tabs } from "antd";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import AdminMenu from "./../../components/layout/AdminMenu";
+import { MdOutlineRemoveRedEye } from "react-icons/md";
+import { RiDeleteBin6Line } from "react-icons/ri";
 
 const { TabPane } = Tabs;
 const AdminQuestions = () => {
@@ -20,7 +22,7 @@ const AdminQuestions = () => {
   const [loading, setloading] = useState(false);
   const [auth, setAuth] = useAuth();
   const [BookMarked, setBookMarked] = useState([]);
-
+  const [UserName, SetUserName] = useState("");
   async function GetQuestions() {
     try {
       setloading(true);
@@ -166,26 +168,24 @@ const AdminQuestions = () => {
                 {Questions.length > 0 ? (
                   Questions.map((q) => (
                     <div class="card w-100 p-2">
-                      <div class="card-body">
-                        <blockquote class="blockquote mb-0">
-                          <p style={{ marginBottom: "0rem" }}>{q.title} </p>
-                          <div className="d-flex align-items-center w-100 justify-content-between">
-                            {" "}
-                            <div>
-                              {" "}
-                              {q.tags.map((tag, index) => (
-                                <Tag color="blue">{tag}</Tag>
-                              ))}
-                            </div>
-                            <footer class="blockquote-footer">
-                              asked by{" "}
-                              <cite title="Source Title">
-                                <b>{q.user.Name}</b>
-                              </cite>{" "}
-                              {moment(q.createdAt).fromNow()}
-                            </footer>
+                      <div>
+                        <p className=" smalltitlefont3 bulletcircle mb-0">
+                          &#8226; {q.title.substring(0, 40)}... ?{" "}
+                        </p>
+                        <div className="d-flex justify-content-between w-100">
+                          <div>
+                            {q.tags.map((tag, index) => (
+                              <Tag color="blue">{tag}</Tag>
+                            ))}
                           </div>
-                        </blockquote>
+                          <footer class="blockquote-footer mt-1 " style={{ fontSize: "1rem" }}>
+                            asked by{" "}
+                            <cite title="Source Title">
+                              <b>{q.user.Name}</b>
+                            </cite>{" on "}
+                            {moment(q.createdAt).format("MMMM Do YYYY")}
+                          </footer>
+                        </div>
                       </div>
                       <div className="d-flex" style={{ gap: "1rem" }}>
                         <NavLink to={`/dashboard/user/answers/${q._id}`}>
@@ -252,44 +252,50 @@ const AdminQuestions = () => {
                 {BookMarked.length > 0 ? (
                   BookMarked.map((q) => (
                     <div class="card w-100 p-2">
-                      <div class="card-body">
-                        <blockquote class="blockquote mb-0">
-                          <p style={{ marginBottom: "0rem" }}>{q.title} </p>
-                          <div className="d-flex align-items-center w-100 justify-content-between">
+                      <div>
+                        <p className="mb-0  smalltitlefont3">
+                          {" "}
+                          &#8226; {q.title.substring(0, 100)}..... ?{" "}
+                        </p>
+
+                        <div className="d-flex justify-content-between w-75 mt-3">
+                          {" "}
+                          <div className="d-flex align-items-center">
                             {" "}
-                            <div>
-                              {" "}
-                              {q.tags.map((tag, index) => (
-                                <Tag color="blue">{tag}</Tag>
-                              ))}
-                            </div>
-                            <footer class="blockquote-footer">
-                              asked by{" "}
-                              <cite title="Source Title">
-                                <b>{q.user.Name}</b>
-                              </cite>{" "}
-                              {moment(q.createdAt).fromNow()}
-                            </footer>
+                            {q.tags.map((tag, index) => (
+                              <Tag color="blue">{tag}</Tag>
+                            ))}
                           </div>
-                        </blockquote>
+                          <footer className="blockquote-footer  ">
+                            asked by{" "}
+                            <cite title="Source Title">
+                              <b>{q.user.Name}</b>
+                            </cite>{" "}
+                            {moment(q.createdAt).format("MMMM Do YYYY")}
+                          </footer>
+                        </div>
                       </div>
-                      <div className="d-flex" style={{ gap: "1rem" }}>
+                      <div className="d-flex justify-content-end">
+                        <NavLink to={`/dashboard/user/ViewQuestion/${q._id}`}>
+                          <MdOutlineRemoveRedEye
+                            className="ViewIcon mr-2"
+                            title="View Question"
+                          />
+                        </NavLink>
                         <NavLink to={`/dashboard/user/answers/${q._id}`}>
                           <Button variant="contained" color="success">
                             Answer
                           </Button>
                         </NavLink>
-                        <NavLink to={`/dashboard/user/ViewQuestion/${q._id}`}>
-                          <button className="btn btn-primary">View</button>
-                        </NavLink>
-                        <button
-                          className="btn btn-warning"
+
+                        <RiDeleteBin6Line
+                          style={{ color: "red" }}
+                          title="Remove Bookmark"
+                          className="Deleteicon"
                           onClick={() => {
                             RemoveBookmark(q._id);
                           }}
-                        >
-                          Remove
-                        </button>
+                        />
                       </div>
                     </div>
                   ))
@@ -303,7 +309,7 @@ const AdminQuestions = () => {
           </TabPane>
         </Tabs>
       </div>
-    </Layout>
+    </Layout >
   );
 };
 

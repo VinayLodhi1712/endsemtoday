@@ -11,11 +11,12 @@ import chatgpt from "../assests/chatgpt.png";
 import Avatar from "@mui/material/Avatar";
 import Divider from '@mui/material/Divider';
 import { Link } from "react-router-dom";
+
 const FadeIn = () => {
   return (
     <div className="container">
       <div className="question-box">
-        <Card sx={{ maxWidth: 345 }} className="card">
+        <Card className="card2">
           <CardContent>
             <Typography gutterBottom variant="h5" component="div" className="d-flex justify-content-center">
               <div className="user-icon">
@@ -52,9 +53,8 @@ const FadeIn = () => {
           </CardContent>
           <CardActions className="card-actions">
             <Link to='/dashboard/user/interaction'>
-            <button size="small" className="btn-outline-primary">Explore</button>
+              <button size="small" className="btn-outline-primary">Explore</button>
             </Link>
-            
           </CardActions>
         </Card>
       </div>

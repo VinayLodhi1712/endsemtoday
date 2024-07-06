@@ -3,67 +3,92 @@ body {
   padding: 0;
   box-sizing: border-box;
   font-family: Georgia, "Times New Roman", Times, serif;
+  background-color: rgb(224, 224, 252) !important;
 }
 
 /* navbar css */
 
 .navbar {
-  padding: 1.2rem 0rem 1.2rem 0rem;
-  text-transform: uppercase;
-  box-shadow: 0 1px 5px;
-  background-image: linear-gradient(
+  padding: 1.2rem 0rem 1.2rem 0rem !important;
+  text-transform: uppercase !important;
+  box-shadow: 0 1px 5px !important;
+  /* background-image: linear-gradient(
     to right,
-    #4facfe 0%,
-    #00f2fe 100%
-  ) !important;
+    #0c0c0c 0%,
+    #0e1010 100%
+  ) !important; */
+
+  
+}
+.bg-richblack-800 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(22 29 41 / var(--tw-bg-opacity));
 }
 
 .navbar-nav {
   gap: 1.5rem;
 }
 .nav-link {
-  font-weight: 600;
-  color: #000;
-  transition: background-color 0.3s;
+  font-weight: 500 !important;
+  color: #f3e8e8 !important;
+  transition: background-color 0.3s !important;
+  text-transform: none !important;
+  font-size: 20px !important;
 }
+
 .nav-link:hover {
-  background-color: rgba(255, 255, 255, 0.608);
+  color: #dc3545 !important;
+  transition: width 0.3s ease, background-color 0.3s ease !important;
+}
+
+.nav-link::first-letter {
+  text-transform: uppercase; /* Capitalize the first letter */
 }
 
 .navbar-brand {
-  color: black;
-  font-weight: 600;
+  color: rgb(248, 240, 240) !important;
+  font-weight: 400 !important;
 }
 
 .nav-link.active {
-  background-color: rgba(255, 255, 255, 0.608);
+  color: #dc3545 !important ;
+  border-bottom: 2px solid #dc3545 !important;
 }
 
 .footer a {
   text-decoration: none;
-  color: black;
   padding: 1rem;
   font-weight: 700;
+  font-weight: 500;
+  color: #f3e8e8;
+  transition: background-color 0.3s;
+  text-transform: none;
+  font-size: 20px;
 }
 .footer-brand h3 {
-  color: black;
+  color: rgb(248, 240, 240);
   font-weight: 700;
 }
 .footer-brand p {
-  color: black;
+  color: rgb(248, 240, 240);
   font-weight: 700;
 }
 .footer {
   z-index: 5;
-  background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
 }
 .Danda {
-  color: #000;
+  color: rgb(248, 240, 240);
   font-weight: 700;
 }
 
+.foot.active{
+  color: #dc3545 !important ;
+  border-bottom: 2px solid #dc3545;
+}
+
 .footer a:hover {
-  color: rgb(237, 246, 247);
+  color: #dc3545 !important ;
+  border-bottom: 2px solid #dc3545;
 }
 
 .notfound {
@@ -142,7 +167,7 @@ body {
 }
 
 .Fixed {
-  position: fixed;
+  position: absolute;
   left: 0%;
   top: 11%;
 }
@@ -152,6 +177,9 @@ body {
   right: 1%;
   top: 11%;
 }
+
+/* App.css */
+
 
 .nav-item .dropdown a {
   text-decoration: none;
@@ -963,13 +991,16 @@ UserInfo .col-md-4 img {
   margin-right: 10px;
 }
 
+.yellowbtn{
+  background-color: #FFD60A;
+}
 .homepage-section:nth-child(odd) {
   /* background-color: rgba(255, 127, 80, 0.564); */
-  background-image: url("../src/assests/backgroungimage.jpg");
+  background-color: rgb(224, 224, 252);
 }
 
 .homepage-section:nth-child(even) {
-  background-color: #ffffff;
+  background-color: rgb(224, 224, 252);
 }
 
 .active-button {
@@ -1276,4 +1307,16 @@ UserInfo .col-md-4 img {
   background-color: #007bff;
   color: white;
   font-weight: 700;
+}
+.text{
+  font-family: serif;
+}
+
+.ant-pagination-item-active {
+  background-color: #ccb1b2 !important; /* Change active item background color */
+  border-color: #ff4d4f; /* Change active item border color */
+}
+
+.ant-pagination-item-active a {
+  color: #ffffff; /* Change active item text color */
 }

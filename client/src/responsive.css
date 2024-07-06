@@ -1,22 +1,40 @@
 /* CSS for smaller screens */
+
+
+/*Navbar toggler */
+.navbar-toggler {
+  border-color: white;
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+
+
 @media screen and (max-width: 768px) {
   .registerformresponsicve {
     width: 80%;
   }
+
   .FormBackground {
     width: 100%;
   }
+
   .footerparent {
     flex-direction: column !important;
     align-items: center;
   }
+
   .footerlinks {
     width: 100% !important;
     font-size: small;
   }
+
   .footer-brand {
     width: 100% !important;
   }
+
   .Danda {
     display: none;
   }
@@ -41,31 +59,34 @@
 }
 
 /* CSS for smaller screens for homepage section2 */
-.homepage-section .swiper-slide {
-  width: 100%;
-  padding: 0 10px;
+@media (max-width: 768px) {
+  .homepage-section .swiper-slide {
+    width: 100%;
+    padding: 0 10px;
+  }
 
-.homepage-section .swiper-slide img {
-  width: 100%;
-  height: auto;
+  .homepage-section .swiper-slide img {
+    width: 100%;
+    height: auto;
+  }
+
+  .homepage-section .center3 {
+    text-align: center;
+  }
+
+  .homepage-section .center3 .btn {
+    margin-top: 1rem;
+  }
 }
 
-.homepage-section .center3 {
-  text-align: center;
-}
-
-.homepage-section .center3 .btn {
-  margin-top: 1rem;
-}
-}
 /* CSS for smaller screens for homepage section3 */
 @media (max-width: 768px) {
   .homepage-section .WelcomeText {
-    font-size: 1.5rem; 
+    font-size: 1.5rem;
   }
 
   .homepage-section .mt-4 {
-    margin-top: 1rem; 
+    margin-top: 1rem;
   }
 
   .homepage-section .w-50 {
@@ -91,21 +112,21 @@
 
   .homepage-section .mediumtitlefont {
     margin-left: 0rem;
-    font-size: 0.8rem; 
+    font-size: 0.8rem;
   }
 
   .homepage-section .faq-list {
-    margin-left: 0; 
-    text-align: left; 
+    margin-left: 0;
+    text-align: left;
     padding-left: 0;
-    font-size: 0.8rem; 
+    font-size: 0.8rem;
   }
 
   .homepage-section .btn-outline-primary {
-    margin-top: 1rem; 
+    margin-top: 1rem;
   }
 
-  .homepage-section .user-tile{
+  .homepage-section .user-tile {
     margin-left: 0rem;
     margin-bottom: 2rem;
 
@@ -123,27 +144,27 @@
     flex-direction: column;
   }
 
-  .d-flex > div {
-    margin: 1rem 0; 
+  .d-flex>div {
+    margin: 1rem 0;
   }
 
   .font-bold {
     font-weight: bold;
-    margin-left: 0; 
+    margin-left: 0;
   }
 
   .highlighted {
     display: block;
-    margin-top: 0.5rem; 
+    margin-top: 0.5rem;
   }
 
   .w-50 {
-    width: 100%; 
-    margin-left: 0; 
-    font-size: 16px; 
+    width: 100%;
+    margin-left: 0;
+    font-size: 16px;
   }
 
   .btn-primary {
-    margin-top: 1rem; 
+    margin-top: 1rem;
   }
 }

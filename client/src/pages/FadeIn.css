@@ -1,9 +1,7 @@
 .container {
   display: flex;
-
   align-items: center;
   height: 40vh;
-  margin-left: 4rem;
 }
 
 .question-box {
@@ -30,7 +28,9 @@
   justify-content: center;
 }
 
-.card {
+.card2 {
+  width: 345px; /* Fixed width */
+  height: 260px; /* Fixed height */
   background-color: #ffffff;
   border-radius: 10px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
@@ -41,21 +41,21 @@
 }
 
 @media (max-width: 768px) {
-  .container{
+  .container {
     margin-top: 3rem;
     margin-left: 0rem;
     margin-bottom: 3rem;
   }
+
   .card {
     max-width: 100%; 
   }
 
-  .card .card-actions {
+  .card-actions {
     flex-direction: column; 
   }
 
-  .card .answer {
+  .answer {
     font-size: 14px; 
   }
-
 }

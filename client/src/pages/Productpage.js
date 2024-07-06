@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Layout from "../components/layout/layout";
+import { useSearch } from "../context/Searchcontext";
 import toast, { Toaster } from "react-hot-toast";
 import { Checkbox, Radio } from "antd";
 import "./../App.css";
@@ -21,7 +22,7 @@ function Productpage() {
   const [load, setLoad] = useState(false);
   const [FilterProductLength, SetFilterProductLength] = useState(true);
   const [pageSize, setPageSize] = useState(6);
-
+  const [values, setValues] = useSearch();
   const [Total, SetTotalvalue] = useState(0);
   const Navigate = useNavigate();
   //get all catogaries
@@ -44,6 +45,38 @@ function Productpage() {
       console.log(error);
     }
   }
+
+  //SearchBar function
+  async function HandleSubmit(e, Keyword) {
+    e.preventDefault();
+    let url;
+    let geturl;
+    try {
+      url = `https://talkofcodebackend.onrender.com/api/v1/product/product-search/${Keyword}/65f9bb4749049ec84f1de5be`;
+      geturl = `https://talkofcodebackend.onrender.com/api/v1/product/get-product/65f9bb4749049ec84f1de5be`;
+
+      if (Keyword) {
+        const response = await fetch(url);
+        const data = await response.json();
+        if (response.status === 210) {
+          toast.error(data.message);
+        }
+        setValues({ ...values, Products: data.Products });
+      } else {
+        const response = await fetch(geturl);
+        const data = await response.json();
+        if (response.status === 210) {
+          toast.error(data.message);
+        }
+        setValues({ ...values, Products: data.products });
+        Navigate("/search");
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Error Searching products");
+    }
+  }
+
   // get all products
   async function GetAllProducts() {
     try {
@@ -148,6 +181,24 @@ function Productpage() {
           style={{ width: "20%", marginLeft: "1rem" }}
           className="Fixed mt-3"
         >
+           <h2 className="mediumtitlefont mb-3">Search Products</h2>
+          <div className="container-fluid mb-4">         
+            <form className="d-flex" role="search" onSubmit={HandleSubmit}>
+              <Toaster />
+             
+              <input
+                className="form-control me-2"
+                type="search"
+                placeholder="Search Products"
+                aria-label="Search"
+                onChange={(e) => {
+                  // setValues({ ...values, Keyword: e.target.value });
+                  HandleSubmit(e, e.target.value);
+                }}
+
+              />
+            </form>
+          </div>
           <div>
             <h2 className="mediumtitlefont">Select Category</h2>
 

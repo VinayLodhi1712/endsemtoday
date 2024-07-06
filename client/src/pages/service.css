@@ -1,0 +1,121 @@
+.container1 {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 100px 50px;
+    padding: 50px 50px;
+}
+
+/* background cards size and rounding */
+.container1 .card {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 350px;
+    height: 300px;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 35px 80px rgba(0, 0, 0, 0.15);
+    transition: 0.5s;
+    align-items: center;
+}
+
+.container1 .card:hover {
+    height: 350px;
+}
+
+.container1 .card .imgbx {
+    position: absolute;
+    top: 20px;
+    width: 300px;
+    height: 220px;
+    background: #333;
+    border-radius: 12px;
+    transition: 0.5s;
+    overflow: hidden;
+}
+
+@media screen and (max-width:430px) {
+    .container1 .card .imgbx {
+        width: 250px;
+    }
+}
+
+@media screen and (max-width:350px) {
+    .container1 .card .imgbx {
+        width: 220px;
+    }
+}
+
+.container1 .card:hover .imgbx {
+    top: -100px;
+    scale: 0.75;
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.15);
+}
+
+.container1 .card .imgbx img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.container1 .card .content {
+    position: absolute;
+    top: 252px;
+    width: 100%;
+    padding: 10px 10px;
+    height: 35px;
+    overflow: hidden;
+    text-align: center;
+    transition: 0.5s;
+}
+
+.container1 .card:hover .content {
+    top: 150px;
+    height: 250px;
+}
+
+.container1 .card .content h2 {
+    font-size: 1.33em;
+    font-weight: 700;
+}
+
+.issue-btn{
+   position: fixed;
+   bottom: 4px;
+   right: 20px;
+   color: rgb(255,255,255);
+   transform: none;
+   transform-origin: 0% 50% 0px;
+   background: #766c82;
+}
+
+.issue-btn:hover{
+    color: rgb(248,225,18);
+  transition: width 0.3s ease, background-color 0.3s ease;
+  transform: scale(1.05px) translateZ(0px);
+ }
+
+ .custom-flex {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    padding: 2rem;
+  }
+  .custom-gradient {
+    background: linear-gradient(to bottom, #e9d5ff, #bfdbfe); /* Adjust the colors to match Tailwind's purple-200 and blue-300 */
+  }
+  .rounded-3xl {
+    border-radius: 1.5rem; /* Tailwind's 3xl rounded is 1.5rem or 24px */
+  }
+
+  .custom-shadow {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for styling */
+  }

@@ -13,7 +13,7 @@
     color: #fff;
     background-size: cover !important; 
     background-position: center; 
-    object-fit: cover !important;
+    overflow: hidden !important;
 }
 
 .banner .swiper-slide:nth-child(1n) {
