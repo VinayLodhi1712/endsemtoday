@@ -3,15 +3,69 @@
 
 /*Navbar toggler */
 .navbar-toggler {
-  border-color: white;
+  border-color: white !important;
 }
 
 .navbar-toggler-icon {
-  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E") !important;
 }
 
+@media screen and (max-width: 768px)
+{
+  .HomeFirstDiv{
+    height: fit-content;
+  }
 
+  .responsive{
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+ 
+  .WelcomeText{
+    font-weight: 600;
+  }
 
+  .custom-flex {
+    display: flex;
+    flex-wrap: wrap ;
+    flex-direction: column;
+    padding: 2rem;
+  }
+
+  .technewshome{
+    width: 100%;
+  }
+
+  .technewshomepara{
+    width: 100%;
+    font-size: 14px;
+  }
+
+  .font-bold{
+    font-weight: 500;
+    font-size: 22px;
+  }
+
+  .codeconnecthome{
+    width: 100%;
+  }
+
+  .codeconnecthometext{
+    width: 100%;
+    font-size: 14px;
+    margin-left: 2rem;
+  }
+
+  .codeconnecthomechat{
+    width: 100%;
+    margin-left: 0;
+  }
+  .codeconnecthomepara{
+    width: 100%;
+    font-size: 14px;
+  }
+
+}
 @media screen and (max-width: 768px) {
   .registerformresponsicve {
     width: 80%;

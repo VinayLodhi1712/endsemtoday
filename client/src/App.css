@@ -704,6 +704,35 @@ UserInfo .col-md-4 img {
   /* Dark blue color */
 }
 
+.technewshome{
+  width: 75%;
+  height: 60%;
+}
+
+.technewshomepara{
+  width: 50%;
+  margin-left: 2rem;
+  font-size: 20px;
+}
+
+.codeconnecthome{
+  width: 75%;
+  height: 60%;
+}
+
+.codeconnecthometext{
+  width: 50%;
+}
+
+.codeconnecthomechat{
+  width: 50%;
+}
+.codeconnecthomepara{
+  width: 70%;
+  font-size: 20px;
+  font-family: sans-serif;
+  color: rgb(131 136 148) ;
+}
 .gradient1 {
   background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
 }

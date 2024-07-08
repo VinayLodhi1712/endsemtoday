@@ -60,3 +60,12 @@
     color: rgb(70, 70, 209);
     font-weight: 700;
 }
+
+
+@media screen and (max-width: 768px){
+    .newclass3{
+        width: 200px;
+        margin-top: 1rem;
+        height: 250px;
+    }
+}

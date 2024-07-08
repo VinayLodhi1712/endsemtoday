@@ -5,7 +5,7 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { FaUser } from "react-icons/fa";
-import { ReactTyped } from "react-typed";     
+import { ReactTyped } from "react-typed";
 
 import chatgpt from "../assests/chatgpt.png";
 import Avatar from "@mui/material/Avatar";
@@ -18,9 +18,9 @@ const FadeIn = () => {
       <div className="question-box">
         <Card className="card2">
           <CardContent>
-            <Typography gutterBottom variant="h5" component="div" className="d-flex justify-content-center">
+            <Typography gutterBottom variant="h5" component="div" className="responsive-layout">
               <div className="user-icon">
-                <FaUser sx={{ width: 30, height: 30 }} />
+                <FaUser className="icon" />
               </div>
               <ReactTyped
                 strings={[
@@ -35,9 +35,9 @@ const FadeIn = () => {
               />
             </Typography>
             <Divider className="divider" />
-            <Typography variant="body2" color="text.secondary" className="d-flex justify-content-center">
+            <Typography variant="body2" color="text.secondary" className="responsive-layout">
               <div className="chatbot-icon">
-                <Avatar src={chatgpt} sx={{ width: 35, height: 40 }} alt={<FaUser sx={{ width: 30, height: 30 }} />} />
+                <Avatar src={chatgpt} className="icon" sx={{ width: { xs: '30px', sm: '30px', md: '35px' }, height: { xs: '30px', sm: '30px', md: '40px' } }} alt={<FaUser sx={{ width: 30, height: 30 }} />} />
               </div>
               <ReactTyped
                 strings={[

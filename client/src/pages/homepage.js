@@ -122,20 +122,20 @@ function Home() {
               <br></br>
               Your Dynamic Tech Platform
             </h1>
-            <p className="text-center">
+            <p className="text-center responsive" style={{fontSize:"20px"}}>
               Empowering Tech Enthusiasts to Learn, Connect, and Innovate.
             </p>
-            <div className="d-flex justify-content-center">
-              <div style={{ marginRight: "1.5rem" }}>
+            <div className="d-flex justify-content-center text-center">
+              <div >
                 <NavLink to="/register">
-                  <Button variant="contained" sx={{ bgcolor: "ochre.darker" }}>
+                  <Button variant="contained" sx={{ bgcolor: "ochre.darker", width: { xs: '150px', sm: '150px', md: '150px' }, marginRight:{ xs: '0px', sm:'0px', md: '1.5rem'} }}>
                     Get Started
                   </Button>
                 </NavLink>
               </div>
               <div>
                 <NavLink to="/About">
-                  <Button variant="contained" sx={{ bgcolor: "ochre.darker" }}>
+                  <Button variant="contained" sx={{ bgcolor: "ochre.darker",  width: { xs: '150px', sm: '150px', md: '150px' } }}>
                     About us
                   </Button>
                 </NavLink>
@@ -199,7 +199,7 @@ function Home() {
         className="homepage-section d-flex align-items-center flex-column justify-content-center w-100  mb-3"
         data-aos="fade-up"
       >
-        <h1 className=" w-50 text-center WelcomeText mt-5">
+        <h1 className=" w-50 text-center WelcomeText mt-5 ">
           {" "}
           More than <span style={{ color: "#1fa2ff" }}>30+ Products</span> Listed. Checkout Now!
         </h1>
@@ -217,7 +217,7 @@ function Home() {
             }}
             breakpoints={{
               0: {
-                slidesPerView: 1,
+                slidesPerView: 1.3,
                 spaceBetween: 10,
               },
               400: {
@@ -309,17 +309,17 @@ function Home() {
         </div>
       </div>
 
-      <div className="homepage-section mb-5 w-75 h-60 custom-flex custom-gradient rounded-3xl custom-shadow " style={{ margin: "auto" }}>
+      <div className="codeconnecthome mb-5 custom-flex custom-gradient rounded-3xl custom-shadow " style={{ margin: "auto" }}>
         
-          <div className="w-50">
+          <div className="codeconnecthomechat">
             <FadeIn />
           </div>
 
-          <div className="w-50  mt-5  mb-4 " >
-            <h2 className="font-bold text-black mb-3" style={{ fontSize: "30px" }}>
+          <div className="codeconnecthometext mt-5 mb-4 " >
+            <h2 className="font-bold text-black mb-3">
               Have Doubts? <br></br><div className="">Ask them at  <span className="highlighted ff">Code<MdOutlineConnectingAirports />Connect, </span></div>
             </h2>
-            <p style={{ width: "70%", fontSize: "20px", fontFamily: "sans-serif", color: "rgb(131 136 148)" }} className="font-bold text-black ff">Ask doubts from experienced people. Share knowledge and learn from others in the community,  Get help from AI.</p>
+            <p  className=" text-black ff codeconnecthomepara">Ask doubts from experienced people. Share knowledge and learn from others in the community,  Get help from AI.</p>
             <div className="flex ">
               <NavLink to="/dashboard/Admin/interaction">
                 <button className="yellowbtn" style={{ marginRight: "4rem" }}>Try it Yourself&rarr;</button>
@@ -337,7 +337,7 @@ function Home() {
       {/* <h1 className="text-center WelcomeText mt-2 mb-2">
           Get instant technical news
         </h1> */}
-      <div className="w-75 h-60 custom-flex custom-gradient rounded-3xl custom-shadow" style={{ margin: "auto" }}>
+      <div className="technewshome custom-flex custom-gradient rounded-3xl custom-shadow" style={{ margin: "auto" }}>
         <div className="d-flex flex-column justify-content-center">
           <h2
             className="font-bold text-black "
@@ -347,8 +347,7 @@ function Home() {
             <span className="highlighted ff"> on our website!</span>
           </h2>
           <p
-            className="w-50 ff"
-            style={{ marginLeft: "2rem", fontSize: "20px" }}
+            className="technewshomepara ff"
           >
             Explore the latest in tech news and stay informed about
             cutting-edge developments, innovations, and trends in the

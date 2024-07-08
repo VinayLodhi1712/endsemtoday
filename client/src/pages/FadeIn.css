@@ -10,12 +10,11 @@
   background-color: #f0f0f0;
 }
 
-.user-icon {
-  margin-right: 10px;
-}
-
 .chatbot-icon {
   margin-right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .answer {
@@ -29,8 +28,10 @@
 }
 
 .card2 {
-  width: 345px; /* Fixed width */
-  height: 260px; /* Fixed height */
+  width: 345px;
+  /* Fixed width */
+  height: 260px;
+  /* Fixed height */
   background-color: #ffffff;
   border-radius: 10px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
@@ -40,22 +41,72 @@
   margin: 15px 0;
 }
 
+.responsive-layout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px; /* Add spacing between the icon and text */
+}
+
+.icon {
+  width: 30px;
+  height: 30px;
+}
+
+@media (min-width: 600px) {
+  .icon {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+@media (min-width: 900px) {
+  .icon {
+    width: 35px;
+    height: 40px;
+  }
+}
+
 @media (max-width: 768px) {
   .container {
-    margin-top: 3rem;
+    margin-top: 1rem;
     margin-left: 0rem;
-    margin-bottom: 3rem;
+    margin-bottom: 1rem;
   }
 
-  .card {
-    max-width: 100%; 
+  .card2{
+    width: 250px;
+    height: 210px;
   }
 
   .card-actions {
-    flex-direction: column; 
+    flex-direction: column;
   }
 
   .answer {
-    font-size: 14px; 
+    font-size: 14px;
   }
+
+  .user-icon {
+    margin-right: 0px;
+  }
+  
+  .chatbot-icon {
+    margin-right: 0px;
+  }
+
+  .divider {
+    margin: 0px 0;
+  }
+
+  .icon{
+    margin-right: 5px;
+  }
+  
 }
