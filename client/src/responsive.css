@@ -99,16 +99,11 @@
   .categorysection .smalltitlefont{
     font-size: 10px;
   }
-  .responsivecategory{
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-  }
+
   
 .Fixed {
   position: relative;
   left: 0%;
-  top: 55%;
 }
 .Fixed .mediumtitlefont{
   font-size: 12px;

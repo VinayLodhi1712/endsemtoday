@@ -78,12 +78,10 @@ const Login = () => {
   return (
     <Layout>
       <ToastContainer />
-      <div>
-        </div>
-      <div className="bg">
+      <div >
         <div
           className="Registerlayout bg-light"
-          style={{ width: "70%", padding: "20px", borderRadius: "10px" }}
+          style={{ width: "50%", padding: "20px", borderRadius: "10px", height:"600px"}}
         >
           <div className="d-flex mb-3 gap-2 loginheader">
             <NavLink to="/register" className="w-50 loginreglink"  >
@@ -105,8 +103,8 @@ const Login = () => {
           >
             <div className="mt-2" style={{ width: "100%" }}>
               <div style={{ textAlign: "center" }}>
-                <h1 style={{ fontWeight: "600" }}>Login</h1>
-                <p style={{ fontSize: "20px" }}>
+                <h1 style={{ fontWeight: "600", color: "rgb(208, 50, 50)" }}>Welcome Back</h1>
+                <p style={{ fontSize: "20px", color: "rgb(208, 50, 50)" }}>
                   Doesn't have an account yet? <a href="/register">Sign-Up</a>{" "}
                   here
                 </p>
@@ -116,6 +114,7 @@ const Login = () => {
                 <label
                   htmlFor="exampleInputEmail1"
                   className="form-label smalltitlefont2"
+                  
                 >
                   Email address
                 </label>
@@ -130,7 +129,7 @@ const Login = () => {
                     SetEmail(e.target.value);
                   }}
                   required
-                  style={{ fontSize: "16px" }}
+                  style={{ fontSize: "16px" ,backgroundColor:"#E6E6FA" }}
                 />
               </div>
 
@@ -155,6 +154,7 @@ const Login = () => {
                       SetPassword(e.target.value);
                     }}
                     required
+                    style={{ fontSize: "16px" ,backgroundColor:"#E6E6FA" }}
                   />
                   <button
                     className="btn btn-outline-primary"
@@ -181,7 +181,7 @@ const Login = () => {
                   type="submit"
                   className="btn btn-primary"
                   disabled={Loading}
-                  style={{ width: "10rem" }}
+                  style={{ width: "10rem",backgroundColor:"rgb(208, 50, 50)" }}
                 >
                   {Loading ? "Loading..." : "Login"}
                 </button>
@@ -191,10 +191,22 @@ const Login = () => {
                   onClick={() => {
                     navigate("/ForgotPassword");
                   }}
+                  style={{ width: "10rem",backgroundColor:"rgb(208, 50, 50)" }}
                 >
                   Forgot Password
                 </button>
+                
               </div>
+              <button
+                  type="submit"
+                  className="btn btn-primary mt-3"
+                  onClick={() => {
+                    navigate("/ForgotPassword");
+                  }}
+                  style={{marginLeft:"15rem", width: "10rem",backgroundColor:"rgb(208, 50, 50)" }}
+                >
+                  Sign-in with Google
+                </button>
             </div>
           </form>
         </div>

@@ -179,17 +179,18 @@ function Productpage() {
       <div className="productpage">
       <div className="categorysection">
         <div className="Fixed productleftside"
-        > <div className="responsivesearch">
-            <h2 className="mediumtitlefont mb-3">Search Products</h2>
-            <div className="container-fluid mb-4">
+        > <div className="responsivesearch mt-2">
+            <h2 className="mediumtitlefont" style={{marginLeft:"-3px"}}>Search Products</h2>
+           
               <form className="d-flex" role="search" onSubmit={HandleSubmit}>
                 <Toaster />
 
                 <input
-                  className="form-control me-2"
+                  className="form-control me-2 " style={{marginLeft:"-3px"}}
                   type="search"
                   placeholder="Search Products"
                   aria-label="Search"
+                  
                   onChange={(e) => {
                     // setValues({ ...values, Keyword: e.target.value });
                     HandleSubmit(e, e.target.value);
@@ -197,11 +198,11 @@ function Productpage() {
 
                 />
               </form>
-            </div>
+            
           </div>
          
-            <div className="responsivecategory">
-              <h2 className="mediumtitlefont">Select Category</h2>
+            <div className="responsivecategory mt-2">
+              <h2 className="mediumtitlefont ">Select Category</h2>
 
               <div className="categoryshow p-1">
                 {Categories?.map((c) => (
@@ -255,7 +256,7 @@ function Productpage() {
 
         </div>
 
-        <div className=" text-center " style={{ height: "100%", width: "80%" }}>
+        <div className=" text-center mt-1" style={{ height: "100%", width: "80%" }}>
           <h1 className="Titlefont">All Products</h1>
           {FilterProductLength ? (
             <div
