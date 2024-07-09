@@ -176,88 +176,94 @@ function Productpage() {
 
   return (
     <Layout>
-      <div className="d-flex justify-content-end mt-3 ">
-        <div
-          style={{ width: "20%", marginLeft: "1rem" }}
-          className="Fixed mt-3"
-        >
-           <h2 className="mediumtitlefont mb-3">Search Products</h2>
-          <div className="container-fluid mb-4">         
-            <form className="d-flex" role="search" onSubmit={HandleSubmit}>
-              <Toaster />
-             
-              <input
-                className="form-control me-2"
-                type="search"
-                placeholder="Search Products"
-                aria-label="Search"
-                onChange={(e) => {
-                  // setValues({ ...values, Keyword: e.target.value });
-                  HandleSubmit(e, e.target.value);
-                }}
+      <div className="productpage">
+      <div className="categorysection">
+        <div className="Fixed productleftside"
+        > <div className="responsivesearch">
+            <h2 className="mediumtitlefont mb-3">Search Products</h2>
+            <div className="container-fluid mb-4">
+              <form className="d-flex" role="search" onSubmit={HandleSubmit}>
+                <Toaster />
 
-              />
-            </form>
-          </div>
-          <div>
-            <h2 className="mediumtitlefont">Select Category</h2>
-
-            <div className="d-flex flex-column p-1">
-              {Categories?.map((c) => (
-                <Checkbox
-                  key={c._id}
-                  className="smalltitlefont"
+                <input
+                  className="form-control me-2"
+                  type="search"
+                  placeholder="Search Products"
+                  aria-label="Search"
                   onChange={(e) => {
-                    HandleFilter(e.target.checked, c._id);
+                    // setValues({ ...values, Keyword: e.target.value });
+                    HandleSubmit(e, e.target.value);
+                  }}
+
+                />
+              </form>
+            </div>
+          </div>
+         
+            <div className="responsivecategory">
+              <h2 className="mediumtitlefont">Select Category</h2>
+
+              <div className="categoryshow p-1">
+                {Categories?.map((c) => (
+                  <Checkbox
+                    key={c._id}
+                    className="smalltitlefont"
+                    onChange={(e) => {
+                      HandleFilter(e.target.checked, c._id);
+                    }}
+                  >
+                    <strong>{c.name}</strong>
+                  </Checkbox> // show categories as check box
+                ))}
+              </div>
+            </div>
+            </div>
+            {/* filter by price */}
+            <div className="mt-3 responsivecategory">
+              <div>
+              <h2 className="mediumtitlefont">Select Price Range</h2>
+              </div>
+              
+              <div className="categoryshow p-1">
+                <Radio.Group
+                  onChange={(e) => {
+                    SetRadioval(e.target.value);
                   }}
                 >
-                  <strong>{c.name}</strong>
-                </Checkbox> // show categories as check box
-              ))}
+                  {Prices?.map((p) => (
+                    <div key={p._id}>
+                      <Radio className="smalltitlefont" value={p.array}>
+                        <strong>{p.name}</strong>
+                      </Radio>
+                    </div>
+                  ))}
+                </Radio.Group>
+              </div>
             </div>
-          </div>
-          {/* filter by price */}
-          <div className="mt-3">
-            <h2 className="mediumtitlefont">Select Price Range</h2>
-            <div className="d-flex flex-column p-1">
-              <Radio.Group
-                onChange={(e) => {
-                  SetRadioval(e.target.value);
+            <div className="mt-3">
+              <button
+                className="btn btn-danger"
+                onClick={() => {
+                  window.location.reload();
                 }}
               >
-                {Prices?.map((p) => (
-                  <div key={p._id}>
-                    <Radio className="smalltitlefont" value={p.array}>
-                      <strong>{p.name}</strong>
-                    </Radio>
-                  </div>
-                ))}
-              </Radio.Group>
+                Clear Filters
+              </button>
             </div>
-          </div>
-          <div className="mt-3">
-            <button
-              className="btn btn-danger"
-              onClick={() => {
-                window.location.reload();
-              }}
-            >
-              Clear Filters
-            </button>
-          </div>
+          
+
+
         </div>
 
         <div className=" text-center " style={{ height: "100%", width: "80%" }}>
           <h1 className="Titlefont">All Products</h1>
           {FilterProductLength ? (
             <div
-              className="d-flex justify-content-around flex-wrap "
-              style={{ height: "100%", gap: "2rem" }}
+              className="productshow"
             >
               {Products.map((p) => (
                 <div
-                  className="card d-flex border border-3 boxlayoutproducts"
-                  style={{ width: "25%", height: "100%" }}
+                  className="card boxlayoutproducts"
                 >
                   <Image
                     src={`https://talkofcodebackend.onrender.com/api/v1/product/get-productPhoto/${p._id}`}

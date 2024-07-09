@@ -64,8 +64,80 @@
     width: 100%;
     font-size: 14px;
   }
+}
+@media screen and (max-width: 768px) {
+  .productpage{
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+  }
+  .productleftside{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: fit-content;
+  }
+  .responsivesearch{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .categorysection{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 3;
+  }
+
+  .categoryshow{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    
+  }
+
+  .categorysection .smalltitlefont{
+    font-size: 10px;
+  }
+  .responsivecategory{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+  
+.Fixed {
+  position: relative;
+  left: 0%;
+  top: 55%;
+}
+.Fixed .mediumtitlefont{
+  font-size: 12px;
+  color: black;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+.productshow{
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  height: 100%;
 
 }
+
+.boxlayoutproducts{
+  width: 47%;
+}
+
+.responsivecategory .mediumtitlefont{
+  font-size: 12px;
+  font-weight: 500;
+}
+}
+
+
 @media screen and (max-width: 768px) {
   .registerformresponsicve {
     width: 80%;

@@ -167,7 +167,7 @@ body {
 }
 
 .Fixed {
-  position: absolute;
+  position: relative;
   left: 0%;
   top: 11%;
 }
@@ -191,8 +191,32 @@ body {
   top: 11%;
 }
 
+.productleftside{
+  width: 20%;
+  margin-left: 1rem;
+  margin-top: 3rem;
+}
+
+.categoryshow{
+  display: flex;
+  flex-direction: column;
+}
+
+.productpage{
+  display: flex;
+  justify-content: end;
+}
+
 .ProductDetailsCard {
   background-color: rgba(34, 33, 33, 0.181);
+}
+
+.productshow{
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  height: 100%;
+  gap: 2rem;
 }
 
 .priceSpan {
@@ -527,12 +551,18 @@ UserInfo .col-md-4 img {
 }
 
 .boxlayoutproducts {
+  display: flex;
   height: 100%;
-  width: 80%;
-
+  width: 25%;
   box-shadow: 4px 8px 10px rgba(0, 0, 0, 0.4), 4px 8px 10px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   padding: 0.2rem;
+}
+
+.card {
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
 }
 
 .reviewlayout {
@@ -1240,11 +1270,7 @@ UserInfo .col-md-4 img {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-.card {
-  border: 1px solid #ccc;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s ease;
-}
+
 
 .user-image {
   display: flex;
