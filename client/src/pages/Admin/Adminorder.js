@@ -47,7 +47,7 @@ const Adminorder = () => {
   async function HandleStatusChange(NewOrderStatus, id) {
     try {
       const response = await fetch(
-        `https://ecomwebapp.onrender.com/api/v1/auth/OrderStatusUpdate/${id}`,
+        `https://talkofcodebackend.onrender.com/api/v1/auth/OrderStatusUpdate/${id}`,
         {
           method: "PUT",
           headers: {

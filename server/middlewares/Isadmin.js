@@ -3,6 +3,7 @@ async function IsAdmin(req, resp, next) {
   try {
     
     const user = await usermodel.findById(req.user._id);
+    console.log('User found:', user);
 
     if (!user || user.Role !== 1) {
       resp.status(403).send({
@@ -10,6 +11,7 @@ async function IsAdmin(req, resp, next) {
         message: "Unauthorized access",
       });
     } else {
+      console.log('User found:', user);
       next();
     }
   } catch (error) {

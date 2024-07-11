@@ -2,9 +2,10 @@ import { useState } from "react";
 import React from "react";
 import Layout from "../components/layout/layout";
 import { useNavigate, NavLink, useLocation } from "react-router-dom";
-import { useAuth } from "../context/auth";
+import { useAuth, loginWithGoogle } from "../context/auth";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { toast, ToastContainer } from "react-toastify";
+//import googlelogo from "../assets/google-logo.svg"
 const Login = () => {
   const [Email, SetEmail] = useState("");
   const [Password, SetPassword] = useState("");
@@ -75,23 +76,63 @@ const Login = () => {
     setShowPassword(!showPassword);
   };
 
+  const handleRegister = async () => {
+    try {
+      const result = await loginWithGoogle();
+      const user = result.user;
+      console.log(user.email);
+      
+  
+      const response = await fetch("http://localhost:8000/api/v1/auth/google-login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: user.email
+        }),
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        setAuth({
+          ...auth,
+          user: data.user,
+          token: data.token,
+        });
+  
+        localStorage.setItem("auth", JSON.stringify({
+          user: data.user,
+          token: data.token,
+        }));
+  
+        toast.success("Login Successful");
+        navigate("/");
+      } else {
+        const errorData = await response.json();
+        toast.error(errorData.message);
+      }
+    } catch (error) {
+      toast.error("Something went wrong, please try again");
+    }
+  };
   return (
     <Layout>
       <ToastContainer />
       <div >
         <div
           className="Registerlayout bg-light"
-          style={{ width: "50%", padding: "20px", borderRadius: "10px", height:"600px"}}
+          style={{ width: "50%", padding: "20px", borderRadius: "10px", height: "600px" }}
         >
           <div className="d-flex mb-3 gap-2 loginheader">
             <NavLink to="/register" className="w-50 loginreglink"  >
-              {" "} 
-           Register 
+              {" "}
+              Register
             </NavLink>
 
             <NavLink to="/login" className="w-50 loginreglink" >
               {" "}
-            Login 
+              Login
             </NavLink>
           </div>
 
@@ -114,7 +155,7 @@ const Login = () => {
                 <label
                   htmlFor="exampleInputEmail1"
                   className="form-label smalltitlefont2"
-                  
+
                 >
                   Email address
                 </label>
@@ -129,7 +170,7 @@ const Login = () => {
                     SetEmail(e.target.value);
                   }}
                   required
-                  style={{ fontSize: "16px" ,backgroundColor:"#E6E6FA" }}
+                  style={{ fontSize: "16px", backgroundColor: "#E6E6FA" }}
                 />
               </div>
 
@@ -154,13 +195,14 @@ const Login = () => {
                       SetPassword(e.target.value);
                     }}
                     required
-                    style={{ fontSize: "16px" ,backgroundColor:"#E6E6FA" }}
+                    style={{ fontSize: "16px", backgroundColor: "#E6E6FA" }}
                   />
                   <button
-                    className="btn btn-outline-primary"
+                    className="btn"
+                    style={{ fontSize: "16px", backgroundColor: "#E6E6FA", marginLeft: "5px" }}
                     type="button"
                     onClick={togglePasswordVisibility}
-                    style={{ marginLeft: "5px" }}
+
                   >
                     {showPassword ? <FaEyeSlash /> : <FaEye />}
                   </button>
@@ -181,7 +223,7 @@ const Login = () => {
                   type="submit"
                   className="btn btn-primary"
                   disabled={Loading}
-                  style={{ width: "10rem",backgroundColor:"rgb(208, 50, 50)" }}
+                  style={{ width: "10rem", backgroundColor: "rgb(208, 50, 50)" }}
                 >
                   {Loading ? "Loading..." : "Login"}
                 </button>
@@ -191,22 +233,25 @@ const Login = () => {
                   onClick={() => {
                     navigate("/ForgotPassword");
                   }}
-                  style={{ width: "10rem",backgroundColor:"rgb(208, 50, 50)" }}
+                  style={{ width: "10rem", backgroundColor: "rgb(208, 50, 50)" }}
                 >
                   Forgot Password
                 </button>
-                
+
+              </div>
+              <div>
+                <h2 className="d-flex justify-content-center mt-3">OR</h2>
               </div>
               <button
-                  type="submit"
-                  className="btn btn-primary mt-3"
-                  onClick={() => {
-                    navigate("/ForgotPassword");
-                  }}
-                  style={{marginLeft:"15rem", width: "10rem",backgroundColor:"rgb(208, 50, 50)" }}
-                >
-                  Sign-in with Google
-                </button>
+                type="submit"
+                className="btn btn-primary mt-2"
+                onClick={
+                  handleRegister
+                }
+                style={{ marginLeft: "14rem", width: "10rem", backgroundColor: "rgb(208, 50, 50)" }}
+              >
+                Login with Google
+              </button>
             </div>
           </form>
         </div>

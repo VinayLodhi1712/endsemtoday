@@ -100,11 +100,11 @@ function Header() {
                         aria-expanded="false"
                       >
                         <Avatar
-                          alt={auth.user.Name}
-                          src={`https://talkofcodebackend.onrender.com/api/v1/auth/get-userPhoto/${auth.user._id}`}
+                          alt={auth.user.Name || auth.user.displayName}
+                          src={`https://talkofcodebackend.onrender.com/api/v1/auth/get-userPhoto/${auth.user._id}`|| auth.user.photoURL}
                           sx={{ width: 30, height: 30 }}
                         />
-                        {auth.user.Name}
+                        {auth.user.Name || auth.user.displayName}
                       </a>
                       <ul className="dropdown-menu">
                         <li>

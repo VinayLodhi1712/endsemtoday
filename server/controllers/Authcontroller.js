@@ -1,8 +1,21 @@
 const Usermodel = require("../modles/usermodel");
+const User = require("../modles/usermodel");
 const { hashPassword, comparePassword } = require("../helpers/authhelper");
 const JWT = require("jsonwebtoken");
 const fs = require("fs").promises;
 const nodemailer = require("nodemailer");
+const generateToken = (userId) => {
+  try {
+    const token = JWT.sign({ _id: userId }, process.env.JWT_SECRET, {
+      expiresIn: '4d',
+    }); // Debug log to check the token
+    return token;
+  } catch (error) {
+    console.error('Error generating token:', error); // Log any error
+    throw error;
+  }
+};
+
 
 async function registerController(req, res) {
   try {
@@ -65,6 +78,32 @@ async function registerController(req, res) {
   } catch (error) {
     console.error("Error:", error);
     res.status(500).send({ success: false, error: "Internal server error" });
+  }
+}
+
+async function googlelogin(req, res) {
+  console.log("google login hit")
+  const { email } = req.body;
+
+  try {
+    let user = await User.findOne({Email: email  });
+    if (user) {
+      // User exists, generate a token
+      const token = generateToken(user._id);
+
+      res.status(200).send({
+        success: true,
+        message: "login successfull",
+        user,
+        token,
+      })
+    } else {
+      // User does not exist, send an error response
+      res.status(404).json({ message: 'User not found' });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Server error');
   }
 }
 
@@ -567,4 +606,5 @@ module.exports = {
   ResetPasswordEmail,
   GetSingleUserInfo,
   ResetPasswordDirectly,
+  googlelogin,
 };

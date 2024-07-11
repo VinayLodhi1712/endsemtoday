@@ -17,7 +17,8 @@ const {
   UpdateSkillTagsController,
   GetSingleUserInfo,
   ResetPasswordEmail,
-  ResetPasswordDirectly
+  ResetPasswordDirectly,
+  googlelogin
 } = require("../controllers/Authcontroller");
 const requireSignIn = require("../middlewares/authMiddleware");
 const IsAdmin = require("../middlewares/Isadmin");
@@ -80,7 +81,7 @@ router.put(
   UpdateSkillTagsController
 );
 router.get("/Getuserinfo/:uid", GetSingleUserInfo);
-
+router.post("/google-login", googlelogin);
 
 //api to send email
 router.post("/SendResetEmail", ResetPasswordEmail);

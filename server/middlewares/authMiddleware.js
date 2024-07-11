@@ -8,6 +8,7 @@ async function requireSignIn(req, resp, next) {
       req.headers.authorization,
       process.env.JWT_SECRET
     );
+    console.log(decode);
     req.user = decode;
     next();
   } catch (error) {   
