@@ -83,10 +83,17 @@ async function registerController(req, res) {
 
 async function googlelogin(req, res) {
   console.log("google login hit")
-  const { email } = req.body;
+  const { email, Name, photo } = req.body;
+  // Validate request body
+  if (!email || !Name) {
+    return res.status(400).send({
+      success: false,
+      message: "Email and Name are required",
+    });
+  }
 
   try {
-    let user = await User.findOne({Email: email  });
+    let user = await User.findOne({ Email:email});
     if (user) {
       // User exists, generate a token
       const token = generateToken(user._id);
@@ -96,10 +103,28 @@ async function googlelogin(req, res) {
         message: "login successfull",
         user,
         token,
+        isNewUser: false,
       })
     } else {
-      // User does not exist, send an error response
-      res.status(404).json({ message: 'User not found' });
+      //User does not exist, send an error response
+      const user = new Usermodel({
+       Email:email,
+       Name,
+       photo,
+       
+      });
+
+      await user.save();
+        // Generate token and redirect to edit profile page
+      const token = generateToken(user._id);
+      
+      res.status(201).send({
+        success: true,
+        message: "User created, please complete your profile",
+        user,
+        token,
+        isNewUser: true,
+      });
     }
   } catch (error) {
     console.error(error);

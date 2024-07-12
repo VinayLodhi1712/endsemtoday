@@ -80,8 +80,7 @@ const Login = () => {
     try {
       const result = await loginWithGoogle();
       const user = result.user;
-      console.log(user.email);
-      
+      console.log(user);
   
       const response = await fetch("http://localhost:8000/api/v1/auth/google-login", {
         method: "POST",
@@ -89,7 +88,9 @@ const Login = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          email: user.email
+          email: user.email,
+          Name: user.displayName,
+          photo:user.photoURL,
         }),
       });
   
@@ -106,8 +107,13 @@ const Login = () => {
           token: data.token,
         }));
   
+        console.log(data.isNewUser);
         toast.success("Login Successful");
-        navigate("/");
+        if (data.isNewUser) {
+          navigate("/dashboard/user/Profile");
+        } else {
+          navigate("/");
+        }
       } else {
         const errorData = await response.json();
         toast.error(errorData.message);

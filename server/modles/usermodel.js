@@ -14,19 +14,19 @@ const UserSchema = new mongoose.Schema(
     },
     Password: {
       type: String,
-      required: true,
+      //required: true,
     },
     Answer: {
       type: String,
-      required: true,
+     // required: true,
     },
     Location: {
       type: String,
-      required: true,
+      //required: true,
     },
     MobileNo: {
       type: Number,
-      required: true,
+      //required: true,
       unique: true,
     },
     SecurityQuestion: {

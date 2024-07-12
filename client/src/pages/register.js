@@ -3,6 +3,7 @@ import React from "react";
 import Layout from "../components/layout/layout";
 import { useNavigate, NavLink, useLocation } from "react-router-dom";
 import toast from "react-hot-toast";
+import { useAuth, loginWithGoogle } from "../context/auth";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import {
   CountryDropdown,
@@ -24,6 +25,7 @@ const Register = () => {
   const [region, setRegion] = useState(""); // Added region state
   const [Location, setLocation] = useState("");
   const navigate = useNavigate();
+  const [auth, setAuth] = useAuth();
   const [Loading, SetLoading] = useState(false);
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -80,6 +82,53 @@ const Register = () => {
       toast.error(error.message);
     }
   }
+
+  const handleRegister = async () => {
+    try {
+      const result = await loginWithGoogle();
+      const user = result.user;
+      console.log(user);
+  
+      const response = await fetch("http://localhost:8000/api/v1/auth/google-login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: user.email,
+          Name: user.displayName,
+          photo:user.photoURL,
+        }),
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        setAuth({
+          ...auth,
+          user: data.user,
+          token: data.token,
+        });
+  
+        localStorage.setItem("auth", JSON.stringify({
+          user: data.user,
+          token: data.token,
+        }));
+  
+        console.log(data.isNewUser);
+        toast.success("Login Successful");
+        if (data.isNewUser) {
+          navigate("/dashboard/user/Profile");
+        } else {
+          navigate("/");
+        }
+      } else {
+        const errorData = await response.json();
+        toast.error(errorData.message);
+      }
+    } catch (error) {
+      toast.error("Something went wrong, please try again");
+    }
+  };
   return (
     <Layout>
       <div className="bg">
@@ -329,6 +378,19 @@ const Register = () => {
                   {Loading ? "Loading..." : " Register"}
                 </button>
               </div>
+              <div>
+                <h2 className="d-flex justify-content-center mt-3">OR</h2>
+              </div>
+              <button
+                type="submit"
+                className="btn btn-primary mt-2"
+                onClick={
+                  handleRegister
+                }
+                style={{ marginLeft: "20.5rem", width: "10rem", backgroundColor: "rgb(208, 50, 50)" }}
+              >
+                Sign-in with Google
+              </button>
             </div>
           </form>
         </div>

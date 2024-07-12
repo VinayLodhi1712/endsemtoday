@@ -19,7 +19,6 @@ export default function AdminRoute() {
             },
           }
         );
-        console.log(res);
 
         if (res.ok) {
           const data = await res.json();
