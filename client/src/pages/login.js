@@ -128,15 +128,14 @@ const Login = () => {
       <div >
         <div
           className="Registerlayout bg-light"
-          style={{ width: "50%", padding: "20px", borderRadius: "10px", height: "600px" }}
         >
-          <div className="d-flex mb-3 gap-2 loginheader">
-            <NavLink to="/register" className="w-50 loginreglink"  >
+          <div className="d-flex mb-3 gap2">
+            <NavLink to="/register" className="loginreglink"  >
               {" "}
               Register
             </NavLink>
 
-            <NavLink to="/login" className="w-50 loginreglink" >
+            <NavLink to="/login" className="loginreglink" >
               {" "}
               Login
             </NavLink>
@@ -157,11 +156,10 @@ const Login = () => {
                 </p>
               </div>
 
-              <div className="mb-2 w-75" style={{ marginLeft: "5rem" }}>
+              <div className="mb-2 w-75 inputmargin">
                 <label
                   htmlFor="exampleInputEmail1"
                   className="form-label smalltitlefont2"
-
                 >
                   Email address
                 </label>
@@ -181,8 +179,8 @@ const Login = () => {
               </div>
 
               <div
-                className="mb-3"
-                style={{ width: "75%", marginLeft: "5rem" }}
+                className="mb-3 inputmargin"
+                style={{ width: "75%"}}
               >
                 <label
                   htmlFor="exampleInputPassword1"
@@ -215,16 +213,7 @@ const Login = () => {
                 </div>
               </div>
 
-              <div
-                className="mt-3"
-                style={{
-                  display: "flex",
-                  justifyContent: "space-around",
-                  alignItems: "center",
-                  width: "60%",
-                  marginLeft: "8rem",
-                }}
-              >
+              <div className="mt-3 loginbuttons">
                 <button
                   type="submit"
                   className="btn btn-primary"
@@ -246,15 +235,15 @@ const Login = () => {
 
               </div>
               <div>
-                <h2 className="d-flex justify-content-center mt-3">OR</h2>
+                <h2 className="d-flex justify-content-center mt-4">OR</h2>
               </div>
               <button
                 type="submit"
-                className="btn btn-primary mt-2"
+                className="btn btn-primary mt-2 logingooglebutton"
                 onClick={
                   handleRegister
                 }
-                style={{ marginLeft: "14rem", width: "10rem", backgroundColor: "rgb(208, 50, 50)" }}
+                style={{ width: "10rem", backgroundColor: "rgb(208, 50, 50)" }}
               >
                 Login with Google
               </button>

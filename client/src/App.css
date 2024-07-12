@@ -18,8 +18,9 @@ body {
     #0e1010 100%
   ) !important; */
 
-  
+
 }
+
 .bg-richblack-800 {
   --tw-bg-opacity: 1;
   background-color: rgb(22 29 41 / var(--tw-bg-opacity));
@@ -28,6 +29,7 @@ body {
 .navbar-nav {
   gap: 1.5rem;
 }
+
 .nav-link {
   font-weight: 500 !important;
   color: #f3e8e8 !important;
@@ -42,7 +44,8 @@ body {
 }
 
 .nav-link::first-letter {
-  text-transform: uppercase; /* Capitalize the first letter */
+  text-transform: uppercase;
+  /* Capitalize the first letter */
 }
 
 .navbar-brand {
@@ -51,7 +54,7 @@ body {
 }
 
 .nav-link.active {
-  color: #dc3545 !important ;
+  color: #dc3545 !important;
   border-bottom: 2px solid #dc3545 !important;
 }
 
@@ -65,29 +68,33 @@ body {
   text-transform: none;
   font-size: 20px;
 }
+
 .footer-brand h3 {
   color: rgb(248, 240, 240);
   font-weight: 700;
 }
+
 .footer-brand p {
   color: rgb(248, 240, 240);
   font-weight: 700;
 }
+
 .footer {
   z-index: 5;
 }
+
 .Danda {
   color: rgb(248, 240, 240);
   font-weight: 700;
 }
 
-.foot.active{
-  color: #dc3545 !important ;
+.foot.active {
+  color: #dc3545 !important;
   border-bottom: 2px solid #dc3545;
 }
 
 .footer a:hover {
-  color: #dc3545 !important ;
+  color: #dc3545 !important;
   border-bottom: 2px solid #dc3545;
 }
 
@@ -190,18 +197,18 @@ body {
   top: 11%;
 }
 
-.productleftside{
+.productleftside {
   width: 100%;
   margin-left: 1rem;
   margin-top: 1rem;
 }
 
-.categoryshow{
+.categoryshow {
   display: flex;
   flex-direction: column;
 }
 
-.productpage{
+.productpage {
   display: flex;
   justify-content: end;
 }
@@ -210,7 +217,7 @@ body {
   background-color: rgba(34, 33, 33, 0.181);
 }
 
-.productshow{
+.productshow {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
@@ -733,35 +740,37 @@ UserInfo .col-md-4 img {
   /* Dark blue color */
 }
 
-.technewshome{
+.technewshome {
   width: 75%;
   height: 60%;
 }
 
-.technewshomepara{
+.technewshomepara {
   width: 50%;
   margin-left: 2rem;
   font-size: 20px;
 }
 
-.codeconnecthome{
+.codeconnecthome {
   width: 75%;
   height: 60%;
 }
 
-.codeconnecthometext{
+.codeconnecthometext {
   width: 50%;
 }
 
-.codeconnecthomechat{
+.codeconnecthomechat {
   width: 50%;
 }
-.codeconnecthomepara{
+
+.codeconnecthomepara {
   width: 70%;
   font-size: 20px;
   font-family: sans-serif;
-  color: rgb(131 136 148) ;
+  color: rgb(131 136 148);
 }
+
 .gradient1 {
   background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
 }
@@ -1049,9 +1058,10 @@ UserInfo .col-md-4 img {
   margin-right: 10px;
 }
 
-.yellowbtn{
+.yellowbtn {
   background-color: #FFD60A;
 }
+
 .homepage-section:nth-child(odd) {
   /* background-color: rgba(255, 127, 80, 0.564); */
   background-color: rgb(224, 224, 252);
@@ -1079,7 +1089,7 @@ UserInfo .col-md-4 img {
 }
 
 .Registerlayout {
-  
+
   /* White background color */
   border-radius: 10px;
   padding: 20px;
@@ -1148,8 +1158,8 @@ UserInfo .col-md-4 img {
 }
 
 .Registerlayout {
-  height: 100%;
-  width: 80%;
+  height: 600px;
+  width: 50%;
   margin: auto;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   border: 1px solid #ccc;
@@ -1171,9 +1181,25 @@ UserInfo .col-md-4 img {
   margin-bottom: 20px;
 }
 
+.loginbuttons {
+  display: flex;
+  width: 60%;
+  margin-left: 8rem;
+  gap: 1rem;
+}
+
+.inputmargin {
+  margin-left: 5rem;
+}
+
 .registerform .form-label {
   font-size: 16px;
 }
+
+.logingooglebutton{
+  margin-left: 13rem;
+}
+
 .faq-list {
   list-style-type: circle;
   padding: 0;
@@ -1189,6 +1215,7 @@ UserInfo .col-md-4 img {
   height: auto;
   object-fit: cover;
 }
+
 .faq-list {
   list-style-type: circle;
   padding: 0;
@@ -1341,17 +1368,23 @@ UserInfo .col-md-4 img {
   justify-content: center;
 }
 
+.gap2 {
+  gap: 1rem;
+}
+
 .loginreglink {
   background-color: rgba(128, 128, 128, 0.522);
   text-decoration: none;
   color: #000;
   font-size: 1.5rem;
-  font-weight: 600;
+  font-weight: 500;
   display: flex;
   justify-content: center;
   padding: 0.2rem;
   border-radius: 5px;
+  width: 50%;
 }
+
 .loginreglink:hover {
   color: #000;
   text-decoration: none;
@@ -1360,17 +1393,21 @@ UserInfo .col-md-4 img {
 .loginreglink.active {
   background-color: #007bff;
   color: white;
-  font-weight: 700;
+  font-weight: 500;
 }
-.text{
+
+.text {
   font-family: serif;
 }
 
 .ant-pagination-item-active {
-  background-color: #ccb1b2 !important; /* Change active item background color */
-  border-color: #ff4d4f; /* Change active item border color */
+  background-color: #ccb1b2 !important;
+  /* Change active item background color */
+  border-color: #ff4d4f;
+  /* Change active item border color */
 }
 
 .ant-pagination-item-active a {
-  color: #ffffff; /* Change active item text color */
+  color: #ffffff;
+  /* Change active item text color */
 }

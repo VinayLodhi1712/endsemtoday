@@ -179,6 +179,23 @@
   }
 }
 
+@media (max-width: 768px) {
+  .Registerlayout{
+    width: 90%;
+  }
+  .inputmargin{
+    margin-left: 2rem;
+  }
+  .loginbuttons{
+    margin-left: 2rem;
+    gap: 1rem;
+  }
+
+  .logingooglebutton{
+    margin-left: 4rem;
+  }
+
+}
 /* CSS for smaller screens for homepage section2 */
 @media (max-width: 768px) {
   .homepage-section .swiper-slide {
@@ -261,9 +278,7 @@
     margin-top: 2rem;
   }
 
-  .d-flex {
-    flex-direction: column;
-  }
+ 
 
   .d-flex>div {
     margin: 1rem 0;
