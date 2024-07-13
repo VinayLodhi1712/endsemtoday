@@ -131,15 +131,9 @@ const Register = () => {
   };
   return (
     <Layout>
-      <div className="bg">
+      <div >
         <div
           className="Registerlayout bg-light"
-          style={{
-            width: "70%",
-            height: "100%",
-            padding: "20px",
-            borderRadius: "10px",
-          }}
         >
           <div className="d-flex mb-3 gap-2 loginheader">
             <NavLink to="/register" className="w-50 loginreglink">
@@ -383,11 +377,11 @@ const Register = () => {
               </div>
               <button
                 type="submit"
-                className="btn btn-primary mt-2"
+                className="btn btn-primary mt-2 marginleft20rem"
                 onClick={
                   handleRegister
                 }
-                style={{ marginLeft: "20.5rem", width: "10rem", backgroundColor: "rgb(208, 50, 50)" }}
+                style={{ width: "10rem", backgroundColor: "rgb(208, 50, 50)" }}
               >
                 Sign-in with Google
               </button>

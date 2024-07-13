@@ -1157,9 +1157,24 @@ UserInfo .col-md-4 img {
   /* Darker navy blue border color on hover for outline button */
 }
 
-.Registerlayout {
+.loginlayout {
   height: 600px;
   width: 50%;
+  margin: auto;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.marginleft20rem{
+  margin-left: 20rem;
+}
+.Registerlayout{
+  height: 100%;
+  width: 70%;
   margin: auto;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   border: 1px solid #ccc;

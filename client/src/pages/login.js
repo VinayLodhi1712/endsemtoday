@@ -127,7 +127,7 @@ const Login = () => {
       <ToastContainer />
       <div >
         <div
-          className="Registerlayout bg-light"
+          className="loginlayout bg-light"
         >
           <div className="d-flex mb-3 gap2">
             <NavLink to="/register" className="loginreglink"  >

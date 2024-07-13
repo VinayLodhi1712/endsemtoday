@@ -27,7 +27,6 @@ const UserSchema = new mongoose.Schema(
     MobileNo: {
       type: Number,
       //required: true,
-      unique: true,
     },
     SecurityQuestion: {
       type: String,

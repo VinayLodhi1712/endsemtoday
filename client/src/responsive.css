@@ -12,6 +12,12 @@
 
 @media screen and (max-width: 768px)
 {
+
+  .navbar{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
   .HomeFirstDiv{
     height: fit-content;
   }
@@ -183,6 +189,9 @@
   .Registerlayout{
     width: 90%;
   }
+  .loginlayout{
+    width: 90%;
+  }
   .inputmargin{
     margin-left: 2rem;
   }
@@ -191,6 +200,9 @@
     gap: 1rem;
   }
 
+  .marginleft20rem{
+    margin-left: 5rem;
+  }
   .logingooglebutton{
     margin-left: 4rem;
   }
@@ -277,13 +289,7 @@
   .WelcomeText {
     margin-top: 2rem;
   }
-
  
-
-  .d-flex>div {
-    margin: 1rem 0;
-  }
-
   .font-bold {
     font-weight: bold;
     margin-left: 0;
