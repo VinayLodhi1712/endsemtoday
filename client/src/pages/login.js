@@ -82,7 +82,7 @@ const Login = () => {
       const user = result.user;
       console.log(user);
   
-      const response = await fetch("http://localhost:8000/api/v1/auth/google-login", {
+      const response = await fetch("http://talkofcodebackend.onrender.com/api/v1/auth/google-login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
