@@ -93,7 +93,7 @@ async function googlelogin(req, res) {
   }
 
   try {
-    let user = await User.findOne({ Email:email});
+    const user = await User.findOne({ Email:email});
     if (user) {
       // User exists, generate a token
       const token = generateToken(user._id);
@@ -111,7 +111,7 @@ async function googlelogin(req, res) {
        Email:email,
        Name,
        photo,
-       
+       MobileNo: null,
       });
 
       await user.save();

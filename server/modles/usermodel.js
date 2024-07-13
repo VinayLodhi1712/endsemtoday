@@ -27,6 +27,7 @@ const UserSchema = new mongoose.Schema(
     MobileNo: {
       type: Number,
       //required: true,
+      sparse:true,
     },
     SecurityQuestion: {
       type: String,
@@ -71,4 +72,5 @@ const UserSchema = new mongoose.Schema(
   }
 );
 
+UserSchema.index({ MobileNo: 1 }, { unique: true, sparse: true });
 module.exports = mongoose.model("Users", UserSchema);
