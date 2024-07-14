@@ -89,7 +89,7 @@ const Register = () => {
       const user = result.user;
       console.log(user);
   
-      const response = await fetch("http://talkofcodebackend.onrender.com/api/v1/auth/google-login", {
+      const response = await fetch("https://talkofcodebackend.onrender.com/api/v1/auth/google-login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -131,9 +131,12 @@ const Register = () => {
   };
   return (
     <Layout>
-      <div >
+      <div className="Registerpage" >
+        <div className="registerleftside" style={{width:"40%"}}>
+
+        </div>
         <div
-          className="Registerlayout bg-light"
+          className="Registerlayout bg-light" style={{width:"60%"}}
         >
           <div className="d-flex mb-3 gap-2 loginheader">
             <NavLink to="/register" className="w-50 loginreglink">
@@ -377,11 +380,11 @@ const Register = () => {
               </div>
               <button
                 type="submit"
-                className="btn btn-primary mt-2 marginleft20rem"
+                className="btn mt-2 marginleft20rem btn-outline-primary"
                 onClick={
                   handleRegister
                 }
-                style={{ width: "10rem", backgroundColor: "rgb(208, 50, 50)" }}
+                style={{ width: "10rem" }}
               >
                 Sign-in with Google
               </button>

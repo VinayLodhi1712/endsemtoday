@@ -1087,14 +1087,6 @@ UserInfo .col-md-4 img {
   min-height: 100vh;
   padding: 20px;
 }
-
-.Registerlayout {
-
-  /* White background color */
-  border-radius: 10px;
-  padding: 20px;
-}
-
 .button-16 {
   font-size: 16px;
 }
@@ -1170,18 +1162,27 @@ UserInfo .col-md-4 img {
 }
 
 .marginleft20rem{
-  margin-left: 20rem;
+  margin-left: 12.5rem;
+}
+
+.Registerpage{
+  display: flex;
+  flex-direction: row;
+  width: 90%;
+  justify-content: center;
+  gap: 4rem;
+
+}
+
+.registerleftside{
+  background-color: #007bff;
 }
 .Registerlayout{
+  margin: 1rem 1rem 1rem 1rem;
   height: 100%;
-  width: 70%;
-  margin: auto;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  padding: 2rem;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  width: 50%;
+  border: 1px solid black;
+  padding: 1rem 1rem 1rem 1rem;
 }
 
 .registerform {
