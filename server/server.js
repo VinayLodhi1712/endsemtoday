@@ -15,7 +15,21 @@ ConnectDb();
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://talkofcodebackend.onrender.com',
+  'https://talkofcode.vercel.app',
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
+}));
 //Routes
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/category", CategoryRoute);

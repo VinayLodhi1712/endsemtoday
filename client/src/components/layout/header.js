@@ -28,21 +28,39 @@ function Header() {
     <>
       <nav className="navbar bg-richblack-800 navbar-expand-lg" style={{ zIndex: "3" }}>
         <div className="container-fluid">
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarTogglerDemo01"
-            aria-controls="navbarTogglerDemo01"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon" />
-          </button>
+          <div className="d-flex w-100 d-md-none">
+            <button
+              className="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarTogglerDemo01"
+              aria-controls="navbarTogglerDemo01"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span className="navbar-toggler-icon" />
+            </button>
 
-          <div className="collapse navbar-collapse d-flex justify-content-between" id="navbarTogglerDemo01">
+            <NavLink
+              to="/"
+              className="ml-auto navbar-brand"
+              href="#"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarTogglerDemo01"
+              aria-controls="navbarTogglerDemo01"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              TALKOFCODE
+            </NavLink>
+          </div>
+
+
+
+
+          <div className="collapse navbar-collapse flexforfullwidth" id="navbarTogglerDemo01">
             <div>
-              <NavLink to="/" className="navbar-brand" href="#">
+              <NavLink to="/" className="navbar-brand d-none d-md-block" href="#">
                 TALKOFCODE
               </NavLink>
             </div>
@@ -51,12 +69,12 @@ function Header() {
               <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li className="nav-item">
                   <NavLink to="/" className="nav-link">
-                    Home
+                  <span>Home</span>
                   </NavLink>
                 </li>
                 <li className="nav-item">
                   <NavLink to="/products" className="nav-link">
-                    Products
+                  <span>Products</span>
                   </NavLink>
                 </li>
                 <li className="nav-item">
@@ -64,12 +82,12 @@ function Header() {
                     to={`/dashboard/${auth ? (auth?.user?.Role === 1 ? `Admin` : `user`) : `user`}/interaction`}
                     className="nav-link"
                   >
-                    CodeConnect
+                   <span>CodeConnect</span>
                   </NavLink>
                 </li>
                 <li className="nav-item">
                   <NavLink to="/technews" className="nav-link">
-                    Tech_Newsy
+                  <span>Tech_Newsy</span>
                   </NavLink>
                 </li>
               </ul>
@@ -80,12 +98,12 @@ function Header() {
                   <>
                     <li className="nav-item">
                       <NavLink to="/register" className="nav-link">
-                        Sign-up
+                      <span>Sign-up</span>
                       </NavLink>
                     </li>
                     <li className="nav-item">
                       <NavLink to="/login" className="nav-link">
-                        Login
+                      <span>Login</span>
                       </NavLink>
                     </li>
                   </>
@@ -101,7 +119,7 @@ function Header() {
                       >
                         <Avatar
                           alt={auth.user.Name || auth.user.displayName}
-                          src={`https://talkofcodebackend.onrender.com/api/v1/auth/get-userPhoto/${auth.user._id}`|| auth.user.photoURL}
+                          src={`https://talkofcodebackend.onrender.com/api/v1/auth/get-userPhoto/${auth.user._id}` || auth.user.photoURL}
                           sx={{ width: 30, height: 30 }}
                         />
                         {auth.user.Name || auth.user.displayName}
@@ -112,13 +130,13 @@ function Header() {
                             to={`/dashboard/${auth?.user?.Role === 1 ? `Admin` : `user`}`}
                             className="dropdown-item"
                           >
-                            Dashboard
+                            <span>Dashboard</span>
                           </NavLink>
                         </li>
 
                         <li>
                           <NavLink className="dropdown-item nav-item" to="/Users">
-                            Users
+                          <span>Users</span>
                           </NavLink>
                         </li>
                         <li>
@@ -127,7 +145,7 @@ function Header() {
                             to="/login"
                             onClick={HandleLogout}
                           >
-                            Logout
+                            <span>Logout</span>
                           </NavLink>
                         </li>
                       </ul>

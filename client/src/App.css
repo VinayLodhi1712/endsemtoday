@@ -21,6 +21,10 @@ body {
 
 }
 
+.flexforfullwidth{
+  display: flex;
+  justify-content: space-around;
+}
 .bg-richblack-800 {
   --tw-bg-opacity: 1;
   background-color: rgb(22 29 41 / var(--tw-bg-opacity));
@@ -53,7 +57,11 @@ body {
   font-weight: 400 !important;
 }
 
-.nav-link.active {
+.nav-link span {
+  display: inline-block;
+}
+
+.nav-link.active span {
   color: #dc3545 !important;
   border-bottom: 2px solid #dc3545 !important;
 }

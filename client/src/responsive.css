@@ -12,11 +12,28 @@
 
 @media screen and (max-width: 768px)
 {
+  .navbar-brand{
+    display: flex;
+    justify-content: center;
+  }
 
+  .nav-link span {
+    display: inline-block;
+  }
+  
+  .nav-link.active span {
+    color: #dc3545 !important;
+    border-bottom: 2px solid #dc3545 !important;
+  }
+  .flexforfullwidth{
+    margin-left: 2rem;
+    display: inline;
+  }
   .navbar{
     display: flex;
     flex-direction: column;
     justify-content: center;
+    margin-top: 2rem;
   }
   .HomeFirstDiv{
     height: fit-content;
@@ -41,7 +58,7 @@
   .technewshome{
     width: 100%;
   }
-
+  
   .technewshomepara{
     width: 100%;
     font-size: 14px;
@@ -248,6 +265,7 @@
 @media (max-width: 768px) {
   .homepage-section .d-flex {
     flex-direction: column;
+    gap:1rem;
     align-items: center;
   }
 
