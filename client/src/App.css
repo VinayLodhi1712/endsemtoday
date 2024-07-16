@@ -1159,18 +1159,18 @@ UserInfo .col-md-4 img {
 
 .loginlayout {
   height: 600px;
-  width: 50%;
+  width: 60%;
   margin: auto;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   border: 1px solid #ccc;
   border-radius: 10px;
   padding: 2rem;
-  margin-top: 1rem;
+  margin-top: 5rem;
   margin-bottom: 1rem;
 }
 
 .marginleft20rem{
-  margin-left: 12.5rem;
+  margin-left: 1rem;
 }
 
 .Registerpage{
@@ -1182,15 +1182,41 @@ UserInfo .col-md-4 img {
 
 }
 
+.textshadow{
+  text-shadow: 2px 2px 5px red;
+
+}
+
+.registerbrandname{
+  font-size: 28px;
+  font-weight: 600;
+  color: white;
+  margin: 6rem 1rem 1rem 4rem;
+  display: flex;
+  text-shadow: 2px 2px 5px red;
+}
+
+.registerleftsidetopic{
+  font-size: 28px;
+  font-weight: 600;
+  color: white;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  text-align: center;
+  height: 65vh;
+}
 .registerleftside{
-  background-color: #007bff;
+  background-color: #4682B4;
 }
 .Registerlayout{
   margin: 1rem 1rem 1rem 1rem;
   height: 100%;
-  width: 50%;
-  border: 1px solid black;
+  width: 60%;
+  border: 2px solid grey ;
   padding: 1rem 1rem 1rem 1rem;
+  border-radius: 20px;
 }
 
 .registerform {
@@ -1205,11 +1231,30 @@ UserInfo .col-md-4 img {
   margin-bottom: 20px;
 }
 
+.loginleftsidetopic{
+  font-size: 28px;
+  font-weight: 600;
+  color: white;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  text-align: center;
+  height: 72vh;
+}
+
+.loginsignupbuttons{
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  margin-top: 2px;
+}
 .loginbuttons {
   display: flex;
   width: 60%;
   margin-left: 8rem;
   gap: 1rem;
+  
 }
 
 .inputmargin {

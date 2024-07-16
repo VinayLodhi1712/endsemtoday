@@ -10,7 +10,7 @@ import {
   RegionDropdown,
   CountryRegionData,
 } from "react-country-region-selector";
-
+import signup from "../assests/singup.png";
 const Register = () => {
   const Locate = useLocation();
   const [Name, SetName] = useState("");
@@ -88,7 +88,7 @@ const Register = () => {
       const result = await loginWithGoogle();
       const user = result.user;
       console.log(user);
-  
+
       const response = await fetch("http://localhost:8000/api/v1/auth/google-login", {
         method: "POST",
         headers: {
@@ -97,10 +97,10 @@ const Register = () => {
         body: JSON.stringify({
           email: user.email,
           Name: user.displayName,
-          photo:user.photoURL,
+          photo: user.photoURL,
         }),
       });
-  
+
       if (response.ok) {
         const data = await response.json();
         setAuth({
@@ -108,12 +108,12 @@ const Register = () => {
           user: data.user,
           token: data.token,
         });
-  
+
         localStorage.setItem("auth", JSON.stringify({
           user: data.user,
           token: data.token,
         }));
-  
+
         console.log(data.isNewUser);
         toast.success("Login Successful");
         if (data.isNewUser) {
@@ -132,13 +132,41 @@ const Register = () => {
   return (
     <Layout>
       <div className="Registerpage" >
-        <div className="registerleftside" style={{width:"40%"}}>
+        <div className="registerleftside d-none d-md-block" style={{ width: "40%" }}>
+          <div className="registerbrandname" >
+            <NavLink to="/" className="navbar-brand" href="#">
+              TALKOFCODE
+            </NavLink>
+          </div>
+          <div className="registerleftsidetopic">
+            <div>
+              <img src={signup}></img>
+              <h2 className="textshadow">New User Registeration</h2>
+              <NavLink to="/register" className="nav-link">
+                <span>Sign-up</span>
+              </NavLink>
 
+              <NavLink to="/login" className="nav-link">
+                <span>Login</span>
+              </NavLink>
+
+              <button
+                type="submit"
+                className="btn mt-2 marginleft20rem btn-outline-primary"
+                onClick={
+                  handleRegister
+                }
+                style={{ width: "10rem" }}
+              >
+                Sign-in with Google
+              </button>
+            </div>
+          </div>
         </div>
         <div
-          className="Registerlayout bg-light" style={{width:"60%"}}
+          className="Registerlayout  bg-light" 
         >
-          <div className="d-flex mb-3 gap-2 loginheader">
+          <div className="d-flex mb-2 gap-2 loginheader">
             <NavLink to="/register" className="w-50 loginreglink">
               {" "}
               Register
@@ -162,14 +190,14 @@ const Register = () => {
             }}
           >
             <div style={{ textAlign: "center" }}>
-              <h1 style={{ fontWeight: "600" }}>Register</h1>
-              <p style={{ fontSize: "20px" }}>
+              <h1 style={{ fontWeight: "600", marginBottom:"2px", color:"#4682B4" }} className="textshadow2">Register</h1>
+              <p style={{ fontSize: "20px", marginBottom:"2px", color:"#4682B4"  }} className="textshadow2">
                 Already have an account? <a href="/login">Login</a> here
               </p>
             </div>
 
             <div style={{ width: "100%" }}>
-              <div className="mb-3">
+              <div className="mb-2">
                 <label htmlFor="name" className="form-label smalltitlefont2">
                   Name
                 </label>
@@ -188,7 +216,7 @@ const Register = () => {
                 />
               </div>
 
-              <div className="mb-3">
+              <div className="mb-2">
                 <label htmlFor="email" className="form-label smalltitlefont2">
                   Email
                 </label>
@@ -207,7 +235,7 @@ const Register = () => {
                 />
               </div>
 
-              <div className="mb-3 d-flex">
+              <div className="mb-2 d-flex">
                 <div style={{ width: "50%", marginRight: "10px" }}>
                   <label
                     htmlFor="password"
@@ -275,7 +303,7 @@ const Register = () => {
                   </label>
                 </div>
               </div>
-              <div className="mb-3 d-flex">
+              <div className="mb-2 d-flex">
                 <div style={{ width: "50%", marginRight: "10px" }}>
                   <CountryDropdown
                     value={country}
@@ -297,7 +325,7 @@ const Register = () => {
                 </div>
               </div>
 
-              <div className="mb-3">
+              <div className="mb-2">
                 <label
                   htmlFor="securityQuestion"
                   className="form-label smalltitlefont2"
@@ -331,7 +359,7 @@ const Register = () => {
                 </select>
               </div>
 
-              <div className="mb-3">
+              <div className="mb-2">
                 <label
                   htmlFor="securityAnswer"
                   className="form-label smalltitlefont2"
@@ -376,19 +404,21 @@ const Register = () => {
                 </button>
               </div>
               <div>
-                <h2 className="d-flex justify-content-center mt-3">OR</h2>
+                <h2 className="d-flex justify-content-center mt-4">OR</h2>
               </div>
               <button
                 type="submit"
-                className="btn mt-2 marginleft20rem btn-outline-primary"
+                className="btn btn-primary mt-2 logingooglebutton"
                 onClick={
                   handleRegister
                 }
                 style={{ width: "10rem" }}
               >
-                Sign-in with Google
+                Login with Google
               </button>
             </div>
+          
+         
           </form>
         </div>
       </div>

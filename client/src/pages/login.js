@@ -5,6 +5,7 @@ import { useNavigate, NavLink, useLocation } from "react-router-dom";
 import { useAuth, loginWithGoogle } from "../context/auth";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { toast, ToastContainer } from "react-toastify";
+import loginimg from "../assests/login.png";
 //import googlelogo from "../assets/google-logo.svg"
 const Login = () => {
   const [Email, SetEmail] = useState("");
@@ -81,7 +82,7 @@ const Login = () => {
       const result = await loginWithGoogle();
       const user = result.user;
       console.log(user);
-  
+
       const response = await fetch("http://localhost:8000/api/v1/auth/google-login", {
         method: "POST",
         headers: {
@@ -90,10 +91,10 @@ const Login = () => {
         body: JSON.stringify({
           email: user.email,
           Name: user.displayName,
-          photo:user.photoURL,
+          photo: user.photoURL,
         }),
       });
-  
+
       if (response.ok) {
         const data = await response.json();
         setAuth({
@@ -101,12 +102,12 @@ const Login = () => {
           user: data.user,
           token: data.token,
         });
-  
+
         localStorage.setItem("auth", JSON.stringify({
           user: data.user,
           token: data.token,
         }));
-  
+
         console.log(data.isNewUser);
         toast.success("Login Successful");
         if (data.isNewUser) {
@@ -125,7 +126,38 @@ const Login = () => {
   return (
     <Layout>
       <ToastContainer />
-      <div >
+      <div className="Registerpage">
+        <div className="registerleftside d-none d-md-block" style={{ width: "40%" }}>
+          <div className="registerbrandname" >
+            <NavLink to="/" className="navbar-brand" href="#" >
+              TALKOFCODE
+            </NavLink>
+          </div>
+          <div className="loginleftsidetopic">
+            <div>
+              <img src={loginimg} style={{height:"80px"}}></img>
+              <h2 className="textshadow">Logged in Form</h2>
+              <NavLink to="/register" className="nav-link">
+                <span>Sign-up</span>
+              </NavLink>
+
+              <NavLink to="/login" className="nav-link">
+                <span>Login</span>
+              </NavLink>
+
+              <button
+                type="submit"
+                className="btn mt-2 marginleft20rem btn-outline-primary"
+                onClick={
+                  handleRegister
+                }
+                style={{ width: "10rem" }}
+              >
+               Login with Google
+              </button>
+            </div>
+          </div>
+        </div>
         <div
           className="loginlayout bg-light"
         >
@@ -149,8 +181,8 @@ const Login = () => {
           >
             <div className="mt-2" style={{ width: "100%" }}>
               <div style={{ textAlign: "center" }}>
-                <h1 style={{ fontWeight: "600", color: "rgb(208, 50, 50)" }}>Welcome Back</h1>
-                <p style={{ fontSize: "20px", color: "rgb(208, 50, 50)" }}>
+                <h1 style={{ fontWeight: "600", color:"#4682B4"}} className="textshadow2">Welcome Back</h1>
+                <p style={{ fontSize: "20px" , color:"#4682B4"}}  className="textshadow2">
                   Doesn't have an account yet? <a href="/register">Sign-Up</a>{" "}
                   here
                 </p>
@@ -180,7 +212,7 @@ const Login = () => {
 
               <div
                 className="mb-3 inputmargin"
-                style={{ width: "75%"}}
+                style={{ width: "75%" }}
               >
                 <label
                   htmlFor="exampleInputPassword1"
@@ -218,7 +250,7 @@ const Login = () => {
                   type="submit"
                   className="btn btn-primary"
                   disabled={Loading}
-                  style={{ width: "10rem", backgroundColor: "rgb(208, 50, 50)" }}
+                  style={{ width: "10rem"}}
                 >
                   {Loading ? "Loading..." : "Login"}
                 </button>
@@ -228,7 +260,7 @@ const Login = () => {
                   onClick={() => {
                     navigate("/ForgotPassword");
                   }}
-                  style={{ width: "10rem", backgroundColor: "rgb(208, 50, 50)" }}
+                  style={{ width: "10rem" }}
                 >
                   Forgot Password
                 </button>
@@ -243,7 +275,7 @@ const Login = () => {
                 onClick={
                   handleRegister
                 }
-                style={{ width: "10rem", backgroundColor: "rgb(208, 50, 50)" }}
+                style={{ width: "10rem" }}
               >
                 Login with Google
               </button>

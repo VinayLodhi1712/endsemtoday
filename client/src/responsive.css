@@ -161,6 +161,13 @@
     width: 80%;
   }
 
+  .registerbrandname{
+    font-size: 18px;
+    font-weight: 500;
+    color: white;
+    margin: 3rem 1rem 1rem 2rem;
+    display: flex;
+  }
   .FormBackground {
     width: 100%;
   }
