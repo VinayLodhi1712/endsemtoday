@@ -1,18 +1,28 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../components/layout/layout";
 import { NavLink } from "react-router-dom";
-import { Button, Drawer, Radio, Space } from "antd";
-
-import { useAuth } from "../context/auth";
+import { Button, Drawer, Tag, Space } from "antd";
+import './dashboard.css';  // Assuming this is where the CSS resides
 import { FaUserEdit } from "react-icons/fa";
 import { FaPlusSquare } from "react-icons/fa";
 import { MdPublishedWithChanges } from "react-icons/md";
 import { BsFillQuestionSquareFill } from "react-icons/bs";
 import { FaHandsHelping } from "react-icons/fa";
+import {
+  FaGithub,
+  FaLinkedin,
+  FaGlobe,
+  FaThumbsUp,
+  FaCircleUser,
+  FaUserClock,
+  FaCode,
+  FaQuestionCircle,
+} from "react-icons/fa";
+import { MdEmail, MdLocationPin } from "react-icons/md";
+import { SiAnswer } from "react-icons/si";
+import { IoMdCall } from "react-icons/io";
+import { useAuth } from "../context/auth";
 import moment from "moment";
-import { FaGithub } from "react-icons/fa";
-import { FaLinkedin } from "react-icons/fa";
-import { FaGlobe } from "react-icons/fa";
 
 const UserDashboard = () => {
   const [open, setOpen] = useState(false);
@@ -21,6 +31,7 @@ const UserDashboard = () => {
   const [QuestionAsked, SetQuestionAsked] = useState(0);
   const [AnswerAsked, SetAnswerAsked] = useState(0);
   const [Reputation, SetReputation] = useState(0);
+
   const onClose = () => {
     setOpen(false);
   };
@@ -33,12 +44,10 @@ const UserDashboard = () => {
       const AllQuestion = await fetch(
         `https://talkofcodebackend.onrender.com/api/v1/Questions/AskedUserQuestion/${auth.user._id}`
       );
-
-      if (AllQuestion.status == 200) {
+      if (AllQuestion.status === 200) {
         const AllQue = await AllQuestion.json();
         SetQuestionAsked(AllQue.questionCount);
       }
-      console.log(QuestionAsked);
     } catch (error) {
       console.log(error);
     }
@@ -49,23 +58,26 @@ const UserDashboard = () => {
       const AllAnswer = await fetch(
         `https://talkofcodebackend.onrender.com/api/v1/Answer/GetNumberOfQuestions/${auth.user._id}`
       );
-
-      if (AllAnswer.status == 200) {
+      if (AllAnswer.status === 200) {
         const AllAns = await AllAnswer.json();
         SetAnswerAsked(AllAns.AnswerCount);
       }
-      console.log(QuestionAsked);
     } catch (error) {
       console.log(error);
     }
   }
+
   async function GetUserReputation() {
-    const resp = await fetch(
-      `https://talkofcodebackend.onrender.com/api/v1/auth/GetReputation/${auth.user._id}`
-    );
-    if (resp.status === 200) {
-      const reputation = await resp.json();
-      SetReputation(reputation.Rep.Reputation);
+    try {
+      const resp = await fetch(
+        `https://talkofcodebackend.onrender.com/api/v1/auth/GetReputation/${auth.user._id}`
+      );
+      if (resp.status === 200) {
+        const reputation = await resp.json();
+        SetReputation(reputation.Rep.Reputation);
+      }
+    } catch (error) {
+      console.log(error);
     }
   }
 
@@ -77,9 +89,76 @@ const UserDashboard = () => {
 
   return (
     <Layout>
-      <div className="d-flex justify-content-center align-items-center h-100 p-3">
-        <div className="d-flex flex-column justify-content-center  align-items-center"></div>
-        <Drawer
+      <div className="d-flex justify-content-center align-items-center p-3 h-100 profile-container">
+        <div className="profile-box">
+          {/* Top section with photo */}
+          <div className="profile-photo-section">
+            <img
+              className="profile-photo"
+              src={`https://ayushreactbackend.onrender.com/api/v1/auth/get-userPhoto/${auth?.user?._id}`}
+              alt="User"
+            />
+          </div>
+
+          {/* Bottom section with details */}
+          <div className="profile-details-section">
+            <h3 className="profile-name">{auth?.user?.Name ?? "User Name"}</h3>
+            <p className="profile-email">{auth?.user?.Email}</p>
+
+            {/* Social Media Icons */}
+            <div className="social-icons">
+              <a href={auth?.user?.Website ?? "#"} target="_blank" rel="noopener noreferrer">
+                <FaGlobe />
+              </a>
+              <a href={auth?.user?.Github ?? "#"} target="_blank" rel="noopener noreferrer">
+                <FaGithub />
+              </a>
+              <a href={auth?.user?.LinkedIn ?? "#"} target="_blank" rel="noopener noreferrer">
+                <FaLinkedin />
+              </a>
+            </div>
+
+            {/* User Details Table */}
+            <div className="user-details">
+              <p>
+                <MdLocationPin /> {auth?.user?.Location ?? "Location"}
+              </p>
+              <p>
+                <FaThumbsUp /> Reputation: &nbsp;<span>{Reputation ?? 0}</span>
+              </p>
+              <p>
+                <FaQuestionCircle /> Questions Asked: &nbsp;<span>{QuestionAsked}</span>
+              </p>
+              <p>
+                <SiAnswer /> Questions Answered: &nbsp;<span>{AnswerAsked}</span>
+              </p>
+              <p>
+                <FaUserClock /> Joined: &nbsp;{moment(auth?.user?.createdAt).fromNow()}
+              </p>
+              <p>
+                <FaCode /> Skills:{" "} &nbsp;
+                {auth?.user?.tags.map((t) => (
+                  <Tag color="blue" key={t}>
+                    {t}
+                  </Tag>
+                ))}
+              </p>
+            </div>
+
+            {/* Buttons */}
+            <div className="profile-buttons">
+              <Button type="primary" onClick={showDrawer}>
+                User Dashboard
+              </Button>
+              <NavLink to="/" >
+                <Button type="primary">Home</Button>
+              </NavLink>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <Drawer
           title="User Dashboard"
           placement={placement}
           width={500}
@@ -175,145 +254,6 @@ const UserDashboard = () => {
             </button>
           </div>
         </Drawer>
-        <div className="container bootstrap snippets bootdey">
-          <div className="panel-body inf-content">
-            <div className="row">
-              <div className="col-md-4">
-                <div className="d-flex flex-column align-items-center">
-                  <img
-                    style={{ width: "90%" }}
-                    src={`https://talkofcodebackend.onrender.com/api/v1/auth/get-userPhoto/${auth.user._id}`}
-                  />
-                </div>
-              </div>
-              <div className="col-md-6">
-                <strong className="UserInfo">User Information</strong>
-                <br />
-                <div className="table-responsive">
-                  <table className="table table-user-information">
-                    <tbody>
-                      <tr>
-                        <td>
-                          <span className="glyphicon glyphicon-asterisk text-primary" />
-                          Id
-                        </td>
-                        <td className="Info">{auth.user._id}</td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <span className="glyphicon glyphicon-user  text-primary" />
-                          Name
-                        </td>
-                        <td className="Info">{auth.user.Name}</td>
-                      </tr>
-
-                      <tr>
-                        <td>
-                          <span className="glyphicon glyphicon-eye-open text-primary" />
-                          Role
-                        </td>
-                        <td className="Info">
-                          {auth.user.Role == 0 ? "User" : "Admin"}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <span className="glyphicon glyphicon-envelope text-primary" />
-                          Email
-                        </td>
-                        <td className="Info">{auth.user.Email}</td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <span className="glyphicon glyphicon-calendar text-primary" />
-                          Location
-                        </td>
-                        <td className="Info">{auth.user.Location}</td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <span className="glyphicon glyphicon-calendar text-primary" />
-                          Question Asked
-                        </td>
-                        <td className="Info">{QuestionAsked}</td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <span className="glyphicon glyphicon-calendar text-primary" />
-                          Question Answered
-                        </td>
-                        <td className="Info">{AnswerAsked}</td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <span className="glyphicon glyphicon-calendar text-primary" />
-                          Reputation
-                        </td>
-                        <td className="Info">{Reputation}</td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <span className="glyphicon glyphicon-calendar text-primary" />
-                          Joined
-                        </td>
-                        <td className="Info">
-                          {moment(auth.user.createdAt).fromNow()}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <span className="glyphicon glyphicon-calendar text-primary" />
-                          Get connected with social media
-                        </td>
-                        <td className="Info">
-                          <div className="d-flex gap-4">
-                            {auth.user.Github ? (
-                              <NavLink
-                                to={auth.user.Github}
-                                className="NavlinksDesign"
-                              >
-                                {" "}
-                                <FaGithub />
-                              </NavLink>
-                            ) : null}
-                            {auth.user.LinkedIn ? (
-                              <NavLink
-                                to={auth.user.LinkedIn}
-                                className="NavlinksDesign"
-                              >
-                                {" "}
-                                <FaLinkedin />
-                              </NavLink>
-                            ) : null}
-                            {auth.user.Website ? (
-                              <NavLink
-                                to={auth.user.Website}
-                                className="NavlinksDesign"
-                              >
-                                {" "}
-                                <FaGlobe />{" "}
-                                <span className="Smalltxt">
-                                  {" "}
-                                  {auth.user.Website}
-                                </span>
-                              </NavLink>
-                            ) : null}
-                          </div>
-                        </td>
-                      </tr>
-                      <Space>
-                        <Button type="primary" onClick={showDrawer}>
-                          User Dashboard
-                        </Button>
-                      </Space>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </Layout>
   );
 };

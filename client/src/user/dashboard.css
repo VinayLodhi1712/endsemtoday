@@ -1,0 +1,85 @@
+.profile-container {
+  height: 100vh;
+}
+
+.profile-box {
+  background-color: #fff;
+  width: 400px;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.profile-photo-section {
+  background-color: #f0f0f0;
+  height: 35%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.2rem;
+}
+
+.profile-photo {
+  border-radius: 50%;
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+}
+
+.profile-details-section {
+  padding-top: 1rem; /* Adjusted to create more space above the name */
+  padding: 0 2rem 2rem;
+  text-align: center;
+}
+
+.profile-name {
+ margin-top: 0.5rem;
+ font-weight: bold;
+  margin-bottom: 0.5rem; /* Reduced bottom margin to reduce gap */
+}
+
+.profile-email {
+  font-size: 0.9rem;
+  color: gray;
+  margin-bottom: 0.5rem; /* Reduced bottom margin to minimize vertical gap */
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem; /* Increased gap between icons */
+  margin-bottom: 1rem;
+  font-size: 1.5rem; /* Increased the size of the social media icons */
+}
+
+.user-details {
+  text-align: left;
+  margin-bottom: 1.5rem;
+  font-size: 1rem; /* Slightly increased the font size */
+}
+
+.user-details p {
+  display: flex;
+  align-items: center;
+  margin: 0.5rem 0;
+  font-size: 1rem; /* Slightly increased the font size */
+}
+
+.user-details p svg {
+  font-size: 1.2rem; /* Increased size of the detail icons */
+  margin-right: 0.5rem; /* Added space between icon and text */
+}
+
+.profile-buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 1rem;
+}
+
+.home-button {
+  width: 100%;
+}
+
+.gap{
+  gap: 1rem;
+}
