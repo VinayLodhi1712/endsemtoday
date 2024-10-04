@@ -141,13 +141,13 @@ const ProductDetails = () => {
         <h3 className="text-center mb-5 Titlefont">Product Details</h3>
         {Detail.map((p) => (
           <div className="row">
-            <div className="col-md-6" style={{ width: "40%", marginLeft:"5rem" }}>
+            <div className="col-md-6" style={{ width: "50%", display: "flex", justifyContent:"center", alignItems:"center" }}>
               <Image
                 src={`https://talkofcodebackend.onrender.com/api/v1/product/get-productPhoto/${p._id}`}
                 style={{ height: "25rem" }}
               />
             </div>
-            <div className="col-md-6" style={{ width: "60%", marginLeft:"-6rem" }}>
+            <div className="col-md-6" style={{ width: "50%" }}>
               <div className="d-flex  mb-3">
                 <button
                   className="button-16"

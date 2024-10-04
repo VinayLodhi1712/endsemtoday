@@ -112,7 +112,7 @@ const ContactForm = () => {
 const Contact = () => {
   return (
     <Layout>
-      <div className="d-flex justify-content-center align-items-center formlayout ">
+      <div className=" d-flex justify-content-center align-items-center formlayout ">
         {/* Left side: Contact Form */}
         <div style={{ width: "50%" }}>
           <h1 className="Titlefont aqua">Get in Touch</h1>

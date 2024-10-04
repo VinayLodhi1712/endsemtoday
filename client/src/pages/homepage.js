@@ -2,7 +2,7 @@ import HomeLayout from "../components/layout/HomePageLayout";
 import BannerCard from "./BannerCard";
 import React, { useEffect } from "react";
 import Card from "react-bootstrap/Card";
-import HomeImg from "../assests/homepageimage.png";
+import homepageimage from "../assests/homepageimage.png";
 import Codeconnectpage from "../assests/codeconnectpage.png";
 import productpage from "../assests/productpage.png";
 import techpage from "../assests/techpage.png";
@@ -116,80 +116,34 @@ function Home() {
             style={{ gap: "1rem" }}
 
           >
-            <h1 className=" mt-3 text-center WelcomeText">
+            <h1 className=" mt-3 text-center WelcomeText mb-3 hometext">
               {" "}
               Welcome to <span style={{ color: "#1fa2ff" }}>TalkOfCode</span>
               <br></br>
               Your Dynamic Tech Platform
             </h1>
-            <p className="text-center responsive" style={{fontSize:"20px"}}>
+            <p className="text-center responsive" style={{ fontSize: "20px"}}>
               Empowering Tech Enthusiasts to Learn, Connect, and Innovate.
             </p>
+            <img src={homepageimage} className="homepageimage"></img>
             <div className="d-flex justify-content-center text-center">
               <div >
                 <NavLink to="/register">
-                  <Button variant="contained" sx={{ bgcolor: "ochre.darker", width: { xs: '150px', sm: '150px', md: '150px' }, marginRight:{ xs: '0px', sm:'0px', md: '1.5rem'} }}>
+                  <Button variant="contained" sx={{ bgcolor: "ochre.darker", width: { xs: '150px', sm: '150px', md: '150px' }, marginRight: { xs: '0px', sm: '0px', md: '1.5rem' } }}>
                     Get Started
                   </Button>
                 </NavLink>
               </div>
               <div>
                 <NavLink to="/About">
-                  <Button variant="contained" sx={{ bgcolor: "ochre.darker",  width: { xs: '150px', sm: '150px', md: '150px' } }}>
+                  <Button variant="contained" sx={{ bgcolor: "ochre.darker", width: { xs: '150px', sm: '150px', md: '150px' } }}>
                     About us
                   </Button>
                 </NavLink>
               </div>
             </div>
 
-            <h3 className=" mt-3 text-center WelcomeText">
-              {" "}
-              Our Services</h3>
-            <div class="container1 d-flex">
-              <div class="card" >
-                <div class="imgbx">
-                  <img
-                    src={productpage}
-                  />
-                </div>
-                <div class="content">
-                  <h2 style={{ color: "#009688" }}>Awesome Featured Products</h2>
-                  <NavLink to="/products">
-                    <Button variant="contained" sx={{ bgcolor: "#009688" }}>
-                      Featured Products
-                    </Button>
-                  </NavLink>
-                </div>
-              </div>
-              <div class="card" >
-                <div class="imgbx">
-                  <img
-                    src={Codeconnectpage}
-                  />
-                </div>
-                <div class="content">
-                  <h2 style={{ color: "#03A9F4" }}>Ask technical questions</h2>
-                  <NavLink to="/dashboard/Admin/interaction">
-                    <Button variant="contained" sx={{ bgcolor: "#03A9F4 " }}>
-                      CodeConnect
-                    </Button>
-                  </NavLink>
-                </div>
-              </div>
-              <div class="card" >
-                <div class="imgbx">
-                  <img src={techpage} />
-                </div>
-                <div class="content">
-                  <h2 style={{ color: "#FF3E7F" }} >Get instant technical news</h2>
-                  <NavLink to="/technews">
-                    <Button variant="contained" sx={{ bgcolor: "#FF3E7F" }}>
-                      Tech_Newsy
-                    </Button>
-                  </NavLink>
-                </div>
-              </div>
-            </div>
+           
           </div>
 
         </div>{" "}
@@ -199,6 +153,53 @@ function Home() {
         className="homepage-section d-flex align-items-center flex-column justify-content-center w-100  mb-3"
         data-aos="fade-up"
       >
+         <div>
+              <div class="container1 d-flex mt-3">
+                <div class="card" >
+                  <div class="imgbx">
+                    <img
+                      src={productpage}
+                    />
+                  </div>
+                  <div class="content">
+                    <h2 style={{ color: "#009688" }}>Awesome Featured Products</h2>
+                    <NavLink to="/products">
+                      <Button variant="contained" sx={{ bgcolor: "#009688" }}>
+                        Featured Products
+                      </Button>
+                    </NavLink>
+                  </div>
+                </div>
+                <div class="card" >
+                  <div class="imgbx">
+                    <img
+                      src={Codeconnectpage}
+                    />
+                  </div>
+                  <div class="content">
+                    <h2 style={{ color: "#03A9F4" }}>Ask technical questions</h2>
+                    <NavLink to="/dashboard/Admin/interaction">
+                      <Button variant="contained" sx={{ bgcolor: "#03A9F4 " }}>
+                        CodeConnect
+                      </Button>
+                    </NavLink>
+                  </div>
+                </div>
+                <div class="card" >
+                  <div class="imgbx">
+                    <img src={techpage} />
+                  </div>
+                  <div class="content">
+                    <h2 style={{ color: "#FF3E7F" }} >Get instant technical news</h2>
+                    <NavLink to="/technews">
+                      <Button variant="contained" sx={{ bgcolor: "#FF3E7F" }}>
+                        Tech_Newsy
+                      </Button>
+                    </NavLink>
+                  </div>
+                </div>
+              </div>
+            </div>
         <h1 className=" w-50 text-center WelcomeText mt-5 ">
           {" "}
           More than <span style={{ color: "#1fa2ff" }}>30+ Products</span> Listed. Checkout Now!
@@ -310,27 +311,27 @@ function Home() {
       </div>
 
       <div className="codeconnecthome mb-5 custom-flex custom-gradient rounded-3xl custom-shadow " style={{ margin: "auto" }}>
-        
-          <div className="codeconnecthomechat">
-            <FadeIn />
-          </div>
 
-          <div className="codeconnecthometext mt-5 mb-4 " >
-            <h2 className="font-bold text-black mb-3">
-              Have Doubts? <br></br><div className="">Ask them at  <span className="highlighted ff">Code<MdOutlineConnectingAirports />Connect, </span></div>
-            </h2>
-            <p  className=" text-black ff codeconnecthomepara">Ask doubts from experienced people. Share knowledge and learn from others in the community,  Get help from AI.</p>
-            <div className="flex ">
-              <NavLink to="/dashboard/Admin/interaction">
-                <button className="yellowbtn" style={{ marginRight: "4rem" }}>Try it Yourself&rarr;</button>
-              </NavLink >
-              <NavLink to="/dashboard/Admi n/interaction">
-                <button>Get AI help.</button>
-              </NavLink>
-            </div>
-          </div>
+        <div className="codeconnecthomechat">
+          <FadeIn />
+        </div>
 
-      
+        <div className="codeconnecthometext mt-5 mb-4 " >
+          <h2 className="font-bold text-black mb-3">
+            Have Doubts? <br></br><div className="">Ask them at  <span className="highlighted ff">Code<MdOutlineConnectingAirports />Connect, </span></div>
+          </h2>
+          <p className=" text-black ff codeconnecthomepara">Ask doubts from experienced people. Share knowledge and learn from others in the community,  Get help from AI.</p>
+          <div className="flex ">
+            <NavLink to="/dashboard/Admin/interaction">
+              <button className="yellowbtn" style={{ marginRight: "4rem" }}>Try it Yourself&rarr;</button>
+            </NavLink >
+            <NavLink to="/dashboard/Admi n/interaction">
+              <button>Get AI help.</button>
+            </NavLink>
+          </div>
+        </div>
+
+
 
       </div>
 

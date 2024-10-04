@@ -12,6 +12,16 @@
 
 @media screen and (max-width: 768px)
 {
+  
+.homepageimage{
+  height: 400px;
+  width: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  object-fit: contain;
+}
+ 
   .navbar-brand{
     display: flex;
     justify-content: center;
@@ -33,7 +43,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-top: 2rem;
+
   }
   .HomeFirstDiv{
     height: fit-content;
@@ -77,6 +87,7 @@
     width: 100%;
     font-size: 14px;
     margin-left: 2rem;
+    order: -1; 
   }
 
   .codeconnecthomechat{
@@ -94,6 +105,11 @@
     flex-direction: column;
     padding: 0;
     margin: 0;
+  }
+  .Registerpage{
+    display: flex;
+    width: 100%;
+    justify-content: center;
   }
   .productleftside{
     display: flex;
@@ -160,6 +176,12 @@
   .registerformresponsicve {
     width: 80%;
   }
+  .registerrightside{
+    padding: 1rem;
+    
+    width: 100%;
+    
+  }
 
   .registerbrandname{
     font-size: 18px;
@@ -198,6 +220,7 @@
     text-align: center;
   }
 
+
   .homepage-section .w-50 {
     width: 100%;
     margin: 0;
@@ -211,10 +234,10 @@
 
 @media (max-width: 768px) {
   .Registerlayout{
-    width: 90%;
+    width: 100%;
   }
   .loginlayout{
-    width: 90%;
+    width: 100%;
   }
   .inputmargin{
     margin-left: 2rem;

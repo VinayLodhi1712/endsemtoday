@@ -7,8 +7,12 @@ body {
 }
 
 /* navbar css */
+.HomeFirstDiv{
+  margin-top: 50px;
+}
 
 .navbar {
+
   padding: 1.2rem 0rem 1.2rem 0rem !important;
   text-transform: uppercase !important;
   box-shadow: 0 1px 5px !important;
@@ -303,113 +307,6 @@ body {
   color: black;
 }
 
-.button-27 {
-  appearance: none;
-  background-color: #000000;
-  border: 2px solid #1a1a1a;
-  border-radius: 15px;
-  box-sizing: border-box;
-  color: #ffffff;
-  cursor: pointer;
-  display: inline-block;
-  font-size: 16px;
-  font-weight: 600;
-  line-height: normal;
-  margin: 0;
-  min-height: 60px;
-  min-width: 0;
-  outline: none;
-  padding: 16px 24px;
-  text-align: center;
-  text-decoration: none;
-  transition: all 300ms cubic-bezier(0.23, 1, 0.32, 1);
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  width: 100%;
-  will-change: transform;
-}
-
-.button-27:disabled {
-  pointer-events: none;
-}
-
-.button-27:hover {
-  box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
-  transform: translateY(-2px);
-}
-
-.button-27:active {
-  box-shadow: none;
-  transform: translateY(0);
-}
-
-.button-24 {
-  background: #ff4742;
-  border: 1px solid #ff4742;
-  border-radius: 6px;
-  box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
-  box-sizing: border-box;
-  color: #ffffff;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-
-  font-size: 16px;
-  font-weight: 800;
-  line-height: 16px;
-  min-height: 40px;
-  outline: 0;
-  padding: 12px 14px;
-  text-align: center;
-  text-rendering: geometricprecision;
-  text-transform: none;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  vertical-align: middle;
-}
-
-.button-24:hover,
-.button-24:active {
-  background-color: initial;
-  background-position: 0 0;
-  color: #ff4742;
-}
-
-.button-24:active {
-  opacity: 0.5;
-}
-
-.button-16 {
-  background-color: #f8f9fa;
-  border: 1px solid #f8f9fa;
-  border-radius: 4px;
-  color: #3c4043;
-  cursor: pointer;
-  font-size: 14px;
-  height: 36px;
-  line-height: 27px;
-  min-width: 54px;
-  padding: 0 16px;
-  text-align: center;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  white-space: pre;
-}
-
-.button-16:hover {
-  border-color: #dadce0;
-  box-shadow: rgba(0, 0, 0, 0.1) 0 1px 1px;
-  color: #202124;
-}
-
-.button-16:focus {
-  border-color: #4285f4;
-  outline: none;
-}
-
 .Titlefont {
   font-size: 2.2rem;
   color: black;
@@ -439,47 +336,6 @@ body {
   font-weight: 500;
   background: #f0db4f;
   color: #000;
-}
-
-.button-28 {
-  appearance: none;
-  background-color: transparent;
-  border: 1px solid #1a1a1a;
-  border-radius: 15px;
-  box-sizing: border-box;
-  color: #3b3b3b;
-  cursor: pointer;
-  display: inline-block;
-  font-family: Roobert, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica,
-    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  font-size: 20px;
-  font-weight: 600;
-  line-height: normal;
-  margin: 0;
-  min-height: 60px;
-  min-width: 0;
-  outline: none;
-  text-align: center;
-  transition: all 300ms cubic-bezier(0.23, 1, 0.32, 1);
-  touch-action: manipulation;
-  width: 40%;
-  will-change: transform;
-}
-
-.button-28:disabled {
-  pointer-events: none;
-}
-
-.button-28:hover {
-  color: hwb(0 9% 90%);
-  background-color: hsl(0, 91%, 51%);
-  box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
-  transform: translateY(-2px);
-}
-
-.button-28:active {
-  box-shadow: none;
-  transform: translateY(0);
 }
 
 .half-star {
@@ -828,6 +684,7 @@ UserInfo .col-md-4 img {
 }
 
 .HomeFirstDiv {
+
   height: 90vh;
 }
 
@@ -1173,18 +1030,28 @@ UserInfo .col-md-4 img {
   margin-left: 1rem;
 }
 
+
+.registercontainer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+}
 .Registerpage{
   display: flex;
-  flex-direction: row;
-  width: 90%;
+  width: 80%;
   justify-content: center;
-  gap: 4rem;
-
 }
 
 .textshadow{
   text-shadow: 2px 2px 5px red;
 
+}
+
+.step-2{
+  padding: 20px;
 }
 
 .registerbrandname{
@@ -1194,6 +1061,27 @@ UserInfo .col-md-4 img {
   margin: 6rem 1rem 1rem 4rem;
   display: flex;
   text-shadow: 2px 2px 5px red;
+}
+
+.content-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.text-content {
+  flex: 1;
+  text-align: left;
+}
+
+.image-content {
+  flex: 1;
+  text-align: right;
+}
+
+.image-content img {
+  max-width: 100%;
+  height: auto;
 }
 
 .registerleftsidetopic{
@@ -1208,6 +1096,7 @@ UserInfo .col-md-4 img {
   height: 65vh;
 }
 .registerleftside{
+  width: 40%;
   background-color: #4682B4;
 }
 .Registerlayout{
@@ -1479,4 +1368,127 @@ UserInfo .col-md-4 img {
 .ant-pagination-item-active a {
   color: #ffffff;
   /* Change active item text color */
+}
+
+.row{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.registerrightside{
+  padding: 3rem;
+  
+  width: 60%;
+  
+}
+
+/* Password container - input and eye toggle on same line */
+.password-container {
+  display: flex;
+  align-items: center;
+}
+
+.password-container input {
+  flex-grow: 1; /* Password input takes up available space */
+  margin-right: 5px; /* Space between input and eye button */
+}
+
+.password-container button {
+  padding: 0.5rem 1rem; /* Align eye button size with input */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* "OR" line styling */
+.or-divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 1.5rem 0; /* Add spacing around the "OR" */
+  font-size: 1rem;
+  font-weight: 600;
+  color: #999; /* Light grey text for "OR" */
+}
+
+.or-divider::before,
+.or-divider::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid #ccc; /* Horizontal line */
+}
+
+.or-divider::before {
+  margin-right: 10px;
+}
+
+.or-divider::after {
+  margin-left: 10px;
+}
+
+/* Login link styling - just text, no button */
+.already-account {
+  text-align: center;
+  margin-top: 1.5rem; /* Less margin at the bottom */
+}
+
+.already-account a {
+  color: #4682b4;
+  font-weight: 600;
+  text-decoration: none;
+  margin-left: 5px;
+}
+
+/* Google sign-in button centered */
+.google-btn {
+  display: block;
+  margin: 1.5rem auto; /* Center the button */
+  width: 70%;
+}
+/* Register form centered and slightly wider */
+.register-form {
+  max-width: 800px; /* Slightly increase form width */
+  margin: 0 auto; /* Center the form */
+}
+
+/* Adjust spacing between elements */
+.mb-2 {
+  margin-bottom: 1rem; /* Less margin between inputs */
+}
+
+
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #beb8c9;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(98, 98, 155) !important;
+  border-radius: 12px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(186, 151, 190, 0.911);
+  border-radius: 12px;
+}
+
+.homepageimage{
+  height: 400px;
+  width: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  object-fit: contain;
+}
+
+.hometext{
+  font-size: 3rem;
 }

@@ -126,164 +126,126 @@ const Login = () => {
   return (
     <Layout>
       <ToastContainer />
-      <div className="Registerpage">
-        <div className="registerleftside d-none d-md-block" style={{ width: "40%" }}>
-          <div className="registerbrandname" >
-            <NavLink to="/" className="navbar-brand" href="#" >
-              TALKOFCODE
-            </NavLink>
-          </div>
-          <div className="loginleftsidetopic">
-            <div>
-              <img src={loginimg} style={{height:"80px"}}></img>
-              <h2 className="textshadow">Logged in Form</h2>
-              <NavLink to="/register" className="nav-link">
-                <span>Sign-up</span>
+      <div className="registercontainer">
+        <div className="Registerpage">
+          <div className="registerleftside d-none d-md-block">
+            <div className="registerbrandname" >
+              <NavLink to="/" className="navbar-brand" href="#" >
+                TALKOFCODE
               </NavLink>
-
-              <NavLink to="/login" className="nav-link">
-                <span>Login</span>
-              </NavLink>
-
-              <button
-                type="submit"
-                className="btn mt-2 marginleft20rem btn-outline-primary"
-                onClick={
-                  handleRegister
-                }
-                style={{ width: "10rem" }}
-              >
-               Login with Google
-              </button>
             </div>
-          </div>
-        </div>
-        <div
-          className="loginlayout bg-light"
-        >
-          <div className="d-flex mb-3 gap2">
-            <NavLink to="/register" className="loginreglink"  >
-              {" "}
-              Register
-            </NavLink>
+            <div className="registerleftsidetopic">
+              <div>
+                <img src={loginimg} style={{ height: "80px" }}></img>
+                <h2 className="textshadow">Logged in Form</h2>
+                <NavLink to="/register" className="nav-link">
+                  <span>Sign-up</span>
+                </NavLink>
 
-            <NavLink to="/login" className="loginreglink" >
-              {" "}
-              Login
-            </NavLink>
-          </div>
+                <NavLink to="/login" className="nav-link">
+                  <span>Login</span>
+                </NavLink>
 
-          <form
-            style={{ display: "flex", justifyContent: "center" }}
-            onSubmit={(e) => {
-              handleSubmit(e);
-            }}
-          >
-            <div className="mt-2" style={{ width: "100%" }}>
-              <div style={{ textAlign: "center" }}>
-                <h1 style={{ fontWeight: "600", color:"#4682B4"}} className="textshadow2">Welcome Back</h1>
-                <p style={{ fontSize: "20px" , color:"#4682B4"}}  className="textshadow2">
-                  Doesn't have an account yet? <a href="/register">Sign-Up</a>{" "}
-                  here
-                </p>
-              </div>
-
-              <div className="mb-2 w-75 inputmargin">
-                <label
-                  htmlFor="exampleInputEmail1"
-                  className="form-label smalltitlefont2"
-                >
-                  Email address
-                </label>
-                <input
-                  type="email"
-                  className="form-control"
-                  id="exampleInputEmail1"
-                  placeholder="Enter your email"
-                  aria-describedby="emailHelp"
-                  value={Email}
-                  onChange={(e) => {
-                    SetEmail(e.target.value);
-                  }}
-                  required
-                  style={{ fontSize: "16px", backgroundColor: "#E6E6FA" }}
-                />
-              </div>
-
-              <div
-                className="mb-3 inputmargin"
-                style={{ width: "75%" }}
-              >
-                <label
-                  htmlFor="exampleInputPassword1"
-                  className="form-label smalltitlefont2"
-                >
-                  Password
-                </label>
-                <div style={{ display: "flex" }}>
-                  <input
-                    type={showPassword ? "text" : "password"}
-                    className="form-control"
-                    id="exampleInputPassword1"
-                    placeholder="Enter your Password"
-                    value={Password}
-                    onChange={(e) => {
-                      SetPassword(e.target.value);
-                    }}
-                    required
-                    style={{ fontSize: "16px", backgroundColor: "#E6E6FA" }}
-                  />
-                  <button
-                    className="btn"
-                    style={{ fontSize: "16px", backgroundColor: "#E6E6FA", marginLeft: "5px" }}
-                    type="button"
-                    onClick={togglePasswordVisibility}
-
-                  >
-                    {showPassword ? <FaEyeSlash /> : <FaEye />}
-                  </button>
-                </div>
-              </div>
-
-              <div className="mt-3 loginbuttons">
                 <button
                   type="submit"
-                  className="btn btn-primary"
-                  disabled={Loading}
-                  style={{ width: "10rem"}}
-                >
-                  {Loading ? "Loading..." : "Login"}
-                </button>
-                <button
-                  type="submit"
-                  className="btn btn-primary"
-                  onClick={() => {
-                    navigate("/ForgotPassword");
-                  }}
+                  className="btn mt-2 marginleft20rem btn-outline-primary"
+                  onClick={
+                    handleRegister
+                  }
                   style={{ width: "10rem" }}
                 >
-                  Forgot Password
+                  Login with Google
+                </button>
+              </div>
+            </div>
+          </div>
+          <div
+            className="registerrightside bg-light"
+          >
+
+            <form
+              className="register-form"
+              onSubmit={(e) => {
+                handleSubmit(e);
+              }}
+            >
+              <div className="mt-2" style={{ width: "100%" }}>
+                <div className="form-title">
+                  <h1 className="textshadow2 text-center">Welcome Back</h1>
+                  <p className="subtitle text-center">
+                    Doesn't have an account yet? <a href="/register">Sign-Up</a>{" "}
+                    here
+                  </p>
+                </div>
+
+                <button
+                  type="submit"
+                  className="btn btn-outline-primary google-btn"
+                  onClick={
+                    handleRegister
+                  }
+
+                >
+                  Login with Google
                 </button>
 
+                <h3 className="or-divider">OR</h3>
+
+                <div className="mb-2">
+                  <label htmlFor="email" className="form-label smalltitlefont2">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    className="form-control"
+                    placeholder="Enter your email"
+                    value={Email}
+                    onChange={(e) => SetEmail(e.target.value)}
+                    required
+                  />
+                </div>
+
+                <div className="mb-2">
+                  <label htmlFor="password" className="form-label smalltitlefont2">
+                    Password
+                  </label>
+                  <div className="password-container">
+                    <input
+                      type={showPassword ? "text" : "password"}
+                      className="form-control"
+                      placeholder="Password"
+                      value={Password}
+                      onChange={(e) => SetPassword(e.target.value)}
+                      required
+                    />
+                    <button className="btn btn-outline-primary" type="button" onClick={togglePasswordVisibility}>
+                      {showPassword ? <FaEyeSlash /> : <FaEye />}
+                    </button>
+                  </div>
+                </div>
+
+                <div className="d-flex justify-content-center mt-3">
+                  <button
+                    type="submit"
+                    className="btn btn-primary"
+                    disabled={Loading}
+                  >
+                    {Loading ? "Loading..." : "Login"}
+                  </button>
+
+               
+
               </div>
-              <div>
-                <h2 className="d-flex justify-content-center mt-4">OR</h2>
-              </div>
-              <button
-                type="submit"
-                className="btn btn-primary mt-2 logingooglebutton"
-                onClick={
-                  handleRegister
-                }
-                style={{ width: "10rem" }}
-              >
-                Login with Google
-              </button>
-            </div>
-          </form>
-        </div>
+
+              <p className="already-account">
+                   <NavLink to="/ForgotPassword">Forgot Password</NavLink>
+                  </p>
+          </div>
+        </form>
       </div>
-    </Layout>
+    </div>
+      </div >
+    </Layout >
   );
 };
 
