@@ -685,7 +685,7 @@ UserInfo .col-md-4 img {
 
 .HomeFirstDiv {
 
-  height: 90vh;
+  height: 100vh;
 }
 
 .Div {
@@ -1481,7 +1481,7 @@ UserInfo .col-md-4 img {
 }
 
 .homepageimage{
-  height: 400px;
+  height: 350px;
   width: 400px;
   display: flex;
   justify-content: center;
