@@ -25,7 +25,11 @@
 .card-actions {
   display: flex;
   justify-content: center;
+  position: relative;
+  text-align: center;
+ 
 }
+
 
 .card2 {
   width: 345px;
@@ -109,4 +113,25 @@
     margin-right: 5px;
   }
   
+}
+.chatbot-fixed {
+  flex-shrink: 0;
+}
+
+
+.flex-grow-1 {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.align-items-start {
+  align-items: flex-start;
 }

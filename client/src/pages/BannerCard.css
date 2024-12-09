@@ -16,6 +16,21 @@
     overflow: hidden !important;
 }
 
+
+.banner .swiper {
+    width: 240px;
+    height: 320px;
+}
+
+.banner .swiper-slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 18px;
+    font-size: 22px;
+    font-weight: bold;
+    color: #fff;
+}
 .banner .swiper-slide:nth-child(1n) {
     background-image: url('../assests/News8.jpg');
 }
@@ -24,9 +39,7 @@
     background-image: url('../assests/News2.jpg');
 }
 
-.banner .swiper-slide:nth-child(3n) {
-    background-image: url('../assests/News3.jpg');
-}
+
 
 .banner .swiper-slide:nth-child(4n) {
     background-image: url('../assests/News4.png');

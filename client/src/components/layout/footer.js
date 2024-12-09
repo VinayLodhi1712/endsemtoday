@@ -24,21 +24,21 @@ function Footer() {
           </div>
 
           <div className="text-center mt-3 ">
-            <a href="mailto:asharma7588@gmail.com" target="_blank">
+            <a href="mailto:vinayanandlodhi12@gmail.com" target="_blank">
               <FaEnvelope className="icon" />
             </a>
             <a href="https://twitter.com/VinayLodhi1712" target="_blank">
               <FaTwitter className="icon" />
             </a>
             <a
-              href="https://github.com/AyushSharma72"
+              href="https://github.com/VinayLodhi1712"
               target="_blank"
               rel="noopener noreferrer"
             >
               <FaGithub className="icon" />
             </a>
             <a
-              href="https://www.linkedin.com/in/ayush-sharma-a155a8267?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+              href="https://www.linkedin.com/in/vinay-anand-lodhi-5694b1234/"
               target="_blank"
               rel="noopener noreferrer"
             >

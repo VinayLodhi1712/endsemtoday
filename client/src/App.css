@@ -6,10 +6,7 @@ body {
   background-color: rgb(224, 224, 252) !important;
 }
 
-/* navbar css */
-.HomeFirstDiv{
-  margin-top: 50px;
-}
+
 
 .navbar {
 
@@ -670,7 +667,7 @@ UserInfo .col-md-4 img {
 }
 
 .Accordian1 {
-  width: 80%;
+  width: 65%;
 }
 
 .swipe {

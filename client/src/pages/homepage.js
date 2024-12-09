@@ -116,7 +116,7 @@ function Home() {
             style={{ gap: "1rem" }}
 
           >
-            <h1 className=" mt-3 text-center WelcomeText mb-3 hometext">
+            <h1 className=" text-center WelcomeText mb-3 hometext">
               {" "}
               Welcome to <span style={{ color: "#1fa2ff" }}>TalkOfCode</span>
               <br></br>
@@ -316,7 +316,7 @@ function Home() {
           <FadeIn />
         </div>
 
-        <div className="codeconnecthometext mt-5 mb-4 " >
+        <div className="codeconnecthometext mt-2 mb-4 " >
           <h2 className="font-bold text-black mb-3">
             Have Doubts? <br></br><div className="">Ask them at  <span className="highlighted ff">Code<MdOutlineConnectingAirports />Connect, </span></div>
           </h2>
@@ -387,7 +387,7 @@ function Home() {
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <Typography style={{ fontFamily: "unset", fontWeight: "500" }}>
+              <Typography style={{ fontSize:"17px", fontWeight: "500" }}>
                 TalkOfCode is a dynamic tech community platform that brings
                 together tech enthusiasts, students, developers, and
                 entrepreneurs to learn, connect, and innovate in the world of
@@ -408,7 +408,7 @@ function Home() {
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <Typography style={{ fontFamily: "unset", fontWeight: "500" }}>
+              <Typography style={{ fontSize:"17px", fontWeight: "500"  }}>
                 Joining TalkOfCode is simple! Click on the "Sign Up" button on
                 our homepage, fill in your details, and become part of our
                 vibrant community.
@@ -428,7 +428,7 @@ function Home() {
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <Typography style={{ fontFamily: "unset", fontWeight: "500" }}>
+              <Typography style={{ fontSize:"17px", fontWeight: "500"  }}>
                 TalkOfCode offers a range of services, including tech news
                 updates, a platform for solving student doubts, and a
                 marketplace for buying and selling study materials.
@@ -448,7 +448,7 @@ function Home() {
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <Typography style={{ fontFamily: "unset", fontWeight: "500" }}>
+              <Typography style={{fontSize:"17px", fontWeight: "500"  }}>
                 You can contribute to TalkOfCode by sharing your knowledge,
                 answering questions, participating in discussions, and helping
                 fellow members of the community.
