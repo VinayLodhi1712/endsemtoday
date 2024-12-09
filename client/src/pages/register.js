@@ -10,7 +10,10 @@ import {
   RegionDropdown,
   CountryRegionData,
 } from "react-country-region-selector";
+import PhoneInput from "react-phone-input-2";
+import "./register.css";
 import signup from "../assests/singup.png";
+import "react-phone-input-2/lib/style.css";
 const Register = () => {
   const [step, setStep] = useState(1);
   const Locate = useLocation();
@@ -92,17 +95,20 @@ const Register = () => {
       const user = result.user;
       console.log(user);
 
-      const response = await fetch("http://localhost:8000/api/v1/auth/google-login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: user.email,
-          Name: user.displayName,
-          photo: user.photoURL,
-        }),
-      });
+      const response = await fetch(
+        "http://localhost:8000/api/v1/auth/google-login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: user.email,
+            Name: user.displayName,
+            photo: user.photoURL,
+          }),
+        }
+      );
 
       if (response.ok) {
         const data = await response.json();
@@ -112,10 +118,13 @@ const Register = () => {
           token: data.token,
         });
 
-        localStorage.setItem("auth", JSON.stringify({
-          user: data.user,
-          token: data.token,
-        }));
+        localStorage.setItem(
+          "auth",
+          JSON.stringify({
+            user: data.user,
+            token: data.token,
+          })
+        );
 
         console.log(data.isNewUser);
         toast.success("Login Successful");
@@ -135,9 +144,9 @@ const Register = () => {
   return (
     <Layout>
       <div className="registercontainer">
-        <div className="Registerpage" >
+        <div className="Registerpage">
           <div className="registerleftside d-none d-md-block">
-            <div className="registerbrandname" >
+            <div className="registerbrandname">
               <NavLink to="/" className="navbar-brand" href="#">
                 TALKOFCODE
               </NavLink>
@@ -145,7 +154,7 @@ const Register = () => {
             <div className="registerleftsidetopic">
               <div>
                 <img src={signup}></img>
-                <h2 className="textshadow">New User Registeration</h2>
+                <h3 className="">New User Registeration</h3>
                 <NavLink to="/register" className="nav-link">
                   <span>Sign-up</span>
                 </NavLink>
@@ -157,9 +166,7 @@ const Register = () => {
                 <button
                   type="submit"
                   className="btn mt-2 marginleft20rem btn-outline-primary"
-                  onClick={
-                    handleRegister
-                  }
+                  onClick={handleRegister}
                   style={{ width: "10rem" }}
                 >
                   Sign-in with Google
@@ -172,20 +179,30 @@ const Register = () => {
               {step === 1 && (
                 <div className="step-1">
                   <div className="form-title">
-                    <h1 className="textshadow2 text-center">Create Account</h1>
-                    <p className="subtitle text-center">Let's get started</p>
+                    <div style={{fontSize:"2.5rem", fontWeight:"600"}} className="text-center">Create Account</div>
+                   {/* Already have an account */}
+                  <p className="already-account">
+                    Already have an account?{""}
+                    <NavLink to="/login">Login Here</NavLink>
+                  </p>
                   </div>
 
-                  <button className="btn btn-outline-primary google-btn" onClick={handleSubmit}>
+                  <button
+                    className="btn btn-outline-primary google-btn"
+                    onClick={handleSubmit}
+                  >
                     Sign-in with Google
                   </button>
 
                   {/* OR divider with horizontal lines */}
-                  <h3 className="or-divider">OR</h3>
+                  <h4 className="or-divider">OR</h4>
 
                   {/* Name */}
                   <div className="mb-2">
-                    <label htmlFor="name" className="form-label smalltitlefont2">
+                    <label
+                      htmlFor="name"
+                      className="form-label smalltitlefont2"
+                    >
                       Name
                     </label>
                     <input
@@ -200,7 +217,10 @@ const Register = () => {
 
                   {/* Email */}
                   <div className="mb-2">
-                    <label htmlFor="email" className="form-label smalltitlefont2">
+                    <label
+                      htmlFor="email"
+                      className="form-label smalltitlefont2"
+                    >
                       Email
                     </label>
                     <input
@@ -215,7 +235,10 @@ const Register = () => {
 
                   {/* Password */}
                   <div className="mb-2">
-                    <label htmlFor="password" className="form-label smalltitlefont2">
+                    <label
+                      htmlFor="password"
+                      className="form-label smalltitlefont2"
+                    >
                       Password
                     </label>
                     <div className="password-container">
@@ -227,7 +250,11 @@ const Register = () => {
                         onChange={(e) => SetPassword(e.target.value)}
                         required
                       />
-                      <button className="btn btn-outline-primary" type="button" onClick={togglePasswordVisibility}>
+                      <button
+                        className="btn btn-outline-primary"
+                        type="button"
+                        onClick={togglePasswordVisibility}
+                      >
                         {showPassword ? <FaEyeSlash /> : <FaEye />}
                       </button>
                     </div>
@@ -235,16 +262,19 @@ const Register = () => {
 
                   {/* Mobile Number */}
                   <div className="mb-2">
-                    <label htmlFor="mobile" className="form-label smalltitlefont2">
+                    <label
+                      htmlFor="mobile"
+                      className="form-label smalltitlefont2"
+                    >
                       Mobile No.
                     </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Enter your Mobile Number"
+
+                    <PhoneInput
+                      enableSearch={true}
+                      country={"in"}
                       value={MobileNo}
-                      onChange={(e) => SetMobileNo(e.target.value)}
-                      required
+                      onChange={SetMobileNo}
+                      // directly set the value here
                     />
                   </div>
 
@@ -255,23 +285,27 @@ const Register = () => {
                     </button>
                   </div>
 
-                  {/* Already have an account */}
-                  <p className="already-account">
-                    Already have an account? <NavLink to="/login">Login</NavLink>
-                  </p>
+                  
                 </div>
               )}
 
               {step === 2 && (
-                <div className="step-2">
+                <div className="step-2 mt-4 ">
                   <div className="form-title">
-                    <h1 className="textshadow2 text-center">Step 2: Additional Information</h1>
+                  <div style={{fontSize:"2rem", fontWeight:"600"}} className="text-center">Additional Information</div>
+                    <p className="already-account">
+                    Already have an account?{""}
+                    <NavLink to="/login">Login Here</NavLink>
+                  </p>
                   </div>
 
                   {/* Country and City */}
                   <div className="mb-2 d-flex">
                     <div className="half-width">
-                      <label htmlFor="country" className="form-label smalltitlefont2">
+                      <label
+                        htmlFor="country"
+                        className="form-label smalltitlefont2"
+                      >
                         Country
                       </label>
                       <CountryDropdown
@@ -281,7 +315,10 @@ const Register = () => {
                       />
                     </div>
                     <div className="half-width">
-                      <label htmlFor="city" className="form-label smalltitlefont2">
+                      <label
+                        htmlFor="city"
+                        className="form-label smalltitlefont2"
+                      >
                         City
                       </label>
                       <RegionDropdown
@@ -295,7 +332,10 @@ const Register = () => {
 
                   {/* Security Question */}
                   <div className="mb-2">
-                    <label htmlFor="securityQuestion" className="form-label smalltitlefont2">
+                    <label
+                      htmlFor="securityQuestion"
+                      className="form-label smalltitlefont2"
+                    >
                       Security Question
                     </label>
                     <select
@@ -304,17 +344,30 @@ const Register = () => {
                       onChange={(e) => SetSecurityQuestion(e.target.value)}
                       required
                     >
-                      <option value="What is your mother's maiden name?">What is your mother's maiden name?</option>
-                      <option value="In which city were you born?">In which city were you born?</option>
-                      <option value="What is the name of your first pet?">What is the name of your first pet?</option>
-                      <option value="What is your favorite book?">What is your favorite book?</option>
-                      <option value="What was the model of your first car?">What was the model of your first car?</option>
+                      <option value="What is your mother's maiden name?">
+                        What is your mother's maiden name?
+                      </option>
+                      <option value="In which city were you born?">
+                        In which city were you born?
+                      </option>
+                      <option value="What is the name of your first pet?">
+                        What is the name of your first pet?
+                      </option>
+                      <option value="What is your favorite book?">
+                        What is your favorite book?
+                      </option>
+                      <option value="What was the model of your first car?">
+                        What was the model of your first car?
+                      </option>
                     </select>
                   </div>
 
                   {/* Security Answer */}
                   <div className="mb-2">
-                    <label htmlFor="securityAnswer" className="form-label smalltitlefont2">
+                    <label
+                      htmlFor="securityAnswer"
+                      className="form-label smalltitlefont2"
+                    >
                       Security Answer
                     </label>
                     <input
@@ -351,19 +404,14 @@ const Register = () => {
                     </button>
                   </div>
 
-                  {/* Already have an account */}
-                  <p className="already-account">
-                    Already have an account? <NavLink to="/login">Login</NavLink>
-                  </p>
+                 
                 </div>
               )}
             </form>
           </div>
-
-
         </div>
       </div>
-    </Layout >
+    </Layout>
   );
 };
 

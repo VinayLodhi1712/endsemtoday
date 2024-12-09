@@ -127,40 +127,6 @@ body {
   color: aliceblue;
 }
 
-.registerform {
-  height: 93%;
-  width: 40%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(173, 218, 230, 0.205);
-  padding: 1rem;
-  gap: 0.5rem;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 10px 20px 0 rgba(0, 0, 0, 0.2);
-}
-
-.registerformupdate {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 10px 20px 0 rgba(0, 0, 0, 0.19);
-  margin-bottom: 1rem;
-  gap: 0.5rem;
-}
-
-.registerformupdatePassword {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 10px 20px 0 rgba(0, 0, 0, 0.19);
-  gap: 0.5rem;
-}
-
 .FormBackgound {
   background-image: linear-gradient(to top, #fff1eb 0%, #ace0f9 100%);
   height: 100%;
@@ -1031,19 +997,6 @@ UserInfo .col-md-4 img {
 }
 
 
-.registercontainer{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  padding: 20px;
-}
-.Registerpage{
-  display: flex;
-  width: 80%;
-  justify-content: center;
-}
 
 .textshadow{
   text-shadow: 2px 2px 5px red;
@@ -1052,110 +1005,6 @@ UserInfo .col-md-4 img {
 
 .step-2{
   padding: 20px;
-}
-
-.registerbrandname{
-  font-size: 28px;
-  font-weight: 600;
-  color: white;
-  margin: 6rem 1rem 1rem 4rem;
-  display: flex;
-  text-shadow: 2px 2px 5px red;
-}
-
-.content-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.text-content {
-  flex: 1;
-  text-align: left;
-}
-
-.image-content {
-  flex: 1;
-  text-align: right;
-}
-
-.image-content img {
-  max-width: 100%;
-  height: auto;
-}
-
-.registerleftsidetopic{
-  font-size: 28px;
-  font-weight: 600;
-  color: white;
-  display: flex;
-  justify-content: center;
-  flex-direction: row;
-  align-items: center;
-  text-align: center;
-  height: 65vh;
-}
-.registerleftside{
-  width: 40%;
-  background-color: #4682B4;
-}
-.Registerlayout{
-  margin: 1rem 1rem 1rem 1rem;
-  height: 100%;
-  width: 60%;
-  border: 2px solid grey ;
-  padding: 1rem 1rem 1rem 1rem;
-  border-radius: 20px;
-}
-
-.registerform {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.registerform h1 {
-  font-weight: 600;
-  font-size: 24px;
-  margin-bottom: 20px;
-}
-
-.loginleftsidetopic{
-  font-size: 28px;
-  font-weight: 600;
-  color: white;
-  display: flex;
-  justify-content: center;
-  flex-direction: row;
-  align-items: center;
-  text-align: center;
-  height: 72vh;
-}
-
-.loginsignupbuttons{
-  display: flex;
-  flex-direction: row;
-  gap: 1rem;
-  margin-top: 2px;
-}
-.loginbuttons {
-  display: flex;
-  width: 60%;
-  margin-left: 8rem;
-  gap: 1rem;
-  
-}
-
-.inputmargin {
-  margin-left: 5rem;
-}
-
-.registerform .form-label {
-  font-size: 16px;
-}
-
-.logingooglebutton{
-  margin-left: 13rem;
 }
 
 .faq-list {
@@ -1377,12 +1226,6 @@ UserInfo .col-md-4 img {
   padding: 20px;
 }
 
-.registerrightside{
-  padding: 3rem;
-  
-  width: 60%;
-  
-}
 
 /* Password container - input and eye toggle on same line */
 .password-container {
@@ -1429,10 +1272,7 @@ UserInfo .col-md-4 img {
 }
 
 /* Login link styling - just text, no button */
-.already-account {
-  text-align: center;
-  margin-top: 1.5rem; /* Less margin at the bottom */
-}
+
 
 .already-account a {
   color: #4682b4;
@@ -1444,14 +1284,10 @@ UserInfo .col-md-4 img {
 /* Google sign-in button centered */
 .google-btn {
   display: block;
-  margin: 1.5rem auto; /* Center the button */
-  width: 70%;
+  margin: auto; /* Center the button */
+  width: 60%;
 }
-/* Register form centered and slightly wider */
-.register-form {
-  max-width: 800px; /* Slightly increase form width */
-  margin: 0 auto; /* Center the form */
-}
+
 
 /* Adjust spacing between elements */
 .mb-2 {

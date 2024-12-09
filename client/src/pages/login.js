@@ -6,6 +6,7 @@ import { useAuth, loginWithGoogle } from "../context/auth";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { toast, ToastContainer } from "react-toastify";
 import loginimg from "../assests/login.png";
+import './register.css';
 //import googlelogo from "../assets/google-logo.svg"
 const Login = () => {
   const [Email, SetEmail] = useState("");
@@ -136,7 +137,7 @@ const Login = () => {
             </div>
             <div className="registerleftsidetopic">
               <div>
-                <img src={loginimg} style={{ height: "80px" }}></img>
+                
                 <h2 className="textshadow">Logged in Form</h2>
                 <NavLink to="/register" className="nav-link">
                   <span>Sign-up</span>
@@ -160,7 +161,7 @@ const Login = () => {
             </div>
           </div>
           <div
-            className="registerrightside bg-light"
+            className="loginrightside bg-light"
           >
 
             <form
@@ -171,7 +172,7 @@ const Login = () => {
             >
               <div className="mt-2" style={{ width: "100%" }}>
                 <div className="form-title">
-                  <h1 className="textshadow2 text-center">Welcome Back</h1>
+                  <h1 className=" text-center" style={{ fontWeight:"600"}}>Welcome Back</h1>
                   <p className="subtitle text-center">
                     Doesn't have an account yet? <a href="/register">Sign-Up</a>{" "}
                     here
