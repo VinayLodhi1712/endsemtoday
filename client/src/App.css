@@ -172,51 +172,6 @@ body {
   top: 11%;
 }
 
-.productleftside {
-  width: 100%;
-  margin-left: 1rem;
-  margin-top: 1rem;
-}
-
-.categoryshow {
-  display: flex;
-  flex-direction: column;
-}
-
-.productpage {
-  display: flex;
-  justify-content: end;
-}
-
-.ProductDetailsCard {
-  background-color: rgba(34, 33, 33, 0.181);
-}
-
-.productshow {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  height: 100%;
-  gap: 2rem;
-}
-
-.priceSpan {
-  color: green;
-  font-weight: 700;
-}
-
-.ButtonBorder {
-  border: 2px solid black;
-}
-
-.productimage {
-  transition: transform 0.3s;
-}
-
-.productimage:hover {
-  transform: scale(1.1);
-}
-
 .userdashboard-menudivs {
   width: 20%;
 }
@@ -383,32 +338,7 @@ UserInfo .col-md-4 img {
   margin-bottom: 1rem;
 }
 
-.boxlayoutproducts {
-  display: flex;
-  height: 100%;
-  width: 25%;
-  box-shadow: 4px 8px 10px rgba(0, 0, 0, 0.4), 4px 8px 10px rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
-  padding: 0.2rem;
-}
 
-.card {
-  border: 1px solid #ccc;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s ease;
-}
-
-.reviewlayout {
-  height: 100%;
-  width: 110%;
-  margin-left: 0.1rem;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  padding: 1rem;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-}
 
 .contactlayout {
   height: 100%;

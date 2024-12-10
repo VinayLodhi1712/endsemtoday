@@ -179,16 +179,21 @@ const Register = () => {
               {step === 1 && (
                 <div className="step-1">
                   <div className="form-title">
-                    <div style={{fontSize:"2.5rem", fontWeight:"600"}} className="text-center">Create Account</div>
-                   {/* Already have an account */}
-                  <p className="already-account">
-                    Already have an account?{""}
-                    <NavLink to="/login">Login Here</NavLink>
-                  </p>
+                    <div
+                      style={{ fontSize: "2.5rem", fontWeight: "600" }}
+                      className="text-center"
+                    >
+                      Create Account
+                    </div>
+                    {/* Already have an account */}
+                    <p className="already-account">
+                      Already have an account?{""}
+                      <NavLink to="/login">Login Here</NavLink>
+                    </p>
                   </div>
 
                   <button
-                    className="btn btn-outline-primary google-btn"
+                    className="btn btn-primary google-btn"
                     onClick={handleSubmit}
                   >
                     Sign-in with Google
@@ -241,25 +246,25 @@ const Register = () => {
                     >
                       Password
                     </label>
-                    <div className="password-container">
+                    <div className="position-relative">
                       <input
                         type={showPassword ? "text" : "password"}
-                        className="form-control"
+                        className="form-control pe-5"
                         placeholder="Password"
                         value={Password}
                         onChange={(e) => SetPassword(e.target.value)}
                         required
                       />
                       <button
-                        className="btn btn-outline-primary"
                         type="button"
                         onClick={togglePasswordVisibility}
+                        className="btn position-absolute end-0 top-50 translate-middle-y"
+                        style={{ border: "none" }}
                       >
                         {showPassword ? <FaEyeSlash /> : <FaEye />}
                       </button>
                     </div>
                   </div>
-
                   {/* Mobile Number */}
                   <div className="mb-2">
                     <label
@@ -284,19 +289,22 @@ const Register = () => {
                       Continue to Step 2 →
                     </button>
                   </div>
-
-                  
                 </div>
               )}
 
               {step === 2 && (
                 <div className="step-2 mt-4 ">
                   <div className="form-title">
-                  <div style={{fontSize:"2rem", fontWeight:"600"}} className="text-center">Additional Information</div>
+                    <div
+                      style={{ fontSize: "2rem", fontWeight: "600" }}
+                      className="text-center"
+                    >
+                      Additional Information
+                    </div>
                     <p className="already-account">
-                    Already have an account?{""}
-                    <NavLink to="/login">Login Here</NavLink>
-                  </p>
+                      Already have an account?{""}
+                      <NavLink to="/login">Login Here</NavLink>
+                    </p>
                   </div>
 
                   {/* Country and City */}
@@ -403,8 +411,6 @@ const Register = () => {
                       {Loading ? "Loading..." : "Register"}
                     </button>
                   </div>
-
-                 
                 </div>
               )}
             </form>

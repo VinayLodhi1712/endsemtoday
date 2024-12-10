@@ -10,7 +10,7 @@ import { useCart } from "../context/cart";
 import { useAuth } from "../context/auth";
 import { Image } from "antd";
 import { Pagination } from "antd";
-
+import './Productpage.css';
 function Productpage() {
   const [Cart, SetCart] = useCart();
   const [Products, SetProducts] = useState([]);
@@ -188,7 +188,7 @@ function Productpage() {
                 <input
                   className="form-control me-2 " style={{marginLeft:"-3px"}}
                   type="search"
-                  placeholder="Search Products"
+                  placeholder="Search "
                   aria-label="Search"
                   
                   onChange={(e) => {
@@ -256,8 +256,8 @@ function Productpage() {
 
         </div>
 
-        <div className=" text-center mt-1" style={{ height: "100%", width: "80%" }}>
-          <h1 className="Titlefont">All Products</h1>
+        <div className=" text-center mt-3" style={{ height: "100%", width: "80%" }}>
+         
           {FilterProductLength ? (
             <div
               className="productshow"
@@ -269,18 +269,18 @@ function Productpage() {
                   <Image
                     src={`https://talkofcodebackend.onrender.com/api/v1/product/get-productPhoto/${p._id}`}
                     className="card-Image-top productimage"
-                    style={{ height: "15rem", width: "100%" }}
+                    style={{ height: "15rem" }}
                   />
 
                   <div className="card-body text-start ProductDetailsCard">
                     <h5 className="card-title">{p.name.substring(0, 15)}...</h5>
-                    <p className="card-text">
+                    <div className="card-text">
                       {p.description.substring(0, 20)}...
-                    </p>
-                    <p className="card-text">
-                      Price: <span className="priceSpan">₹ {p.price}</span>{" "}
-                    </p>
-                    <div className="d-flex justify-content-around">
+                    </div>
+                    <div className="card-text">
+                      Price: <span className="priceSpan">₹{p.price}</span>{" "}
+                    </div>
+                    <div className="productbuttons">
                       <button
                         className="btn btn-primary ButtonBorder"
                         onClick={() => {
@@ -296,7 +296,7 @@ function Productpage() {
                         More details
                       </button>
                       <button
-                        className="btn btn-light  border-dark border-2"
+                        className="btn btn-light  border-dark border-2 ButtonBorder"
                         onClick={() => {
                           if (!auth.user) {
                             toast("Please Login First");

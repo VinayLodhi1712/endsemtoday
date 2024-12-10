@@ -28,7 +28,7 @@ import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import ScrollToTop from "react-scroll-to-top";
+// import ScrollToTop from "react-scroll-to-top";
 
 import { EffectCoverflow, Pagination } from "swiper/modules";
 
@@ -459,7 +459,7 @@ function Home() {
         </div>{" "}
 
       </div>
-      <ScrollToTop smooth color="#766c82" />
+      {/* <ScrollToTop smooth color="#766c82" /> */}
       <NavLink to='/ContactUs'>
         <button className="issue-btn" >🤔Facing an issue?</button>
       </NavLink>
