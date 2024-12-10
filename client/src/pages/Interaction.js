@@ -18,6 +18,9 @@ import { blue } from "@mui/material/colors";
 import { useAuth } from "../context/auth";
 import { Pagination } from "antd";
 import chatgpt from "../assests/chatgpt.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faRobot } from "@fortawesome/free-solid-svg-icons";
+import "./Interaction.css";
 const Interaction = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [conversation, setConversation] = useState([]);
@@ -216,12 +219,89 @@ const Interaction = () => {
         style={{ gap: "1rem" }}
       >
         <ThemeProvider theme={theme}>
-          <NavLink to="/dashboard/user/Ask" className="AskQuestion">
-            <Button variant="contained" sx={{ bgcolor: "ochre.darker" }}>
-              Ask Question
-            </Button>
+          <NavLink to="/dashboard/user/Ask">
+            <div
+              style={{
+                position: "fixed",
+                bottom: "20px",
+                right: "20px",
+                backgroundColor: "#E0F7FA", // Light blue background
+                borderRadius: "50%",
+                padding: "15px",
+                width: "80px",
+                height: "80px",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+                cursor: "pointer",
+                zIndex: 1000,
+              }}
+            >
+              <FontAwesomeIcon
+                icon={faRobot}
+                style={{
+                  color: "#0000ff", // Slightly darker blue
+                  fontSize: "1.8rem",
+                  marginBottom: "5px",
+                }}
+              />
+              <span
+                style={{
+                  color: "#0000ff",
+                  fontSize: "1rem",
+                  fontWeight: "bold",
+                  textAlign: "center",
+                }}
+              >
+                Ask
+              </span>
+            </div>
           </NavLink>
         </ThemeProvider>
+
+        <ThemeProvider theme={theme}>
+          <div
+            style={{
+              position: "fixed",
+              bottom: "120px",
+              right: "20px",
+              backgroundColor: "#E0F7FA", // Light blue background
+              borderRadius: "50%",
+              padding: "15px",
+              width: "80px",
+              height: "80px",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+              cursor: "pointer",
+              zIndex: 1000,
+            }}
+          >
+            
+           
+              <Avatar src={chatgpt}   style={{
+            
+                fontSize: "1.8rem",
+                marginBottom: "5px",
+              }}onClick={showModal} />
+        
+            <span
+              style={{
+                color: "#0000ff",
+                fontSize: "0.7rem",
+                fontWeight: "bold",
+                textAlign: "center",
+              }}
+            >
+              AI-Help
+            </span>
+          </div>
+        </ThemeProvider>
+
         <h1>
           Code
           <MdOutlineConnectingAirports />
@@ -239,13 +319,6 @@ const Interaction = () => {
           enterButton
           className="w-50"
         />
-        <Button
-          variant="contained"
-          sx={{ bgcolor: "ochre.darker" }}
-          onClick={showModal}
-        >
-          Clear doubts with AI
-        </Button>
 
         {/* Modal for conversation */}
         <Modal
@@ -302,7 +375,7 @@ const Interaction = () => {
           {Questions.length > 0 ? (
             Questions.map((q) => (
               <div
-                class="card w-75 p-2"
+                class="card p-2"
                 style={{ boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.3)" }}
               >
                 <div class="card-body">
@@ -327,15 +400,15 @@ const Interaction = () => {
                       className="d-flex align-items-center"
                       style={{ width: "50%" }}
                     >
-                      <p className="light-dull">Asked:</p>
-                      <p
+                      <div>Asked:</div>
+                      <div
                         className="DateDisplay"
                         style={{ marginLeft: "0.5rem" }}
                       >
                         {" "}
                         {/* Add margin for spacing */}
                         {moment(q.createdAt).format("MMMM Do YYYY")}
-                      </p>
+                      </div>
                     </div>
                   </div>
 
@@ -344,6 +417,7 @@ const Interaction = () => {
                       style={{ marginBottom: "0rem" }}
                       className="QuestionTitle"
                     >
+                      Q.{" "}
                       {q.title.length > 100
                         ? q.title.substring(0, 100) + "..."
                         : q.title}
@@ -360,7 +434,10 @@ const Interaction = () => {
                     </div>
                   </blockquote>
                 </div>
-                <div className="d-flex justify-content-between">
+                <div
+                  className="d-flex justify-content-between"
+                  style={{ marginLeft: "14px", marginRight: "14px" }}
+                >
                   <div className="AnswerParent">
                     <div className="AnswerBox">
                       <IoMdChatboxes />

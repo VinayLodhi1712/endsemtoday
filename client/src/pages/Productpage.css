@@ -70,6 +70,13 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease;
   }
+
+  .card2 {
+    width: 40%;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+  }
   
   .reviewlayout {
     height: 100%;
@@ -83,10 +90,18 @@
     margin-bottom: 1rem;
   }
 
+  .cartlayout{
+    display: flex;
+    justify-content: start;
+    width: 100%;
+  }
 
 
 @media screen and (max-width: 1068px)  {
-    
+    .card2{
+      width: 50%;
+    }  
+
     .ButtonBorder {
         border: 2px solid black;
         font-size: 13px;

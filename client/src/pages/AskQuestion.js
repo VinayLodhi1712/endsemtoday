@@ -4,6 +4,7 @@ import { useAuth } from "../context/auth";
 import { Tag } from "antd";
 import { RxCross2 } from "react-icons/rx";
 import toast from "react-hot-toast";
+import './Interaction.css';
 const AskQuestion = () => {
   const [auth, SetAuth] = useAuth();
   const [question, Setquestion] = useState("");
@@ -58,11 +59,10 @@ const AskQuestion = () => {
     <Layout>
       {" "}
       <div
-        className="d-flex justify-content-center flex-column align-items-center w-100"
-        style={{ gap: "1rem", height: "77vh" }}
+        className="d-flex justify-content-center flex-column align-items-center w-100 askquestion"
       >
         <h2 className="mt-2 Titlefont">Ask Your Question</h2>
-        <div className="form-container">
+        <div className="form-container2">
           <form
             onSubmit={(e) => {
               PostQuestion(e);

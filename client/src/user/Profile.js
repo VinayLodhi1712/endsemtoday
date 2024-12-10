@@ -8,8 +8,9 @@ import { RxCross2 } from "react-icons/rx";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Modal } from "antd";
 import UserMEnu from "./../components/layout/UserMEnu";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
+import 'react-toastify/dist/ReactToastify.css';
 const Profile = () => {
   const [auth, Setauth] = useAuth();
   const [Name, SetName] = useState("");
@@ -69,6 +70,9 @@ const Profile = () => {
       const data = await response.json();
 
       if (response.status === 200) {
+        
+        toast.success(data.message);
+
         Setauth({
           ...auth, //spread auth to keep previous values as it is
           user: data.UpdatedUser,
@@ -82,7 +86,7 @@ const Profile = () => {
           })
         );
 
-        toast.success(data.message);
+        
       } else {
         toast(data.message, {
           icon: "❌",

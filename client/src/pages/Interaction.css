@@ -1,0 +1,88 @@
+.UserNameDisplay {
+    color: #4285f4;
+    font-weight: 600;
+    margin: 0;
+    margin-left: 0.5rem;
+  }
+  
+  .DateDisplay {
+    color: #4285f4;
+  }
+  
+ .QuestionTitle {
+        font-weight: 600;
+      
+        padding: 8px;
+        
+      }
+  .card{
+    width: 75%;
+  }
+
+  .username {
+    position: absolute;
+    top: 7%;
+    right: 2%;
+  }
+
+  .askquestion{
+     gap: 1rem;
+     height: 77vh;
+  }
+
+  .form-container2 {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    padding: 1rem;
+    width: 70%;
+    margin: 0 auto;
+  }
+
+  @media screen and (max-width: 768px) {
+    .UserNameDisplay{
+        font-size: 15px;
+    }
+    .DateDisplay {
+        color: #4285f4;
+        font-size: 15px;
+      }
+
+      .card{
+        width:95%;
+      }
+
+      .btn-primary{
+        margin-top:0px;
+      }
+
+      .card-body{
+        padding: 8px;
+      }
+
+      .QuestionTitle {
+        font-weight: 600;
+      
+        padding: 8px;
+        
+      }
+
+      .username {
+        
+        top: 7%;
+        right: 2%;
+      }
+      
+  .askquestion{
+    gap: 1rem;
+    height: 100vh;
+ }
+
+ .form-container2 {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  padding: 1rem;
+  width: 90%;
+  margin: 0 auto;
+}
+      
+  }

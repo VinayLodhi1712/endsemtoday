@@ -188,11 +188,7 @@ body {
   left: 3%;
 }
 
-.username {
-  position: absolute;
-  top: 7%;
-  right: 2%;
-}
+
 
 .UpVote {
   border-radius: 50%;
@@ -284,16 +280,7 @@ UserInfo .col-md-4 img {
   font-weight: 700;
 }
 
-.UserNameDisplay {
-  color: #4285f4;
-  font-weight: 600;
-  margin: 0;
-  margin-left: 0.5rem;
-}
 
-.DateDisplay {
-  color: #4285f4;
-}
 
 .AnswerParent {
   display: flex;
@@ -445,9 +432,16 @@ UserInfo .col-md-4 img {
   background-color: rgba(255, 127, 80, 0.328);
 }
 
+@media (max-width: 768px) {
+  .news-container{
+    min-width: 0;
+  }
+  
+}
+
 .card-wrapper {
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
 }
 
 .box-layout {

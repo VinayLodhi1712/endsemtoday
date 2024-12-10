@@ -13,7 +13,7 @@ import { LuBookmarkPlus } from "react-icons/lu";
 import Button from "@mui/material/Button";
 import { FaRegArrowAltCircleDown } from "react-icons/fa";
 import Avatar from "@mui/material/Avatar";
-
+import './Interaction.css';
 const View = () => {
   const [Questions, SetQuestions] = useState([]);
   const [Answers, SetAnswers] = useState([]);
@@ -155,61 +155,70 @@ const View = () => {
 
           {Questions.length > 0 ? (
             Questions.map((q) => (
-              <div class="card w-100 p-2">
+              <div
+                class="card w-100 p-2"
+                style={{ boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.3)" }}
+              >
                 <div class="card-body">
-                  <div className="d-flex justify-content-between">
+                  <div
+                    className="d-flex justify-content-between"
+                    style={{ width: "100%" }}
+                  >
+                    {/* User image and name */}
                     <div
-                      className="d-flex justify-content-between"
-                      style={{ width: "25%" }}
+                      className="d-flex align-items-center "
+                      style={{ width: "50%" }}
                     >
-                      {" "}
+                      <Avatar
+                        src={`https://talkofcodebackend.onrender.com/api/v1/auth/get-userPhoto/${q.user._id}`}
+                        sx={{ width: 30, height: 30 }} // Add margin for spacing
+                      />
+                      <p className="UserNameDisplay">{q.user.Name}</p>
+                    </div>
+
+                    {/* Asked label and date */}
+                    <div
+                      className="d-flex align-items-center"
+                      style={{ width: "50%" }}
+                    >
+                      <div>Asked:</div>
                       <div
-                        className="d-flex  justify-content-between"
-                        style={{ width: "26%" }}
+                        className="DateDisplay"
+                        style={{ marginLeft: "0.5rem" }}
                       >
-                        <Avatar
-                          src={`https://talkofcodebackend.onrender.com/api/v1/auth/get-userPhoto/${q.user._id}`}
-                          sx={{ width: 30, height: 30 }}
-                        />
-                        <p className="UserNameDisplay">{q.user.Name}</p>
-                      </div>
-                      <div className="d-flex">
-                        <p className="light-dull">Asked:</p>
-
-                        <p className="DateDisplay">
-                          {" "}
-                          {moment(q.createdAt).format("MMMM Do YYYY")}
-                        </p>
-                      </div>
-                    </div>
-
-                    <LuBookmarkPlus
-                      title="Add to Bookmark"
-                      className="Bookmark"
-                      onClick={() => {
-                        Bookmark(q._id);
-                      }}
-                    />
-                  </div>
-                  <blockquote class="blockquote mb-0">
-                    <p
-                      style={{ marginBottom: "0rem" }}
-                      className="QuestionTitle "
-                    >
-                      {q.title}{" "}
-                    </p>
-                    <small>{q.question}</small>
-                    <div className="d-flex align-items-center w-100 justify-content-between">
-                      {" "}
-                      <div>
                         {" "}
-                        {q.tags.map((tag, index) => (
-                          <Tag color="blue">{tag}</Tag>
-                        ))}
+                        {/* Add margin for spacing */}
+                        {moment(q.createdAt).format("MMMM Do YYYY")}
                       </div>
                     </div>
-                  </blockquote>
+                    <LuBookmarkPlus
+                    title="Add to Bookmark"
+                    className="Bookmark"
+                    onClick={() => {
+                      Bookmark(q._id);
+                    }}
+                  />
+                  </div>
+                  
                 </div>
+                <blockquote class="blockquote mb-0">
+                  <p
+                    style={{ marginBottom: "0rem" }}
+                    className="QuestionTitle "
+                  >
+                    {q.title}{" "}
+                  </p>
+                  <small>{q.question}</small>
+                  <div className="d-flex align-items-center w-100 justify-content-between">
+                    {" "}
+                    <div>
+                      {" "}
+                      {q.tags.map((tag, index) => (
+                        <Tag color="blue">{tag}</Tag>
+                      ))}
+                    </div>
+                  </div>
+                </blockquote>
               </div>
             ))
           ) : (

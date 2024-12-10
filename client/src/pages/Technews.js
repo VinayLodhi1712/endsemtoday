@@ -58,7 +58,8 @@ const Technews = () => {
   return (
     <Layout>
       <div className="news-container">
-        <h2 className="text-center mb-4 Titlefont">Technews</h2>
+        
+        <h2 className="text-center mb-4 Titlefont ">Get Instant Technical News</h2>
 
         <div className="card-wrapper">
           {" "}
@@ -100,6 +101,7 @@ const Technews = () => {
               effect={"coverflow"}
               grabCursor={true}
               centeredSlides={true}
+              spaceBetween={20}
               slidesPerView={4}
               loop={true}
               navigation={true}
@@ -109,6 +111,32 @@ const Technews = () => {
                 depth: 100,
                 modifier: 0,
                 slideShadows: true,
+              }}
+              breakpoints={{
+                0: {
+                  slidesPerView: 1.3,
+                  spaceBetween: 10,
+                },
+                400: {
+                  slidesPerView: 1.3,
+                  spaceBetween: 15,
+                },
+                576: {
+                  slidesPerView: 2,
+                  spaceBetween: 20,
+                },
+                768: {
+                  slidesPerView: 3,
+                  spaceBetween: 30,
+                },
+                992: {
+                  slidesPerView: 4,
+                  spaceBetween: 40,
+                },
+                1200: {
+                  slidesPerView: 5,
+                  spaceBetween: 50,
+                },
               }}
               modules={[EffectCoverflow, Pagination, Navigation]}
               className="mySwiper"
