@@ -8,6 +8,7 @@ import cartimage from "../assests/cartimage.png";
 import emptycart from "../assests/emptycart.png";
 import { Image } from "antd";
 import ".././App.css";
+import "./Productpage.css";
 const CartPage = () => {
   const [Cart, setCart] = useCart();
   const [auth, SetAuth] = useAuth();
@@ -41,49 +42,52 @@ const CartPage = () => {
   return (
     <Layout>
       <div style={{ width: "100%" }} className="mt-3">
+        <h2 className="text-center mt-3 ">Cart Summary</h2>
+
+        <hr />
+        <div className="items-center">
         <h4 className="text-center">
           You have{" "}
           {Cart.length < 2 ? Cart.length + " item" : Cart.length + " items"} in
           your cart.{" "}
         </h4>
+        <div className="cartcard p-2">
+          <h5>
+            <b>Total Payable Amount:</b>₹ {TotalPrice()}.00
+          </h5>
+        </div>
         {auth?.token ? (
           //cart page items
 
           <div
-            className="d-flex justify-content-center"
+            className="d-flex justify-content-center p-3"
             style={{ width: "100%" }}
           >
             {Cart.length > 0 ? (
-              <div
-                className="d-flex justify-content-start"
-                style={{ width: "100%" }}
-              >
+              <div className="cartlayout ">
                 <div
-                  className="d-flex justify-content-center align-items-center flex-wrap"
-                  style={{ gap: "1rem", width: "50%" }}
+                  className="d-flex justify-content-center align-items-center flex-wrap "
+                  
                 >
                   {Cart?.map((p) => (
-                    <div
-                      className="card border border-3"
-                      style={{ width: "40%" }}
-                    >
+                    <div className="card2 border border-3">
                       <Image
                         src={`https://talkofcodebackend.onrender.com/api/v1/product/get-productPhoto/${p._id}`}
                         className="card-Image-top productimage"
-                        style={{ height: "15rem", width: "100%" }}
+                        style={{ height: "15rem" }}
                       />
 
                       <div className="card-body text-start ProductDetailsCard">
                         <h5 className="card-title">
                           {p.name.substring(0, 15)}...
                         </h5>
-                        <p className="card-text">
+                        <div className="card-text">
                           {p.description.substring(0, 20)}...
-                        </p>
-                        <p className="card-text">
-                          Price: <span className="priceSpan">₹ {p.price}</span>{" "}
-                        </p>
-                        <div className="d-flex justify-content-around">
+                        </div>
+                        <div className="card-text">
+                          Price: <span className="priceSpan">₹{p.price}</span>{" "}
+                        </div>
+                        <div className="productbuttons">
                           <button
                             className="btn btn-primary ButtonBorder"
                             onClick={() => {
@@ -104,19 +108,6 @@ const CartPage = () => {
                       </div>
                     </div>
                   ))}
-                </div>
-                <div
-                  className="d-flex flex-column CartFixed"
-                  style={{ width: "40%" }}
-                >
-                  <h2 className="text-center mt-3 ">Cart Summary</h2>
-
-                  <hr />
-                  <div className="card p-2">
-                    <h5>
-                      <b>Total Payable Amount:</b>₹ {TotalPrice()}.00
-                    </h5>
-                  </div>
                 </div>
               </div>
             ) : (
@@ -148,6 +139,7 @@ const CartPage = () => {
             <Image src={cartimage}></Image>
           </div>
         )}
+      </div>
       </div>
     </Layout>
   );

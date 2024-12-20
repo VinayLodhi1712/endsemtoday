@@ -16,7 +16,7 @@ const FadeIn = () => {
   return (
     <div className="container">
       <div className="question-box">
-        <Card className="card2 d-flex flex-column">
+        <Card className="card3 d-flex flex-column">
           <CardContent className="flex-grow-1">
             <div className="d-flex items-center justify-center">
               <div className="w-20 user-icon">

@@ -1,7 +1,6 @@
 .container {
   display: flex;
   align-items: center;
-  height: 40vh;
 }
 
 .question-box {
@@ -31,9 +30,10 @@
 }
 
 
-.card2 {
+.card3 {
   width: 345px;
   /* Fixed width */
+
   height: 260px;
   /* Fixed height */
   background-color: #ffffff;
@@ -84,7 +84,7 @@
     margin-bottom: 1rem;
   }
 
-  .card2{
+  .card3{
     width: 250px;
     height: 210px;
   }

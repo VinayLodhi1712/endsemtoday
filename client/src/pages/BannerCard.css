@@ -1,28 +1,9 @@
-.newclass2{
-    width: 320px;
-    height: 380px;
-}
-
-.newclass3{
-    display: flex; 
-    align-items: center;
-    justify-content: center;
-    border-radius: 18px;
-    font-size: 22px;
-    font-weight: bold;
-    color: #fff;
-    background-size: cover !important; 
-    background-position: center; 
-    overflow: hidden !important;
-}
-
-
-.banner .swiper {
-    width: 240px;
-    height: 320px;
-}
-
-.banner .swiper-slide {
+.banner .swiper-container {
+    width: 320px; /* Consistent width */
+    height: 380px; /* Consistent height */
+  }
+  
+  .banner .swiper-slide {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -30,55 +11,40 @@
     font-size: 22px;
     font-weight: bold;
     color: #fff;
-}
-.banner .swiper-slide:nth-child(1n) {
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+  }
+  
+  .banner .swiper-slide:nth-child(1) {
     background-image: url('../assests/News8.jpg');
-}
-
-.banner .swiper-slide:nth-child(2n) {
+  }
+  .banner .swiper-slide:nth-child(2) {
     background-image: url('../assests/News2.jpg');
-}
-
-
-
-.banner .swiper-slide:nth-child(4n) {
+  }
+  .banner .swiper-slide:nth-child(3) {
     background-image: url('../assests/News4.png');
-}
-
-.banner .swiper-slide:nth-child(5n) {
+  }
+  .banner .swiper-slide:nth-child(4) {
     background-image: url('../assests/News5.jpg');
-}
-
-.banner .swiper-slide:nth-child(6n) {
+  }
+  .banner .swiper-slide:nth-child(5) {
     background-image: url('../assests/News6.jpg');
-}
-
-.banner .swiper-slide:nth-child(7n) {
+  }
+  .banner .swiper-slide:nth-child(6) {
     background-image: url('../assests/News7.jpg');
-}
-
-.banner .swiper-slide:nth-child(8n) {
+  }
+  .banner .swiper-slide:nth-child(7) {
     background-image: url('../assests/News10.jpg');
-}
-
-.banner .swiper-slide:nth-child(9n) {
+  }
+  .banner .swiper-slide:nth-child(8) {
     background-image: url('../assests/News1.png');
-}
-
-.banner .swiper-slide:nth-child(10n) {
-    background-image: url('../assests/News10.jpg');
-}
-
-.highlighted{
-    color: rgb(70, 70, 209);
-    font-weight: 700;
-}
-
-
-@media screen and (max-width: 768px){
-    .newclass3{
-        width: 200px;
-        margin-top: 1rem;
-        height: 250px;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .banner .swiper-container {
+      width: 200px;
+      height: 250px;
     }
-}
+  }
+  

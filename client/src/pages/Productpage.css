@@ -25,6 +25,7 @@
   
   .ProductDetailsCard {
     background-color: rgba(34, 33, 33, 0.181);
+    padding: 1rem;
   }
   
   .productshow {
@@ -65,14 +66,24 @@
     padding: 0.2rem;
   }
   
+   
   .card {
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+  }
+  .cartcard {
+    width: 40%;
+    align-items: center;
     border: 1px solid #ccc;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease;
   }
 
   .card2 {
-    width: 40%;
+
+    display: flex;
+    flex-direction: column;
     border: 1px solid #ccc;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease;
@@ -90,12 +101,26 @@
     margin-bottom: 1rem;
   }
 
-  .cartlayout{
+  .cartlayout {
     display: flex;
-    justify-content: start;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     width: 100%;
   }
 
+  .items-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .CartFixed {
+    align-items: center;
+    width: 100%;
+  }
 
 @media screen and (max-width: 1068px)  {
     .card2{
@@ -186,4 +211,18 @@
       font-size: 12px;
       font-weight: 500;
     }
+
+    .cartlayout {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .CartFixed {
+      position: fixed;
+      right: 1%;
+      
+      width: 100%;
+    }
+    
+  
 }

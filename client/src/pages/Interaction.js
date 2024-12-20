@@ -375,7 +375,7 @@ const Interaction = () => {
           {Questions.length > 0 ? (
             Questions.map((q) => (
               <div
-                class="card p-2"
+                class="cardinter p-2"
                 style={{ boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.3)" }}
               >
                 <div class="card-body">
