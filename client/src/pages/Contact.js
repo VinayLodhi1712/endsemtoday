@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Layout from "../components/layout/layout";
 import Contactus from "../assests/contacus.jpeg";
-import AyushProfile from "../assests/ayush.jpg";
+import AyushProfile from "../assests/smallayush.jpg";
 import { TfiHeadphoneAlt } from "react-icons/tfi";
 import { FaPhoneAlt } from "react-icons/fa";
 import { FaGithub, FaEnvelope, FaLinkedin, FaYoutube } from "react-icons/fa";
