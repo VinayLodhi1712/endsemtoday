@@ -1,30 +1,17 @@
 import React, { useState, useEffect } from "react";
 import Layout from "../components/layout/layout";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
-import { CardActionArea } from "@mui/material";
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import CircularProgress from "@mui/material/CircularProgress";
 import Skeleton from "@mui/material/Skeleton";
 import { Empty } from "antd";
 import "../App.css";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper/modules";
-// Import Swiper styles
-import "swiper/css";
-import "swiper/css/effect-coverflow";
-import "swiper/css/pagination";
-import { EffectCoverflow, Pagination } from "swiper/modules";
 
 const Technews = () => {
   const [newsData, setNewsData] = useState(null);
-  const [loading, setlodaing] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     async function fetchNews() {
-      setlodaing(true);
+      setLoading(true);
       const topic = "coding";
       const language = "en";
       const url = `https://news67.p.rapidapi.com/v2/topic-search?languages=${encodeURIComponent(
@@ -34,8 +21,7 @@ const Technews = () => {
       const options = {
         method: "GET",
         headers: {
-          "X-RapidAPI-Key":
-            "df461d9036mshb4f44340f3538d7p13a8bajsn86cdae799e77",
+          "X-RapidAPI-Key": "3b66842437mshcaf81fced1636e6p15053bjsnf454e7c9cc4e",
           "X-RapidAPI-Host": "news67.p.rapidapi.com",
         },
       };
@@ -43,145 +29,68 @@ const Technews = () => {
       try {
         const response = await fetch(url, options);
         const result = await response.json();
-        setNewsData(result.news); // Update newsData state with fetched data
-        setlodaing(false);
+        setNewsData(result.news);
       } catch (error) {
-        setlodaing(false);
         console.error(error);
+      } finally {
+        setLoading(false);
       }
     }
     fetchNews();
-
-    //'3b66842437mshcaf81fced1636e6p15053bjsnf454e7c9cc4e'
   }, []);
 
   return (
     <Layout>
-      <div className="news-container">
-        
-        <h2 className="text-center mb-4 Titlefont ">Get Instant Technical News</h2>
-
-        <div className="card-wrapper">
-          {" "}
-          {loading ? (
-            <div
-              className="w-100 text-center d-flex flex-column align-items-center justify-content-center"
-              style={{ gap: "2rem" }}
-            >
-              <div className="d-flex " style={{ gap: "2rem" }}>
-                <div>
-                  <Skeleton variant="rectangular" width={310} height={218} />
-                  <Skeleton />
-                  <Skeleton width="60%" />
-                </div>
-                <div>
-                  <Skeleton variant="rectangular" width={310} height={218} />
-                  <Skeleton />
-                  <Skeleton width="60%" />
-                </div>
-
-                <div>
-                  <Skeleton variant="rectangular" width={310} height={218} />
-                  <Skeleton />
-                  <Skeleton width="60%" />
-                </div>
-
-                <div>
-                  <Skeleton variant="rectangular" width={310} height={218} />
-                  <Skeleton />
-                  <Skeleton width="60%" />
+      <h1 className="text-center mt-4 section-title">Get Instant Technical News</h1>
+    
+        {loading ? (
+          <div className="row">
+            {[...Array(6)].map((_, i) => (
+              <div key={i} className="col-md-4 col-sm-6 mb-4">
+                <div className="news-card card h-100 shadow-sm">
+                  <Skeleton variant="rectangular" width="100%" height={200} />
+                  <div className="card-body">
+                    <Skeleton variant="text" width="80%" height={24} />
+                    <Skeleton variant="text" width="60%" height={20} />
+                    <Skeleton variant="rectangular" width={100} height={32} className="mt-2" />
+                  </div>
                 </div>
               </div>
-              <div>
-                <CircularProgress disableShrink /> <h5>Loading...</h5>
+            ))}
+            <div className="text-center mt-3">
+              <CircularProgress />
+              <h5 className="mt-2">Loading...</h5>
+            </div>
+          </div>
+        ) : newsData && newsData.length > 0 ? (
+          <div className="row">
+            {newsData.map((newsItem, index) => (
+              <div key={index} className="col-md-4 col-sm-6 mb-4">
+                <div className="news-card card h-100 shadow-sm">
+                  {newsItem.Image && (
+                    <img src={newsItem.Image} className="card-img-top" alt="News" />
+                  )}
+                  <div className="card-body">
+                    <h5 className="card-title">{newsItem.Title.substring(0, 50)}...</h5>
+                    <a
+                      href={newsItem.Url}
+                      className="btn btn-primary btn-sm mt-2"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Read More
+                    </a>
+                  </div>
+                </div>
               </div>
-            </div>
-          ) : newsData && newsData.length > 0 ? (
-            <Swiper
-              effect={"coverflow"}
-              grabCursor={true}
-              centeredSlides={true}
-              spaceBetween={20}
-              slidesPerView={4}
-              loop={true}
-              navigation={true}
-              coverflowEffect={{
-                rotate: 50,
-                stretch: 0,
-                depth: 100,
-                modifier: 0,
-                slideShadows: true,
-              }}
-              breakpoints={{
-                0: {
-                  slidesPerView: 1.3,
-                  spaceBetween: 10,
-                },
-                400: {
-                  slidesPerView: 1.3,
-                  spaceBetween: 15,
-                },
-                576: {
-                  slidesPerView: 2,
-                  spaceBetween: 20,
-                },
-                768: {
-                  slidesPerView: 3,
-                  spaceBetween: 30,
-                },
-                992: {
-                  slidesPerView: 4,
-                  spaceBetween: 40,
-                },
-                1200: {
-                  slidesPerView: 5,
-                  spaceBetween: 50,
-                },
-              }}
-              modules={[EffectCoverflow, Pagination, Navigation]}
-              className="mySwiper"
-              initialSlide={0}
-            >
-              {newsData.map((newsItem, index) => (
-                <SwiperSlide key={index}>
-                  <Card className="box-layout boxlayout">
-                    <CardActionArea>
-                      {newsItem.Image && ( // Check if Image URL is valid
-                        <CardMedia
-                          className="news-image"
-                          component="img"
-                          height="140"
-                          image={newsItem.Image}
-                          alt="News Image"
-                        />
-                      )}
-
-                      <CardContent>
-                        <Typography gutterBottom variant="h5" component="div">
-                          {newsItem.Title.substring(0, 50)}....
-                        </Typography>
-                        <a
-                          href={newsItem.Url}
-                          style={{ marginBottom: "1rem" }}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {newsItem.Url.substring(0, 30)}
-                        </a>
-                      </CardContent>
-                    </CardActionArea>
-                  </Card>
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          ) : (
-            <div className="d-flex w-100 align-items-center justify-content-center flex-column ">
-              <p className="text-center">No news available</p>
-              <Empty />
-            </div>
-          )}
-        </div>
-      </div>
+            ))}
+          </div>
+        ) : (
+          <div className="d-flex flex-column justify-content-center align-items-center vh-50">
+            <p className="text-center">No news available</p>
+            <Empty />
+          </div>
+        )}
     </Layout>
   );
 };
