@@ -1,8 +1,9 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { IoCall } from "react-icons/io5";
+import { FaShoppingCart, FaRegHeart } from "react-icons/fa";
 import { Image } from "antd";
 import Layout from "../components/layout/layout";
 import { Modal, Button, Form } from "react-bootstrap";
@@ -12,13 +13,8 @@ import { faStar, faStarHalfAlt } from "@fortawesome/free-solid-svg-icons";
 import { useAuth } from "../context/auth";
 import { useCart } from "../context/cart";
 
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper/modules";
-// Import Swiper styles
-import "swiper/css";
-import "swiper/css/effect-coverflow";
-import "swiper/css/pagination";
-import { EffectCoverflow, Pagination } from "swiper/modules";
+// Import CSS
+import "./productDetails.css"; // Import the CSS file we just created
 
 const ProductDetails = () => {
   const Navigate = useNavigate();
@@ -30,20 +26,31 @@ const ProductDetails = () => {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
   const [showDetails, setShowDetails] = useState(true);
+  const [quantity, setQuantity] = useState(1);
 
   const handleRating = (rate) => {
     setRating(rate);
   };
+  
+  const incrementQuantity = () => {
+    setQuantity(prev => prev + 1);
+  };
+  
+  const decrementQuantity = () => {
+    if (quantity > 1) {
+      setQuantity(prev => prev - 1);
+    }
+  };
+
   async function GetProduct() {
     try {
       const response = await fetch(
         `https://talkofcodebackend.onrender.com/api/v1/product/getSingle-product/${params.slug}`
       );
       const data = await response.json();
-      console.log(data);
       SetDetails(data.product);
     } catch (error) {
-      toast.error("Error Showing details");
+      toast.error("Error showing details");
       console.log(error);
       setTimeout(() => {
         Navigate("/");
@@ -117,7 +124,7 @@ const ProductDetails = () => {
       }
     } catch (error) {
       console.error(error);
-      toast.error("Something went Wrong in deleting review");
+      toast.error("Something went wrong in deleting review");
     }
   }
 
@@ -126,232 +133,263 @@ const ProductDetails = () => {
       setComment("");
     }
   }, [showModal]);
+  
   useEffect(() => {
     GetProduct();
   }, []);
 
   return (
     <Layout>
-      <style>{`
-       .swiper-wrapper {
-        width: 100% !important;
-      }
-      `}</style>
-      <div className=" mt-3 d-flex flex-column">
-        <h3 className="text-center mb-5 Titlefont">Product Details</h3>
+      <div className="product-container">
+        <h2 className="text-center mb-3 "style={{fontWeight:"600"}}>Product Details</h2>
+        
         {Detail.map((p) => (
-          <div className="row">
-            <div className="col-md-6" style={{ width: "50%", display: "flex", justifyContent:"center", alignItems:"center" }}>
-              <Image
-                src={`https://talkofcodebackend.onrender.com/api/v1/product/get-productPhoto/${p._id}`}
-                style={{ height: "25rem" }}
-              />
-            </div>
-            <div className="col-md-6" style={{ width: "50%" }}>
-              <div className="d-flex  mb-3">
-                <button
-                  className="button-16"
-                  style={{
-                    marginRight: "120px",
-                    fontWeight: 600,
-                    letterSpacing: "1.2px",
-                  }}
-                  onClick={() => setShowDetails(true)}
-                >
-                  DETAILS
-                </button>
-                <button
-                  className="button-16"
-                  style={{ fontWeight: 600, letterSpacing: "1.2px" }}
-                  onClick={() => setShowDetails(false)}
-                >
-                  REVIEWS
-                </button>
+          <div className="row" key={p._id}>
+            <div className="col-md-6 mb-3">
+              <div className="product-image-container">
+                <Image
+                  src={`https://talkofcodebackend.onrender.com/api/v1/product/get-productPhoto/${p._id}`}
+                  className="product-image"
+                  alt={p.name}
+                />
               </div>
-              {showDetails ? (
-                <div className="col-md-11">
-                  <p className="Titlefont">{p.name} </p>
-                  <p style={{ fontWeight: 600 }}> {p.description}</p>
-                  <p className="tag"> {p.category.name}</p>
-                  <p className="smalltitlefont">
-                    PRICE: <strong> ₹{p.price}</strong>{" "}
-                  </p>
-
-                  <div className="d-flex mt-2 mb-3 w-60">
-                    <button
-                      className="button-27"
-                      style={{ marginRight: "60px" }}
-                      onClick={() => {
-                        SetCart([...Cart, p]);
-                        localStorage.setItem(
-                          "Cart",
-                          JSON.stringify([...Cart, p])
-                        );
-                        toast("Item Added to cart!", {
-                          icon: "👍",
-                        });
-                      }}
-                    >
-                      ADD TO CART
-                    </button>
-                    <button
-                      className="button-24"
-                      onClick={() => {
-                        makeCall();
-                      }}
-                    >
-                      <IoCall />
-                      <span style={{ marginRight: "5px" }}></span>
-                      Contact
-                    </button>
-                  </div>
-                </div>
-              ) : (
-                <div className="col-md-10" style={{ width: "100%" }}>
-                  {typeof p.ratings === "number" && p.ratings > 0 ? (
-                    <>
-                      <p className="mediumtitlefont">
-                        Number of Reviews : {p.numofreviews}
-                      </p>
-                      <p className="mediumtitlefont">
-                        Rating:
-                        {[...Array(Math.floor(p.ratings))].map((_, index) => (
-                          <FontAwesomeIcon
-                            icon={faStar}
-                            key={index}
-                            style={{ color: "#FFD700", fontSize: "28px" }}
-                          />
-                        ))}
-                        {p.ratings % 1 !== 0 && (
-                          <FontAwesomeIcon
-                            icon={faStarHalfAlt}
-                            style={{ color: "#FFD700", fontSize: "28px" }}
-                          />
-                        )}
-                      </p>
-                    </>
-                  ) : (
-                    <p className="mediumtitlefont ">No rating available</p>
+            </div>
+            
+            <div className="col-md-6">
+              <span className="product-category">{p.category.name}</span>
+              <h1 className="product-title">{p.name}</h1>
+              
+              {typeof p.ratings === "number" && p.ratings > 0 && (
+                <div className="mb-2">
+                  {[...Array(Math.floor(p.ratings))].map((_, index) => (
+                    <FontAwesomeIcon
+                      icon={faStar}
+                      key={index}
+                      className="star"
+                    />
+                  ))}
+                  {p.ratings % 1 !== 0 && (
+                    <FontAwesomeIcon
+                      icon={faStarHalfAlt}
+                      className="star"
+                    />
                   )}
-                  <Button
-                    className="btn btn-success mb-3"
-                    onClick={() => setShowModal(true)}
-                  >
-                    Create Review
-                  </Button>
-
-                  <Swiper
-                    effect={"coverflow"}
-                    grabCursor={true}
-                    centeredSlides={true}
-                    slidesPerView={Math.min(3, p.reviews.length)} // Ensure at least 3 reviews are visible
-                    loop={true}
-                    navigation={true}
-                    coverflowEffect={{
-                      rotate: 50,
-                      stretch: 0,
-                      modifier: 0,
-                      slideShadows: true,
-                    }}
-                    modules={[EffectCoverflow, Navigation]}
-                    className="mySwiper mb-3"
-                    initialSlide={1}
-                  >
-                    {p.reviews.length > 0 && (
-                      <>
-                        {p.reviews.map((review) => (
-                          <SwiperSlide key={review._id}>
-                            <div
-                              className="boxlayout p-3"
-                              style={{ width: "100%" }}
-                            >
-                              <div
-                                className="d-flex justify-content-between"
-                                style={{ marginRight: "10px" }}
-                              >
-                                <div>
-                                  {[...Array(review.rating)].map((_, index) => (
-                                    <span
-                                      key={index}
-                                      style={{
-                                        color: "#FFD700",
-                                        fontSize: "28px",
-                                      }}
-                                    >
-                                      &#9733;
-                                    </span>
-                                  ))}
-                                </div>
-                                {auth.user &&
-                                  auth.user._id.toString() === review.user && (
-                                    <Button
-                                      className="btn btn-danger mb-3 align-items-center"
-                                      onClick={() => deleteReview(review._id)}
-                                    >
-                                      Delete
-                                    </Button>
-                                  )}
-                              </div>
-
-                              <p style={{ fontWeight: 600 }}>
-                                {review.comment}
-                              </p>
-                              <p
-                                className="mediumtitlefont"
-                                style={{ marginRight: "8rem" }}
-                              >
-                                - {review.name}
-                              </p>
-                            </div>
-                          </SwiperSlide>
-                        ))}
-                      </>
-                    )}
-                  </Swiper>
-
-                  <Modal show={showModal} onHide={() => setShowModal(false)}>
-                    <Modal.Header closeButton>
-                      <Modal.Title>Create Review</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                      <Form>
-                        <Form.Group controlId="formRating">
-                          <Form.Label>Rating</Form.Label>
-                          <Rating
-                            onClick={handleRating}
-                            ratingValue={rating}
-                            size={30}
-                          />
-                        </Form.Group>
-                        <Form.Group controlId="formComment">
-                          <Form.Label>Comment</Form.Label>
-                          <Form.Control
-                            type="text"
-                            placeholder="Enter your comment"
-                            value={comment}
-                            onChange={(e) => setComment(e.target.value)}
-                          />
-                        </Form.Group>
-                      </Form>
-                    </Modal.Body>
-                    <Modal.Footer>
-                      <Button
-                        variant="secondary"
-                        onClick={() => setShowModal(false)}
-                      >
-                        Close
-                      </Button>
-                      <Button variant="primary" onClick={createReview}>
-                        Submit Review
-                      </Button>
-                    </Modal.Footer>
-                  </Modal>
+                  <span className="ms-2 text-muted">({p.numofreviews} reviews)</span>
                 </div>
               )}
+              
+              <p className="product-description">{p.description}</p>
+              
+              <div className="product-price">
+                ₹{p.price}
+                <span className="original-price">₹{Math.round(p.price * 1.3)}</span>
+                <span className="discount">30% OFF</span>
+              </div>
+             
+              
+              <div className="quantity-selector">
+                <span className="me-3">Quantity:</span>
+                <button className="quantity-btn" onClick={decrementQuantity}>-</button>
+                <input type="text" className="quantity-input" value={quantity} readOnly />
+                <button className="quantity-btn" onClick={incrementQuantity}>+</button>
+              </div>
+              
+              <div className="action-buttons">
+                <button
+                  className="cart-btn"
+                  onClick={() => {
+                    // Add the product multiple times based on quantity
+                    const items = Array(quantity).fill(p);
+                    SetCart([...Cart, ...items]);
+                    localStorage.setItem(
+                      "Cart",
+                      JSON.stringify([...Cart, ...items])
+                    );
+                    toast(`${quantity} item(s) added to cart!`, {
+                      icon: "👍",
+                    });
+                  }}
+                >
+                  <FaShoppingCart /> Add to Cart
+                </button>
+                
+                <button className="buy-btn">Buy Now</button>
+                
+                <button
+                  className="contact-btn"
+                  onClick={() => makeCall()}
+                >
+                  <IoCall /> Contact Seller
+                </button>
+                
+                <button className="wishlist-btn">
+                  <FaRegHeart />
+                </button>
+              </div>
+              
+              <div className="tabs-container">
+                <div className="tabs-header">
+                  <button
+                    className={`tab-btn ${showDetails ? 'active' : ''}`}
+                    onClick={() => setShowDetails(true)}
+                  >
+                    Product Details
+                  </button>
+                  <button
+                    className={`tab-btn ${!showDetails ? 'active' : ''}`}
+                    onClick={() => setShowDetails(false)}
+                  >
+                    Reviews
+                  </button>
+                </div>
+                
+                <div className="tab-content">
+                  {showDetails ? (
+                    <div className="details-content">
+                      <h5 className="mb-2">Specifications</h5>
+                      <div className="row">
+                        <div className="col-md-6">
+                          <ul className="list-group specs-list">
+                            <li className="list-group-item d-flex justify-content-between">
+                              <span>Category</span>
+                              <span className="fw-bold">{p.category.name}</span>
+                            </li>
+                            <li className="list-group-item d-flex justify-content-between">
+                              <span>Shipping</span>
+                              <span className="fw-bold">Free</span>
+                            </li>
+                            <li className="list-group-item d-flex justify-content-between">
+                              <span>Warranty</span>
+                              <span className="fw-bold">1 Year</span>
+                            </li>
+                          </ul>
+                        </div>
+                        <div className="col-md-6">
+                          <ul className="list-group specs-list">
+                            <li className="list-group-item d-flex justify-content-between">
+                              <span>Stock</span>
+                              <span className="fw-bold">Available</span>
+                            </li>
+                            <li className="list-group-item d-flex justify-content-between">
+                              <span>Returns</span>
+                              <span className="fw-bold">7 Days</span>
+                            </li>
+                            <li className="list-group-item d-flex justify-content-between">
+                              <span>Rating</span>
+                              <span className="fw-bold">{p.ratings ? p.ratings.toFixed(1) : 'N/A'} / 5</span>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="reviews-container">
+                      <div className="review-summary mb-3">
+                        <div>
+                          <h5 className="mb-2">Customer Reviews</h5>
+                          {typeof p.ratings === "number" && p.ratings > 0 ? (
+                            <div>
+                              <p className="mb-0">Overall Rating: {p.ratings.toFixed(1)} out of 5</p>
+                              <p className="text-muted mb-0">Based on {p.numofreviews} reviews</p>
+                            </div>
+                          ) : (
+                            <p>No ratings yet</p>
+                          )}
+                        </div>
+                        <div className="ms-auto">
+                          <Button
+                            className="create-review-btn"
+                            onClick={() => setShowModal(true)}
+                          >
+                            Write a Review
+                          </Button>
+                        </div>
+                      </div>
+                      
+                      {p.reviews.length > 0 ? (
+                        <div className="reviews-grid">
+                          {p.reviews.map((review) => (
+                            <div className="review-card" key={review._id}>
+                              <div className="review-header">
+                                <div>
+                                  {[...Array(review.rating)].map((_, index) => (
+                                    <span key={index} className="star">★</span>
+                                  ))}
+                                </div>
+                                {auth.user && auth.user._id.toString() === review.user && (
+                                  <Button
+                                    className="delete-review-btn"
+                                    onClick={() => deleteReview(review._id)}
+                                  >
+                                    Delete
+                                  </Button>
+                                )}
+                              </div>
+                              <p className="review-comment">{review.comment}</p>
+                              <p className="review-author">- {review.name}</p>
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        <div className="empty-reviews">
+                          <p className="mb-0">No reviews yet. Be the first to write one!</p>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+              </div>
             </div>
           </div>
         ))}
       </div>
+
+      {/* Review Modal */}
+      <Modal show={showModal} onHide={() => setShowModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title className="modal-review-title">Write a Review</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group controlId="formRating" className="mb-3">
+              <Form.Label>Your Rating</Form.Label>
+              <div className="rating-container">
+                <Rating
+                  onClick={handleRating}
+                  ratingValue={rating}
+                  size={30}
+                />
+              </div>
+            </Form.Group>
+            <Form.Group controlId="formComment">
+              <Form.Label>Your Review</Form.Label>
+              <Form.Control
+                as="textarea"
+                className="review-textarea"
+                placeholder="Share your experience with this product..."
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+              />
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            variant="outline-secondary"
+            className="modal-footer-btn"
+            onClick={() => setShowModal(false)}
+          >
+            Cancel
+          </Button>
+          <Button 
+            variant="dark" 
+            className="modal-footer-btn"
+            onClick={createReview}
+          >
+            Submit Review
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </Layout>
   );
 };

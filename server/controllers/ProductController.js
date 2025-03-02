@@ -202,27 +202,44 @@ async function UpdateProductController(req, resp) {
   }
 }
 
-async function ProductFilterController(req, resp) {
+async function ProductFilterController() {
   try {
-    const { checked, priceRange } = req.body;
-    let args = {};
-    if (checked.length > 0) args.category = checked;
-
-    if (priceRange.length) {
-      args.price = { $gte: priceRange[0], $lte: priceRange[1] };
+    // Make sure we have valid data to send
+    const requestData = {
+      checked: checked || [],
+      priceRange: Radioval || [],
+    };
+    
+    console.log("Sending filter data:", JSON.stringify(requestData, null, 2));
+    
+    const response = await fetch(
+      `https://talkofcodebackend.onrender.com/api/v1/product/productfilter`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestData),
+      }
+    );
+    
+    // Validate response is JSON
+    const contentType = response.headers.get("content-type");
+    if (!contentType || !contentType.includes("application/json")) {
+      throw new Error("Received non-JSON response from server");
     }
-
-    const products = await ProductModel.find(args);
-    resp.status(200).send({
-      success: true,
-      products,
-    });
+    
+    const responseData = await response.json();
+    console.log("Parsed filter response:", responseData);
+    
+    // Update products state
+    SetProducts(responseData?.products || []);
+    SetFilterProductLength((responseData?.products || []).length > 0);
   } catch (error) {
-    resp.status(500).send({
-      success: false,
-      message: "Error while applying filter try again",
-      error,
-    });
+    toast.error("An error occurred with filters");
+    console.log("Filter error:", error);
+    // Fallback to getting all products
+    GetAllProducts();
   }
 }
 //count the produts

@@ -1,21 +1,19 @@
 import { useState } from "react";
 import React from "react";
 import Layout from "../components/layout/layout";
-import { useNavigate, NavLink, useLocation } from "react-router-dom";
+import { useNavigate, NavLink} from "react-router-dom";
 import { useAuth, loginWithGoogle } from "../context/auth";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { toast, ToastContainer } from "react-toastify";
-import loginimg from "../assests/login.png";
 import "./register.css";
 //import googlelogo from "../assets/google-logo.svg"
 const Login = () => {
   const [Email, SetEmail] = useState("");
-  const [Password, SetPassword] = useState("");
+  const [Password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const [auth, setAuth] = useAuth();
   const [Loading, SetLoading] = useState(false);
-  const location = useLocation();
 
   async function handleSubmit(e) {
     try {
@@ -133,121 +131,42 @@ const Login = () => {
   return (
     <Layout>
       <ToastContainer />
-      <div className="registercontainer">
-        <div className="Registerpage">
-          <div className="registerleftside d-none d-md-block">
-            <div className="registerbrandname">
-              <NavLink to="/" className="navbar-brand" href="#">
-                TALKOFCODE
-              </NavLink>
+      <div className="container d-flex justify-content-center align-items-center min-vh-100">
+        <div className="card p-4 shadow-lg" style={{ maxWidth: "400px", width: "100%" }}>
+          <h3 className="text-center mb-3">Welcome Back</h3>
+          <p className="text-center">Don’t have an account? <NavLink to="/register">Sign-Up</NavLink></p>
+          <button className="btn btn-danger w-100 mb-3" onClick={handleRegister}>Login with Google</button>
+          <hr />
+          <form onSubmit={handleSubmit}>
+            <div className="mb-3">
+              <label className="form-label">Email</label>
+              <input type="email" className="form-control" placeholder="Enter your email" value={Email} onChange={(e) => SetEmail(e.target.value)} required />
             </div>
-            <div className="registerleftsidetopic">
-              <div>
-                <h2 className="textshadow">Logged in Form</h2>
-                <NavLink to="/register" className="nav-link">
-                  <span>Sign-up</span>
-                </NavLink>
-
-                <NavLink to="/login" className="nav-link">
-                  <span>Login</span>
-                </NavLink>
-
-                <button
-                  type="submit"
-                  className="btn mt-2 marginleft20rem btn-outline-primary"
-                  onClick={handleRegister}
-                  style={{ width: "10rem" }}
-                >
-                  Login with Google
-                </button>
-              </div>
-            </div>
-          </div>
-          <div className="loginrightside bg-light">
-            <form
-              className="register-form"
-              onSubmit={(e) => {
-                handleSubmit(e);
-              }}
-            >
-              <div className="mt-2" style={{ width: "100%" }}>
-                <div className="form-title">
-                  <h1 className=" text-center" style={{ fontWeight: "600" }}>
-                    Welcome Back
-                  </h1>
-                  <p className="subtitle text-center">
-                    Doesn't have an account yet? <a href="/register">Sign-Up</a>{" "}
-                    here
-                  </p>
-                </div>
-
-                <button
-                  type="submit"
-                  className="btn btn-primary google-btn"
-                  onClick={handleRegister}
-                >
-                  Login with Google
-                </button>
-
-                <h3 className="or-divider">OR</h3>
-
-                <div className="mb-2">
-                  <label htmlFor="email" className="form-label smalltitlefont2">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    className="form-control"
-                    placeholder="Enter your email"
-                    value={Email}
-                    onChange={(e) => SetEmail(e.target.value)}
-                    required
-                  />
-                </div>
-
-                <div className="mb-2">
-                  <label
-                    htmlFor="password"
-                    className="form-label smalltitlefont2"
-                  >
-                    Password
-                  </label>
-                  <div className="position-relative">
-                    <input
-                      type={showPassword ? "text" : "password"}
-                      className="form-control pe-5"
-                      placeholder="Password"
-                      value={Password}
-                      onChange={(e) => SetPassword(e.target.value)}
-                      required
-                    />
-                    <button
-                      type="button"
-                      onClick={togglePasswordVisibility}
-                      className="btn position-absolute end-0 top-50 translate-middle-y"
-                      style={{ border: "none" }}
-                    >
-                      {showPassword ? <FaEyeSlash /> : <FaEye />}
-                    </button>
-                  </div>
-                </div>
-
-                <div className="d-flex justify-content-center mt-3">
-                  <button
-                    type="submit"
-                    className="btn btn-primary"
-                    disabled={Loading}
-                  >
-                    {Loading ? "Loading..." : "Login"}
-                  </button>
-                </div>
-
-                <p className="already-account">
-                  <NavLink to="/ForgotPassword">Forgot Password</NavLink>
-                </p>
-              </div>
-            </form>
-          </div>
+            <div className="mb-3 position-relative">
+      <label className="form-label">Password</label>
+      <div className="position-relative">
+        <input
+          type={showPassword ? "text" : "password"}
+          className="form-control pe-5"
+          placeholder="Enter password"
+          value={Password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <span
+          className="position-absolute top-50 end-0 translate-middle-y me-3 cursor-pointer"
+          style={{ cursor: "pointer", fontSize: "1.2rem", color: "#6c757d" }}
+          onClick={togglePasswordVisibility}
+        >
+          {showPassword ? <FaEyeSlash /> : <FaEye />}
+        </span>
+      </div>
+    </div>
+            <button type="submit" className="btn btn-primary w-100" disabled={Loading}>{Loading ? "Loading..." : "Login"}</button>
+            <p className="text-center mt-3">
+              <NavLink to="/ForgotPassword">Forgot Password?</NavLink>
+            </p>
+          </form>
         </div>
       </div>
     </Layout>

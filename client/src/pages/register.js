@@ -1,22 +1,20 @@
 import { useEffect, useState } from "react";
 import React from "react";
 import Layout from "../components/layout/layout";
-import { useNavigate, NavLink, useLocation } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useAuth, loginWithGoogle } from "../context/auth";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import {
   CountryDropdown,
   RegionDropdown,
-  CountryRegionData,
 } from "react-country-region-selector";
 import PhoneInput from "react-phone-input-2";
 import "./register.css";
-import signup from "../assests/singup.png";
 import "react-phone-input-2/lib/style.css";
+
 const Register = () => {
   const [step, setStep] = useState(1);
-  const Locate = useLocation();
   const [Name, SetName] = useState("");
   const [Email, SetEmail] = useState("");
   const [Password, SetPassword] = useState("");
@@ -25,15 +23,17 @@ const Register = () => {
   const [SecurityQuestion, SetSecurityQuestion] = useState("");
   const [MobileNo, SetMobileNo] = useState("");
   const [photo, SetPhoto] = useState("");
-  const [country, setCountry] = useState(""); // Added country state
-  const [region, setRegion] = useState(""); // Added region state
+  const [country, setCountry] = useState("");
+  const [region, setRegion] = useState("");
   const [Location, setLocation] = useState("");
   const navigate = useNavigate();
   const [auth, setAuth] = useAuth();
   const [Loading, SetLoading] = useState(false);
+
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
+
   const Setlocation = () => {
     setLocation(region + " " + country);
   };
@@ -41,6 +41,7 @@ const Register = () => {
   useEffect(() => {
     Setlocation();
   }, [region]);
+
   const nextStep = () => setStep(step + 1);
   const prevStep = () => setStep(step - 1);
 
@@ -141,256 +142,180 @@ const Register = () => {
       toast.error("Something went wrong, please try again");
     }
   };
+
   return (
     <Layout>
-      <div className="registercontainer">
-        <div className="Registerpage">
-          <div className="registerleftside d-none d-md-block">
-            <div className="registerbrandname">
-              <NavLink to="/" className="navbar-brand" href="#">
-                TALKOFCODE
-              </NavLink>
-            </div>
-            <div className="registerleftsidetopic">
-              <div>
-                <img src={signup}></img>
-                <h3 className="">New User Registeration</h3>
-                <NavLink to="/register" className="nav-link">
-                  <span>Sign-up</span>
-                </NavLink>
+      <div className="container d-flex justify-content-center align-items-center min-vh-100">
+        <div
+          className="card p-4 shadow-lg"
+          style={{ maxWidth: "500px", width: "100%" }}
+        >
+          {step === 1 && (
+            <div className="step-1">
+              <h2 className="text-center mb-3">Create Account</h2>
+              <p className="text-center">
+                Already have an account? <NavLink to="/login">Login</NavLink>
+              </p>
 
-                <NavLink to="/login" className="nav-link">
-                  <span>Login</span>
-                </NavLink>
+              <button
+                className="btn btn-danger w-100 mb-3"
+                onClick={handleRegister}
+              >
+                Sign-in with Google
+              </button>
 
-                <button
-                  type="submit"
-                  className="btn mt-2 marginleft20rem btn-outline-primary"
-                  onClick={handleRegister}
-                  style={{ width: "10rem" }}
-                >
-                  Sign-in with Google
-                </button>
-              </div>
-            </div>
-          </div>
-          <div className="registerrightside bg-light">
-            <form className="register-form" onSubmit={handleSubmit}>
-              {step === 1 && (
-                <div className="step-1">
-                  <div className="form-title">
-                    <div
-                      style={{ fontSize: "2.5rem", fontWeight: "600" }}
-                      className="text-center"
-                    >
-                      Create Account
-                    </div>
-                    {/* Already have an account */}
-                    <p className="already-account">
-                      Already have an account?{""}
-                      <NavLink to="/login">Login Here</NavLink>
-                    </p>
-                  </div>
+              <hr />
 
-                  <button
-                    className="btn btn-primary google-btn"
-                    onClick={handleSubmit}
-                  >
-                    Sign-in with Google
-                  </button>
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  nextStep();
+                }}
+              >
+                <div className="mb-3">
+                  <label className="form-label">Name</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Enter your name"
+                    value={Name}
+                    onChange={(e) => SetName(e.target.value)}
+                    required
+                  />
+                </div>
 
-                  {/* OR divider with horizontal lines */}
-                  <h4 className="or-divider">OR</h4>
+                <div className="mb-3">
+                  <label className="form-label">Email</label>
+                  <input
+                    type="email"
+                    className="form-control"
+                    placeholder="Enter your email"
+                    value={Email}
+                    onChange={(e) => SetEmail(e.target.value)}
+                    required
+                  />
+                </div>
 
-                  {/* Name */}
-                  <div className="mb-2">
-                    <label
-                      htmlFor="name"
-                      className="form-label smalltitlefont2"
-                    >
-                      Name
-                    </label>
+                <div className="mb-3">
+                  <label className="form-label">Password</label>
+                  <div className="position-relative">
                     <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Enter your name"
-                      value={Name}
-                      onChange={(e) => SetName(e.target.value)}
+                      type={showPassword ? "text" : "password"}
+                      className="form-control pe-5"
+                      placeholder="Enter password"
+                      value={Password}
+                      onChange={(e) => SetPassword(e.target.value)}
                       required
                     />
-                  </div>
-
-                  {/* Email */}
-                  <div className="mb-2">
-                    <label
-                      htmlFor="email"
-                      className="form-label smalltitlefont2"
+                    <span
+                      className="position-absolute top-50 end-0 translate-middle-y me-3"
+                      style={{
+                        cursor: "pointer",
+                        fontSize: "1.2rem",
+                        color: "#6c757d",
+                      }}
+                      onClick={togglePasswordVisibility}
                     >
-                      Email
-                    </label>
-                    <input
-                      type="email"
-                      className="form-control"
-                      placeholder="Enter your email"
-                      value={Email}
-                      onChange={(e) => SetEmail(e.target.value)}
-                      required
-                    />
-                  </div>
-
-                  {/* Password */}
-                  <div className="mb-2">
-                    <label
-                      htmlFor="password"
-                      className="form-label smalltitlefont2"
-                    >
-                      Password
-                    </label>
-                    <div className="position-relative">
-                      <input
-                        type={showPassword ? "text" : "password"}
-                        className="form-control pe-5"
-                        placeholder="Password"
-                        value={Password}
-                        onChange={(e) => SetPassword(e.target.value)}
-                        required
-                      />
-                      <button
-                        type="button"
-                        onClick={togglePasswordVisibility}
-                        className="btn position-absolute end-0 top-50 translate-middle-y"
-                        style={{ border: "none" }}
-                      >
-                        {showPassword ? <FaEyeSlash /> : <FaEye />}
-                      </button>
-                    </div>
-                  </div>
-                  {/* Mobile Number */}
-                  <div className="mb-2">
-                    <label
-                      htmlFor="mobile"
-                      className="form-label smalltitlefont2"
-                    >
-                      Mobile No.
-                    </label>
-
-                    <PhoneInput
-                      enableSearch={true}
-                      country={"in"}
-                      value={MobileNo}
-                      onChange={SetMobileNo}
-                      // directly set the value here
-                    />
-                  </div>
-
-                  {/* Continue to Step 2 Button */}
-                  <div className="d-flex justify-content-center mt-3">
-                    <button className="btn btn-primary" onClick={nextStep}>
-                      Continue to Step 2 →
-                    </button>
+                      {showPassword ? <FaEyeSlash /> : <FaEye />}
+                    </span>
                   </div>
                 </div>
-              )}
 
-              {step === 2 && (
-                <div className="step-2 mt-4 ">
-                  <div className="form-title">
-                    <div
-                      style={{ fontSize: "2rem", fontWeight: "600" }}
-                      className="text-center"
-                    >
-                      Additional Information
-                    </div>
-                    <p className="already-account">
-                      Already have an account?{""}
-                      <NavLink to="/login">Login Here</NavLink>
-                    </p>
-                  </div>
+                <div className="mb-3">
+                  <label className="form-label">Mobile No.</label>
+                  <PhoneInput
+                    enableSearch={true}
+                    country={"in"}
+                    value={MobileNo}
+                    onChange={SetMobileNo}
+                    inputClass="form-control"
+                    containerClass="w-100"
+                  />
+                </div>
 
-                  {/* Country and City */}
-                  <div className="mb-2 d-flex">
-                    <div className="half-width">
-                      <label
-                        htmlFor="country"
-                        className="form-label smalltitlefont2"
-                      >
-                        Country
-                      </label>
-                      <CountryDropdown
-                        value={country}
-                        onChange={(val) => setCountry(val)}
-                        className="form-control"
-                      />
-                    </div>
-                    <div className="half-width">
-                      <label
-                        htmlFor="city"
-                        className="form-label smalltitlefont2"
-                      >
-                        City
-                      </label>
-                      <RegionDropdown
-                        country={country}
-                        value={region}
-                        onChange={(val) => setRegion(val)}
-                        className="form-control"
-                      />
-                    </div>
-                  </div>
+                <button type="submit" className="btn btn-primary w-100">
+                  Continue
+                </button>
+              </form>
+            </div>
+          )}
 
-                  {/* Security Question */}
-                  <div className="mb-2">
-                    <label
-                      htmlFor="securityQuestion"
-                      className="form-label smalltitlefont2"
-                    >
-                      Security Question
-                    </label>
-                    <select
-                      id="Questions"
+          {step === 2 && (
+            <div className="step-2">
+              <h2 className="text-center mb-3">Additional Information</h2>
+              <p className="text-center">
+                Already have an account? <NavLink to="/login">Login</NavLink>
+              </p>
+              <button
+                className="btn btn-danger w-100 mb-3"
+                onClick={handleRegister}
+              >
+                Sign-in with Google
+              </button>
+
+              <hr />
+              <form onSubmit={handleSubmit}>
+                <div className="mb-3 row">
+                  <div className="col-md-6 mb-3 mb-md-0">
+                    <label className="form-label">Country</label>
+                    <CountryDropdown
+                      value={country}
+                      onChange={(val) => setCountry(val)}
                       className="form-control"
-                      onChange={(e) => SetSecurityQuestion(e.target.value)}
-                      required
-                    >
-                      <option value="What is your mother's maiden name?">
-                        What is your mother's maiden name?
-                      </option>
-                      <option value="In which city were you born?">
-                        In which city were you born?
-                      </option>
-                      <option value="What is the name of your first pet?">
-                        What is the name of your first pet?
-                      </option>
-                      <option value="What is your favorite book?">
-                        What is your favorite book?
-                      </option>
-                      <option value="What was the model of your first car?">
-                        What was the model of your first car?
-                      </option>
-                    </select>
-                  </div>
-
-                  {/* Security Answer */}
-                  <div className="mb-2">
-                    <label
-                      htmlFor="securityAnswer"
-                      className="form-label smalltitlefont2"
-                    >
-                      Security Answer
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Your Answer"
-                      value={Answer}
-                      onChange={(e) => SetAnswer(e.target.value)}
-                      required
                     />
                   </div>
+                  <div className="col-md-6">
+                    <label className="form-label">City</label>
+                    <RegionDropdown
+                      country={country}
+                      value={region}
+                      onChange={(val) => setRegion(val)}
+                      className="form-control"
+                    />
+                  </div>
+                </div>
 
-                  {/* Upload Photo */}
-                  <div className="d-flex justify-content-start w-100 border-2 mb-2">
-                    <label className="btn border border-3 w-100 btn-outline-primary">
+                <div className="mb-3">
+                  <label className="form-label">Security Question</label>
+                  <select
+                    className="form-control"
+                    onChange={(e) => SetSecurityQuestion(e.target.value)}
+                    required
+                  >
+                    <option value="What is your mother's maiden name?">
+                      What is your mother's maiden name?
+                    </option>
+                    <option value="In which city were you born?">
+                      In which city were you born?
+                    </option>
+                    <option value="What is the name of your first pet?">
+                      What is the name of your first pet?
+                    </option>
+                    <option value="What is your favorite book?">
+                      What is your favorite book?
+                    </option>
+                    <option value="What was the model of your first car?">
+                      What was the model of your first car?
+                    </option>
+                  </select>
+                </div>
+
+                <div className="mb-3">
+                  <label className="form-label">Security Answer</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Your answer"
+                    value={Answer}
+                    onChange={(e) => SetAnswer(e.target.value)}
+                    required
+                  />
+                </div>
+
+                <div className="mb-3">
+                  <label className="form-label d-block">Profile Photo</label>
+                  <div className="d-grid">
+                    <label className="btn btn-outline-primary">
                       {photo ? photo.name : "Upload Photo"}
                       <input
                         type="file"
@@ -401,20 +326,29 @@ const Register = () => {
                       />
                     </label>
                   </div>
-
-                  {/* Back and Register Buttons */}
-                  <div className="d-flex justify-content-between mt-3">
-                    <button className="btn btn-secondary" onClick={prevStep}>
-                      ← Back to Step 1
-                    </button>
-                    <button className="btn btn-primary" type="submit">
-                      {Loading ? "Loading..." : "Register"}
-                    </button>
-                  </div>
                 </div>
-              )}
-            </form>
-          </div>
+
+                <div className="d-flex justify-content-between mt-3">
+                  <button
+                    type="button"
+                    className="btn btn-secondary me-2"
+                    onClick={prevStep}
+                    style={{ width: "48%" }}
+                  >
+                    Back
+                  </button>
+                  <button
+                    type="submit"
+                    className="btn btn-primary ms-2"
+                    disabled={Loading}
+                    style={{ width: "48%" }}
+                  >
+                    {Loading ? "Loading..." : "Register"}
+                  </button>
+                </div>
+              </form>
+            </div>
+          )}
         </div>
       </div>
     </Layout>

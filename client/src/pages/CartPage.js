@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Layout from "../components/layout/layout";
 import { useCart } from "../context/cart";
 import { useNavigate } from "react-router-dom";
@@ -17,7 +17,7 @@ const CartPage = () => {
   function RemoveCartItems(id) {
     try {
       let MyCart = [...Cart];
-      let index = MyCart.findIndex((Item) => Item._id == id);
+      let index = MyCart.findIndex((Item) => Item._id === id);
       MyCart.splice(index, 1);
       setCart(MyCart);
       localStorage.setItem("Cart", JSON.stringify(MyCart));
@@ -30,7 +30,7 @@ const CartPage = () => {
   function TotalPrice() {
     try {
       let total = 0;
-      Cart?.map((item) => {
+      Cart?.forEach((item) => {
         total = total + item.price;
       });
       return total;
@@ -112,7 +112,7 @@ const CartPage = () => {
               </div>
             ) : (
               <div className="d-flex flex-column">
-                <img src={emptycart} style={{ width: "20rem" }} />
+                <img src={emptycart} alt="Empty cart" style={{ width: "20rem" }} />
                 <button
                   className="btn btn-dark"
                   onClick={() => {

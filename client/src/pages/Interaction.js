@@ -29,8 +29,6 @@ const Interaction = () => {
   const [TotalQuestions, SetTotalQuestions] = useState(0);
   const [loading, setLoading] = useState(false);
   const [Keyword, SetKeyword] = useState("");
-  const [answer, setAnswer] = useState("");
-
   const isInitialMount = useRef(true);
 
   const [auth, SetAuth] = useAuth();
@@ -43,10 +41,6 @@ const Interaction = () => {
 
   const showModal = () => {
     setIsModalVisible(true);
-  };
-
-  const handleOk = () => {
-    setIsModalVisible(false);
   };
 
   const handleCancel = () => {
