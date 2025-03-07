@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useRef } from "react";
-import Layout from "../components/layout/layout";
+import Layout from "../../components/layout/layout";
 import { MdOutlineConnectingAirports } from "react-icons/md";
 import toast from "react-hot-toast";
 import { Tag } from "antd";
 import moment from "moment";
-import "../App.css";
+import '../../App.css';
 import { Modal } from "antd";
 import { NavLink } from "react-router-dom";
 import { Input } from "antd";
@@ -15,9 +15,9 @@ import { IoMdChatboxes } from "react-icons/io";
 import Button from "@mui/material/Button";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { blue } from "@mui/material/colors";
-import { useAuth } from "../context/auth";
+import { useAuth } from "../../context/auth";
 import { Pagination } from "antd";
-import chatgpt from "../assests/chatgpt.png";
+import chatgpt from "../../assests/chatgpt.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRobot } from "@fortawesome/free-solid-svg-icons";
 import "./Interaction.css";
@@ -275,14 +275,15 @@ const Interaction = () => {
               zIndex: 1000,
             }}
           >
-            
-           
-              <Avatar src={chatgpt}   style={{
-            
+            <Avatar
+              src={chatgpt}
+              style={{
                 fontSize: "1.8rem",
                 marginBottom: "5px",
-              }}onClick={showModal} />
-        
+              }}
+              onClick={showModal}
+            />
+
             <span
               style={{
                 color: "#0000ff",
@@ -365,73 +366,50 @@ const Interaction = () => {
             </button>
           </div>
         </Modal>
+        {/* Question Cards Container - Replace your existing question cards map loop with this */}
         <div className="w-100 d-flex flex-column align-items-center gap-3">
           {Questions.length > 0 ? (
             Questions.map((q) => (
-              <div
-                class="cardinter p-2"
-                style={{ boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.3)" }}
-              >
-                <div class="card-body">
-                  <div
-                    className="d-flex justify-content-between"
-                    style={{ width: "100%" }}
-                  >
+              <div key={q._id} className="question-card">
+                <div className="question-card-body">
+                  <div className="question-header">
                     {/* User image and name */}
-                    <div
-                      className="d-flex align-items-center "
-                      style={{ width: "50%" }}
-                    >
+                    <div className="user-info">
                       <Avatar
                         src={`https://talkofcodebackend.onrender.com/api/v1/auth/get-userPhoto/${q.user._id}`}
-                        sx={{ width: 30, height: 30 }} // Add margin for spacing
+                        sx={{ width: 32, height: 32 }}
                       />
                       <p className="UserNameDisplay">{q.user.Name}</p>
                     </div>
 
                     {/* Asked label and date */}
-                    <div
-                      className="d-flex align-items-center"
-                      style={{ width: "50%" }}
-                    >
+                    <div className="question-date">
                       <div>Asked:</div>
-                      <div
-                        className="DateDisplay"
-                        style={{ marginLeft: "0.5rem" }}
-                      >
-                        {" "}
-                        {/* Add margin for spacing */}
+                      <div className="DateDisplay">
                         {moment(q.createdAt).format("MMMM Do YYYY")}
                       </div>
                     </div>
                   </div>
 
-                  <blockquote class="blockquote mb-0">
-                    <p
-                      style={{ marginBottom: "0rem" }}
-                      className="QuestionTitle"
-                    >
+                  <div className="question-content">
+                    <p className="QuestionTitle">
                       Q.{" "}
                       {q.title.length > 100
                         ? q.title.substring(0, 100) + "..."
                         : q.title}
                     </p>
 
-                    <div className="d-flex align-items-center w-100 justify-content-between">
-                      {" "}
-                      <div>
-                        {" "}
-                        {q.tags.map((tag, index) => (
-                          <Tag color="blue">{tag}</Tag>
-                        ))}
-                      </div>
+                    <div className="question-tags">
+                      {q.tags.map((tag, index) => (
+                        <Tag color="blue" key={index}>
+                          {tag}
+                        </Tag>
+                      ))}
                     </div>
-                  </blockquote>
+                  </div>
                 </div>
-                <div
-                  className="d-flex justify-content-between"
-                  style={{ marginLeft: "14px", marginRight: "14px" }}
-                >
+
+                <div className="question-actions">
                   <div className="AnswerParent">
                     <div className="AnswerBox">
                       <IoMdChatboxes />
@@ -439,10 +417,7 @@ const Interaction = () => {
                     </div>
                   </div>
 
-                  <div
-                    className="d-flex align-items-center"
-                    style={{ gap: "1rem" }}
-                  >
+                  <div className="action-buttons">
                     <NavLink to={`/dashboard/user/ViewQuestion/${q._id}`}>
                       <button className="btn btn-primary">View</button>
                     </NavLink>
@@ -476,7 +451,6 @@ const Interaction = () => {
             ))
           ) : (
             <>
-              {" "}
               <Empty />
             </>
           )}

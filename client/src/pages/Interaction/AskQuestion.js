@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Layout from "../components/layout/layout";
-import { useAuth } from "../context/auth";
+import Layout from "../../components/layout/layout";
+import { useAuth } from "../../context/auth";
 import { Tag } from "antd";
 import { RxCross2 } from "react-icons/rx";
 import toast from "react-hot-toast";

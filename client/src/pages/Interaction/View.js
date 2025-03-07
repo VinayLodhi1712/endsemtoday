@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
-import Layout from "../components/layout/layout";
+import Layout from "../../components/layout/layout";
 import toast from "react-hot-toast";
 import { Tag } from "antd";
 import moment from "moment";
-import "../App.css";
 import { Empty } from "antd";
 import { useParams } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { FaRegArrowAltCircleUp } from "react-icons/fa";
-import { useAuth } from "../context/auth";
+import { useAuth } from "../../context/auth";
 import { LuBookmarkPlus } from "react-icons/lu";
 import Button from "@mui/material/Button";
 import { FaRegArrowAltCircleDown } from "react-icons/fa";

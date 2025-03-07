@@ -7,21 +7,6 @@ body {
 }
 
 
-
-.navbar {
-
-  padding: 1.2rem 0rem 1.2rem 0rem !important;
-  text-transform: uppercase !important;
-  box-shadow: 0 1px 5px !important;
-  /* background-image: linear-gradient(
-    to right,
-    #0c0c0c 0%,
-    #0e1010 100%
-  ) !important; */
-
-
-}
-
 .flexforfullwidth{
   display: flex;
   justify-content: space-around;

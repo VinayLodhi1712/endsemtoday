@@ -29,6 +29,7 @@ import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 // import ScrollToTop from "react-scroll-to-top";
+import "./home.css";
 
 import { EffectCoverflow, Pagination } from "swiper/modules";
 

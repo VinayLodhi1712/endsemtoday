@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import Header from "./header";
-import Footer from "./footer";
+import Header from "./Header/header";
+import Footer from "./Footer/footer";
 
 function Layout({ children }) {
   return (

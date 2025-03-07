@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import Layout from "../components/layout/layout";
+import Layout from "../../components/layout/layout";
 import { useParams } from "react-router-dom";
 import toast from "react-hot-toast";
-import { useAuth } from "../context/auth";
+import { useAuth } from "../../context/auth";
 import Button from "@mui/material/Button";
 const AnswerQuestion = () => {
   const params = useParams();

@@ -1,0 +1,335 @@
+/* Header.css */
+.header-container {
+    background-color: #121212;
+    padding: 0;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  .navbar {
+    padding: 20px 0;  
+  }
+  
+  .container {
+    margin: 0 auto;
+    padding: 0 20px;
+    width: 100%;
+  }
+  
+  /* Brand styling */
+  .navbar-brand {
+    font-weight: 700;
+    font-size: 24px;
+    color: white;
+    margin-right: 40px;
+    padding: 0;
+    background: linear-gradient(90deg, #4776E6 0%, #8E54E9 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+  }
+  
+  .navbar-brand-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Links Containers */
+  .navbar-collapse {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .navbar-links-container {
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
+  }
+  
+  .navbar-auth-container {
+    display: flex;
+    justify-content: center;
+  }
+  
+  /* Navigation Links */
+  .navbar-nav {
+    display: flex;
+    align-items: center;
+  }
+  
+  .main-links {
+    justify-content: center;
+  }
+  
+  .auth-links {
+    justify-content: flex-end;
+  }
+  
+  .nav-item {
+    margin: 0 5px;
+    position: relative;
+  }
+  
+  .nav-link {
+    color: #a8a8a8;
+    font-weight: 500;
+    padding: 8px 15px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+  }
+  
+  .nav-link:hover, 
+  .nav-link.active {
+    color: white;
+  }
+  
+  .nav-link span {
+    position: relative;
+  }
+  
+  .nav-link.active span::after {
+    content: '';
+    background: linear-gradient(90deg, #4776E6 0%, #8E54E9 100%);
+  }
+  
+  /* Authentication Links */
+  .signup-link, 
+  .login-link {
+    margin-left: 5px;
+  }
+  
+  .login-link {
+    background: linear-gradient(90deg, #4776E6 0%, #8E54E9 100%);
+    color: white;
+  }
+  
+  .login-link:hover, 
+  .login-link.active {
+    background: linear-gradient(90deg, #3a5fbd 0%, #7444c3 100%);
+    color: white;
+  }
+  
+  /* User Dropdown */
+  .user-dropdown {
+    margin-right: 10px;
+  }
+  
+  .user-dropdown .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .user-avatar {
+    border: 2px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .user-name {
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  .dropdown-menu {
+    background-color: #1a1a1a;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-top: 8px;
+  }
+  
+  .dropdown-item {
+    color: #a8a8a8;
+    padding: 10px 15px;
+    transition: all 0.3s ease;
+  }
+  
+  .dropdown-item:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: white;
+  }
+  
+  /* Cart Styling */
+  .cart-link {
+    position: relative;
+    padding-right: 15px;
+  }
+  
+  .cart-icon {
+    font-size: 20px;
+  }
+  
+  /* Mobile Styling */
+  .mobile-header {
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .navbar-toggler {
+    border: none;
+    padding: 8px;
+    background-color: rgba(255, 255, 255, 0.05);
+    cursor: pointer;
+  }
+  
+  .navbar-toggler-icon {
+    filter: invert(1);
+  }
+  
+  .mobile-brand {
+    margin-right: 0;
+  }
+  
+  /* Improved responsive adjustments */
+@media (max-width: 992px) {
+  .navbar {
+    padding: 10px 0;
+  }
+  
+  .navbar-collapse {
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: #1a1a1a;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    padding: 15px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  
+  .navbar-links-container, 
+  .navbar-auth-container {
+    width: 100%;
+  }
+  
+  .main-links, 
+  .auth-links {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    margin: 10px 0;
+  }
+  
+  .nav-item {
+    width: 100%;
+    margin: 5px 0;
+  }
+  
+  .nav-link {
+    padding: 12px 10px;
+    width: 100%;
+  }
+  
+  .mobile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 5px 0;
+  }
+  
+  .navbar-toggler {
+    padding: 8px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+    margin-right: 10px;
+  }
+  
+  .mobile-brand {
+    margin-right: 0;
+    font-size: 20px;
+  }
+  
+  /* User dropdown improvements for mobile */
+  .dropdown-menu {
+    width: 100%;
+    position: static !important;
+    transform: none !important;
+    margin-top: 5px;
+    border-radius: 4px;
+    padding: 5px 0;
+  }
+  
+  .dropdown-item {
+    padding: 12px 15px;
+  }
+  
+  /* Fix for user name and avatar on mobile */
+  .user-name {
+    max-width: 150px;
+  }
+  
+  /* Better spacing for auth buttons on mobile */
+  .signup-link, 
+  .login-link {
+    margin: 5px 0;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .login-link {
+    margin-top: 8px;
+    padding: 10px 0;
+  }
+  
+  /* Cart styling for mobile */
+  .cart-link {
+    padding: 12px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  
+  .cart-icon {
+    margin-right: 8px;
+  }
+  
+  /* Add separation between main links and auth links */
+  .navbar-auth-container {
+    margin-top: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding-top: 10px;
+  }
+}
+
+/* Extra small devices */
+@media (max-width: 576px) {
+  .container {
+    padding: 0 15px;
+  }
+  
+  .mobile-brand {
+    font-size: 18px;
+  }
+  
+  .user-name {
+    max-width: 100px;
+  }
+}
+
+/* Improve animation for mobile menu */
+.navbar-collapse {
+  transition: all 0.3s ease;
+}
+
+/* Fix for navbar toggler icon visibility */
+.navbar-toggler-icon {
+  filter: invert(1);
+  opacity: 0.8;
+}
+
+.navbar-toggler:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(71, 118, 230, 0.5);
+}
