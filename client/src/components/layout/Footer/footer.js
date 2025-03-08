@@ -1,16 +1,72 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { FaEnvelope, FaTwitter, FaGithub, FaLinkedin, FaShoppingCart, FaQuestionCircle, FaNewspaper } from "react-icons/fa";
-import "./footer.css"; // Updated CSS file
+import { ToastContainer, toast } from "react-toastify"; // Import react-toastify for notifications
+import {
+  FaEnvelope,
+  FaTwitter,
+  FaGithub,
+  FaLinkedin,
+  FaShoppingCart,
+  FaQuestionCircle,
+  FaNewspaper,
+} from "react-icons/fa";
+import "./footer.css";
+import "react-toastify/dist/ReactToastify.css"; // Import the CSS for react-toastify
 
 function Footer() {
+  const [email, setEmail] = useState(""); 
+  const [loading, setLoading] = useState(false); 
+  const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:8000/api/v1";
+  const handleSubscribe = async () => {
+    if (!email) {
+      toast.error("Please enter a valid email");
+      return;
+    }
+  
+    try {
+      setLoading(true);
+      const response = await fetch(`${apiUrl}/subscribe`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+      if (response.status === 404) {
+        console.error(`404 Not Found: ${apiUrl}/subscribe`);
+        toast.error("API endpoint not found. Check server routes.");
+        setLoading(false);
+        return;
+      }
+  
+      const data = await response.json();
+      if (response.ok) {
+        toast.success( "Subscribed successfully!");
+        setEmail("");
+      } else {
+        toast.error( "Subscription failed");
+      }
+    } catch (error) {
+      console.error("Subscription error:", error);
+      if (error.message === "Failed to fetch") {
+        toast.error("Cannot connect to server. Is your backend running?");
+      } else {
+        toast.error("Something went wrong. Try again!");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <footer className="footer-container">
+      <ToastContainer position="top-right" autoClose={3000} />
+      
       <div className="footer-content">
         {/* Brand Column */}
         <div className="footer-section brand-section">
           <h2 className="footer-logo">TALKOFCODE</h2>
-          <p className="footer-tagline">Your one-stop platform for e-commerce, technical Q&A, and tech news.</p>
+          <p className="footer-tagline">
+            Your one-stop platform for e-commerce, technical Q&A, and tech news.
+          </p>
         </div>
 
         {/* Services Column */}
@@ -70,22 +126,44 @@ function Footer() {
               type="email"
               className="newsletter-input"
               placeholder="Your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
-            <button className="newsletter-button">
-              Subscribe
+            <button className="newsletter-button" onClick={handleSubscribe} disabled={loading}>
+              {loading ? "Subscribing..." : "Subscribe"}
             </button>
           </div>
           <div className="social-links">
-            <a href="mailto:vinayanandlodhi12@gmail.com" className="social-icon" target="_blank" rel="noopener noreferrer">
+            <a
+              href="mailto:vinayanandlodhi12@gmail.com"
+              className="social-icon"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <FaEnvelope />
             </a>
-            <a href="https://twitter.com/VinayLodhi1712" className="social-icon" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://twitter.com/VinayLodhi1712"
+              className="social-icon"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <FaTwitter />
             </a>
-            <a href="https://github.com/VinayLodhi1712" className="social-icon" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://github.com/VinayLodhi1712"
+              className="social-icon"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <FaGithub />
             </a>
-            <a href="https://www.linkedin.com/in/vinay-anand-lodhi-5694b1234/" className="social-icon" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://www.linkedin.com/in/vinay-anand-lodhi-5694b1234/"
+              className="social-icon"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <FaLinkedin />
             </a>
           </div>
@@ -93,7 +171,7 @@ function Footer() {
       </div>
 
       <div className="footer-divider"></div>
-      
+
       <div className="footer-bottom">
         <p>© 2024 TALKOFCODE. All rights reserved.</p>
       </div>
