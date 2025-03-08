@@ -1,5 +1,5 @@
-const Usermodel = require("../modles/usermodel");
-const User = require("../modles/usermodel");
+const Usermodel = require("../models/usermodel");
+const User = require("../models/usermodel");
 const { hashPassword, comparePassword } = require("../helpers/authhelper");
 const JWT = require("jsonwebtoken");
 const fs = require("fs").promises;
@@ -82,7 +82,6 @@ async function registerController(req, res) {
 }
 
 async function googlelogin(req, res) {
-  console.log("google login hit")
   const { email, Name, photo } = req.body;
   // Validate request body
   if (!email || !Name) {

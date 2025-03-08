@@ -1,4 +1,4 @@
-const usermodel = require("../modles/usermodel");
+const usermodel = require("../models/usermodel");
 async function IsAdmin(req, resp, next) {
   try {
     

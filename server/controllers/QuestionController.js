@@ -1,6 +1,6 @@
-const Questionmodel = require("../modles/QuestionModel");
-const Answermodel = require("../modles/Answermodel");
-const Usermodel = require("../modles/usermodel");
+const Questionmodel = require("../models/QuestionModel");
+const Answermodel = require("../models/Answermodel");
+const Usermodel = require("../models/usermodel");
 
 async function AskquestionController(req, resp) {
   try {

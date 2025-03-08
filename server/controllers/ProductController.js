@@ -1,9 +1,9 @@
-const ProductModel = require("../modles/ProductModel");
-const OrderModel = require("../modles/OrderModel");
-const usermodel = require("../modles/usermodel");
+const ProductModel = require("../models/ProductModel");
+const OrderModel = require("../models/OrderModel");
+const usermodel = require("../models/usermodel");
 const fs = require("fs").promises;
 const slugify = require("slugify");
-const CategoryModel = require("../modles/CategoryModel");
+const CategoryModel = require("../models/CategoryModel");
 
 const dotenv = require("dotenv");
 dotenv.configDotenv();

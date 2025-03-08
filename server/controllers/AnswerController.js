@@ -1,7 +1,7 @@
-const Answermodel = require("../modles/Answermodel");
-const Questionmodel = require("../modles/QuestionModel");
+const Answermodel = require("../models/Answermodel");
+const Questionmodel = require("../models/QuestionModel");
 const nodemailer = require("nodemailer");
-const Usermodel = require("../modles/usermodel");
+const Usermodel = require("../models/usermodel");
 
 async function AnswerController(req, resp) {
   try {

@@ -12,7 +12,7 @@ const {
   RemoveBookmarked,
   GetSingleQuestionsController,
   QuestionByUserCountController
-} = require("../controllers/QuestionControoler");
+} = require("../controllers/QuestionController");
 
 router.get("/get_question/:Page", GetquestionController);
 router.post("/ask_question/:id", AskquestionController);

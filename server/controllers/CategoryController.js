@@ -1,4 +1,4 @@
-const CategoryModel = require("../modles/CategoryModel");
+const CategoryModel = require("../models/CategoryModel");
 const slugify = require("slugify");
 
 //create category
