@@ -205,7 +205,7 @@ const ProductDetails = () => {
                       "Cart",
                       JSON.stringify([...Cart, ...items])
                     );
-                    toast(`${quantity} item(s) added to cart!`, {
+                    toast.success(`${quantity} item(s) added to cart!`, {
                       icon: "👍",
                     });
                   }}

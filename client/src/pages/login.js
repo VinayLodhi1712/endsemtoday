@@ -113,7 +113,6 @@ const Login = () => {
           })
         );
 
-        console.log(data.isNewUser);
         toast.success("Login Successful");
         if (data.isNewUser) {
           navigate("/dashboard/user/Profile");

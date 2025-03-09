@@ -22,7 +22,6 @@ import Typography from "@mui/material/Typography";
 import FadeIn from "./FadeIn";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { MdOutlineConnectingAirports } from "react-icons/md";
-import codeconnect1 from "../assests/codeconnect1.jpg";
 import './service.css';
 import "swiper/css";
 import "swiper/css/effect-coverflow";
@@ -117,7 +116,7 @@ function Home() {
             style={{ gap: "1rem" }}
 
           >
-            <h1 className=" text-center WelcomeText mb-3 hometext">
+            <h1 className=" text-center WelcomeText mb-3 mt-2 hometext">
               {" "}
               Welcome to <span style={{ color: "#1fa2ff" }}>TalkOfCode</span>
               <br></br>
@@ -126,35 +125,7 @@ function Home() {
             <p className="text-center responsive" style={{ fontSize: "20px"}}>
               Empowering Tech Enthusiasts to Learn, Connect, and Innovate.
             </p>
-            <img src={homepageimage} className="homepageimage"></img>
-            <div className="d-flex justify-content-center text-center">
-              <div >
-                <NavLink to="/register">
-                  <Button variant="contained" sx={{ bgcolor: "ochre.darker", width: { xs: '150px', sm: '150px', md: '150px' }, marginRight: { xs: '0px', sm: '0px', md: '1.5rem' } }}>
-                    Get Started
-                  </Button>
-                </NavLink>
-              </div>
-              <div>
-                <NavLink to="/About">
-                  <Button variant="contained" sx={{ bgcolor: "ochre.darker", width: { xs: '150px', sm: '150px', md: '150px' } }}>
-                    About us
-                  </Button>
-                </NavLink>
-              </div>
-            </div>
-
-           
-          </div>
-
-        </div>{" "}
-
-      </div>
-      <div
-        className="homepage-section d-flex align-items-center flex-column justify-content-center w-100  mb-3"
-        data-aos="fade-up"
-      >
-         <div>
+            <div>
               <div class="container1 d-flex mt-3">
                 <div class="card" >
                   <div class="imgbx">
@@ -201,6 +172,35 @@ function Home() {
                 </div>
               </div>
             </div>
+            {/* <img src={homepageimage} className="homepageimage"></img> */}
+            <div className="d-flex justify-content-center text-center">
+              <div >
+                <NavLink to="/register">
+                  <Button variant="contained" sx={{ bgcolor: "ochre.darker", width: { xs: '150px', sm: '150px', md: '150px' }, marginRight: { xs: '0px', sm: '0px', md: '1.5rem' } }}>
+                    Get Started
+                  </Button>
+                </NavLink>
+              </div>
+              <div>
+                <NavLink to="/About">
+                  <Button variant="contained" sx={{ bgcolor: "ochre.darker", width: { xs: '150px', sm: '150px', md: '150px' } }}>
+                    About us
+                  </Button>
+                </NavLink>
+              </div>
+            </div>
+
+           
+          </div>
+
+        </div>{" "}
+
+      </div>
+      <div
+        className="homepage-section d-flex align-items-center flex-column justify-content-center w-100  mb-3"
+        data-aos="fade-up"
+      >
+         
         <h1 className=" w-50 text-center WelcomeText mt-5 ">
           {" "}
           More than <span style={{ color: "#1fa2ff" }}>30+ Products</span> Listed. Checkout Now!
