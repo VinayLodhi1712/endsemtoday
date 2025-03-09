@@ -65,7 +65,7 @@ const CartPage = () => {
             {cart.length > 0 ? (
               <div className="cart-items-container">
                 {cart?.map((product) => (
-                  <div key={product._id} className="cart-item">
+                  <div key={product._id} className="cart-item2">
                     <Image
                       src={`https://talkofcodebackend.onrender.com/api/v1/product/get-productPhoto/${product._id}`}
                       alt={product.name}

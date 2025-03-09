@@ -97,7 +97,6 @@
   
   .nav-link.active span::after {
     content: '';
-    background: linear-gradient(90deg, #4776E6 0%, #8E54E9 100%);
   }
   
   /* Authentication Links */

@@ -167,7 +167,7 @@
 }
 
 /* Dashboard Button Styling */
-.ButtonBorder {
+.ButtonBorder2 {
   margin-bottom: 0.5rem;
   border-radius: 8px;
   transition: all 0.3s ease;
@@ -175,12 +175,12 @@
   border: none;
 }
 
-.ButtonBorder:hover {
+.ButtonBorder2:hover {
   transform: translateX(5px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
-.ButtonBorder a {
+.ButtonBorder2 a {
   color: white;
   text-decoration: none;
   font-weight: 500;
@@ -191,7 +191,7 @@
   justify-content: center;
 }
 
-.ButtonBorder a svg {
+.ButtonBorder2 a svg {
   margin-right: 0.5rem;
   font-size: 1.1rem;
 }

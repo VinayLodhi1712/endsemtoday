@@ -241,7 +241,7 @@ const AdminDashboard = () => {
           style={{ gap: "1rem" }}
         >
           <button
-            className="btn ButtonBorder w-100"
+            className="btn ButtonBorder2 w-100"
             style={{ 
               fontWeight: "700", 
               backgroundColor: "#2c3e50",
@@ -260,7 +260,7 @@ const AdminDashboard = () => {
           </button>
 
           <button
-            className="btn ButtonBorder w-100"
+            className="btn ButtonBorder2 w-100"
             style={{ 
               fontWeight: "700", 
               backgroundColor: "#3498db",
@@ -279,7 +279,7 @@ const AdminDashboard = () => {
           </button>
 
           <button
-            className="btn ButtonBorder w-100"
+            className="btn ButtonBorder2 w-100"
             style={{ 
               fontWeight: "700", 
               backgroundColor: "#16a085",
@@ -298,7 +298,7 @@ const AdminDashboard = () => {
           </button>
 
           <button
-            className="btn ButtonBorder w-100"
+            className="btn ButtonBorder2 w-100"
             style={{ 
               fontWeight: "700", 
               backgroundColor: "#9b59b6",
@@ -317,7 +317,7 @@ const AdminDashboard = () => {
           </button>
 
           <button
-            className="btn ButtonBorder w-100"
+            className="btn ButtonBorder2 w-100"
             style={{ 
               fontWeight: "700", 
               backgroundColor: "#e74c3c",
@@ -336,7 +336,7 @@ const AdminDashboard = () => {
           </button>
 
           <button
-            className="btn ButtonBorder w-100"
+            className="btn ButtonBorder2 w-100"
             style={{ 
               fontWeight: "700", 
               backgroundColor: "#f39c12",
@@ -355,7 +355,7 @@ const AdminDashboard = () => {
           </button>
 
           <button
-            className="btn ButtonBorder w-100"
+            className="btn ButtonBorder2 w-100"
             style={{ 
               fontWeight: "700", 
               backgroundColor: "#27ae60",

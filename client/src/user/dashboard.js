@@ -205,7 +205,7 @@ const UserDashboard = () => {
           style={{ gap: "2rem" }}
         >
           <button
-            className="btn btn-dark ButtonBorder w-100"
+            className="btn btn-dark ButtonBorder2 w-100"
             style={{ fontWeight: "700" }}
           >
             <NavLink
@@ -218,7 +218,7 @@ const UserDashboard = () => {
           </button>
 
           <button
-            className="btn btn-dark ButtonBorder w-100"
+            className="btn btn-dark ButtonBorder2 w-100"
             style={{ fontWeight: "700" }}
           >
             <NavLink
@@ -231,7 +231,7 @@ const UserDashboard = () => {
           </button>
           
           <button
-            className="btn btn-dark ButtonBorder w-100"
+            className="btn btn-dark ButtonBorder2 w-100"
             style={{ fontWeight: "700" }}
           >
             <NavLink
@@ -245,7 +245,7 @@ const UserDashboard = () => {
           </button>
 
           <button
-            className="btn btn-dark ButtonBorder w-100"
+            className="btn btn-dark ButtonBorder2 w-100"
             style={{ fontWeight: "700" }}
           >
             <NavLink
@@ -258,7 +258,7 @@ const UserDashboard = () => {
           </button>
 
           <button
-            className="btn btn-dark ButtonBorder w-100"
+            className="btn btn-dark ButtonBorder2 w-100"
             style={{ fontWeight: "700" }}
           >
             <NavLink
