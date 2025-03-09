@@ -5,7 +5,6 @@ import toast from "react-hot-toast";
 import { Tag } from "antd";
 import moment from "moment";
 import '../../App.css';
-import { Modal } from "antd";
 import { NavLink } from "react-router-dom";
 import { Input } from "antd";
 import { Empty } from "antd";
@@ -21,17 +20,16 @@ import chatgpt from "../../assests/chatgpt.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRobot } from "@fortawesome/free-solid-svg-icons";
 import "./Interaction.css";
+import ChatGPT from "./Chatgpt"; // Import the ChatGPT component
+
 const Interaction = () => {
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [conversation, setConversation] = useState([]);
+  const [showChatGPT, setShowChatGPT] = useState(false);
   const [Questions, SetQuestions] = useState([]);
-  const [userQuestion, setUserQuestion] = useState([]);
   const [TotalQuestions, SetTotalQuestions] = useState(0);
-  const [loading, setLoading] = useState(false);
   const [Keyword, SetKeyword] = useState("");
   const isInitialMount = useRef(true);
 
-  const [auth, SetAuth] = useAuth();
+  const [auth] = useAuth();
 
   const [pageSize, setPageSize] = useState(6);
   const [Searching, SetSearching] = useState(false);
@@ -39,64 +37,10 @@ const Interaction = () => {
 
   const { Search } = Input;
 
-  const showModal = () => {
-    setIsModalVisible(true);
+  // Toggle ChatGPT modal visibility
+  const toggleChatGPT = () => {
+    setShowChatGPT(!showChatGPT);
   };
-
-  const handleCancel = () => {
-    setIsModalVisible(false);
-  };
-
-  const handleAskQuestion = async () => {
-    if (userQuestion.length === 0) return;
-
-    // Add user question to conversation
-    const updatedConversation = [
-      ...conversation,
-      { role: "user", content: userQuestion },
-    ];
-    setConversation(updatedConversation);
-    setUserQuestion("");
-
-    // Fetch answer from ChatGPT
-    setLoading(true);
-    const url = "https://chatgpt-42.p.rapidapi.com/gpt4";
-    const options = {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        "X-RapidAPI-Key": "c31e37b590msh53493f64684660cp15092ajsn8c95da3fe0c6",
-        //'3b66842437mshcaf81fced1636e6p15053bjsnf454e7c9cc4e'
-        "X-RapidAPI-Host": "chatgpt-42.p.rapidapi.com",
-      },
-      body: JSON.stringify({
-        messages: [{ role: "user", content: userQuestion }],
-        web_access: false,
-      }),
-    };
-
-    try {
-      const response = await fetch(url, options);
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-      const result = await response.json();
-      const chatGPTAnswer = result.result;
-      // Add chatbot answer to conversation
-      updatedConversation.push({ role: "chatbot", content: chatGPTAnswer });
-      setConversation(updatedConversation);
-      setLoading(false);
-    } catch (error) {
-      console.error(error);
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    if (conversation.length > 0) {
-      setIsModalVisible(true);
-    }
-  }, [conversation]);
 
   async function onSearch(keywordToSearch) {
     try {
@@ -118,6 +62,7 @@ const Interaction = () => {
       toast.error("Something went wrong");
     }
   }
+  
   async function DeleteQuestion(question) {
     try {
       let confirmed = window.confirm(
@@ -144,6 +89,7 @@ const Interaction = () => {
       toast.error("Question Not Deleted");
     }
   }
+  
   async function GetQuestions() {
     try {
       const response = await fetch(
@@ -274,6 +220,7 @@ const Interaction = () => {
               cursor: "pointer",
               zIndex: 1000,
             }}
+            onClick={toggleChatGPT} // Add click handler to toggle ChatGPT
           >
             <Avatar
               src={chatgpt}
@@ -281,7 +228,6 @@ const Interaction = () => {
                 fontSize: "1.8rem",
                 marginBottom: "5px",
               }}
-              onClick={showModal}
             />
 
             <span
@@ -296,6 +242,9 @@ const Interaction = () => {
             </span>
           </div>
         </ThemeProvider>
+
+        {/* Include the ChatGPT component */}
+        {showChatGPT && <ChatGPT />}
 
         <h1>
           Code
@@ -315,58 +264,7 @@ const Interaction = () => {
           className="w-50"
         />
 
-        {/* Modal for conversation */}
-        <Modal
-          title="ChatGPT"
-          visible={isModalVisible}
-          onCancel={handleCancel}
-          width={1000}
-          footer={[null]}
-        >
-          <div className="conversation-container">
-            {/* Display conversation */}
-            {conversation.map((message, index) => (
-              <div key={index} className={`message ${message.role}`}>
-                <div className="message-container">
-                  {/* Render icon based on role */}
-                  {message.role === "user" ? (
-                    <div className="user-icon">
-                      <Avatar
-                        src={`https://talkofcodebackend.onrender.com/api/v1/auth/get-userPhoto/${auth.user._id}`}
-                        sx={{ width: 30, height: 30 }}
-                      />
-                    </div>
-                  ) : (
-                    <div className="chatbot-icon">
-                      <Avatar src={chatgpt} sx={{ width: 30, height: 30 }} />
-                    </div>
-                  )}
-                  {/* Render message content */}
-                  <div>
-                    <div className="message-content">{message.content}</div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className="input-container">
-            <input
-              className="question-input"
-              type="text"
-              placeholder="Type your question here..."
-              value={userQuestion}
-              onChange={(e) => setUserQuestion(e.target.value)}
-            />
-            <button
-              className=" btn btn-dark"
-              onClick={handleAskQuestion}
-              disabled={loading}
-            >
-              {loading ? "Asking..." : "Ask"}
-            </button>
-          </div>
-        </Modal>
-        {/* Question Cards Container - Replace your existing question cards map loop with this */}
+        {/* Question Cards Container */}
         <div className="w-100 d-flex flex-column align-items-center gap-3">
           {Questions.length > 0 ? (
             Questions.map((q) => (
