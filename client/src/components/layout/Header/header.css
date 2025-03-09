@@ -107,13 +107,11 @@
   }
   
   .login-link {
-    background: linear-gradient(90deg, #4776E6 0%, #8E54E9 100%);
     color: white;
   }
   
   .login-link:hover, 
   .login-link.active {
-    background: linear-gradient(90deg, #3a5fbd 0%, #7444c3 100%);
     color: white;
   }
   

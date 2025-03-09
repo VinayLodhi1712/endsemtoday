@@ -1,17 +1,43 @@
-.profile-container {
-  height: 100vh;
+/* Modern color palette */
+:root {
+  --primary: #3a6ea5;
+  --primary-hover: #2c5a8c;
+  --secondary: #6c757d;
+  --accent: #61dafb;
+  --light-bg: #f8f9fa;
+  --dark-text: #333;
+  --medium-text: #555;
+  --light-text: #777;
+  --card-bg: #fff;
+  --border-color: #eaeaea;
 }
 
+/* Profile Container */
+.profile-container {
+  height: 100vh;
+  background-color: var(--light-bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Main Profile Box */
 .profile-box {
-  background-color: #fff;
+  background-color: var(--card-bg);
   width: 400px;
   border-radius: 15px;
   overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+  transition: transform 0.3s ease;
 }
 
+.profile-box:hover {
+  transform: translateY(-5px);
+}
+
+/* Photo Section with Gradient Background */
 .profile-photo-section {
-  background-color: #f0f0f0;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
   height: 35%;
   display: flex;
   justify-content: center;
@@ -19,67 +45,171 @@
   padding: 0.2rem;
 }
 
+/* Profile Photo with Border */
 .profile-photo {
   border-radius: 50%;
   width: 180px;
   height: 180px;
   object-fit: cover;
+  border: 4px solid var(--card-bg);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
+/* Details Section */
 .profile-details-section {
-  padding-top: 1rem; /* Adjusted to create more space above the name */
+  padding-top: 1rem;
   padding: 0 2rem 2rem;
   text-align: center;
 }
 
+/* User Name */
 .profile-name {
- margin-top: 0.5rem;
- font-weight: bold;
-  margin-bottom: 0.5rem; /* Reduced bottom margin to reduce gap */
+  margin-top: 0.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: var(--dark-text);
+  font-size: 1.5rem;
 }
 
+/* User Email */
 .profile-email {
   font-size: 0.9rem;
-  color: gray;
-  margin-bottom: 0.5rem; /* Reduced bottom margin to minimize vertical gap */
+  color: var(--light-text);
+  margin-bottom: 0.8rem;
 }
 
+/* Social Media Icons */
 .social-icons {
   display: flex;
   justify-content: center;
-  gap: 1.5rem; /* Increased gap between icons */
-  margin-bottom: 1rem;
-  font-size: 1.5rem; /* Increased the size of the social media icons */
+  gap: 1.5rem;
+  margin-bottom: 1.2rem;
+  font-size: 1.5rem;
 }
 
+.social-icons a {
+  color: var(--primary);
+  transition: color 0.2s, transform 0.2s;
+}
+
+.social-icons a:hover {
+  color: var(--accent);
+  transform: scale(1.1);
+}
+
+/* User Details */
 .user-details {
   text-align: left;
   margin-bottom: 1.5rem;
-  font-size: 1rem; /* Slightly increased the font size */
+  font-size: 1rem;
+  background-color: var(--light-bg);
+  padding: 1rem;
+  border-radius: 8px;
 }
 
 .user-details p {
   display: flex;
   align-items: center;
-  margin: 0.5rem 0;
-  font-size: 1rem; /* Slightly increased the font size */
+  margin: 0.6rem 0;
+  color: var(--medium-text);
 }
 
 .user-details p svg {
-  font-size: 1.2rem; /* Increased size of the detail icons */
-  margin-right: 0.5rem; /* Added space between icon and text */
+  font-size: 1.2rem;
+  margin-right: 0.5rem;
+  color: var(--primary);
 }
 
+.user-details p span {
+  font-weight: 500;
+  color: var(--dark-text);
+}
+
+/* Tags styling */
+.ant-tag {
+  margin: 0.2rem;
+  border-radius: 4px;
+}
+
+/* Button Styling */
 .profile-buttons {
   display: flex;
   justify-content: space-around;
-  margin-top: 1rem;
+  margin-top: 1.2rem;
+  gap: 0.8rem;
 }
 
-.home-button {
+.profile-buttons button {
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s;
+}
+
+.profile-buttons .ant-btn-primary {
+  background-color: var(--primary);
+  border-color: var(--primary);
+}
+
+.profile-buttons .ant-btn-primary:hover {
+  background-color: var(--primary-hover);
+  border-color: var(--primary-hover);
+  transform: translateY(-2px);
+}
+
+/* Drawer Styling */
+.ant-drawer-content-wrapper {
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+}
+
+.ant-drawer-title {
+  color: var(--primary);
+  font-weight: bold;
+}
+
+/* Dashboard Button Styling */
+.ButtonBorder {
+  margin-bottom: 0.5rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  background: linear-gradient(to right, var(--dark-text), #444);
+  border: none;
+}
+
+.ButtonBorder:hover {
+  transform: translateX(5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.ButtonBorder a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.5rem;
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.gap{
+.ButtonBorder a svg {
+  margin-right: 0.5rem;
+  font-size: 1.1rem;
+}
+
+/* Gap utility */
+.gap {
   gap: 1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .profile-box {
+    width: 90%;
+    max-width: 350px;
+  }
+  
+  .profile-photo {
+    width: 150px;
+    height: 150px;
+  }
 }

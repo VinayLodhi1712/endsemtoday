@@ -9,137 +9,129 @@ import emptycart from "../assests/emptycart.png";
 import { Image } from "antd";
 import ".././App.css";
 import "./Productpage.css";
-const CartPage = () => {
-  const [Cart, setCart] = useCart();
-  const [auth, SetAuth] = useAuth();
-  const Navigate = useNavigate();
+import './cart.css';
 
-  function RemoveCartItems(id) {
+const CartPage = () => {
+  const [cart, setCart] = useCart();
+  const [auth] = useAuth();
+  const navigate = useNavigate();
+
+  const removeCartItem = (id) => {
     try {
-      let MyCart = [...Cart];
-      let index = MyCart.findIndex((Item) => Item._id === id);
-      MyCart.splice(index, 1);
-      setCart(MyCart);
-      localStorage.setItem("Cart", JSON.stringify(MyCart));
-      toast("Item removed from cart!");
+      const updatedCart = [...cart];
+      const index = updatedCart.findIndex((item) => item._id === id);
+      updatedCart.splice(index, 1);
+      setCart(updatedCart);
+      localStorage.setItem("Cart", JSON.stringify(updatedCart));
+      toast.success("Item removed from cart!");
     } catch (error) {
       console.log(error);
-      toast.error("Error Removing item");
+      toast.error("Error removing item");
     }
-  }
-  function TotalPrice() {
+  };
+
+  const calculateTotalPrice = () => {
     try {
       let total = 0;
-      Cart?.forEach((item) => {
+      cart?.forEach((item) => {
         total = total + item.price;
       });
-      return total;
+      return total.toLocaleString('en-IN');
     } catch (error) {
       console.log(error);
+      return 0;
     }
-  }
+  };
 
   return (
     <Layout>
-      <div style={{ width: "100%" }} className="mt-3">
-        <h2 className="text-center mt-3 ">Cart Summary</h2>
-
-        <hr />
-        <div className="items-center">
-        <h4 className="text-center">
-          You have{" "}
-          {Cart.length < 2 ? Cart.length + " item" : Cart.length + " items"} in
-          your cart.{" "}
-        </h4>
-        <div className="cartcard p-2">
-          <h5>
-            <b>Total Payable Amount:</b>₹ {TotalPrice()}.00
-          </h5>
+      <div className="cart-container">
+        <div className="cart-header">
+          <h2 className="cart-title">Your Shopping Cart</h2>
+          <div className="cart-divider"></div>
         </div>
+
         {auth?.token ? (
-          //cart page items
+          <>
+            <div className="cart-summary">
+              <div className="cart-count">
+                You have {cart.length} {cart.length === 1 ? "item" : "items"} in your cart
+              </div>
+              <div className="cart-total">
+                <b>Total Amount:</b> ₹{calculateTotalPrice()}.00
+              </div>
+            </div>
 
-          <div
-            className="d-flex justify-content-center p-3"
-            style={{ width: "100%" }}
-          >
-            {Cart.length > 0 ? (
-              <div className="cartlayout ">
-                <div
-                  className="d-flex justify-content-center align-items-center flex-wrap "
-                  
-                >
-                  {Cart?.map((p) => (
-                    <div className="card2 border border-3">
-                      <Image
-                        src={`https://talkofcodebackend.onrender.com/api/v1/product/get-productPhoto/${p._id}`}
-                        className="card-Image-top productimage"
-                        style={{ height: "15rem" }}
-                      />
-
-                      <div className="card-body text-start ProductDetailsCard">
-                        <h5 className="card-title">
-                          {p.name.substring(0, 15)}...
-                        </h5>
-                        <div className="card-text">
-                          {p.description.substring(0, 20)}...
-                        </div>
-                        <div className="card-text">
-                          Price: <span className="priceSpan">₹{p.price}</span>{" "}
-                        </div>
-                        <div className="productbuttons">
-                          <button
-                            className="btn btn-primary ButtonBorder"
-                            onClick={() => {
-                              Navigate(`/ProductDetails/${p.slug}`);
-                            }}
-                          >
-                            More details
-                          </button>
-                          <button
-                            className="btn btn-danger ButtonBorder"
-                            onClick={() => {
-                              RemoveCartItems(p._id);
-                            }}
-                          >
-                            Remove
-                          </button>
-                        </div>
+            {cart.length > 0 ? (
+              <div className="cart-items-container">
+                {cart?.map((product) => (
+                  <div key={product._id} className="cart-item">
+                    <Image
+                      src={`https://talkofcodebackend.onrender.com/api/v1/product/get-productPhoto/${product._id}`}
+                      alt={product.name}
+                      className="cart-item-image"
+                      preview={true}
+                    />
+                    <div className="cart-item-details">
+                      <h3 className="cart-item-name">
+                        {product.name.length > 20
+                          ? `${product.name.substring(0, 20)}...`
+                          : product.name}
+                      </h3>
+                      <p className="cart-item-description">
+                        {product.description.length > 60
+                          ? `${product.description.substring(0, 60)}...`
+                          : product.description}
+                      </p>
+                      <p className="cart-item-price">
+                        Price: <span className="price-amount">₹{product.price.toLocaleString('en-IN')}</span>
+                      </p>
+                      <div className="cart-buttons">
+                        <button
+                          className="cart-button details-button"
+                          onClick={() => navigate(`/ProductDetails/${product.slug}`)}
+                        >
+                          View Details
+                        </button>
+                        <button
+                          className="cart-button remove-button"
+                          onClick={() => removeCartItem(product._id)}
+                        >
+                          Remove
+                        </button>
                       </div>
                     </div>
-                  ))}
-                </div>
+                  </div>
+                ))}
               </div>
             ) : (
-              <div className="d-flex flex-column">
-                <img src={emptycart} alt="Empty cart" style={{ width: "20rem" }} />
+              <div className="empty-cart">
+                <img src={emptycart} alt="Your cart is empty" />
                 <button
-                  className="btn btn-dark"
-                  onClick={() => {
-                    Navigate("/products");
-                  }}
+                  className="shopping-button"
+                  onClick={() => navigate("/products")}
                 >
-                  Add Items to cart
+                  Browse Products
                 </button>
               </div>
             )}
-          </div>
+          </>
         ) : (
-          //message if not login
-          <div className="text-center d-flex flex-column align-items-center">
-            <h4>Please login to access your cart</h4>
+          <div className="login-message">
+            <h4>Please login to view your cart</h4>
             <button
-              className="btn btn-primary"
-              onClick={() => {
-                Navigate("/login");
-              }}
+              className="login-button"
+              onClick={() => navigate("/login")}
             >
-              Login
+              Login to Continue
             </button>
-            <Image src={cartimage}></Image>
+            <Image 
+              src={cartimage} 
+              alt="Login to view cart" 
+              preview={false}
+            />
           </div>
         )}
-      </div>
       </div>
     </Layout>
   );
