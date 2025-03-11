@@ -7,11 +7,15 @@
 
 
   ![1](https://github.com/user-attachments/assets/161be1ff-4c28-4ac5-92e5-fce779ea9dd6)
+
  ![product](https://github.com/user-attachments/assets/ccfd8d72-4b08-46b9-bb83-9a11a0f16a11)
- ![dashboard](https://github.com/user-attachments/assets/484ea9e0-ca21-48cb-a0a5-0b65ea295148)
+ 
 ![ai help](https://github.com/user-attachments/assets/edf3dbaf-31e3-4006-bfa7-fc7019d24146)
+
 ![cart](https://github.com/user-attachments/assets/fef7badf-8deb-4aeb-b0bd-3772f429a0a8)
+
 ![tech news](https://github.com/user-attachments/assets/f2d22fa1-6bda-4b8f-9b25-a7acb1c43cbe)
+
 ![contact](https://github.com/user-attachments/assets/684c58ac-7633-4c2e-926b-2b78b8918bd0)
 
 ![8](https://github.com/user-attachments/assets/ac899385-de81-4cf8-856e-08ab09a1c4e0)
