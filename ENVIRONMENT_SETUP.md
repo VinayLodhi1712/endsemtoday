@@ -43,7 +43,7 @@ This project uses environment variables to manage different configurations for d
 
 ### Production:
 1. **Render Backend**: Your current setup is already perfect - no changes needed!
-2. **Vercel Frontend**: Just add `REACT_APP_API_BASE_URL = https://talkofcodebackend.onrender.com`
+2. **Vercel Frontend**: Add `REACT_APP_API_BASE_URL = https://talkofcodebackend.onrender.com` (without /api/v1)
 
 ## Security Notes:
 - Never commit `.env.local` or `.env.production` files to git
