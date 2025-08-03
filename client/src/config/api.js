@@ -1,10 +1,15 @@
-// API Configuration
+// API Configuration using environment variables
+const getBaseURL = () => {
+  // Use environment variable if available, otherwise fallback to production
+  return process.env.REACT_APP_API_BASE_URL || 'https://talkofcodebackend.onrender.com/api/v1';
+};
+
 const API_CONFIG = {
   development: {
-    baseURL: 'https://talkofcodebackend.onrender.com/api/v1',
+    baseURL: getBaseURL(),
   },
   production: {
-    baseURL: 'https://talkofcodebackend.onrender.com/api/v1',
+    baseURL: getBaseURL(),
   }
 };
 

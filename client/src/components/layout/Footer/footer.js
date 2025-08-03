@@ -16,7 +16,7 @@ import "react-toastify/dist/ReactToastify.css"; // Import the CSS for react-toas
 function Footer() {
   const [email, setEmail] = useState(""); 
   const [loading, setLoading] = useState(false); 
-  const apiUrl = process.env.REACT_APP_API_URL || "https://talkofcodebackend.onrender.com/api/v1";
+  const apiUrl = process.env.REACT_APP_API_BASE_URL || "https://talkofcodebackend.onrender.com/api/v1";
   const handleSubscribe = async () => {
     if (!email) {
       toast.error("Please enter a valid email");
