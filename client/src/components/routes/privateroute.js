@@ -2,16 +2,17 @@ import { useState, useEffect } from "react";
 import { useAuth } from "../../context/auth";
 import { Outlet } from "react-router-dom";
 import Spinner from "./spinner";
+import { getApiUrl, API_ENDPOINTS } from "../../config/api";
 
 export default function PrivateRoute() {
   const [ok, setOk] = useState(false);
-  const [auth, setAuth] = useAuth();
+  const [auth] = useAuth();
 
   useEffect(() => {
     const AuthCheck = async () => {
       try {
         const res = await fetch(
-          "https://talkofcodebackend.onrender.com/api/v1/auth/userAuth",
+          getApiUrl(API_ENDPOINTS.AUTH.USER_AUTH),
           {
             headers: {
               Authorization: auth?.token,
@@ -25,11 +26,9 @@ export default function PrivateRoute() {
             setOk(true);
           } else {
             setOk(false);
-            console.log("no ok from server");
           }
         } else {
           setOk(false);
-          console.log("no ok from server");
         }
       } catch (error) {
         console.error("Error checking authentication:", error);

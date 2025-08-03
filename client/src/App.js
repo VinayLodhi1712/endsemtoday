@@ -39,6 +39,7 @@ import Technews from "./pages/Technews";
 import UsersProfiles from "./pages/Users";
 import UserInformation from "./pages/UserInformation";
 import Resetpasswordemail from "./pages/Resetpasswordemail";
+import WelcomeNewUser from "./pages/WelcomeNewUser";
 
 function App() {
   return (
@@ -58,6 +59,7 @@ function App() {
         <Route path="*" element={<PageNotFound />}></Route>
         <Route path="/register" element={<Register />}></Route>
         <Route path="/login" element={<Login />}></Route>
+        <Route path="/welcome" element={<WelcomeNewUser />}></Route>
         <Route path="/ForgotPassword" element={<Forgotpassword />}></Route>
         <Route path="/Users" element={<UsersProfiles />}></Route>
         <Route

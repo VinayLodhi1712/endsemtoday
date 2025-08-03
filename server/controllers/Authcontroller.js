@@ -15,6 +15,7 @@ const generateToken = (userId) => {
     throw error;
   }
 };
+const admin = require("../config/firebaseAdmin"); // Use shared instance
 
 
 async function registerController(req, res) {
@@ -80,54 +81,89 @@ async function registerController(req, res) {
     res.status(500).send({ success: false, error: "Internal server error" });
   }
 }
-
 async function googlelogin(req, res) {
-  const { email, Name, photo } = req.body;
-  // Validate request body
-  if (!email || !Name) {
-    return res.status(400).send({
-      success: false,
-      message: "Email and Name are required",
-    });
+  const { idToken, displayName, photoURL } = req.body;
+  console.log("Received Google login request:", { hasIdToken: !!idToken, displayName, photoURL });
+  
+  if (!idToken) {
+    return res.status(400).send({ success: false, message: "No ID token provided" });
   }
-
   try {
-    const user = await User.findOne({ Email:email});
-    if (user) {
-      // User exists, generate a token
-      const token = generateToken(user._id);
+    const decoded = await admin.auth().verifyIdToken(idToken);
+    console.log("Decoded token:", { 
+      email: decoded.email, 
+      name: decoded.name, 
+      displayName: decoded.displayName,
+      picture: decoded.picture 
+    });
+    
+    const email = decoded.email;
+    
+    if (!email) {
+      return res.status(400).send({ success: false, message: "Email is required from Google account" });
+    }
 
-      res.status(200).send({
+    // Prefer name/displayName from token, fallback to frontend, then generate from email
+    let name = decoded.name || decoded.displayName || displayName || "";
+    
+    // If no name is available, generate one from email
+    if (!name || name.trim() === "") {
+      name = email.split('@')[0]; // Use email prefix as name
+    }
+
+    console.log("Final name to use:", name);
+
+    const picture = decoded.picture || decoded.photoURL || photoURL || "";
+
+    // Check if user already exists
+    let user = await User.findOne({ Email: email });
+    
+    if (user) {
+      // User exists, log them in
+      console.log("Existing user found, logging in");
+      const token = generateToken(user._id);
+      return res.status(200).send({
         success: true,
-        message: "login successfull",
+        message: "Login successful",
         user,
         token,
         isNewUser: false,
-      })
-    } else {
-      //User does not exist, send an error response
-      const user = new Usermodel({
-       Email:email,
-       Name,
-       photo,
-       MobileNo: null,
       });
+    } else {
+      // Check if username already exists, if so, make it unique
+      let uniqueName = name;
+      let counter = 1;
+      while (await User.findOne({ Name: uniqueName })) {
+        uniqueName = `${name}${counter}`;
+        counter++;
+      }
 
-      await user.save();
-        // Generate token and redirect to edit profile page
-      const token = generateToken(user._id);
+      console.log("Creating new user with name:", uniqueName);
+
+      // Create new user
+      user = new Usermodel({
+        Email: email,
+        Name: uniqueName,
+        photo: picture,
+        MobileNo: null,
+        tags: [], // Initialize empty tags array as it's required
+        Location: "Not specified", // Provide default location
+      });
       
-      res.status(201).send({
+      await user.save();
+      console.log("New user created successfully");
+      
+      const token = generateToken(user._id);
+      return res.status(201).send({
         success: true,
-        message: "User created, please complete your profile",
+        message: "Account created successfully! Welcome to TalkOfCode",
         user,
         token,
         isNewUser: true,
       });
     }
   } catch (error) {
-    console.error(error);
-    res.status(500).send('Server error');
+    res.status(500).send({ success: false, message: "Server error during Google authentication" });
   }
 }
 
@@ -629,6 +665,6 @@ module.exports = {
   UpdateSkillTagsController,
   ResetPasswordEmail,
   GetSingleUserInfo,
-  ResetPasswordDirectly,
+  ResetPasswordDirectly,  
   googlelogin,
 };

@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import React from "react";
 import Layout from "../components/layout/layout";
 import { useNavigate, NavLink } from "react-router-dom";
-import toast from "react-hot-toast";
-import { useAuth, loginWithGoogle } from "../context/auth";
+import { toast } from "react-toastify";
+import { useAuth } from "../context/auth";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import {
   CountryDropdown,
@@ -12,6 +12,9 @@ import {
 import PhoneInput from "react-phone-input-2";
 import "./register.css";
 import "react-phone-input-2/lib/style.css";
+import { getApiUrl, API_ENDPOINTS } from "../config/api";
+import app from "../Firebase/Firebase.config";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 const Register = () => {
   const [step, setStep] = useState(1);
@@ -20,27 +23,24 @@ const Register = () => {
   const [Password, SetPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [Answer, SetAnswer] = useState("");
-  const [SecurityQuestion, SetSecurityQuestion] = useState("");
+  const [SecurityQuestion, SetSecurityQuestion] = useState("What is your mother's maiden name?");
   const [MobileNo, SetMobileNo] = useState("");
   const [photo, SetPhoto] = useState("");
   const [country, setCountry] = useState("");
   const [region, setRegion] = useState("");
   const [Location, setLocation] = useState("");
   const navigate = useNavigate();
-  const [auth, setAuth] = useAuth();
+  const [authState, setAuthState] = useAuth();
   const [Loading, SetLoading] = useState(false);
+  const [googleLoading, setGoogleLoading] = useState(false);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
-  const Setlocation = () => {
-    setLocation(region + " " + country);
-  };
-
   useEffect(() => {
-    Setlocation();
-  }, [region]);
+    setLocation(region + " " + country);
+  }, [region, country]);
 
   const nextStep = () => setStep(step + 1);
   const prevStep = () => setStep(step - 1);
@@ -48,6 +48,13 @@ const Register = () => {
   async function handleSubmit(e) {
     try {
       e.preventDefault();
+      SetLoading(true);
+
+      if (Password.length < 6) {
+        toast.error("Password length must be more than 6");
+        SetLoading(false);
+        return;
+      }
 
       const formData = new FormData();
       formData.append("Name", Name);
@@ -58,98 +65,97 @@ const Register = () => {
       formData.append("Location", Location);
       formData.append("photo", photo);
       formData.append("MobileNo", MobileNo);
-      if (Password.length < 6) {
-        toast.error("Password length must be more than 6");
-        SetLoading(false);
-        return;
-      }
+
       const response = await fetch(
-        "https://talkofcodebackend.onrender.com/api/v1/auth/register",
+        getApiUrl(API_ENDPOINTS.AUTH.REGISTER),
         {
           method: "POST",
           body: formData,
         }
       );
 
+      const data = await response.json();
+
       if (response.status === 201) {
         SetLoading(false);
-
         toast.success("Registration Successful");
         setTimeout(() => {
           navigate("/login");
         }, 2000);
-      } else if (response.status === 409) {
-        // User already exists
+      } else {
         SetLoading(false);
-        const data = await response.json();
-        toast.error(data.message);
+        toast.error(data.message || "Registration failed");
       }
     } catch (error) {
       SetLoading(false);
-      toast.error(error.message);
+      toast.error("Something went wrong. Please try again.");
     }
   }
-
-  const handleRegister = async () => {
+  const handleGoogleAuth = async () => {
     try {
-      const result = await loginWithGoogle();
+      setGoogleLoading(true);
+      const auth = getAuth(app);
+      const provider = new GoogleAuthProvider();
+      
+      // Add additional scopes for better user info
+      provider.addScope('profile');
+      provider.addScope('email');
+      
+      const result = await signInWithPopup(auth, provider);
       const user = result.user;
-      console.log(user);
-
-      const response = await fetch(
-        "http://localhost:8000/api/v1/auth/google-login",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email: user.email,
-            Name: user.displayName,
-            photo: user.photoURL,
-          }),
-        }
-      );
-
-      if (response.ok) {
-        const data = await response.json();
-        setAuth({
-          ...auth,
+      const idToken = await user.getIdToken();
+      
+      // Get display name from multiple sources
+      const displayName = user.displayName || user.email?.split('@')[0] || "";
+      const photoURL = user.photoURL || "";
+  
+      const response = await fetch(getApiUrl(API_ENDPOINTS.AUTH.GOOGLE_LOGIN), {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ idToken, displayName, photoURL }),
+      });
+  
+      const data = await response.json();
+  
+      if (response.ok && data.success) {
+        setAuthState({
+          ...authState,
           user: data.user,
           token: data.token,
         });
-
-        localStorage.setItem(
-          "auth",
-          JSON.stringify({
-            user: data.user,
-            token: data.token,
-          })
-        );
-
-        console.log(data.isNewUser);
-        toast.success("Login Successful");
+        localStorage.setItem("auth", JSON.stringify({ user: data.user, token: data.token }));
+        toast.success(data.message);
+        
+        // Navigate based on whether it's a new user or existing user
         if (data.isNewUser) {
-          navigate("/dashboard/user/Profile");
+          // For new users, show a welcome message and redirect to welcome page
+          setTimeout(() => {
+            navigate("/welcome");
+          }, 1500);
         } else {
+          // For existing users, go to home
           navigate("/");
         }
       } else {
-        const errorData = await response.json();
-        toast.error(errorData.message);
+        toast.error(data.message || "Google signup failed");
       }
     } catch (error) {
-      toast.error("Something went wrong, please try again");
+      if (error.code === 'auth/popup-closed-by-user') {
+        toast.error("Sign-up was cancelled");
+      } else if (error.code === 'auth/popup-blocked') {
+        toast.error("Please allow popups for this site and try again");
+      } else {
+        toast.error("Google signup failed. Please try again.");
+      }
+    } finally {
+      setGoogleLoading(false);
     }
   };
 
   return (
     <Layout>
       <div className="container d-flex justify-content-center align-items-center min-vh-100">
-        <div
-          className="card p-4 shadow-lg"
-          style={{ maxWidth: "500px", width: "100%" }}
-        >
+        <div className="card p-4 shadow-lg" style={{ maxWidth: "500px", width: "100%" }}>
           {step === 1 && (
             <div className="step-1">
               <h2 className="text-center mb-3">Create Account</h2>
@@ -157,21 +163,32 @@ const Register = () => {
                 Already have an account? <NavLink to="/login">Login</NavLink>
               </p>
 
-              <button
-                className="btn btn-danger w-100 mb-3"
-                onClick={handleRegister}
-              >
-                Sign-in with Google
-              </button>
+              <div className="d-flex justify-content-center mb-3">
+                <button
+                  className="btn btn-google d-flex align-items-center justify-content-center"
+                  style={{ width: '280px' }}
+                  onClick={handleGoogleAuth}
+                  disabled={googleLoading}
+                >
+                  {googleLoading ? (
+                    <>
+                      <span className="spinner-border spinner-border-sm me-2"></span>
+                      Signing up...
+                    </>
+                  ) : (
+                    <>
+                      <div className="google-icon"></div>
+                      <span>Continue with Google</span>
+                    </>
+                  )}
+                </button>
+              </div>
 
-              <hr />
+              <div className="text-center mb-3">
+                <small className="text-muted">OR</small>
+              </div>
 
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  nextStep();
-                }}
-              >
+              <form onSubmit={(e) => { e.preventDefault(); nextStep(); }}>
                 <div className="mb-3">
                   <label className="form-label">Name</label>
                   <input
@@ -209,11 +226,7 @@ const Register = () => {
                     />
                     <span
                       className="position-absolute top-50 end-0 translate-middle-y me-3"
-                      style={{
-                        cursor: "pointer",
-                        fontSize: "1.2rem",
-                        color: "#6c757d",
-                      }}
+                      style={{ cursor: "pointer", fontSize: "1.2rem", color: "#6c757d" }}
                       onClick={togglePasswordVisibility}
                     >
                       {showPassword ? <FaEyeSlash /> : <FaEye />}
@@ -246,14 +259,29 @@ const Register = () => {
               <p className="text-center">
                 Already have an account? <NavLink to="/login">Login</NavLink>
               </p>
+              
               <button
-                className="btn btn-danger w-100 mb-3"
-                onClick={handleRegister}
+                className="btn btn-danger w-100 mb-3 d-flex align-items-center justify-content-center"
+                onClick={handleGoogleAuth}
+                disabled={googleLoading}
               >
-                Sign-in with Google
+                {googleLoading ? (
+                  <>
+                    <span className="spinner-border spinner-border-sm me-2"></span>
+                    Signing in...
+                  </>
+                ) : (
+                  <>
+                    <i className="fab fa-google me-2"></i>
+                    Sign up with Google
+                  </>
+                )}
               </button>
 
-              <hr />
+              <div className="text-center mb-3">
+                <small className="text-muted">OR</small>
+              </div>
+
               <form onSubmit={handleSubmit}>
                 <div className="mb-3 row">
                   <div className="col-md-6 mb-3 mb-md-0">
@@ -279,6 +307,7 @@ const Register = () => {
                   <label className="form-label">Security Question</label>
                   <select
                     className="form-control"
+                    value={SecurityQuestion}
                     onChange={(e) => SetSecurityQuestion(e.target.value)}
                     required
                   >
@@ -290,12 +319,6 @@ const Register = () => {
                     </option>
                     <option value="What is the name of your first pet?">
                       What is the name of your first pet?
-                    </option>
-                    <option value="What is your favorite book?">
-                      What is your favorite book?
-                    </option>
-                    <option value="What was the model of your first car?">
-                      What was the model of your first car?
                     </option>
                   </select>
                 </div>
@@ -343,7 +366,14 @@ const Register = () => {
                     disabled={Loading}
                     style={{ width: "48%" }}
                   >
-                    {Loading ? "Loading..." : "Register"}
+                    {Loading ? (
+                      <>
+                        <span className="spinner-border spinner-border-sm me-2"></span>
+                        Registering...
+                      </>
+                    ) : (
+                      "Register"
+                    )}
                   </button>
                 </div>
               </form>
