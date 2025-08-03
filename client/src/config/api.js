@@ -1,7 +1,7 @@
 // API Configuration
 const API_CONFIG = {
   development: {
-    baseURL: 'http://localhost:8000/api/v1',
+    baseURL: 'https://talkofcodebackend.onrender.com/api/v1',
   },
   production: {
     baseURL: 'https://talkofcodebackend.onrender.com/api/v1',
