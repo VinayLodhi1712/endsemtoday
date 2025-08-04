@@ -13,6 +13,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import AdminMenu from "./../../components/layout/AdminMenu";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import { API_BASE_URL } from "../../config/api";
 
 const { TabPane } = Tabs;
 const AdminQuestions = () => {
@@ -27,7 +28,7 @@ const AdminQuestions = () => {
     try {
       setloading(true);
       const response = await fetch(
-        `https://talkofcodebackend.onrender.com/api/v1/Questions/UserQuestions/${auth.user._id}/${SkipCount}`
+        `${API_BASE_URL}/Questions/UserQuestions/${auth.user._id}/${SkipCount}`
       );
       const data = await response.json();
       if (response.status == 200) {
@@ -48,13 +49,12 @@ const AdminQuestions = () => {
   async function GetNumberofQuestion() {
     try {
       const data = await fetch(
-        "https://talkofcodebackend.onrender.com/api/v1/Questions/QuestionCount"
+        "${API_BASE_URL}/Questions/QuestionCount"
       );
 
       if (data) {
         const Number = await data.json();
         SetTotalQuestions(Number.Total);
-        console.log(TotalQuestions);
       }
     } catch (error) {
       console.log(error);
@@ -68,7 +68,7 @@ const AdminQuestions = () => {
       );
       if (confirmed) {
         const del = await fetch(
-          `https://talkofcodebackend.onrender.com/api/v1/Questions/delete_question/${question}`,
+          `${API_BASE_URL}/Questions/delete_question/${question}`,
           {
             method: "DELETE",
             headers: { "Content-Type": "application/json" },
@@ -90,7 +90,7 @@ const AdminQuestions = () => {
   async function GetBookmarkedQuestion() {
     try {
       const response = await fetch(
-        `https://talkofcodebackend.onrender.com/api/v1/Questions/getBookmarked/${auth.user._id}`
+        `${API_BASE_URL}/Questions/getBookmarked/${auth.user._id}`
       );
       const data = await response.json();
       if (response.status === 200) {
@@ -108,7 +108,7 @@ const AdminQuestions = () => {
   async function RemoveBookmark(qid) {
     try {
       const response = await fetch(
-        `https://talkofcodebackend.onrender.com/api/v1/Questions/removeBookmarked/${auth.user._id}/${qid}`,
+        `${API_BASE_URL}/Questions/removeBookmarked/${auth.user._id}/${qid}`,
         {
           method: "PUT",
           headers: {
@@ -314,3 +314,6 @@ const AdminQuestions = () => {
 };
 
 export default AdminQuestions;
+
+
+

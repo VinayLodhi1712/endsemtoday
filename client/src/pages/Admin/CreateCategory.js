@@ -5,6 +5,7 @@ import { useAuth } from "../../context/auth";
 import { Modal } from "antd";
 
 import toast from "react-hot-toast";
+import { API_BASE_URL } from "../../config/api";
 const CreateCategory = () => {
   const [categories, SetCategories] = useState([]);
   const [name, SetName] = useState("");
@@ -17,7 +18,7 @@ const CreateCategory = () => {
   async function GetCategories() {
     try {
       const response = await fetch(
-        "https://talkofcodebackend.onrender.com/api/v1/category/GetAll-category",
+        "${API_BASE_URL}/category/GetAll-category",
 
         {
           headers: {
@@ -41,7 +42,7 @@ const CreateCategory = () => {
     e.preventDefault();
     try {
       const response = await fetch(
-        "https://talkofcodebackend.onrender.com/api/v1/category/create-category",
+        "${API_BASE_URL}/category/create-category",
         {
           method: "POST",
           headers: {
@@ -72,7 +73,7 @@ const CreateCategory = () => {
     e.preventDefault();
     try {
       const response = await fetch(
-        `https://talkofcodebackend.onrender.com/api/v1/category/update-category/${selected._id}`,
+        `${API_BASE_URL}/category/update-category/${selected._id}`,
         {
           method: "PUT",
           headers: {
@@ -103,7 +104,7 @@ const CreateCategory = () => {
   async function HandleDelete(id) {
     try {
       const response = await fetch(
-        `https://talkofcodebackend.onrender.com/api/v1/category/Delete-category/${id}`,
+        `${API_BASE_URL}/category/Delete-category/${id}`,
         {
           method: "DELETE",
           headers: {
@@ -232,3 +233,6 @@ const CreateCategory = () => {
 };
 
 export default CreateCategory;
+
+
+

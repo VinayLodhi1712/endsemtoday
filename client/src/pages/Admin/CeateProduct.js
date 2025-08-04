@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { Select } from "antd";
 import { useAuth } from "../../context/auth";
+import { API_BASE_URL } from "../../config/api";
 
 const CreateProduct = () => {
   const [categories, SetCategories] = useState([]);
@@ -23,7 +24,7 @@ const CreateProduct = () => {
   async function GetCategories() {
     try {
       const response = await fetch(
-        "https://talkofcodebackend.onrender.com/api/v1/category/GetAll-category",
+        "${API_BASE_URL}/category/GetAll-category",
 
         {
           headers: {
@@ -56,7 +57,7 @@ const CreateProduct = () => {
 
     try {
       const response = await fetch(
-        "https://talkofcodebackend.onrender.com/api/v1/product/create-product",
+        "${API_BASE_URL}/product/create-product",
         {
           method: "POST",
           headers: {
@@ -177,3 +178,7 @@ const CreateProduct = () => {
 };
 
 export default CreateProduct;
+
+
+
+

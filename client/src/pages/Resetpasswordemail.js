@@ -3,6 +3,7 @@ import Layout from "../components/layout/layout";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useParams } from "react-router-dom";
 import toast from "react-hot-toast";
+import { API_BASE_URL } from "../config/api";
 const Resetpasswordemail = () => {
   const [NewPass, SetNewPass] = useState("");
   const [NewPassAgain, SetNewPassAgain] = useState("");
@@ -21,7 +22,7 @@ const Resetpasswordemail = () => {
     try {
       if (NewPass === NewPassAgain) {
         const response = await fetch(
-          `https://talkofcodebackend.onrender.com/api/v1/auth/DirectReset/${Email}`,
+          `${API_BASE_URL}/auth/DirectReset/${Email}`,
           {
             method: "POST",
             headers: {
@@ -118,3 +119,6 @@ const Resetpasswordemail = () => {
 };
 
 export default Resetpasswordemail;
+
+
+

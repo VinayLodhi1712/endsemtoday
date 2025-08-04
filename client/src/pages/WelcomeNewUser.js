@@ -116,3 +116,4 @@ const WelcomeNewUser = () => {
 };
 
 export default WelcomeNewUser;
+

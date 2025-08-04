@@ -12,6 +12,7 @@ import { IoCall } from "react-icons/io5";
 import Image from "antd";
 
 import { Tag } from "antd";
+import { API_BASE_URL } from "../config/api";
 const UserInformation = () => {
   const [auth, SetAuth] = useAuth();
   const [QuestionAsked, SetQuestionAsked] = useState(0);
@@ -23,7 +24,7 @@ const UserInformation = () => {
   async function GetUserDetails() {
     try {
       const Response = await fetch(
-        `https://talkofcodebackend.onrender.com/api/v1/auth/Getuserinfo/${Userid}`
+        `${API_BASE_URL}/auth/Getuserinfo/${Userid}`
       );
       if (Response) {
         const data = await Response.json();
@@ -41,7 +42,7 @@ const UserInformation = () => {
   async function GetAllUserQuestion() {
     try {
       const AllQuestion = await fetch(
-        `https://talkofcodebackend.onrender.com/api/v1/Questions/AskedUserQuestion/${Userid}`
+        `${API_BASE_URL}/Questions/AskedUserQuestion/${Userid}`
       );
 
       if (AllQuestion.status == 200) {
@@ -57,7 +58,7 @@ const UserInformation = () => {
   async function GetAllUserAnswers() {
     try {
       const AllAnswer = await fetch(
-        `https://talkofcodebackend.onrender.com/api/v1/Answer/GetNumberOfQuestions/${Userid}`
+        `${API_BASE_URL}/Answer/GetNumberOfQuestions/${Userid}`
       );
 
       if (AllAnswer.status == 200) {
@@ -71,7 +72,7 @@ const UserInformation = () => {
   }
   async function GetUserReputation() {
     const resp = await fetch(
-      `https://talkofcodebackend.onrender.com/api/v1/auth/GetReputation/${Userid}`
+      `${API_BASE_URL}/auth/GetReputation/${Userid}`
     );
     if (resp.status === 200) {
       const reputation = await resp.json();
@@ -95,7 +96,7 @@ const UserInformation = () => {
               <div className="col-md-4 UserInfoImage">
                 <img
                   style={{ width: "100%", height: "28rem" }}
-                  src={`https://talkofcodebackend.onrender.com/api/v1/auth/get-userPhoto/${Userid}`}
+                  src={`${API_BASE_URL}/auth/get-userPhoto/${Userid}`}
                 />
               </div>
               <div className="col-md-6">
@@ -259,3 +260,6 @@ const UserInformation = () => {
 };
 
 export default UserInformation;
+
+
+

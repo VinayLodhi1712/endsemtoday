@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import Layout from "../components/layout/layout";
 import { Card } from "antd";
 import { useAuth } from "../context/auth";
@@ -8,20 +8,22 @@ import { NavLink } from "react-router-dom";
 import { Modal } from "antd";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Button from "@mui/material/Button";
+import { API_BASE_URL } from "../config/api";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { blue } from "@mui/material/colors";
 
 const UserContributions = () => {
-  const [auth, setAuth] = useAuth();
+  const [auth] = useAuth();
   const [answer, setAnswer] = useState("");
   const [response, setResponse] = useState([]);
   const [open, setOpen] = useState(false);
   const [selectedId, setSelectedId] = useState(null); // State to store the selected contribution ID
   const [expandedId, setExpandedId] = useState(null);
-  async function getUserAnswer() {
+  
+  const getUserAnswer = useCallback(async () => {
     try {
       const response = await fetch(
-        `https://talkofcodebackend.onrender.com/api/v1/Answer/Get_User_Answers/${auth.user._id}`
+        `${API_BASE_URL}/Answer/Get_User_Answers/${auth.user._id}`
       );
       const answers = await response.json();
       if (answers) {
@@ -30,10 +32,9 @@ const UserContributions = () => {
         toast("you haven't made any contributions");
       }
     } catch (error) {
-      console.log(error);
       toast.error("Something went wrong");
     }
-  }
+  }, [auth.user._id]);
 
   async function deleteContribution(aid, qid) {
     try {
@@ -42,7 +43,7 @@ const UserContributions = () => {
       );
       if (confirmed) {
         const del = await fetch(
-          `https://talkofcodebackend.onrender.com/api/v1/Answer/delete_Answer/${aid}/${qid}/${auth.user._id}`,
+          `${API_BASE_URL}/Answer/delete_Answer/${aid}/${qid}/${auth.user._id}`,
           {
             method: "DELETE",
             headers: {
@@ -67,7 +68,7 @@ const UserContributions = () => {
   async function updateContribution(aid) {
     try {
       const updated = await fetch(
-        `https://talkofcodebackend.onrender.com/api/v1/Answer/Update_Answer/${aid}`,
+        `${API_BASE_URL}/Answer/Update_Answer/${aid}`,
         {
           method: "PUT",
           headers: {
@@ -103,7 +104,7 @@ const UserContributions = () => {
 
   useEffect(() => {
     getUserAnswer();
-  }, []);
+  }, [getUserAnswer]);
 
   const handleUpdateClick = (id, answer) => {
     setSelectedId(id); // Set the selected ID when the update button is clicked
@@ -142,7 +143,7 @@ const UserContributions = () => {
                     <div
                       style={{ display: "flex", alignItems: "center" }}
                     ></div>
-                    <p
+                    <div
                       className="arrow-bullet ff"
                       style={{
                         fontSize: "18px",
@@ -152,8 +153,8 @@ const UserContributions = () => {
                     >
                       &rarr;{" "}
                       {expandedId === R._id
-                        ? R.answer
-                        : `${R.answer.slice(0, 47)}...`}
+                        ? <div dangerouslySetInnerHTML={{ __html: R.answer }} />
+                        : <div dangerouslySetInnerHTML={{ __html: `${R.answer.slice(0, 47)}...` }} />}
                       {R.answer.length > 50 && (
                         <button
                           type="link"
@@ -163,7 +164,7 @@ const UserContributions = () => {
                           {expandedId === R._id ? "See less" : "See more"}
                         </button>
                       )}
-                    </p>
+                    </div>
                   </Card>
                   <div
                     className="d-flex justify-content-center mt-1"
@@ -237,3 +238,6 @@ const UserContributions = () => {
 };
 
 export default UserContributions;
+
+
+

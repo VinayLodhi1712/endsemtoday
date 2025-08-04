@@ -11,6 +11,7 @@ import { useAuth } from "../context/auth";
 import { Image } from "antd";
 import { Pagination } from "antd";
 import './Productpage.css';
+import { API_BASE_URL } from "../config/api";
 
 function Productpage() {
   const { Option } = Select;
@@ -32,7 +33,7 @@ function Productpage() {
   async function GetCategories() {
     try {
       const response = await fetch(
-        "https://talkofcodebackend.onrender.com/api/v1/category/GetAll-category",
+        `${API_BASE_URL}/category/GetAll-category`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -44,7 +45,7 @@ function Productpage() {
         SetCategories(data.category);
       }
     } catch (error) {
-      console.log(error);
+      // Handle error silently
     }
   }
 
@@ -55,7 +56,7 @@ function Productpage() {
     
     try {
       if (keyword) {
-        const url = `https://talkofcodebackend.onrender.com/api/v1/product/product-search/${keyword}/${auth?.user?._id || '65f9bb4749049ec84f1de5be'}`;
+        const url = `${API_BASE_URL}/product/product-search/${keyword}/${auth?.user?._id || '65f9bb4749049ec84f1de5be'}`;
         const response = await fetch(url);
         const data = await response.json();
         
@@ -71,7 +72,6 @@ function Productpage() {
         GetAllProducts();
       }
     } catch (error) {
-      console.log(error);
       toast.error("Error searching products");
     }
   }
@@ -81,9 +81,9 @@ function Productpage() {
     try {
       let url;
       if (auth.user) {
-        url = `https://talkofcodebackend.onrender.com/api/v1/product/product-list/${Page}/${auth.user._id}`;
+        url = `${API_BASE_URL}/product/product-list/${Page}/${auth.user._id}`;
       } else {
-        url = `https://talkofcodebackend.onrender.com/api/v1/product/product-list/${Page}/65f2f1dc6ecc89ef55716aaf`;
+        url = `${API_BASE_URL}/product/product-list/${Page}/65f2f1dc6ecc89ef55716aaf`;
       }
 
       const response = await fetch(url);
@@ -96,7 +96,6 @@ function Productpage() {
         toast.error("Cannot get products");
       }
     } catch (error) {
-      console.log(error);
       toast.error("Something went Wrong");
     }
   }
@@ -110,10 +109,8 @@ function Productpage() {
         priceRange: Radioval,
       };
       
-      console.log("Sending filter data:", JSON.stringify(requestData, null, 2));
-      
       const response = await fetch(
-        `https://talkofcodebackend.onrender.com/api/v1/product/productfilter`,
+        `${API_BASE_URL}/product/productfilter`,
         {
           method: "POST",
           headers: {
@@ -125,18 +122,15 @@ function Productpage() {
       
       // Log the raw response for debugging
       const responseText = await response.text();
-      console.log("Raw filter response:", responseText);
       
       // Parse the response
       const responseData = JSON.parse(responseText);
-      console.log("Parsed filter response:", responseData);
       
       // Update products state
       SetProducts(responseData?.products || []);
       SetFilterProductLength((responseData?.products || []).length > 0);
     } catch (error) {
       toast.error("An error occurred with filters");
-      console.log("Filter error:", error);
     }
   }
 
@@ -145,26 +139,20 @@ function Productpage() {
     try {
       let url;
       if (auth.user) {
-        url = `https://talkofcodebackend.onrender.com/api/v1/product/product-count/${auth.user._id}`;
+        url = `${API_BASE_URL}/product/product-count/${auth.user._id}`;
       } else {
-        url = `https://talkofcodebackend.onrender.com/api/v1/product/product-count/65f2f1dc6ecc89ef55716aaf`;
+        url = `${API_BASE_URL}/product/product-count/65f2f1dc6ecc89ef55716aaf`;
       }
 
       const response = await fetch(url);
       const data = await response.json();
       SetTotalvalue(data?.Total);
     } catch (error) {
-      console.log(error);
+      // Handle error silently or show user-friendly message
     }
   }
 
   useEffect(() => {
-    // Log when filters change to help debug
-    console.log("Filter state changed:", { 
-      categories: checked, 
-      priceRange: Radioval 
-    });
-    
     if (checked.length || (Radioval && Radioval.length)) {
       FilterProduct();
       setLoad(false);
@@ -184,7 +172,6 @@ function Productpage() {
       // Find the selected price object by id
       const selectedPrice = Prices.find(p => p._id === value);
       if (selectedPrice && Array.isArray(selectedPrice.array)) {
-        console.log("Setting price range to:", selectedPrice.array);
         // Make sure we're setting the array correctly
         SetRadioval(selectedPrice.array);
       }
@@ -282,7 +269,7 @@ function Productpage() {
                   GetAllProducts();
                 }}
               >
-                Reset Filters
+                Reset
               </button>
             </div>
           </div>
@@ -311,7 +298,7 @@ function Productpage() {
               {Products.map((p) => (
                 <div className="boxlayoutproducts" key={p._id}>
                   <Image
-                    src={`https://talkofcodebackend.onrender.com/api/v1/product/get-productPhoto/${p._id}`}
+                    src={`${API_BASE_URL}/product/get-productPhoto/${p._id}`}
                     className="productimage"
                     alt={p.name}
                     preview={false}
@@ -388,3 +375,6 @@ function Productpage() {
 }
 
 export default Productpage;
+
+
+

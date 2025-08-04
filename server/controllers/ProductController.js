@@ -202,44 +202,39 @@ async function UpdateProductController(req, resp) {
   }
 }
 
-async function ProductFilterController() {
+async function ProductFilterController(req, resp) {
   try {
-    // Make sure we have valid data to send
-    const requestData = {
-      checked: checked || [],
-      priceRange: Radioval || [],
-    };
+    let args = {};
+    const { checked, priceRange } = req.body;
     
-    console.log("Sending filter data:", JSON.stringify(requestData, null, 2));
-    
-    const response = await fetch(
-      `https://talkofcodebackend.onrender.com/api/v1/product/productfilter`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(requestData),
-      }
-    );
-    
-    // Validate response is JSON
-    const contentType = response.headers.get("content-type");
-    if (!contentType || !contentType.includes("application/json")) {
-      throw new Error("Received non-JSON response from server");
+    // Filter by categories if provided
+    if (checked && checked.length > 0) {
+      args.category = { $in: checked };
     }
     
-    const responseData = await response.json();
-    console.log("Parsed filter response:", responseData);
+    // Filter by price range if provided
+    if (priceRange && priceRange.length === 2) {
+      args.price = {
+        $gte: priceRange[0],
+        $lte: priceRange[1],
+      };
+    }
     
-    // Update products state
-    SetProducts(responseData?.products || []);
-    SetFilterProductLength((responseData?.products || []).length > 0);
+    console.log("Filter arguments:", args);
+    
+    const products = await ProductModel.find(args).select("-photo").populate("category");
+    
+    resp.status(200).send({
+      success: true,
+      products,
+    });
   } catch (error) {
-    toast.error("An error occurred with filters");
     console.log("Filter error:", error);
-    // Fallback to getting all products
-    GetAllProducts();
+    resp.status(500).send({
+      success: false,
+      message: "Error filtering products",
+      error,
+    });
   }
 }
 //count the produts

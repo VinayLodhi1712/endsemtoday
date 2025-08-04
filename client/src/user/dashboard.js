@@ -23,6 +23,7 @@ import { SiAnswer } from "react-icons/si";
 import { IoMdCall } from "react-icons/io";
 import { useAuth } from "../context/auth";
 import moment from "moment";
+import { API_BASE_URL } from "../config/api";
 
 const UserDashboard = () => {
   const [open, setOpen] = useState(false);
@@ -43,7 +44,7 @@ const UserDashboard = () => {
   async function GetAllUserQuestion() {
     try {
       const AllQuestion = await fetch(
-        `https://talkofcodebackend.onrender.com/api/v1/Questions/AskedUserQuestion/${auth.user._id}`
+        `${API_BASE_URL}/Questions/AskedUserQuestion/${auth.user._id}`
       );
       if (AllQuestion.status === 200) {
         const AllQue = await AllQuestion.json();
@@ -57,7 +58,7 @@ const UserDashboard = () => {
   async function GetAllUserAnswers() {
     try {
       const AllAnswer = await fetch(
-        `https://talkofcodebackend.onrender.com/api/v1/Answer/GetNumberOfQuestions/${auth.user._id}`
+        `${API_BASE_URL}/Answer/GetNumberOfQuestions/${auth.user._id}`
       );
       if (AllAnswer.status === 200) {
         const AllAns = await AllAnswer.json();
@@ -71,7 +72,7 @@ const UserDashboard = () => {
   async function GetUserReputation() {
     try {
       const resp = await fetch(
-        `https://talkofcodebackend.onrender.com/api/v1/auth/GetReputation/${auth.user._id}`
+        `${API_BASE_URL}/auth/GetReputation/${auth.user._id}`
       );
       if (resp.status === 200) {
         const reputation = await resp.json();
@@ -277,3 +278,6 @@ const UserDashboard = () => {
 };
 
 export default UserDashboard;
+
+
+

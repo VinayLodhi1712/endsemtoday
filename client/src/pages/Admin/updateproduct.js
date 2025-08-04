@@ -6,6 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Select } from "antd";
 import { useAuth } from "../../context/auth";
 import AdminMenu from "./../../components/layout/AdminMenu";
+import { API_BASE_URL } from "../../config/api";
 
 const UpateProductUSer = () => {
   const [categories, SetCategories] = useState([]);
@@ -25,7 +26,7 @@ const UpateProductUSer = () => {
   async function GetCategories() {
     try {
       const response = await fetch(
-        "https://talkofcodebackend.onrender.com/api/v1/category/GetAll-category",
+        "${API_BASE_URL}/category/GetAll-category",
 
         {
           headers: {
@@ -46,7 +47,7 @@ const UpateProductUSer = () => {
   async function GetsingleProduct() {
     try {
       const response = await fetch(
-        `https://talkofcodebackend.onrender.com/api/v1/product/getSingle-product/${params.slug}`
+        `${API_BASE_URL}/product/getSingle-product/${params.slug}`
       );
       const data = await response.json();
       SetSingleProduct(data.product[0]._id);
@@ -83,7 +84,7 @@ const UpateProductUSer = () => {
     }
     try {
       const response = await fetch(
-        `https://talkofcodebackend.onrender.com/api/v1/product/update-product/${Singleproduct}`,
+        `${API_BASE_URL}/product/update-product/${Singleproduct}`,
         {
           method: "PUT",
           headers: {
@@ -116,7 +117,7 @@ const UpateProductUSer = () => {
         return;
       } else {
         const response = await fetch(
-          `https://talkofcodebackend.onrender.com/api/v1/product/Delete-product/${Singleproduct}`,
+          `${API_BASE_URL}/product/Delete-product/${Singleproduct}`,
           {
             method: "delete",
             headers: {
@@ -185,7 +186,7 @@ const UpateProductUSer = () => {
                 </label>
                 <img
                   style={{ width: "5rem" }}
-                  src={`https://talkofcodebackend.onrender.com/api/v1/product/get-productPhoto/${Pid}`}
+                  src={`${API_BASE_URL}/product/get-productPhoto/${Pid}`}
                 ></img>
               </div>
 
@@ -248,3 +249,7 @@ const UpateProductUSer = () => {
 };
 
 export default UpateProductUSer;
+
+
+
+

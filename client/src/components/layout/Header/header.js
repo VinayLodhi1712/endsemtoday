@@ -7,10 +7,11 @@ import { Badge } from "antd";
 import { IoCartSharp } from "react-icons/io5";
 import Avatar from "@mui/material/Avatar";
 import "./header.css"; 
+import { API_BASE_URL } from "../../../config/api";
 
 function Header() {
   const [auth, setAuth] = useAuth();
-  const [cart, setCart] = useCart();
+  const [cart] = useCart();
 
   function HandleLogout() {
     setAuth({
@@ -113,16 +114,18 @@ function Header() {
                 ) : (
                   <>
                     <li className="nav-item dropdown user-dropdown">
+                      {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                       <a
                         className="nav-link dropdown-toggle"
                         href="#"
                         role="button"
                         data-bs-toggle="dropdown"
                         aria-expanded="false"
+                        onClick={(e) => e.preventDefault()}
                       >
                         <Avatar
                           alt={auth.user.Name || auth.user.displayName}
-                          src={`https://talkofcodebackend.onrender.com/api/v1/auth/get-userPhoto/${auth.user._id}` || auth.user.photoURL}
+                          src={`${API_BASE_URL}/auth/get-userPhoto/${auth.user._id}` || auth.user.photoURL}
                           sx={{ width: 30, height: 30 }}
                           className="user-avatar"
                         />
@@ -172,3 +175,6 @@ function Header() {
 }
 
 export default Header;
+
+
+

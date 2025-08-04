@@ -3,6 +3,7 @@ import Layout from "./../components/layout/layout";
 import { Tag } from "antd";
 import toast from "react-hot-toast";
 import { Pagination } from "antd";
+import { API_BASE_URL } from "../config/api";
 import { FaMapMarkerAlt, FaStar, FaLightbulb } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 const Users = () => {
@@ -17,7 +18,7 @@ const Users = () => {
   async function GetAllUsers() {
     try {
       const response = await fetch(
-        `https://talkofcodebackend.onrender.com/api/v1/auth/UsersListNoLogin/${Page}`,
+        `${API_BASE_URL}/auth/UsersListNoLogin/${Page}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -37,7 +38,7 @@ const Users = () => {
   async function GetCount() {
     try {
       const response = await fetch(
-        `https://talkofcodebackend.onrender.com/api/v1/auth/UserCount`
+        `${API_BASE_URL}/auth/UserCount`
       );
       const data = await response.json();
       SetTotalvalue(data?.Total);
@@ -70,7 +71,7 @@ const Users = () => {
                 <img
                   className="img-fluid"
                   style={{ width: "10rem", height: "10rem" }}
-                  src={`https://talkofcodebackend.onrender.com/api/v1/auth/get-userPhoto/${u._id}`}
+                  src={`${API_BASE_URL}/auth/get-userPhoto/${u._id}`}
                   alt={u.Name}
                 />
               </div>
@@ -130,4 +131,7 @@ const Users = () => {
 };
 
 export default Users;
-// image={`https://talkofcodebackend.onrender.com/api/v1/auth/get-userPhoto/${u._id}`}
+// image={`${API_BASE_URL}/auth/get-userPhoto/${u._id}`}
+
+
+

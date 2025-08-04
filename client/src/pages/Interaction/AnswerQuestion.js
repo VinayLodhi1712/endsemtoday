@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useAuth } from "../../context/auth";
 import Button from "@mui/material/Button";
+import { API_BASE_URL } from "../../config/api";
 const AnswerQuestion = () => {
   const params = useParams();
   const [Answer, SetAnswer] = useState("");
@@ -14,7 +15,7 @@ const AnswerQuestion = () => {
   async function GetSingleQuestion() {
     try {
       const que = await fetch(
-        `https://talkofcodebackend.onrender.com/api/v1/Questions/getSingleQuestion/${params.id}`
+        `${API_BASE_URL}/Questions/getSingleQuestion/${params.id}`
       );
       const data = await que.json();
       if (data) {
@@ -34,7 +35,7 @@ const AnswerQuestion = () => {
     e.preventDefault();
     try {
       const response = await fetch(
-        `https://talkofcodebackend.onrender.com/api/v1/Answer/post_Answer/${auth.user._id}/${params.id}`,
+        `${API_BASE_URL}/Answer/post_Answer/${auth.user._id}/${params.id}`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -58,7 +59,7 @@ const AnswerQuestion = () => {
   async function SendEmail() {
     try {
       const response = await fetch(
-        `https://talkofcodebackend.onrender.com/api/v1/Answer/EmailUser/${Email}`,
+        `${API_BASE_URL}/Answer/EmailUser/${Email}`,
         {
           method: "POST",
           headers: {
@@ -67,7 +68,7 @@ const AnswerQuestion = () => {
         }
       );
       if (response.status == 200) {
-        console.log("Email sent ");
+        // Email sent successfully
       }
     } catch (error) {
       toast.error("EmailSent");
@@ -86,7 +87,7 @@ const AnswerQuestion = () => {
         <div className="d-flex flex-column contactlayout">
           <h3 className="mediumtitlefont">Question: {Title} ?</h3>
           <p>
-            <strong>Description:</strong> {Description}
+            <strong>Description:</strong> <div dangerouslySetInnerHTML={{ __html: Description }} />
           </p>
         </div>
         <form
@@ -134,3 +135,6 @@ const AnswerQuestion = () => {
 };
 
 export default AnswerQuestion;
+
+
+

@@ -4,6 +4,7 @@ import Layout from "../components/layout/layout";
 import toast from "react-hot-toast";
 import { Image } from "antd";
 import { useAuth } from "../context/auth";
+import { API_BASE_URL } from "../config/api";
 const Categorylist = () => {
   const [CatProducts, SetCatProducts] = useState([]);
   const [Category, SetCategory] = useState([]);
@@ -15,9 +16,9 @@ const Categorylist = () => {
     try {
       let url;
       if (auth.user) {
-        url = `https://talkofcodebackend.onrender.com/api/v1/product/product-CategoryWise/${Params.id}/${auth.user._id}`;
+        url = `${API_BASE_URL}/product/product-CategoryWise/${Params.id}/${auth.user._id}`;
       } else {
-        url = `https://talkofcodebackend.onrender.com/api/v1/product/product-CategoryWise/${Params.id}/65f9bb4749049ec84f1de5be`;
+        url = `${API_BASE_URL}/product/product-CategoryWise/${Params.id}/65f9bb4749049ec84f1de5be`;
       }
       const response = await fetch(url);
       const data = await response.json();
@@ -50,7 +51,7 @@ const Categorylist = () => {
                 style={{ width: "22%", height: "100%" }}
               >
                 <Image
-                  src={`https://talkofcodebackend.onrender.com/api/v1/product/get-productPhoto/${p._id}`}
+                  src={`${API_BASE_URL}/product/get-productPhoto/${p._id}`}
                   className="card-Image-top productimage"
                   style={{ height: "15rem", width: "100%" }}
                 />
@@ -90,3 +91,6 @@ const Categorylist = () => {
 };
 
 export default Categorylist;
+
+
+

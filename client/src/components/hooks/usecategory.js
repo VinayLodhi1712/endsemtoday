@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
+import { API_BASE_URL } from "../../config/api";
 
 const Usecategory = () => {
   const [AllCat, SetAllCat] = useState([]);
@@ -7,7 +8,7 @@ const Usecategory = () => {
   async function getCatagories() {
     try {
       const response = await fetch(
-        "https://talkofcodebackend.onrender.com/api/v1/category/GetAll-category"
+        "${API_BASE_URL}/category/GetAll-category"
       );
       if (response) {
         const data = await response.json();
@@ -26,3 +27,6 @@ const Usecategory = () => {
   return AllCat; // we can get Allcat in any file after importing the Usecategory function
 };
 export default Usecategory;
+
+
+

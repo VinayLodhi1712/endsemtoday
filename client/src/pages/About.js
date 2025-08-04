@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import CountUp from "react-countup";
 import VisibilitySensor from "react-visibility-sensor";
 import { FaAddressBook, FaShoppingCart, FaComment } from "react-icons/fa";
+import { API_BASE_URL } from "../config/api";
 function Productcard() {
   return (
     <Card className="boxlayout" style={{ width: "22rem" }}>
@@ -78,7 +79,7 @@ const About = () => {
   const fetchTotalUsers = async () => {
     try {
       const response = await fetch(
-        "https://talkofcodebackend.onrender.com/api/v1/auth/count"
+        `${API_BASE_URL}/auth/count`
       );
 
       if (!response.ok) {
@@ -94,7 +95,7 @@ const About = () => {
   const fetchProductCount = async () => {
     try {
       const response = await fetch(
-        "https://talkofcodebackend.onrender.com/api/v1/product/product-count"
+        `${API_BASE_URL}/product/product-count`
       );
       const data = await response.json();
       setTotalProducts(data.Total);
@@ -106,7 +107,7 @@ const About = () => {
   const fetchQuestionCount = async () => {
     try {
       const response = await fetch(
-        "https://talkofcodebackend.onrender.com/api/v1/Questions/QuestionCount"
+        `${API_BASE_URL}/Questions/QuestionCount`
       );
       const data = await response.json();
       setTotalQuestions(data.Total);
@@ -251,3 +252,6 @@ const About = () => {
 };
 
 export default About;
+
+
+

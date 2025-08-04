@@ -7,13 +7,14 @@ import { useAuth } from "../../context/auth";
 import "./../../App.css";
 import { Image } from "antd";
 import Layout from "../../components/layout/layout";
+import { API_BASE_URL } from "../../config/api";
 const Products = () => {
   const [Products, SetProducts] = useState([]);
   const [auth, SetAuth] = useAuth();
   async function GetAllProducts() {
     try {
       const response = await fetch(
-        `https://talkofcodebackend.onrender.com/api/v1/product/get-product/${auth.user._id}`
+        `${API_BASE_URL}/product/get-product/${auth.user._id}`
       );
       const data = await response.json();
       if (data?.success) {
@@ -50,7 +51,7 @@ const Products = () => {
                 style={{ width: "25%", height: "100%" }}
               >
                 <Image
-                  src={`https://talkofcodebackend.onrender.com/api/v1/product/get-productPhoto/${p._id}`}
+                  src={`${API_BASE_URL}/product/get-productPhoto/${p._id}`}
                   className="card-Image-top productimage"
                   style={{ height: "15rem", width: "100%" }}
                 />
@@ -81,3 +82,7 @@ const Products = () => {
 };
 
 export default Products;
+
+
+
+

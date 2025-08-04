@@ -12,6 +12,7 @@ import { LuBookmarkPlus } from "react-icons/lu";
 import Button from "@mui/material/Button";
 import { FaRegArrowAltCircleDown } from "react-icons/fa";
 import Avatar from "@mui/material/Avatar";
+import { API_BASE_URL } from "../../config/api";
 import './Interaction.css';
 const View = () => {
   const [Questions, SetQuestions] = useState([]);
@@ -23,7 +24,7 @@ const View = () => {
   async function GetSingleQuestion() {
     try {
       const response = await fetch(
-        `https://talkofcodebackend.onrender.com/api/v1/Questions/getSingleQuestion/${params.qid}`
+        `${API_BASE_URL}/Questions/getSingleQuestion/${params.qid}`
       );
       const data = await response.json();
       if (response.status === 200) {
@@ -39,9 +40,8 @@ const View = () => {
   async function GetSingleAnswers() {
     try {
       const response = await fetch(
-        `https://talkofcodebackend.onrender.com/api/v1/Answer/get_Answer/${params.qid}`
+        `${API_BASE_URL}/Answer/get_Answer/${params.qid}`
       );
-      console.log("worked");
       const data = await response.json();
       if (response.status === 200) {
         SetAnswers(data.response);
@@ -55,7 +55,7 @@ const View = () => {
   async function UpdateVotes(aid, Votes, ansuid) {
     try {
       const votevalue = await fetch(
-        `https://talkofcodebackend.onrender.com/api/v1/Answer/Update_Answer_votes/${aid}/${auth.user._id}/${ansuid}`,
+        `${API_BASE_URL}/Answer/Update_Answer_votes/${aid}/${auth.user._id}/${ansuid}`,
         {
           method: "PUT",
           headers: {
@@ -82,7 +82,7 @@ const View = () => {
   async function UpdateDownVotes(aid, Votes, ansuid) {
     try {
       const votevalue = await fetch(
-        `https://talkofcodebackend.onrender.com/api/v1/Answer/Update_Answer_Down_votes/${aid}/${auth.user._id}/${ansuid}`,
+        `${API_BASE_URL}/Answer/Update_Answer_Down_votes/${aid}/${auth.user._id}/${ansuid}`,
         {
           method: "PUT",
           headers: {
@@ -109,7 +109,7 @@ const View = () => {
   async function Bookmark(qid) {
     try {
       const response = await fetch(
-        `https://talkofcodebackend.onrender.com/api/v1/auth//Bookmark/${qid}/${auth.user._id}`,
+        `${API_BASE_URL}/auth//Bookmark/${qid}/${auth.user._id}`,
         {
           method: "PUT",
           headers: {
@@ -169,7 +169,7 @@ const View = () => {
                       style={{ width: "50%" }}
                     >
                       <Avatar
-                        src={`https://talkofcodebackend.onrender.com/api/v1/auth/get-userPhoto/${q.user._id}`}
+                        src={`${API_BASE_URL}/auth/get-userPhoto/${q.user._id}`}
                         sx={{ width: 30, height: 30 }} // Add margin for spacing
                       />
                       <p className="UserNameDisplay">{q.user.Name}</p>
@@ -207,7 +207,7 @@ const View = () => {
                   >
                     {q.title}{" "}
                   </p>
-                  <small>{q.question}</small>
+                  <div dangerouslySetInnerHTML={{ __html: q.question }} />
                   <div className="d-flex align-items-center w-100 justify-content-between">
                     {" "}
                     <div>
@@ -260,7 +260,7 @@ const View = () => {
                   </div>
                   <div className="card-body mt-3 ">
                     <b>Answer: </b>
-                    {a.answer}
+                    <div dangerouslySetInnerHTML={{ __html: a.answer }} />
                   </div>
 
                   <div className="blockquote-footer username mt-1">
@@ -293,3 +293,6 @@ const View = () => {
 };
 
 export default View;
+
+
+

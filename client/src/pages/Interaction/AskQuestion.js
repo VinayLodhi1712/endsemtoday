@@ -5,6 +5,7 @@ import { Tag } from "antd";
 import { RxCross2 } from "react-icons/rx";
 import toast from "react-hot-toast";
 import './Interaction.css';
+import { API_BASE_URL } from "../../config/api";
 const AskQuestion = () => {
   const [auth, SetAuth] = useAuth();
   const [question, Setquestion] = useState("");
@@ -29,7 +30,7 @@ const AskQuestion = () => {
     e.preventDefault();
     try {
       const response = await fetch(
-        `https://talkofcodebackend.onrender.com/api/v1/Questions/ask_question/${auth.user._id}`,
+        `${API_BASE_URL}/Questions/ask_question/${auth.user._id}`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -161,3 +162,6 @@ const AskQuestion = () => {
 };
 
 export default AskQuestion;
+
+
+

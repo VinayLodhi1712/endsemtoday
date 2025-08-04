@@ -10,6 +10,7 @@ import AdminMenu from "./../../components/layout/AdminMenu";
 import { Modal } from "antd";
 import { Link } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
+import { API_BASE_URL } from "../../config/api";
 const Profile = () => {
   const [auth, Setauth] = useAuth();
   const [Name, SetName] = useState("");
@@ -57,7 +58,7 @@ const Profile = () => {
 
       e.preventDefault();
       const response = await fetch(
-        "https://talkofcodebackend.onrender.com/api/v1/auth/profile",
+        "${API_BASE_URL}/auth/profile",
         {
           method: "PUT",
           headers: {
@@ -102,7 +103,7 @@ const Profile = () => {
       formData.append("NewPassword", NewPassword);
 
       const response = await fetch(
-        "https://talkofcodebackend.onrender.com/api/v1/auth/ProfilePassword",
+        "${API_BASE_URL}/auth/ProfilePassword",
         {
           method: "PUT",
           headers: {
@@ -145,7 +146,7 @@ const Profile = () => {
       e.preventDefault();
 
       const response = await fetch(
-        "https://talkofcodebackend.onrender.com/api/v1/auth/ProfileLinks",
+        "${API_BASE_URL}/auth/ProfileLinks",
         {
           method: "PUT",
           headers: {
@@ -196,7 +197,7 @@ const Profile = () => {
       e.preventDefault();
 
       const response = await fetch(
-        `https://talkofcodebackend.onrender.com/api/v1/auth/userskillsupdate/${skilltoremove}`,
+        `${API_BASE_URL}/auth/userskillsupdate/${skilltoremove}`,
         {
           method: "PUT",
           headers: {
@@ -264,7 +265,7 @@ const Profile = () => {
                 style={{ height: "14rem", width: "14rem", marginRight: "2rem" }}
                 title
                 className="img-circle img-thumbnail isTooltip EditProfileUSerPhoto"
-                src={`https://talkofcodebackend.onrender.com/api/v1/auth/get-userPhoto/${auth.user._id}`}
+                src={`${API_BASE_URL}/auth/get-userPhoto/${auth.user._id}`}
                 data-original-title="Usuario"
               />
               <div className="d-flex justify-content-start w-100 border-2 mb-2">
@@ -651,3 +652,6 @@ const Profile = () => {
 };
 
 export default Profile;
+
+
+

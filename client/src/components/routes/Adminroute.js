@@ -2,16 +2,17 @@ import { useState, useEffect } from "react";
 import { useAuth } from "../../context/auth";
 import { Outlet } from "react-router-dom";
 import Spinner from "./spinner";
+import { API_BASE_URL } from "../../config/api";
 
 export default function AdminRoute() {
   const [ok, setOk] = useState(false);
-  const [auth, setAuth] = useAuth();
+  const [auth] = useAuth();
 
   useEffect(() => {
     const AuthCheck = async () => {
       try {
         const res = await fetch(
-          "https://talkofcodebackend.onrender.com/api/v1/auth/AdminAuth",
+          `${API_BASE_URL}/auth/AdminAuth`,
           {
             headers: {
               Authorization: auth?.token,
@@ -29,7 +30,6 @@ export default function AdminRoute() {
           }
         } else {
           setOk(false);
-          console.log("no ok from server");
         }
       } catch (error) {
         console.error("Error checking authentication:", error);
@@ -41,3 +41,6 @@ export default function AdminRoute() {
 
   return ok ? <Outlet /> : <Spinner path="/" />; // redirect to home page if user try to access the admin page path="/" is a prop here
 }
+
+
+

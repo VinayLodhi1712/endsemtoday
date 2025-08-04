@@ -5,11 +5,12 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useAuth } from "./context/auth";
 import { Image } from "antd";
+import { API_BASE_URL } from "./config/api";
 
 const Search = () => {
   const Navigate = useNavigate();
-  const [values, SetValues] = useSearch();
-  const [auth, Setauth] = useAuth();
+  const [values] = useSearch();
+  const [auth] = useAuth();
   return (
     <Layout>
       <div className="d-flex flex-column text-center mt-3">
@@ -29,7 +30,7 @@ const Search = () => {
                 style={{ width: "25%", height: "100%" }}
               >
                 <Image
-                  src={`https://talkofcodebackend.onrender.com/api/v1/product/get-productPhoto/${p._id}`}
+                  src={`${API_BASE_URL}/product/get-productPhoto/${p._id}`}
                   className="card-Image-top"
                   style={{ height: "15rem", width: "100%" }}
                 />
@@ -67,3 +68,6 @@ const Search = () => {
 };
 
 export default Search;
+
+
+

@@ -10,6 +10,7 @@ import Button from "@mui/material/Button";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { blue } from "@mui/material/colors";
 import AdminMenu from "./../../components/layout/AdminMenu";
+import { API_BASE_URL } from "../../config/api";
 
 const UserContributions = () => {
   const [auth, setAuth] = useAuth();
@@ -22,7 +23,7 @@ const UserContributions = () => {
   async function getUserAnswer() {
     try {
       const response = await fetch(
-        `https://talkofcodebackend.onrender.com/api/v1/Answer/Get_User_Answers/${auth.user._id}`
+        `${API_BASE_URL}/Answer/Get_User_Answers/${auth.user._id}`
       );
       const answers = await response.json();
       if (answers) {
@@ -43,7 +44,7 @@ const UserContributions = () => {
       );
       if (confirmed) {
         const del = await fetch(
-          `https://talkofcodebackend.onrender.com/api/v1/Answer/delete_Answer/${aid}/${qid}/${auth.user._id}`,
+          `${API_BASE_URL}/Answer/delete_Answer/${aid}/${qid}/${auth.user._id}`,
           {
             method: "DELETE",
             headers: {
@@ -68,7 +69,7 @@ const UserContributions = () => {
   async function updateContribution(aid) {
     try {
       const updated = await fetch(
-        `https://talkofcodebackend.onrender.com/api/v1/Answer/Update_Answer/${aid}`,
+        `${API_BASE_URL}/Answer/Update_Answer/${aid}`,
         {
           method: "PUT",
           headers: {
@@ -239,3 +240,6 @@ const UserContributions = () => {
 };
 
 export default UserContributions;
+
+
+

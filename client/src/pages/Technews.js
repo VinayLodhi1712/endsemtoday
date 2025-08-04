@@ -96,3 +96,4 @@ const Technews = () => {
 };
 
 export default Technews;
+

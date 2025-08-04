@@ -13,6 +13,7 @@ import { NavLink, Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { blue } from "@mui/material/colors";
+import { API_BASE_URL } from "../config/api";
 import { styled } from "@mui/material/styles";
 import ArrowForwardIosSharpIcon from "@mui/icons-material/ArrowForwardIosSharp";
 import MuiAccordion from "@mui/material/Accordion";
@@ -80,7 +81,7 @@ function Home() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://talkofcodebackend.onrender.com/api/v1/product/get-product"
+          "${API_BASE_URL}/product/get-product"
         );
         const data = await response.json();
 
@@ -264,7 +265,7 @@ function Home() {
                   <div className="user-image2 boxshadow">
                     <Card.Img
                       variant="top"
-                      src={`https://talkofcodebackend.onrender.com/api/v1/product/get-productPhoto/${p._id}`}
+                      src={`${API_BASE_URL}/product/get-productPhoto/${p._id}`}
                       style={{
                         width: "100%",
                         height: "17rem",
@@ -470,3 +471,6 @@ function Home() {
 }
 
 export default Home;
+
+
+

@@ -12,6 +12,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faStarHalfAlt } from "@fortawesome/free-solid-svg-icons";
 import { useAuth } from "../context/auth";
 import { useCart } from "../context/cart";
+import { API_BASE_URL } from "../config/api";
 
 // Import CSS
 import "./productDetails.css"; // Import the CSS file we just created
@@ -45,7 +46,7 @@ const ProductDetails = () => {
   async function GetProduct() {
     try {
       const response = await fetch(
-        `https://talkofcodebackend.onrender.com/api/v1/product/getSingle-product/${params.slug}`
+        `${API_BASE_URL}/product/getSingle-product/${params.slug}`
       );
       const data = await response.json();
       SetDetails(data.product);
@@ -77,7 +78,7 @@ const ProductDetails = () => {
     if (comment && !isNaN(rating) && rating >= 1 && rating <= 5) {
       try {
         const response = await fetch(
-          `https://talkofcodebackend.onrender.com/api/v1/product/get-product/${productId}/${authId}/create-review`,
+          `${API_BASE_URL}/product/get-product/${productId}/${authId}/create-review`,
           {
             method: "PUT",
             headers: {
@@ -110,7 +111,7 @@ const ProductDetails = () => {
     const productId = Detail[0]._id;
     try {
       const response = await fetch(
-        `https://talkofcodebackend.onrender.com/api/v1/product/get-product/${productId}/${authId}/delete-review/${reviewId}`,
+        `${API_BASE_URL}/product/get-product/${productId}/${authId}/delete-review/${reviewId}`,
         {
           method: "delete",
         }
@@ -148,7 +149,7 @@ const ProductDetails = () => {
             <div className="col-md-6 mb-3">
               <div className="product-image-container">
                 <Image
-                  src={`https://talkofcodebackend.onrender.com/api/v1/product/get-productPhoto/${p._id}`}
+                  src={`${API_BASE_URL}/product/get-productPhoto/${p._id}`}
                   className="product-image"
                   alt={p.name}
                 />
@@ -395,3 +396,6 @@ const ProductDetails = () => {
 };
 
 export default ProductDetails;
+
+
+

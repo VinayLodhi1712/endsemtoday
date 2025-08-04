@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import noorders from "../../assests/noorders.jpeg";
 import { useAuth } from "../../context/auth";
 import { Select } from "antd";
+import { API_BASE_URL } from "../../config/api";
 const { Option } = Select;
 
 const Adminorder = () => {
@@ -25,7 +26,7 @@ const Adminorder = () => {
   async function GetOrders() {
     try {
       const response = await fetch(
-        "https://talkofcodebackend.onrender.com/api/v1/auth/Adminorders",
+        "${API_BASE_URL}/auth/Adminorders",
         {
           headers: {
             "Content-Type": "application/json",
@@ -47,7 +48,7 @@ const Adminorder = () => {
   async function HandleStatusChange(NewOrderStatus, id) {
     try {
       const response = await fetch(
-        `https://talkofcodebackend.onrender.com/api/v1/auth/OrderStatusUpdate/${id}`,
+        `${API_BASE_URL}/auth/OrderStatusUpdate/${id}`,
         {
           method: "PUT",
           headers: {
@@ -186,3 +187,6 @@ const Adminorder = () => {
 };
 
 export default Adminorder;
+
+
+

@@ -10,6 +10,7 @@ import { Image } from "antd";
 import ".././App.css";
 import "./Productpage.css";
 import './cart.css';
+import { API_BASE_URL } from "../config/api";
 
 const CartPage = () => {
   const [cart, setCart] = useCart();
@@ -67,7 +68,7 @@ const CartPage = () => {
                 {cart?.map((product) => (
                   <div key={product._id} className="cart-item2">
                     <Image
-                      src={`https://talkofcodebackend.onrender.com/api/v1/product/get-productPhoto/${product._id}`}
+                      src={`${API_BASE_URL}/product/get-productPhoto/${product._id}`}
                       alt={product.name}
                       className="cart-item-image"
                       preview={true}
@@ -138,3 +139,6 @@ const CartPage = () => {
 };
 
 export default CartPage;
+
+
+

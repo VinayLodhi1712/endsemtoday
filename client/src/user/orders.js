@@ -8,6 +8,7 @@ import moment from "moment";
 import { Image } from "antd";
 import toast from "react-hot-toast";
 import noorders from "../assests/noorders.jpeg";
+import { API_BASE_URL } from "../config/api";
 
 const Orders = () => {
   const [Orders, SetOrders] = useState([]);
@@ -17,7 +18,7 @@ const Orders = () => {
   async function GetOrders() {
     try {
       const response = await fetch(
-        "https://talkofcodebackend.onrender.com/api/v1/auth/orders",
+        "${API_BASE_URL}/auth/orders",
         {
           headers: {
             "Content-Type": "application/json",
@@ -39,7 +40,7 @@ const Orders = () => {
   async function CancelOrder(id) {
     try {
       const response = await fetch(
-        `https://talkofcodebackend.onrender.com/api/v1/auth/OrderDelete/${id}`,
+        `${API_BASE_URL}/auth/OrderDelete/${id}`,
         {
           method: "DELETE",
           headers: {
@@ -117,7 +118,7 @@ const Orders = () => {
                     <div className="d-flex justify-content-between border border-2 p-2">
                       <div style={{ width: "50%" }}>
                         <Image
-                          src={`https://talkofcodebackend.onrender.com/api/v1/product/get-productPhoto/${p._id}`}
+                          src={`${API_BASE_URL}/product/get-productPhoto/${p._id}`}
                           className="card-Image-top"
                           style={{ height: "100%", width: "10rem" }}
                         />
@@ -178,3 +179,6 @@ const Orders = () => {
 };
 
 export default Orders;
+
+
+

@@ -4,6 +4,7 @@ import "./Chatgpt.css";
 import { useAuth } from "../../context/auth";
 import toast from "react-hot-toast";
 import chatgpt from "../../assests/chatgpt.png"; // Make sure to import the image
+import { API_BASE_URL } from "../../config/api";
 
 const ChatGPT = () => {
   const [isModalVisible, setIsModalVisible] = useState(true); // Start with modal visible
@@ -110,7 +111,7 @@ const ChatGPT = () => {
                 {message.role === "user" ? (
                   <div className="user-icon">
                     <Avatar
-                      src={`https://talkofcodebackend.onrender.com/api/v1/auth/get-userPhoto/${auth.user._id}`}
+                      src={`${API_BASE_URL}/auth/get-userPhoto/${auth.user._id}`}
                       className="user-avatar"
                     />
                   </div>
@@ -153,3 +154,6 @@ const ChatGPT = () => {
 };
 
 export default ChatGPT;
+
+
+

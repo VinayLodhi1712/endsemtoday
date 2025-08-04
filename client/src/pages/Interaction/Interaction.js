@@ -21,6 +21,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRobot } from "@fortawesome/free-solid-svg-icons";
 import "./Interaction.css";
 import ChatGPT from "./Chatgpt"; // Import the ChatGPT component
+import { API_BASE_URL } from "../../config/api";
 
 const Interaction = () => {
   const [showChatGPT, setShowChatGPT] = useState(false);
@@ -49,7 +50,7 @@ const Interaction = () => {
         return;
       }
       const response = await fetch(
-        `https://talkofcodebackend.onrender.com/api/v1/Questions/Question_search/${keywordToSearch}`
+        `${API_BASE_URL}/Questions/Question_search/${keywordToSearch}`
       );
       const data = await response.json();
       if (response.status === 200) {
@@ -70,7 +71,7 @@ const Interaction = () => {
       );
       if (confirmed) {
         const del = await fetch(
-          `https://talkofcodebackend.onrender.com/api/v1/Questions/delete_question/${question}`,
+          `${API_BASE_URL}/Questions/delete_question/${question}`,
           {
             method: "DELETE",
             headers: { "Content-Type": "application/json" },
@@ -93,7 +94,7 @@ const Interaction = () => {
   async function GetQuestions() {
     try {
       const response = await fetch(
-        `https://talkofcodebackend.onrender.com/api/v1/Questions/get_question/${Page}`
+        `${API_BASE_URL}/Questions/get_question/${Page}`
       );
       const data = await response.json();
       if (response.status === 200) {
@@ -110,7 +111,7 @@ const Interaction = () => {
   async function GetNumberofQuestion() {
     try {
       const data = await fetch(
-        "https://talkofcodebackend.onrender.com/api/v1/Questions/QuestionCount"
+        "${API_BASE_URL}/Questions/QuestionCount"
       );
 
       if (data) {
@@ -274,7 +275,7 @@ const Interaction = () => {
                     {/* User image and name */}
                     <div className="user-info">
                       <Avatar
-                        src={`https://talkofcodebackend.onrender.com/api/v1/auth/get-userPhoto/${q.user._id}`}
+                        src={`${API_BASE_URL}/auth/get-userPhoto/${q.user._id}`}
                         sx={{ width: 32, height: 32 }}
                       />
                       <p className="UserNameDisplay">{q.user.Name}</p>
@@ -370,3 +371,6 @@ const Interaction = () => {
 };
 
 export default Interaction;
+
+
+

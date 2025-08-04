@@ -7,6 +7,7 @@ import { FaPhoneAlt } from "react-icons/fa";
 import { FaGithub, FaEnvelope, FaLinkedin, FaYoutube } from "react-icons/fa";
 import vinayprofile from "../assests/vinayprofile.jpg";
 import { toast } from "react-hot-toast";
+import { API_BASE_URL } from "../config/api";
 
 const ContactForm = () => {
   const [Name, SetName] = useState("");
@@ -18,7 +19,7 @@ const ContactForm = () => {
       Setloading(true);
       e.preventDefault();
       const response = await fetch(
-        "https://talkofcodebackend.onrender.com/api/v1/auth/SubmitUserQueryForm",
+        "${API_BASE_URL}/auth/SubmitUserQueryForm",
         {
           method: "POST",
           headers: {
@@ -276,3 +277,6 @@ const Contact = () => {
 };
 
 export default Contact;
+
+
+

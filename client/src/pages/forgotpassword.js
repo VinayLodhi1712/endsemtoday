@@ -6,6 +6,7 @@ import { FaEye, FaEyeSlash, FaArrowLeft } from "react-icons/fa";
 import { Modal } from "antd";
 import { Link } from "react-router-dom";
 import forget from "../assests/forget.png";
+import { API_BASE_URL } from "../config/api";
 
 const Forgotpassword = () => {
   const [Email, SetEmail] = useState("");
@@ -39,7 +40,7 @@ const Forgotpassword = () => {
       e.preventDefault();
       Setloading(true);
       const response = await fetch(
-        "https://talkofcodebackend.onrender.com/api/v1/auth/forgetPassword",
+        "${API_BASE_URL}/auth/forgetPassword",
         {
           method: "POST",
           headers: {
@@ -74,7 +75,7 @@ const Forgotpassword = () => {
     try {
       Setloading(true);
       const response = await fetch(
-        "https://talkofcodebackend.onrender.com/api/v1/auth/SendResetEmail",
+        "${API_BASE_URL}/auth/SendResetEmail",
         {
           method: "POST",
           headers: {
@@ -258,3 +259,6 @@ const Forgotpassword = () => {
 };
 
 export default Forgotpassword;
+
+
+
