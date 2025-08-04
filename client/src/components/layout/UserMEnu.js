@@ -26,6 +26,12 @@ const UserMEnu = () => {
           >
             Create Product
           </NavLink>
+          <NavLink
+            to="/order-history"
+            className="list-group-item list-group-item-action"
+          >
+            Order History
+          </NavLink>
           {/* <NavLink
             to="/dashboard/User/Orders"
             className="list-group-item list-group-item-action"

@@ -20,6 +20,10 @@ import Search from "./Search";
 import ProductDetails from "./pages/ProductDetails";
 import Categorylist from "./pages/categorylist";
 import CartPage from "./pages/CartPage";
+import Checkout from "./pages/Checkout";
+import OrderConfirmation from "./pages/OrderConfirmation";
+import OrderHistory from "./pages/OrderHistory";
+import OrderDetails from "./pages/OrderDetails";
 import Adminorder from "./pages/Admin/Adminorder";
 import AdminProfile from "./pages/Admin/AdminProfile";
 import Users from "./pages/Admin/User";
@@ -50,6 +54,10 @@ function App() {
           element={<ProductDetails></ProductDetails>}
         ></Route>
         <Route path="/UserCart" element={<CartPage></CartPage>}></Route>
+        <Route path="/checkout" element={<Checkout></Checkout>}></Route>
+        <Route path="/order-confirmation" element={<OrderConfirmation></OrderConfirmation>}></Route>
+        <Route path="/order-history" element={<OrderHistory></OrderHistory>}></Route>
+        <Route path="/order-details" element={<OrderDetails></OrderDetails>}></Route>
         <Route path="/products" element={<Productpage></Productpage>}></Route>
         <Route path="/search" element={<Search></Search>}></Route>
         <Route path="/categories/:id" element={<Categorylist />}></Route>
