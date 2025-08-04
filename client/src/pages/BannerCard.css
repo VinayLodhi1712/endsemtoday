@@ -43,8 +43,34 @@
   
   @media screen and (max-width: 768px) {
     .banner .swiper-container {
+      width: 280px;
+      height: 320px;
+    }
+    
+    .banner .swiper-slide {
+      font-size: 18px;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .banner .swiper-container {
+      width: 240px;
+      height: 280px;
+    }
+    
+    .banner .swiper-slide {
+      font-size: 16px;
+    }
+  }
+  
+  @media screen and (max-width: 360px) {
+    .banner .swiper-container {
       width: 200px;
-      height: 250px;
+      height: 240px;
+    }
+    
+    .banner .swiper-slide {
+      font-size: 14px;
     }
   }
   

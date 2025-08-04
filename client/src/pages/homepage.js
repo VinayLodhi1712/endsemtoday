@@ -3,9 +3,6 @@ import BannerCard from "./BannerCard";
 import React, { useEffect } from "react";
 import Card from "react-bootstrap/Card";
 import homepageimage from "../assests/homepageimage.png";
-import Codeconnectpage from "../assests/codeconnectpage.png";
-import productpage from "../assests/productpage.png";
-import techpage from "../assests/techpage.png";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { FaCartShopping } from "react-icons/fa6";
@@ -76,18 +73,29 @@ function Home() {
   }, []);
   const [expanded, setExpanded] = React.useState("false");
   const [product, setProduct] = React.useState([]);
+  const [loading, setLoading] = React.useState(true);
+  const [error, setError] = React.useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setLoading(true);
+        setError(null);
         const response = await fetch(
-          "${API_BASE_URL}/product/get-product"
+          `${API_BASE_URL}/product/get-product`
         );
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
         const data = await response.json();
-
         setProduct(data.products.slice(0, 10));
       } catch (error) {
         console.error("Error fetching data:", error);
+        setError(error.message);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -127,68 +135,63 @@ function Home() {
               Empowering Tech Enthusiasts to Learn, Connect, and Innovate.
             </p>
             <div>
-              <div class="container1 d-flex mt-3">
-                <div class="card" >
-                  <div class="imgbx">
-                    <img
-                      src={productpage}
-                    />
+              <div className="hero-cards-grid">
+                <div className="hero-card">
+                  <div className="hero-card-icon-container" onClick={() => document.querySelector('.hero-card:nth-child(1)').classList.toggle('flipped')}>
+                    <div className="hero-card-icon" style={{ backgroundColor: "#009688" }}>
+                      🛒
+                    </div>
                   </div>
-                  <div class="content">
-                    <h2 style={{ color: "#009688" }}>Awesome Featured Products</h2>
-                    <NavLink to="/products">
-                      <Button variant="contained" sx={{ bgcolor: "#009688" }}>
-                        Featured Products
-                      </Button>
-                    </NavLink>
-                  </div>
+                  <h3>Featured Products</h3>
+                  <p>Discover amazing products from our community</p>
+                  <NavLink to="/products">
+                    <button className="hero-card-btn" style={{ backgroundColor: "#009688" }}>
+                      Shop Now
+                    </button>
+                  </NavLink>
                 </div>
-                <div class="card" >
-                  <div class="imgbx">
-                    <img
-                      src={Codeconnectpage}
-                    />
+                <div className="hero-card">
+                  <div className="hero-card-icon-container" onClick={() => document.querySelector('.hero-card:nth-child(2)').classList.toggle('flipped')}>
+                    <div className="hero-card-icon" style={{ backgroundColor: "#03A9F4" }}>
+                      ✨
+                    </div>
                   </div>
-                  <div class="content">
-                    <h2 style={{ color: "#03A9F4" }}>Ask technical questions</h2>
-                    <NavLink to="/dashboard/Admin/interaction">
-                      <Button variant="contained" sx={{ bgcolor: "#03A9F4 " }}>
-                        CodeConnect
-                      </Button>
-                    </NavLink>
-                  </div>
+                  <h3>Code Connect</h3>
+                  <p>Ask questions and get help from the community</p>
+                  <NavLink to="/dashboard/Admin/interaction">
+                    <button className="hero-card-btn" style={{ backgroundColor: "#03A9F4" }}>
+                      Get Help
+                    </button>
+                  </NavLink>
                 </div>
-                <div class="card" >
-                  <div class="imgbx">
-                    <img src={techpage} />
+                <div className="hero-card">
+                  <div className="hero-card-icon-container" onClick={() => document.querySelector('.hero-card:nth-child(3)').classList.toggle('flipped')}>
+                    <div className="hero-card-icon" style={{ backgroundColor: "#FF3E7F" }}>
+                      📰
+                    </div>
                   </div>
-                  <div class="content">
-                    <h2 style={{ color: "#FF3E7F" }} >Get instant technical news</h2>
-                    <NavLink to="/technews">
-                      <Button variant="contained" sx={{ bgcolor: "#FF3E7F" }}>
-                        Tech_Newsy
-                      </Button>
-                    </NavLink>
-                  </div>
+                  <h3>Tech News</h3>
+                  <p>Stay updated with latest technology trends</p>
+                  <NavLink to="/technews">
+                    <button className="hero-card-btn" style={{ backgroundColor: "#FF3E7F" }}>
+                      Read News
+                    </button>
+                  </NavLink>
                 </div>
               </div>
             </div>
             {/* <img src={homepageimage} className="homepageimage"></img> */}
-            <div className="d-flex justify-content-center text-center">
-              <div >
-                <NavLink to="/register">
-                  <Button variant="contained" sx={{ bgcolor: "ochre.darker", width: { xs: '150px', sm: '150px', md: '150px' }, marginRight: { xs: '0px', sm: '0px', md: '1.5rem' } }}>
-                    Get Started
-                  </Button>
-                </NavLink>
-              </div>
-              <div>
-                <NavLink to="/About">
-                  <Button variant="contained" sx={{ bgcolor: "ochre.darker", width: { xs: '150px', sm: '150px', md: '150px' } }}>
-                    About us
-                  </Button>
-                </NavLink>
-              </div>
+            <div className="hero-buttons-container">
+              <NavLink to="/register">
+                <button className="hero-main-btn get-started-btn">
+                  Get Started
+                </button>
+              </NavLink>
+              <NavLink to="/About">
+                <button className="hero-main-btn about-btn">
+                  About Us
+                </button>
+              </NavLink>
             </div>
 
            
@@ -207,10 +210,34 @@ function Home() {
           More than <span style={{ color: "#1fa2ff" }}>30+ Products</span> Listed. Checkout Now!
         </h1>
         <div style={{ width: "100%", marginTop: "0%", marginBottom: "2rem" }}>
-          <Swiper
-            effect={"coverflow"}
-            grabCursor={true}
-            spaceBetween={20}
+          {loading ? (
+            <div className="d-flex justify-content-center align-items-center" style={{ minHeight: "300px" }}>
+              <div className="spinner-border text-primary" role="status">
+                <span className="visually-hidden">Loading products...</span>
+              </div>
+              <span className="ms-3">Loading products...</span>
+            </div>
+          ) : error ? (
+            <div className="alert alert-warning text-center" role="alert">
+              <h5>Unable to load products</h5>
+              <p>Please check your internet connection and try refreshing the page.</p>
+              <button 
+                className="btn btn-primary"
+                onClick={() => window.location.reload()}
+              >
+                Retry
+              </button>
+            </div>
+          ) : product.length === 0 ? (
+            <div className="alert alert-info text-center" role="alert">
+              <h5>No products available</h5>
+              <p>Please check back later for new products.</p>
+            </div>
+          ) : (
+            <Swiper
+              effect={"coverflow"}
+              grabCursor={true}
+              spaceBetween={20}
             slidesPerView={4}
             coverflowEffect={{
               rotate: 50,
@@ -309,6 +336,7 @@ function Home() {
               </NavLink>
             </div>
           </Swiper>
+          )}
         </div>
       </div>
 

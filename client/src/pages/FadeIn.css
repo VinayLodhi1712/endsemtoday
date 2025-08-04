@@ -1,12 +1,14 @@
 .container {
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .question-box {
   padding: 20px;
-  border-radius: 10px;
-  background-color: #f0f0f0;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
 .chatbot-icon {
@@ -19,6 +21,8 @@
 .answer {
   margin-top: 10px;
   font-size: 20px;
+  color: #333;
+  font-weight: 500;
 }
 
 .card-actions {
@@ -26,19 +30,41 @@
   justify-content: center;
   position: relative;
   text-align: center;
- 
 }
 
-
 .card3 {
-  width: 345px;
-  /* Fixed width */
+  width: 380px;
+  height: 280px;
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
 
-  height: 260px;
-  /* Fixed height */
-  background-color: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+.card3:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+}
+
+.btn-outline-primary {
+  background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-outline-primary:hover {
+  background: linear-gradient(135deg, #1565c0 0%, #0d47a1 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(25, 118, 210, 0.3);
 }
 
 .divider {
@@ -85,8 +111,8 @@
   }
 
   .card3{
-    width: 250px;
-    height: 210px;
+    width: 280px;
+    height: 220px;
   }
 
   .card-actions {
@@ -112,7 +138,36 @@
   .icon{
     margin-right: 5px;
   }
+}
+
+@media (max-width: 480px) {
+  .card3{
+    width: 240px;
+    height: 200px;
+  }
+
+  .answer {
+    font-size: 12px;
+  }
   
+  .question-box {
+    padding: 15px;
+  }
+}
+
+@media (max-width: 360px) {
+  .card3{
+    width: 200px;
+    height: 180px;
+  }
+
+  .answer {
+    font-size: 11px;
+  }
+  
+  .question-box {
+    padding: 10px;
+  }
 }
 .chatbot-fixed {
   flex-shrink: 0;
