@@ -6,6 +6,29 @@ body {
   background-color: rgb(224, 224, 252) !important;
 }
 
+/* Global image centering for product displays */
+.ant-image img {
+  object-fit: contain !important;
+  object-position: center !important;
+}
+
+/* Ensure all product images are properly centered */
+.product-image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f8f9fa;
+  padding: 8px;
+}
+
+.product-image-container img,
+.product-image-container .ant-image img {
+  object-fit: contain !important;
+  object-position: center !important;
+  max-width: 100%;
+  max-height: 100%;
+}
+
 /* Professional Google Sign-in Button Styling */
 .btn-google {
   background: #ffffff !important;

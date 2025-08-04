@@ -98,6 +98,22 @@
   .nav-link.active span::after {
     content: '';
   }
+
+  /* Exclude cart badge from nav-link active styles */
+  .nav-link.active .cart-badge span::after,
+  .nav-link.active .ant-badge-count::after {
+    content: none !important;
+    display: none !important;
+  }
+
+  /* Prevent nav-link active styles from affecting cart badge */
+  .nav-link.active .cart-badge,
+  .nav-link.active .cart-badge *,
+  .nav-link.active .ant-badge-count {
+    color: #ffffff !important;
+    border: none !important;
+    border-bottom: none !important;
+  }
   
   /* Authentication Links */
   .signup-link, 
@@ -162,7 +178,116 @@
   }
   
   .cart-icon {
-    font-size: 20px;
+    font-size: 24px;
+    color: white !important;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    transition: all 0.3s ease;
+  }
+
+  .cart-link:hover .cart-icon {
+    color: #4776E6 !important;
+    transform: scale(1.1);
+  }
+
+  /* Cart Badge Styling - Enhanced Visibility */
+  .cart-badge {
+    position: relative;
+    display: inline-block;
+  }
+
+  .cart-badge .ant-badge-count {
+    background: #ff7875 !important;
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    border: none !important;
+    box-shadow: 0 2px 6px rgba(255, 120, 117, 0.4) !important;
+    min-width: 20px !important;
+    height: 20px !important;
+    line-height: 16px !important;
+    font-size: 12px !important;
+    border-radius: 10px !important;
+    position: absolute !important;
+    right: -8px !important;
+    top: -8px !important;
+    z-index: 9999 !important;
+    transform: scale(1) !important;
+    animation: none !important;
+    text-shadow: none !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  /* Force white text color for badge count */
+  .cart-badge .ant-badge-count,
+  .cart-badge .ant-badge-count span,
+  .ant-badge-count {
+    color: #ffffff !important;
+    text-shadow: none !important;
+  }
+
+  /* Override any nav-link active styles for cart badge */
+  .nav-link .cart-badge .ant-badge-count,
+  .nav-link.active .cart-badge .ant-badge-count,
+  .nav-link:hover .cart-badge .ant-badge-count {
+    color: #ffffff !important;
+    background: #ff7875 !important;
+    border: none !important;
+    border-bottom: none !important;
+  }
+
+  /* Ensure no pseudo-elements on badge count */
+  .cart-badge .ant-badge-count::before,
+  .cart-badge .ant-badge-count::after {
+    display: none !important;
+    content: none !important;
+  }
+
+  @keyframes cartPulse {
+    0% {
+      transform: scale(1.2);
+      box-shadow: 0 4px 15px rgba(255, 77, 79, 0.9), 0 0 0 1px rgba(255, 255, 255, 0.3);
+    }
+    50% {
+      transform: scale(1.35);
+      box-shadow: 0 6px 20px rgba(255, 77, 79, 1), 0 0 0 2px rgba(255, 255, 255, 0.5);
+    }
+    100% {
+      transform: scale(1.2);
+      box-shadow: 0 4px 15px rgba(255, 77, 79, 0.9), 0 0 0 1px rgba(255, 255, 255, 0.3);
+    }
+  }
+
+  .cart-badge .ant-badge-count-sm {
+    min-width: 18px !important;
+    height: 18px !important;
+    line-height: 16px !important;
+    font-size: 10px !important;
+    right: -8px !important;
+    top: -8px !important;
+    transform: scale(1) !important;
+  }
+
+  /* Ensure badge is always visible */
+  .cart-badge .ant-badge-count:not(.ant-badge-count-zero) {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  /* Make cart icon always visible and white */
+  .nav-link .cart-icon {
+    color: white !important;
+    opacity: 1 !important;
+  }
+
+  /* Improve cart link styling */
+  .cart-link {
+    color: white !important;
+  }
+
+  .cart-link:hover {
+    color: #4776E6 !important;
   }
   
   /* Mobile Styling */
@@ -286,10 +411,45 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    position: relative;
   }
   
   .cart-icon {
     margin-right: 8px;
+  }
+
+  /* Ensure cart badge is visible on mobile */
+  .cart-badge .ant-badge-count {
+    position: absolute !important;
+    right: -6px !important;
+    top: -6px !important;
+    z-index: 1000 !important;
+    min-width: 18px !important;
+    height: 18px !important;
+    line-height: 14px !important;
+    font-size: 11px !important;
+    transform: scale(1) !important;
+    background: #ff7875 !important;
+    color: #ffffff !important;
+    border: none !important;
+    box-shadow: 0 2px 6px rgba(255, 120, 117, 0.4) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-shadow: none !important;
+  }
+
+  /* Force white text on mobile too */
+  .cart-badge .ant-badge-count,
+  .cart-badge .ant-badge-count span {
+    color: #ffffff !important;
+    text-shadow: none !important;
+  }
+
+  /* Ensure cart icon is visible on mobile */
+  .cart-link .cart-icon {
+    color: white !important;
+    font-size: 22px !important;
   }
   
   /* Add separation between main links and auth links */

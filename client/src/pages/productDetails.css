@@ -100,79 +100,108 @@
   
   .action-buttons {
     display: flex;
-    gap: 10px;
+    gap: 12px;
     margin-bottom: 20px;
     flex-wrap: wrap;
+    align-items: center;
   }
   
   .cart-btn {
     background-color: #ffc107;
     color: #333;
     border: none;
-    border-radius: 5px;
-    padding: 8px 16px;
+    border-radius: 8px;
+    padding: 12px 20px;
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
+    flex: 1;
+    min-height: 48px;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(255, 193, 7, 0.3);
   }
   
   .cart-btn:hover {
     background-color: #e6af06;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(255, 193, 7, 0.4);
   }
   
   .buy-btn {
     background-color: white;
     color: #333;
     border: 2px solid #333;
-    border-radius: 5px;
-    padding: 8px 16px;
+    border-radius: 8px;
+    padding: 12px 20px;
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
+    flex: 1;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
   
   .buy-btn:hover {
     background-color: #333;
     color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
   
   .contact-btn {
     background-color: #4caf50;
     color: white;
     border: none;
-    border-radius: 5px;
-    padding: 8px 16px;
+    border-radius: 8px;
+    padding: 12px 20px;
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
+    flex: 1;
+    min-height: 48px;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(76, 175, 80, 0.3);
   }
   
   .contact-btn:hover {
     background-color: #3d8b40;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(76, 175, 80, 0.4);
   }
   
   .wishlist-btn {
     background-color: transparent;
-    border: 1px solid #ddd;
+    border: 2px solid #ddd;
     color: #666;
-    border-radius: 5px;
-    padding: 8px 12px;
+    border-radius: 8px;
+    padding: 12px 16px;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   }
   
   .wishlist-btn:hover {
     background-color: #f9f9f9;
     color: #ff6b6b;
+    border-color: #ff6b6b;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(255, 107, 107, 0.2);
   }
   
   .tabs-container {
@@ -319,6 +348,18 @@
     
     .action-buttons {
       flex-direction: column;
+      gap: 12px;
+    }
+
+    .cart-btn,
+    .buy-btn,
+    .contact-btn {
+      flex: none;
+      width: 100%;
+    }
+
+    .wishlist-btn {
+      width: 100%;
     }
     
     .product-title {

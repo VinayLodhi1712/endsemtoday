@@ -159,8 +159,9 @@ function Header() {
                     </li>
                     <li className="nav-item cart-item">
                       <NavLink to="/UserCart" className="nav-link cart-link">
-                        <IoCartSharp className="cart-icon" />
-                        <Badge count={cart?.length} showZero className="cart-badge"></Badge>
+                        <Badge count={cart?.length} showZero className="cart-badge">
+                          <IoCartSharp className="cart-icon" />
+                        </Badge>
                       </NavLink>
                     </li>
                   </>
